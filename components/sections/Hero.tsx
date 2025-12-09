@@ -49,7 +49,7 @@ export function Hero() {
         {/* Heading */}
         <h1 className="text-white text-balance text-4xl font-semibold leading-tight tracking-tight sm:text-5xl md:text-6xl">
           Engaging Websites
-          <br className="hidden sm:block" />Built to Convert.
+          <br />Built to Convert.
         </h1>
 
         {/* Subheading */}

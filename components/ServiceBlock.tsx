@@ -1,5 +1,5 @@
 import { ReactNode } from "react";
-import { ScrollingList } from "./ScrollingList";
+import { ScrollingList } from "@/components/ScrollingList";
 
 export type ServiceItem = {
     label: string,

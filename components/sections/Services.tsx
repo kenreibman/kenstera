@@ -1,5 +1,5 @@
 import { SectionHeader } from "@/components/SectionHeader";
-import { ServiceBlock } from "../ServiceBlock";
+import { ServiceBlock } from "@/components/ServiceBlock";
 import {
   LayoutDashboard,
   Rocket,

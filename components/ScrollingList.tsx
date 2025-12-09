@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import type { ServiceItem } from "./ServiceBlock";
+import type { ServiceItem } from "@/components/ServiceBlock";
 
 export function ScrollingList({ items }: { items: ServiceItem[] }) {
   const doubled = [...items, ...items];

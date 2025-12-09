@@ -34,7 +34,7 @@ export function Services() {
         <ServiceBlock
           label="Website Design & Development"
           title="Transform your online presence with websites built for results."
-          body="Design that connects. Strong storytelling. Quality leads. Let us build you a website that finally does what it's supposed to."
+          body="Striking Visuals. Strong storytelling. Quality leads. Let us build you a website that finally does what it's supposed to."
           items={[
             { label: "UX-focused layouts", icon: <LayoutDashboard size={14} /> },
             { label: "High-converting landing pages", icon: <Rocket size={14} /> },

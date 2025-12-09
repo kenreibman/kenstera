@@ -10,7 +10,7 @@ export function Hero() {
     <section
       className="
         relative
-        flex min-h-[calc(100vh-4rem)] items-center justify-center
+        flex min-h-[90vh] items-center justify-center
         overflow-hidden
         bg-black
       "

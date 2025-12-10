@@ -24,23 +24,23 @@ type ProcessStage = {
 
 const stages: ProcessStage[] = [
   {
-    title: "Smart Analyzing",
+    title: "Plan",
     subtitle:
       "We assess your current website, funnels, and workflows to uncover what’s working, what isn’t, and where the biggest opportunities are.",
     visual: <Stage1Graphic />,
   },
   {
-    title: "AI Development",
+    title: "Develop",
     "subtitle": "Our team builds intelligent automation systems tailored to your business processes.",
     visual: <Stage2Graphic />
   },
   {  
-    title: "Seamless Launch",
+    title: "Launch",
     "subtitle": "Our team builds intelligent automation systems tailored to your business processes.",
     visual: <Stage3Graphic />
   },
   {  
-    title: "Maintenance and Upkeep",
+    title: "Hosting & Maintenance",
     "subtitle": "Our team builds intelligent automation systems tailored to your business processes.",
     visual: <Stage4Graphic />
   },
@@ -48,7 +48,7 @@ const stages: ProcessStage[] = [
 
 export function Process() {
   return (
-    <section className="relative w-full bg-black px-4 py-12 md:py-28">
+    <section className="relative w-full bg-black px-4 py-12 md:py-20">
       <div className="mx-auto max-w-[900px]">
         <SectionHeader
           eyebrow="Our Process"

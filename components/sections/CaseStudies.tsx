@@ -144,8 +144,8 @@ export function CaseStudies() {
             ))}
           </CarouselContent>
 
-            <CarouselPrevious className="h-8 w-8 rounded-full border hidden md:block" />
-            <CarouselNext className="h-8 w-8 rounded-full hidden md:block" />
+            <CarouselPrevious className="h-8 w-8 rounded-full border hidden md:flex" />
+            <CarouselNext className="h-8 w-8 rounded-full hidden md:flex" />
         </Carousel>
       </div>
     </section>

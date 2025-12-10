@@ -101,7 +101,7 @@ export function CaseStudies() {
         <Carousel className="mt-12">
           <CarouselContent className="-ml-4 md:ml-0">
             {CASE_STUDIES.map((study) => (
-              <CarouselItem key={study.id} className="pl-4 basis-[85%] md:basis-full">
+              <CarouselItem key={study.id} className="pl-4 md:pl-0 basis-[85%] md:basis-full">
                 <article className="grid gap-8 rounded-3xl border border-white/10 bg-neutral-950/80 p-6 md:grid-cols-2 lg:p-8">
                   {/* Left: image / visual placeholder */}
                   <div className="flex items-center justify-center">

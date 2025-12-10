@@ -11,7 +11,7 @@ import {
 
 export function Services() {
   return (
-    <section className="relative w-full bg-black px-4 py-20 md:py-28">
+    <section className="relative w-full bg-black px-4 py-12">
       {/* Inner wrapper */}
       <div className="mx-auto max-w-[1000px]">
         <SectionHeader

@@ -1,6 +1,6 @@
 "use client";
 import { motion } from "framer-motion";
-
+import { MessageSquare, Settings2, BarChart3, RefreshCw, ArrowUp, Check } from "lucide-react";
 import { ReactNode } from "react";
 import { SectionHeader } from "@/components/SectionHeader";
 import { Radar } from "@/components/Radar";
@@ -15,36 +15,41 @@ import {
     X,
 } from "lucide-react";
 
-// Type for one step card
-type ProcessStep = {
+// Type for one stage card
+type ProcessStage = {
   title: string;
   subtitle: string;
   visual: ReactNode;
 };
 
-const steps: ProcessStep[] = [
+const stages: ProcessStage[] = [
   {
     title: "Smart Analyzing",
     subtitle:
       "We assess your current website, funnels, and workflows to uncover what’s working, what isn’t, and where the biggest opportunities are.",
-    visual: <Step1Graphic />,
+    visual: <Stage1Graphic />,
   },
   {
     title: "AI Development",
     "subtitle": "Our team builds intelligent automation systems tailored to your business processes.",
-    visual: <Step2Graphic />
+    visual: <Stage2Graphic />
   },
   {  
     title: "Seamless Launch",
     "subtitle": "Our team builds intelligent automation systems tailored to your business processes.",
-    visual: <Step3Graphic />
+    visual: <Stage3Graphic />
+  },
+  {  
+    title: "Maintenance and Upkeep",
+    "subtitle": "Our team builds intelligent automation systems tailored to your business processes.",
+    visual: <Stage4Graphic />
   },
 ];
 
 export function Process() {
   return (
-    <section className="relative w-full bg-black px-4 py-20 md:py-28">
-      <div className="mx-auto max-w-[1000px]">
+    <section className="relative w-full bg-black px-4 py-12 md:py-28">
+      <div className="mx-auto max-w-[900px]">
         <SectionHeader
           eyebrow="Our Process"
           title={
@@ -64,26 +69,26 @@ export function Process() {
           align="center"
         />
 
-        {/* Steps grid */}
+        {/* Stages grid */}
         <div className="mt-12 grid gap-6 md:grid-cols-2">
-          {steps.map((step, index) => (
+          {stages.map((stage, index) => (
             <article
-              key={step.title}
+              key={stage.title}
               className="rounded-3xl border border-white/10 bg-neutral-900/70 p-6 text-sm text-neutral-200"
             >
-              {/* Dynamic step badge */}
+              {/* Dynamic stage badge */}
               <div className="mb-4 inline-flex items-center rounded-full border border-white/15 bg-black/70 px-3 py-1 text-[11px] font-medium text-neutral-300">
-                Step {index + 1}
+                Stage {index + 1}
               </div>
 
               <h3 className="text-lg font-semibold text-white sm:text-xl">
-                {step.title}
+                {stage.title}
               </h3>
 
-              <p className="mt-2 text-sm text-neutral-300">{step.subtitle}</p>
+              <p className="mt-2 text-sm text-neutral-300">{stage.subtitle}</p>
 
-              {/* Custom visual for this step */}
-              {step.visual}
+              {/* Custom visual for this stage */}
+              {stage.visual}
             </article>
           ))}
         </div>
@@ -93,7 +98,7 @@ export function Process() {
 }
 
 
-function Step1Graphic() {
+function Stage1Graphic() {
   return (
     <div className="mt-6 flex flex-col gap-4 md:flex-row">
       {/* Radar graphic (client component) */}
@@ -128,7 +133,7 @@ function Step1Graphic() {
   );
 }
 
-function Step2Graphic() {
+function Stage2Graphic() {
   return (
     <div className="mt-6">
       {/* fake minimal browser frame */}
@@ -170,12 +175,12 @@ function Step2Graphic() {
 function PulseLine({ offset }: { offset: number }) {
   return (
     <div
-      className="relative w-20 h-[1px] bg-white/[0.05]" // base line
+      className="relative w-20 h-px bg-white/5" // base line
       style={{ transform: `translateY(${offset}px)` }}
     >
       {/* Energy pulse */}
       <motion.div
-        className="absolute top-0 h-[1px] w-6 rounded-full"
+        className="absolute top-0 h-px w-6 rounded-full"
         style={{
           background:
             "linear-gradient(90deg, rgba(129,74,200,0.1) 0%, rgba(129,74,200,0.6) 90%, rgba(221,121,253,0.6) 100%)",
@@ -190,7 +195,7 @@ function PulseLine({ offset }: { offset: number }) {
     </div>
   );
 }
-function Step3Graphic() {
+function Stage3Graphic() {
   return (
     <div className="mt-6">
       <div className="relative rounded-2xl border border-white/10 bg-neutral-950/80 px-20 py-8">
@@ -212,6 +217,76 @@ function Step3Graphic() {
           <div className="flex flex-col items-center gap-2">
             <div className="flex h-16 w-16 items-center justify-center rounded-xl border border-white/10 bg-black/80" />
             <span className="text-[11px] text-neutral-300">Your stack</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function Stage4Graphic() {
+  return (
+    <div className="mt-6">
+      <div className="rounded-2xl border border-white/10 bg-neutral-950/80 px-5 py-4 text-sm text-neutral-200">
+        <div className="space-y-2">
+          {/* Row 1 */}
+          <div className="flex items-center justify-between rounded-xl border border-white/10 bg-black/70 px-3 py-3">
+            <div className="flex items-center gap-3">
+              <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-white/5">
+                <MessageSquare size={16} className="text-purple-300" />
+              </div>
+              <div>
+                <div className="text-[13px] font-semibold text-white">
+                  Google Search Rankings
+                </div>
+                <div className="text-[11px] text-neutral-400">
+                  Efficiency will increase by 20%.
+                </div>
+              </div>
+            </div>
+            <div className="flex h-7 w-7 items-center justify-center rounded-full border border-purple-400/60 bg-purple-500/10">
+              <RefreshCw size={14} className="text-purple-300" />
+            </div>
+          </div>
+
+          {/* Row 2 */}
+          <div className="flex items-center justify-between rounded-xl border border-white/10 bg-black/70 px-3 py-3">
+            <div className="flex items-center gap-3">
+              <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-white/5">
+                <Settings2 size={16} className="text-purple-300" />
+              </div>
+              <div>
+                <div className="text-[13px] font-semibold text-white">
+                  Website hosting
+                </div>
+                <div className="text-[11px] text-neutral-400">
+                  Update available.
+                </div>
+              </div>
+            </div>
+            <div className="flex h-7 w-7 items-center justify-center rounded-full border border-purple-400/60 bg-purple-500/10">
+              <ArrowUp size={14} className="text-purple-300" />
+            </div>
+          </div>
+
+          {/* Row 3 */}
+          <div className="flex items-center justify-between rounded-xl border border-white/10 bg-black/70 px-3 py-3">
+            <div className="flex items-center gap-3">
+              <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-white/5">
+                <BarChart3 size={16} className="text-purple-300" />
+              </div>
+              <div>
+                <div className="text-[13px] font-semibold text-white">
+                  Social Media Marketing
+                </div>
+                <div className="text-[11px] text-neutral-400">
+                  Up to date.
+                </div>
+              </div>
+            </div>
+            <div className="flex h-7 w-7 items-center justify-center rounded-full border border-purple-400/60 bg-purple-500/10">
+              <Check size={14} className="text-purple-300" />
+            </div>
           </div>
         </div>
       </div>

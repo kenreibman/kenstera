@@ -11,8 +11,11 @@ const FEATURED_PLANS: Plan[] = [
       "Search Engine Optimization Rankings, Boost your online presence and leads.",
     startingAt: "$500",
     startingSuffix: "/month",
-    ctaLabel: "Schedule a call",
-    ctaHref: "https://cal.com/kenstera/30min",
+    cta: {
+      type: "schedule",
+      label: "Schedule a Call",
+      calLink: "kenstera/30min"
+    },
     features: [
       "Discovery & strategy call",
       "1-3 page marketing site or landing page",
@@ -31,8 +34,11 @@ const FEATURED_PLANS: Plan[] = [
     startingAt: "$2500",
     startingSuffix: "/project",
     featured: true,
-    ctaLabel: "Schedule a call",
-    ctaHref: "https://cal.com/kenstera/30min",
+    cta: {
+      type: "schedule",
+      label: "Schedule a Call",
+      calLink: "kenstera/30min"
+    },
     features: [
       "Full website design up to 15 pages",
       "SEO Ready",
@@ -50,8 +56,11 @@ const FEATURED_PLANS: Plan[] = [
       "Marketing, web hosting, maintenance and more.",
     startingAt: "$99",
     startingSuffix: "/month",
-    ctaLabel: "Schedule a call",
-    ctaHref: "/contact",
+    cta: {
+      type: "schedule",
+      label: "Schedule a Call",
+      calLink: "kenstera/30min"
+    },
     features: [
       "Priority access & dedicated contact",
       "Ongoing design & dev iterations",

@@ -1,7 +1,22 @@
 import { ReactNode } from "react";
 import Link from "next/link";
+import { ScheduleModal } from '@/components/ScheduleModal';
 import { Button } from "@/components/ui/button";
 import { Check } from "lucide-react";
+
+export type PlanCTA =
+  | {
+      type: "link";
+      label: string;
+      href: string;
+    }
+  | {
+      type: "schedule";
+      label: string;
+      calLink: string;
+      modalTitle?: string;
+  };
+
 
 export type Plan = {
   id: string;
@@ -12,8 +27,7 @@ export type Plan = {
   startingAt: string;
   startingSuffix: string;
   featured?: boolean;
-  ctaLabel: string;
-  ctaHref?: string | null;
+  cta: PlanCTA;
   features: string[];
 };
 
@@ -81,7 +95,7 @@ export function PricingCards({ plans }: PricingCardsProps) {
 
             {/* CTA */}
             <div className="mt-6">
-              {plan.ctaHref ? (
+              {plan.cta.type === 'link' && plan.cta.href ? (
                 <Button
                   asChild
                   className={
@@ -90,8 +104,20 @@ export function PricingCards({ plans }: PricingCardsProps) {
                       : "w-full rounded-full bg-white/5 text-white hover:bg-white/10"
                   }
                 >
-                  <Link href={plan.ctaHref}>{plan.ctaLabel}</Link>
+                  <Link href={plan.cta.href}>{plan.cta.label}</Link>
                 </Button>
+              ) : plan.cta.type === "schedule" && plan.cta.calLink ? (
+                <ScheduleModal
+                  label={plan.cta.label}
+                  calLink={plan.cta.calLink}
+                  theme="auto"
+                  layout="month_view"
+                  className={
+                    isFeatured
+                      ? "w-full rounded-full bg-purple-500 px-4 py-2 text-sm font-semibold text-white hover:bg-purple-400 cursor-pointer transition"
+                      : "w-full rounded-full bg-white/5 px-4 py-2 text-sm font-semibold text-white hover:bg-white/10 cursor-pointer transition"
+                  }
+                />
               ) : (
                 <Button
                   disabled
@@ -101,7 +127,7 @@ export function PricingCards({ plans }: PricingCardsProps) {
                       : "w-full rounded-full bg-white/5 text-neutral-400"
                   }
                 >
-                  {plan.ctaLabel}
+                  {plan.cta.label}
                 </Button>
               )}
             </div>

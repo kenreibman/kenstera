@@ -3,11 +3,9 @@
 import { motion } from "framer-motion";
 
 const logos = [
-  { name: "Logoipsum 1" },
-  { name: "Logoipsum 2" },
-  { name: "Logoipsum 3" },
-  { name: "Logoipsum 4" },
-  { name: "Logoipsum 5" },
+  { name: "LEARFIELD" },
+  { name: "SIDEARM Sports" },
+  { name: "TheTickSuit" },
 ];
 
 export function Testimonials() {

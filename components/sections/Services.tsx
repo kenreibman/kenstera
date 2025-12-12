@@ -1,13 +1,6 @@
 import { SectionHeader } from "@/components/SectionHeader";
 import { ServiceBlock } from "@/components/ServiceBlock";
-import {
-  LayoutDashboard,
-  Rocket,
-  Smartphone,
-  Server,
-  Search,
-  GaugeCircle,
-} from "lucide-react";
+import { ServiceWebsiteVisual } from "@/components/ServiceWebsiteVisual";
 
 export function Services() {
   return (
@@ -35,26 +28,7 @@ export function Services() {
           label="Website Design & Development"
           title="Transform your online presence with websites built for results."
           body="Striking Visuals. Strong storytelling. Quality leads. Let us build you a website that finally does what it's supposed to."
-          items={[
-            { label: "UX-focused layouts", icon: <LayoutDashboard size={14} /> },
-            { label: "High-converting landing pages", icon: <Rocket size={14} /> },
-            {
-              label: "Mobile-first responsive design",
-              icon: <Smartphone size={14} />,
-            },
-            {
-              label: "Custom back-end functionality",
-              icon: <Server size={14} />,
-            },
-            {
-              label: "Search Engine Optimizations",
-              icon: <Search size={14} />,
-            },
-            {
-              label: "Blazing fast performance",
-              icon: <GaugeCircle size={14} />,
-            },
-          ]}
+          visual={<ServiceWebsiteVisual />}
         />
       </div>
     </section>

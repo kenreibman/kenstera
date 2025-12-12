@@ -6,6 +6,8 @@ const logos = [
   { name: "LEARFIELD" },
   { name: "SIDEARM Sports" },
   { name: "TheTickSuit" },
+  { name: "B Design" },
+  { name: "TheDavidImage" },
 ];
 
 export function Testimonials() {

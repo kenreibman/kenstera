@@ -1,19 +1,14 @@
 "use client";
-
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { GalaxyOrb } from "../GalaxyOrb";
+import { ScheduleModal } from "../ScheduleModal";
 
 export function Hero() {
   return (
     <section
-      className="
-        relative
-        flex min-h-[90vh] items-center justify-center
-        overflow-hidden
-        bg-black
-      "
+      className="relative flex min-h-[90vh] items-center justify-center overflow-hidden bg-black"
     >
       {/* Galary Orb */}
       <div className="absolute inset-0 flex items-center justify-center">
@@ -59,22 +54,23 @@ export function Hero() {
 
         {/* CTAs */}
         <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
-          <Button
-            asChild
+          <ScheduleModal
+            label="Free Strategy Call"
+            calLink="kenstera/15min" // or whatever your event slug is
+            namespace="hero-strategy-call"
+            theme="auto"
+            layout="month_view"
             className="
               rounded-full
               bg-purple-500
               px-6 py-2
-              text-sm font-semibold
+              text-sm
+              font-semibold
               text-white
               hover:bg-purple-600
               transition-colors
             "
-          >
-            <Link href="/contact">
-              Get started now
-            </Link>
-          </Button>
+          />
 
           <Button
             asChild

@@ -4,7 +4,7 @@ import { ServiceWebsiteVisual } from "@/components/ServiceWebsiteVisual";
 
 export function Services() {
   return (
-    <section className="relative w-full bg-black px-4 py-20">
+    <section className="relative w-full bg-black px-4 py-20" id="services">
       {/* Inner wrapper */}
       <div className="mx-auto max-w-[1000px]">
         <SectionHeader
@@ -24,6 +24,21 @@ export function Services() {
           align="center"
         />
         {/* Web Design and Development Block */}
+        <ServiceBlock
+          label="Website Design & Development"
+          title="Transform your online presence with websites built for results."
+          body="Striking visuals. Strong storytelling. Quality leads. Let us build you a website that finally does what it's supposed to."
+          visual={<ServiceWebsiteVisual />}
+        />
+        {/* Content Marketing Block */}
+        <ServiceBlock
+          label="Website Design & Development"
+          title="Transform your online presence with websites built for results."
+          body="Striking Visuals. Strong storytelling. Quality leads. Let us build you a website that finally does what it's supposed to."
+          visual={<ServiceWebsiteVisual />}
+          reverse
+        />
+        {/* Branding Block */}
         <ServiceBlock
           label="Website Design & Development"
           title="Transform your online presence with websites built for results."

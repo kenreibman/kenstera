@@ -33,10 +33,9 @@ export function ServiceWebsiteVisual() {
 
         {/* Animated list */}
         <ScrollingList items={ServiceWebsiteVisualItems} />
-
-        {/* Bottom fade */}
-        <div className="pointer-events-none absolute inset-x-0 bottom-0 h-24 bg-linear-to-t from-black to-transparent" />
       </div>
+      {/* Bottom fade */}
+      <div className="pointer-events-none absolute inset-x-0 bottom-0 h-24 bg-linear-to-t from-black to-transparent" />
     </div>
   );
 }

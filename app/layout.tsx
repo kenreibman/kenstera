@@ -10,7 +10,7 @@ const figtree = Figtree({
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://kenstera.com"),
-  title: "Kenstera",
+  title: "Kenstera - Web Design Agency that Drives Leads",
   description: "Kenstera is a web design and development agency helping businesses redesign, optimize, and elevate their online presence through modern, high-performing websites.",
     alternates: {
     canonical: "https://kenstera.com",
@@ -18,7 +18,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Kenstera — Web Design Agency",
     description:
-      "Kenstera redesigns, optimizes, and develops high-performing websites for modern businesses.",
+      "Kenstera develops, designs, and optimizes high-quality websites for modern businesses.",
     url: "https://kenstera.com",
     siteName: "Kenstera",
     locale: "en_US",

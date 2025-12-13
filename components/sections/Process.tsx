@@ -100,7 +100,7 @@ export function Process() {
 
 function Stage1Graphic() {
   return (
-    <div className="mt-6 flex flex-col gap-4 md:flex-row">
+    <div className="mt-6 flex gap-4 md:flex-row">
       {/* Radar graphic (client component) */}
       <Radar />
 

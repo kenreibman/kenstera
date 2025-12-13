@@ -86,7 +86,7 @@ export function Pricing() {
           }
           subtitle={
             <>
-              Choose a starting point that fits your stage. Every project
+              Choose a starting point that fits your needs. Every project
               includes strategy, thoughtful design, and clean implementation.
             </>
           }

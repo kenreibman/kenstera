@@ -2,6 +2,7 @@ import { SectionHeader } from "@/components/SectionHeader";
 import { ServiceBlock } from "@/components/ServiceBlock";
 import { ServiceWebsiteVisual } from "@/components/ServiceWebsiteVisual";
 import { ServiceGrowthVisual } from "@/components/ServiceGrowthVisual";
+import { ServiceSEOVisual } from "@/components/ServiceSEOVisual";
 
 export function Services() {
   return (
@@ -44,7 +45,7 @@ export function Services() {
           label="Search Engine Optimization"
           title="Make your business known. Outshine your competition."
           body="With our SEO and marketing strategies, we accelerate long-term organic traffic that compounds month after month."
-          visual={<ServiceWebsiteVisual />}
+          visual={<ServiceSEOVisual />}
         />
       </div>
     </section>

@@ -77,7 +77,7 @@ const CASE_STUDIES: CaseStudy[] = [
 
 export function CaseStudies() {
   return (
-    <section className="relative w-full bg-black px-4 py-12 md:py-20">
+    <section className="relative w-full bg-black px-0 md:px-20 py-12 md:py-20">
       <div className="mx-auto max-w-[1000px]">
         <SectionHeader
           eyebrow="Case Studies"
@@ -99,7 +99,7 @@ export function CaseStudies() {
         />
 
         <Carousel className="mt-12">
-          <CarouselContent className="-ml-4 md:ml-0">
+          <CarouselContent className="md:ml-0">
             {CASE_STUDIES.map((study) => (
               <CarouselItem key={study.id} className="pl-4 md:pl-0 basis-[85%] md:basis-full">
                 <article className="grid gap-8 rounded-3xl border border-white/10 bg-neutral-950/80 p-6 md:grid-cols-2 lg:p-8">

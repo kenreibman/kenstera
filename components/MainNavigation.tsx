@@ -45,13 +45,13 @@ export function MainNavigation() {
               px-4 py-2
               text-sm
               font-semibold
-              text-white
-            hover:bg-purpl-900
+              text-primary
+            hover:bg-violet-500
               transition-colors
             "
           >
             <Link
-              href="https://cal.com/kenstera/30min"
+              href="https://cal.com/kenstera/15min"
               target="_blank"
             >
               Book a call

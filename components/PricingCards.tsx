@@ -55,7 +55,7 @@ export function PricingCards({ plans }: PricingCardsProps) {
             className={[
               "flex flex-col rounded-3xl border bg-neutral-950/80 p-6 text-sm text-neutral-200",
               isFeatured
-                ? "border-purple-400/60 bg-linear-to-b from-purple-900/30 via-neutral-950/90 to-black shadow-[0_0_40px_rgba(88,28,135,0.45)]"
+                ? "border-violet-400/60 bg-linear-to-b from-violet-900/30 via-neutral-950/90 to-black shadow-[0_0_40px_rgba(88,28,135,0.45)]"
                 : "border-white/10",
             ].join(" ")}
           >
@@ -100,7 +100,7 @@ export function PricingCards({ plans }: PricingCardsProps) {
                   asChild
                   className={
                     isFeatured
-                      ? "w-full rounded-full bg-violet-400 hover:bg-purple-800"
+                      ? "w-full rounded-full bg-violet-400 hover:bg-violet-500"
                       : "w-full rounded-full bg-white/5 text-white hover:bg-white/10"
                   }
                 >
@@ -114,7 +114,7 @@ export function PricingCards({ plans }: PricingCardsProps) {
                   layout="month_view"
                   className={
                     isFeatured
-                      ? "w-full rounded-full bg-violet-400 px-4 py-2 text-sm font-semibold text-white hover:bg-purple-800 cursor-pointer transition"
+                      ? "w-full rounded-full bg-violet-400 px-4 py-2 text-sm font-semibold text-black hover:bg-violet-500 cursor-pointer transition"
                       : "w-full rounded-full bg-white/5 px-4 py-2 text-sm font-semibold text-white hover:bg-white/10 cursor-pointer transition"
                   }
                 />
@@ -123,7 +123,7 @@ export function PricingCards({ plans }: PricingCardsProps) {
                   disabled
                   className={
                     isFeatured
-                      ? "w-full rounded-full bg-violet-400/60 text-white"
+                      ? "w-full rounded-full bg-violet-400/60 text-black"
                       : "w-full rounded-full bg-white/5 text-neutral-400"
                   }
                 >

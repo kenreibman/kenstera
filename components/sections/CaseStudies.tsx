@@ -107,7 +107,7 @@ export function CaseStudies() {
                   <div className="flex items-center justify-center">
                     <div className="relative h-64 w-full max-w-sm overflow-hidden rounded-2xl bg-neutral-900/90">
                       {/* Placeholder – swap this for an <Image /> later */}
-                      <div className="flex h-full w-full items-center justify-center text-xs uppercase tracking-wide text-neutral-500">
+                      <div className="flex h-full w-full items-center justify-center text-xs uppercase tracking-wide text-neutral-900">
                         {study.image.alt}
                       </div>
                     </div>

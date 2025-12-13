@@ -109,23 +109,18 @@ function Stage1Graphic() {
         <ul className="space-y-2">
           <li className="flex items-center justify-between">
             <span>Current site audit</span>
-            <span className="text-[10px] text-neutral-500">In progress</span>
           </li>
           <li className="flex items-center justify-between">
             <span>Performance &amp; speed check</span>
-            <span className="text-[10px] text-neutral-500">Reviewing</span>
           </li>
           <li className="flex items-center justify-between">
             <span>UX &amp; content review</span>
-            <span className="text-[10px] text-neutral-500">Analyzing</span>
           </li>
           <li className="flex items-center justify-between">
             <span>Tech stack &amp; integrations</span>
-            <span className="text-[10px] text-neutral-500">Noted</span>
           </li>
           <li className="flex items-center justify-between">
             <span>Growth opportunities</span>
-            <span className="text-[10px] text-neutral-500">Identified</span>
           </li>
         </ul>
       </div>
@@ -139,7 +134,7 @@ function Stage2Graphic() {
       {/* fake minimal browser frame */}
       <div className="rounded-2xl border border-white/15 bg-neutral-950/80 p-3">
         {/* top bar */}
-        <div className="mb-3 flex items-center justify-between px-1 text-[10px] text-neutral-500">
+        <div className="mb-3 flex items-center justify-between px-1 text-[10px] text-neutral-900">
           <div className="flex items-center gap-1">
             <ChevronLeft size={12} strokeWidth={2} />
             <ChevronRight size={12} strokeWidth={2} />
@@ -155,7 +150,7 @@ function Stage2Graphic() {
 
         <div className="flex gap-3">
           {/* sidebar icons */}
-          <div className="flex w-8 flex-col items-center gap-3 rounded-lg bg-black/80 py-3 text-[10px] text-neutral-500">
+          <div className="flex w-8 flex-col items-center gap-3 rounded-lg bg-black/80 py-3 text-[10px] text-neutral-900">
             <div className="h-4 w-4 rounded-md bg-neutral-800" />
             <div className="h-4 w-4 rounded-md bg-neutral-800" />
             <div className="h-4 w-4 rounded-md bg-neutral-800" />

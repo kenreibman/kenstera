@@ -54,7 +54,7 @@ export function Process() {
           eyebrow="Our Process"
           title={
             <>
-              Our Simple, Smart,
+              Simple, Smart,
               <br />
               and Scalable Process
             </>

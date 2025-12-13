@@ -100,7 +100,7 @@ export function PricingCards({ plans }: PricingCardsProps) {
                   asChild
                   className={
                     isFeatured
-                      ? "w-full rounded-full bg-fuchsia-600 hover:bg-purple-800"
+                      ? "w-full rounded-full bg-violet-400 hover:bg-purple-800"
                       : "w-full rounded-full bg-white/5 text-white hover:bg-white/10"
                   }
                 >
@@ -114,7 +114,7 @@ export function PricingCards({ plans }: PricingCardsProps) {
                   layout="month_view"
                   className={
                     isFeatured
-                      ? "w-full rounded-full bg-fuchsia-600 px-4 py-2 text-sm font-semibold text-white hover:bg-purple-800 cursor-pointer transition"
+                      ? "w-full rounded-full bg-violet-400 px-4 py-2 text-sm font-semibold text-white hover:bg-purple-800 cursor-pointer transition"
                       : "w-full rounded-full bg-white/5 px-4 py-2 text-sm font-semibold text-white hover:bg-white/10 cursor-pointer transition"
                   }
                 />
@@ -123,7 +123,7 @@ export function PricingCards({ plans }: PricingCardsProps) {
                   disabled
                   className={
                     isFeatured
-                      ? "w-full rounded-full bg-fuchsia-600/60 text-white"
+                      ? "w-full rounded-full bg-violet-400/60 text-white"
                       : "w-full rounded-full bg-white/5 text-neutral-400"
                   }
                 >

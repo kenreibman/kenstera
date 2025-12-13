@@ -41,7 +41,7 @@ export function MainNavigation() {
             asChild
             className="
               rounded-full
-            bg-fuchsia-600
+            bg-violet-400
               px-4 py-2
               text-sm
               font-semibold

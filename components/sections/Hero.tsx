@@ -33,7 +33,7 @@ export function Hero() {
       >
         {/* Pill / badge */}
         <div className="mb-6 inline-flex items-center gap-3 rounded-full border border-white/10 bg-black/60 px-4 py-2 text-xs font-medium text-white/80 backdrop-blur">
-          <span className="rounded-full bg-fuchsia-600 px-2 py-0.5 text-[11px] font-semibold uppercase tracking-wide">
+          <span className="rounded-full bg-violet-400 px-2 py-0.5 text-[11px] font-semibold uppercase tracking-wide">
             New
           </span>
           <span className="text-xs sm:text-sm">
@@ -79,8 +79,8 @@ export function Hero() {
               text-sm
               font-semibold
               text-white
-              bg-fuchsia-600
-              hover:bg-fuchsia-600
+              bg-violet-400
+              hover:bg-violet-400
               transition-colors
             "
           />

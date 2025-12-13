@@ -33,7 +33,7 @@ export function Hero() {
       >
         {/* Pill / badge */}
         <div className="mb-6 inline-flex items-center gap-3 rounded-full border border-white/10 bg-black/60 px-4 py-2 text-xs font-medium text-white/80 backdrop-blur">
-          <span className="rounded-full bg-purple-700 px-2 py-0.5 text-[11px] font-semibold uppercase tracking-wide">
+          <span className="rounded-full bg-fuchsia-600 px-2 py-0.5 text-[11px] font-semibold uppercase tracking-wide">
             New
           </span>
           <span className="text-xs sm:text-sm">
@@ -51,9 +51,7 @@ export function Hero() {
             tracking-tight
             sm:text-5xl
             md:text-6xl
-            bg-[linear-gradient(235deg,#ffffff_0%,#c381bc_78%)]
-            bg-clip-text
-            text-transparent
+            text-white
           "
         >
           Engaging Websites
@@ -81,8 +79,8 @@ export function Hero() {
               text-sm
               font-semibold
               text-white
-              bg-purple-700
-              hover:bg-purple-900
+              bg-fuchsia-600
+              hover:bg-fuchsia-600
               transition-colors
             "
           />
@@ -96,7 +94,7 @@ export function Hero() {
               px-6
               text-sm
               font-semibold
-              border border-white/15
+              border border-purple-900
               bg-black/60
               text-white
               hover:bg-white/5 hover:text-white

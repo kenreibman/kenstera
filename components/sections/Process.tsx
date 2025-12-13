@@ -244,7 +244,7 @@ function Stage4Graphic() {
                 </div>
               </div>
             </div>
-            <div className="flex h-7 w-7 items-center justify-center rounded-full border border-purple-400/60 bg-purple-700/10">
+            <div className="flex h-7 w-7 items-center justify-center rounded-full border border-purple-400/60 bg-fuchsia-600/10">
               <RefreshCw size={14} className="text-purple-300" />
             </div>
           </div>
@@ -264,7 +264,7 @@ function Stage4Graphic() {
                 </div>
               </div>
             </div>
-            <div className="flex h-7 w-7 items-center justify-center rounded-full border border-purple-400/60 bg-purple-700/10">
+            <div className="flex h-7 w-7 items-center justify-center rounded-full border border-purple-400/60 bg-fuchsia-600/10">
               <ArrowUp size={14} className="text-purple-300" />
             </div>
           </div>
@@ -284,7 +284,7 @@ function Stage4Graphic() {
                 </div>
               </div>
             </div>
-            <div className="flex h-7 w-7 items-center justify-center rounded-full border border-purple-400/60 bg-purple-700/10">
+            <div className="flex h-7 w-7 items-center justify-center rounded-full border border-purple-400/60 bg-fuchsia-600/10">
               <Check size={14} className="text-purple-300" />
             </div>
           </div>

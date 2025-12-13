@@ -32,7 +32,11 @@ export function SectionHeader({
         </div>
       )}
 
-      <h2 className="text-balance text-3xl font-semibold tracking-tight text-white sm:text-4xl md:text-[40px]">
+      <h2 className="text-balance text-3xl font-semibold tracking-tight
+        text-transparent
+        bg-clip-text
+        bg-[linear-gradient(235deg,#ffffff_0%,#ffffff_44%,#6464a7_100%)]
+      sm:text-4xl md:text-[40px]">
         {title}
       </h2>
 

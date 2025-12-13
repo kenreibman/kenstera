@@ -33,7 +33,7 @@ export function Hero() {
       >
         {/* Pill / badge */}
         <div className="mb-6 inline-flex items-center gap-3 rounded-full border border-white/10 bg-black/60 px-4 py-2 text-xs font-medium text-white/80 backdrop-blur">
-          <span className="rounded-full bg-purple-500 px-2 py-0.5 text-[11px] font-semibold uppercase tracking-wide">
+          <span className="rounded-full bg-purple-700 px-2 py-0.5 text-[11px] font-semibold uppercase tracking-wide">
             New
           </span>
           <span className="text-xs sm:text-sm">
@@ -42,13 +42,26 @@ export function Hero() {
         </div>
 
         {/* Heading */}
-        <h1 className="text-white text-balance text-4xl font-semibold leading-tight tracking-tight sm:text-5xl md:text-6xl">
+        <h1
+          className="
+            text-balance
+            text-4xl
+            font-semibold
+            leading-tight
+            tracking-tight
+            sm:text-5xl
+            md:text-6xl
+            bg-[linear-gradient(235deg,#ffffff_0%,#c381bc_78%)]
+            bg-clip-text
+            text-transparent
+          "
+        >
           Engaging Websites
           <br />Built to Convert.
         </h1>
 
         {/* Subheading */}
-        <p className="mt-5 max-w-xl text-balance text-sm text-neutral-300 sm:text-base">
+        <p className="mt-5 max-w-xl text-balance text-sm text-white/90 sm:text-base">
           From design to strategy, <strong>Kenstera</strong> builds digital experiences engineered to turn visitors into leads.
         </p>
 
@@ -61,13 +74,15 @@ export function Hero() {
             theme="auto"
             layout="month_view"
             className="
+              h-10
+              cursor-pointer
               rounded-full
-              bg-purple-500
-              px-6 py-2
+              px-6
               text-sm
               font-semibold
               text-white
-              hover:bg-purple-600
+              bg-purple-700
+              hover:bg-purple-900
               transition-colors
             "
           />
@@ -76,19 +91,23 @@ export function Hero() {
             asChild
             variant="outline"
             className="
+              h-10
               rounded-full
-              border-white/15
+              px-6
+              text-sm
+              font-semibold
+              border border-white/15
               bg-black/60
-              px-6 py-2
-              text-sm font-semibold
               text-white
-              hover:bg-white/5
+              hover:bg-white/5 hover:text-white
+              transition-colors
             "
           >
-            <Link href="#services">
-              View services
+            <Link href="#services" className="inline-flex items-center justify-center">
+              View our Services
             </Link>
           </Button>
+
         </div>
       </motion.div>
     </section>

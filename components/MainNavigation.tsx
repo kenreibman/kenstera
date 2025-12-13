@@ -4,13 +4,12 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 
 const navItems = [
-    { href: "/", label: "Home" },
-    { href: "/about", label: "About" },
-    { href: "/works", label: "Works" },
-    { href: "/pricing", label: "Pricing" },
-    { href: "/contact", label: "Contact" },
+  { href: "/", label: "Home" },
+  { href: "/about", label: "About" },
+  { href: "/works", label: "Works" },
+  { href: "/pricing", label: "Pricing" },
+  { href: "/contact", label: "Contact" },
 ];
-
 
 export function MainNavigation() {
   return (
@@ -27,22 +26,30 @@ export function MainNavigation() {
         <nav className="flex items-center gap-6 md:gap-8">
           <div className="hidden items-center gap-6 md:flex">
             {navItems.map((item) => (
-                <Link
-                    key={item.href}
-                    href={item.href}
-                    className="text-sm font-medium text-neutral-300 transition-colors hover:text-white"
-                >
-                    {item.label}
-                </Link>
+              <Link
+                key={item.href}
+                href={item.href}
+                className="text-sm font-medium text-white/70 transition-colors hover:text-white"
+              >
+                {item.label}
+              </Link>
             ))}
           </div>
 
           {/* “Book a call” button */}
           <Button
             asChild
-            className="rounded-full bg-[#8B5CF6] px-4 py-2 text-sm font-semibold text-white hover:bg-[#7C3AED]"
+            className="
+              rounded-full
+            bg-purple-700
+              px-4 py-2
+              text-sm
+              font-semibold
+              text-white
+            hover:bg-purpl-900
+              transition-colors
+            "
           >
-            {/* Use your Cal.com link here */}
             <Link
               href="https://cal.com/kenstera/30min"
               target="_blank"

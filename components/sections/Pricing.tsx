@@ -31,7 +31,7 @@ const FEATURED_PLANS: Plan[] = [
     badge: "Most popular",
     description:
       "For businesses that want a high-quality site, built to scale.",
-    startingAt: "$2500",
+    startingAt: "$3500",
     startingSuffix: "/project",
     featured: true,
     cta: {

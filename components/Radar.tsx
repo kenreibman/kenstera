@@ -26,7 +26,7 @@ export function Radar() {
       />
 
       {/* center dot */}
-      <div className="absolute h-2 w-2 rounded-full bg-purple-400" />
+      <div className="absolute h-2 w-2 rounded-full bg-purple-800" />
     </div>
   );
 }

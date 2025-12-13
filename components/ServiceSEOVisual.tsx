@@ -124,7 +124,7 @@ function SerpPreview() {
         <div className="h-2 w-10 rounded-full bg-white/10" />
       </div>
 
-      <div className="rounded-lg border border-white/5 bg-black/50 p-3">
+      <div className="rounded-lg h-[110px] border border-white/5 bg-black/50 p-3">
         <AnimatePresence mode="wait">
           <motion.div
             key={item.title}

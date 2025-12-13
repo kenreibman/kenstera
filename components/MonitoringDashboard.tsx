@@ -10,41 +10,11 @@ function Card({ children }: { children: React.ReactNode }) {
   );
 }
 
-function Stat({
-  label,
-  value,
-  suffix,
-}: {
-  label: string;
-  value: number;
-  suffix?: string;
-}) {
-  return (
-    <div className="flex flex-col gap-1">
-      <div className="text-[10px] uppercase tracking-wide text-neutral-500">
-        {label}
-      </div>
-      <div className="flex items-baseline gap-1">
-        <motion.span
-          className="text-sm font-semibold text-white"
-          animate={{ opacity: [0.85, 1, 0.85] }}
-          transition={{ duration: 2.8, repeat: Infinity, ease: "easeInOut" }}
-        >
-          {value}
-        </motion.span>
-        {suffix ? (
-          <span className="text-[10px] text-neutral-500">{suffix}</span>
-        ) : null}
-      </div>
-    </div>
-  );
-}
-
 function LineChart() {
   // “draw” a line using an SVG path + strokeDashoffset animation
   return (
     <div className="relative h-20 overflow-hidden rounded-lg bg-neutral-950/60">
-      <div className="absolute inset-0 bg-gradient-to-b from-white/[0.03] to-transparent" />
+      <div className="absolute inset-0 bg-linear-to-b from-white/3 to-transparent" />
       <svg
         className="absolute inset-0 h-full w-full"
         viewBox="0 0 240 80"

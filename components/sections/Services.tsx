@@ -1,6 +1,7 @@
 import { SectionHeader } from "@/components/SectionHeader";
 import { ServiceBlock } from "@/components/ServiceBlock";
 import { ServiceWebsiteVisual } from "@/components/ServiceWebsiteVisual";
+import { ServiceGrowthVisual } from "@/components/ServiceGrowthVisual";
 
 export function Services() {
   return (
@@ -35,7 +36,7 @@ export function Services() {
           label="Ongoing Growth & Maintenance"
           title="Your site stays fast, secure, and optimized."
           body="Most websites get launched... and forgotten. Your website isn't a one-time project. It's a growth asset. Let us do the hard work so you can focus on your business."
-          visual={<ServiceWebsiteVisual />}
+          visual={<ServiceGrowthVisual />}
           reverse
         />
         {/* Branding Block */}

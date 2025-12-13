@@ -23,8 +23,8 @@ export function ServiceBlock({
   return (
     <div
       className={`
-        mt-16 flex flex-col gap-10
-        lg:mt-20 lg:flex-row lg:items-center
+        mt-4 flex flex-col gap-10
+        lg:mt-10 lg:flex-row lg:items-center
         ${reverse ? "lg:flex-row-reverse" : ""}
       `}
     >

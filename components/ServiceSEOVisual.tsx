@@ -2,14 +2,6 @@
 
 import { motion, AnimatePresence } from "framer-motion";
 import { useMemo, useState, useEffect } from "react";
-import {
-  Search,
-  TrendingUp,
-  BarChart3,
-  ShieldCheck,
-  Link2,
-  FileText,
-} from "lucide-react";
 
 type KeywordRow = {
   keyword: string;
@@ -49,58 +41,6 @@ const SERP_VARIANTS = [
       "Fix crawl issues, strengthen pages, and track conversions. A clean SEO foundation that scales with your business.",
   },
 ];
-
-function ChromeTopBar() {
-  return (
-    <div className="mb-3 flex items-center justify-between px-1 text-[10px] text-neutral-900">
-      <div className="flex items-center gap-1">
-        <div className="h-2 w-2 rounded-full bg-neutral-800" />
-        <div className="h-2 w-2 rounded-full bg-neutral-800" />
-        <div className="h-2 w-2 rounded-full bg-neutral-800" />
-      </div>
-
-      <div className="h-3 w-28 rounded-full bg-neutral-800" />
-
-      <div className="flex items-center gap-1">
-        <div className="h-2 w-2 rounded-sm bg-neutral-800" />
-        <div className="h-2 w-2 rounded-sm bg-neutral-800" />
-        <div className="h-2 w-2 rounded-sm bg-neutral-800" />
-      </div>
-    </div>
-  );
-}
-
-function SidebarIcons() {
-  const items = [
-    { icon: <Search size={14} />, label: "Search" },
-    { icon: <TrendingUp size={14} />, label: "Rank" },
-    { icon: <BarChart3 size={14} />, label: "Perf" },
-    { icon: <FileText size={14} />, label: "Pages" },
-    { icon: <Link2 size={14} />, label: "Links" },
-    { icon: <ShieldCheck size={14} />, label: "Health" },
-  ];
-
-  return (
-    <div className="flex w-9 flex-col items-center gap-3 rounded-lg bg-black/80 py-3 text-[10px] text-neutral-400">
-      {items.map((it, i) => (
-        <motion.div
-          key={it.label}
-          className="flex h-7 w-7 items-center justify-center rounded-md bg-neutral-900/80"
-          animate={{ opacity: [0.65, 1, 0.65] }}
-          transition={{
-            duration: 2.8,
-            repeat: Infinity,
-            ease: "easeInOut",
-            delay: i * 0.12,
-          }}
-          aria-hidden="true"
-        >
-          <div className="text-neutral-500">{it.icon}</div>
-        </motion.div>
-      ))}
-    </div>
-  );
-}
 
 function KeywordTicker({ rows }: { rows: KeywordRow[] }) {
   // Infinite loop: duplicate list and translate by half.
@@ -259,11 +199,7 @@ export function ServiceSEOVisual() {
   return (
     <div className="mt-6">
       <div className="rounded-2xl border border-white/15 bg-neutral-950/80 p-3">
-        <ChromeTopBar />
-
         <div className="flex gap-3">
-          <SidebarIcons />
-
           <div className="flex-1">
             <div className="grid gap-3">
               <KeywordTicker rows={KEYWORDS} />

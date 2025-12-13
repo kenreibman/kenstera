@@ -60,7 +60,7 @@ export function Hero() {
 
         {/* Subheading */}
         <p className="mt-5 max-w-xl text-balance text-sm text-white/90 sm:text-base">
-          From design to strategy, <strong>Kenstera</strong> builds digital experiences engineered to turn visitors into leads.
+          From design to strategy, Kenstera builds digital experiences engineered to turn visitors into leads.
         </p>
 
         {/* CTAs */}

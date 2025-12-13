@@ -61,7 +61,7 @@ export function Process() {
           }
           subtitle={
             <>
-              We guide you through a clear, collaborative process—from
+              We guide you through a clear, collaborative process. From
               understanding your goals to launching and optimizing a website
               that supports real growth.
             </>

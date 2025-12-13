@@ -32,17 +32,17 @@ export function Services() {
         />
         {/* Content Marketing Block */}
         <ServiceBlock
-          label="Website Design & Development"
-          title="Transform your online presence with websites built for results."
-          body="Striking Visuals. Strong storytelling. Quality leads. Let us build you a website that finally does what it's supposed to."
+          label="Ongoing Growth & Maintenance"
+          title="Your site stays fast, secure, and optimized."
+          body="Most websites get launched... and forgotten. Your website isn't a one-time project. It's a growth asset. Let us do the hard work so you can focus on your business."
           visual={<ServiceWebsiteVisual />}
           reverse
         />
         {/* Branding Block */}
         <ServiceBlock
-          label="Website Design & Development"
-          title="Transform your online presence with websites built for results."
-          body="Striking Visuals. Strong storytelling. Quality leads. Let us build you a website that finally does what it's supposed to."
+          label="Search Engine Optimization"
+          title="Make your business known. Outshine your competition."
+          body="With our SEO and marketing strategies, we accelerate long-term organic traffic that compounds month after month."
           visual={<ServiceWebsiteVisual />}
         />
       </div>

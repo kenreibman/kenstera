@@ -9,7 +9,7 @@ const FEATURED_PLANS: Plan[] = [
     icon: <Sparkles className="h-4 w-4 text-purple-300" />,
     description:
       "Search Engine Optimization Rankings, Boost your online presence and leads.",
-    startingAt: "$500",
+    startingAt: "$750",
     startingSuffix: "/month",
     cta: {
       type: "schedule",
@@ -31,7 +31,7 @@ const FEATURED_PLANS: Plan[] = [
     badge: "Most popular",
     description:
       "For businesses that want a high-quality site, built to scale.",
-    startingAt: "$3500",
+    startingAt: "$4500",
     startingSuffix: "/project",
     featured: true,
     cta: {
@@ -54,7 +54,7 @@ const FEATURED_PLANS: Plan[] = [
     icon: <Crown className="h-4 w-4 text-purple-300" />,
     description:
       "Marketing, web hosting, maintenance and more.",
-    startingAt: "$99",
+    startingAt: "$149",
     startingSuffix: "/month",
     cta: {
       type: "schedule",

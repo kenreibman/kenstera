@@ -25,7 +25,7 @@ export function Video() {
 
   return (
     <section className="bg-black text-white">
-      <div className="mx-auto max-w-7xl px-6 py-16 lg:py-24">
+      <div className="mx-auto max-w-[1000px] px-6 py-16 lg:py-24">
         <div className="mx-auto max-w-4xl text-center">
           <h2 className="text-balance text-4xl font-semibold leading-[1.05] tracking-[-0.02em] sm:text-6xl">
             The agency that gives your brand the support it’s been looking for

@@ -77,7 +77,7 @@ const CASE_STUDIES: CaseStudy[] = [
 
 export function CaseStudies() {
   return (
-    <section className="relative w-full bg-black px-0 md:px-20 py-12 md:py-20">
+    <section className="relative invert w-full bg-black px-0 md:px-20 py-12 md:py-20">
       <div className="mx-auto max-w-[1000px]">
         <SectionHeader
           eyebrow="Case Studies"

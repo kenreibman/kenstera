@@ -6,7 +6,7 @@ import { ServiceSEOVisual } from "@/components/ServiceSEOVisual";
 
 export function Services() {
   return (
-    <section className="relative w-full bg-black px-4 py-20" id="services">
+    <section className="relative w-full bg-black px-4 py-20 invert" id="services">
       {/* Inner wrapper */}
       <div className="mx-auto max-w-[1000px]">
         <SectionHeader

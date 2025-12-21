@@ -4,6 +4,7 @@ import { useLayoutEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { motion, useReducedMotion } from "framer-motion";
 import { Star } from "lucide-react";
+import Link from "next/link";
 
 type Tile = { src: string; alt: string };
 
@@ -148,16 +149,13 @@ export function Hero() {
             </div>
 
             <h1 className="text-balance text-5xl font-semibold leading-[1.02] tracking-[-0.02em] sm:text-6xl">
-              The space
+              Creative strategy,
               <br />
-              between creativity
-              <br />
-              and code
+              engineered in code
             </h1>
 
             <p className="mt-6 max-w-xl text-pretty text-sm leading-6 text-white/60">
-              In the space between creativity and code, we create digital experiences built for
-              the future—platforms that adapt, scale, and push your brand forward.
+              Where creativity meets code, we build digital experiences designed to scale, adapt, and move your brand forward.
             </p>
 
             <div className="mt-6 flex items-center gap-3 text-white/70">
@@ -171,11 +169,15 @@ export function Hero() {
             </div>
 
             <div className="mt-10 flex flex-wrap items-center gap-4">
-              <button className="bg-violet-400 px-6 py-3 text-black text-sm font-medium transition hover:bg-violet-500">
-                BOOK A CALL
-              </button>
+              <Link
+                href="https://cal.com/kenstera/15min"
+                target="_blank"
+                className="bg-violet-400 px-6 py-3 text-black text-sm font-medium transition hover:bg-violet-500 inline-block"
+              >
+                Book a call
+              </Link>
               <button className="bg-white px-6 py-3 text-sm font-medium text-black transition hover:bg-white/90">
-                EXPLORE OUR WORK
+                Explore Our Work
               </button>
             </div>
           </div>

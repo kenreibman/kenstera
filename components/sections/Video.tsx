@@ -39,6 +39,13 @@ export function Video() {
         <div className="mt-10 sm:mt-14">
           <div className="relative overflow-hidden rounded-2xl ring-1 ring-white/10">
             <div className="relative aspect-video w-full bg-neutral-950">
+              <video
+                src="https://hatamex.cdn.prismic.io/hatamex/aRZHXrpReVYa4c1r_Hatamex-1-.mp4"
+                className="absolute inset-0 h-full w-full object-cover"
+                playsInline
+                controls
+                preload="metadata"
+              />
             </div>
           </div>
         </div>

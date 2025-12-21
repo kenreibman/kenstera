@@ -92,16 +92,16 @@ function VerticalMarqueeColumn({
 }
 
 const tilesLeft: Tile[] = [
-  { src: "/tiles/closeup-1.jpg", alt: "Closeup" },
-  { src: "/tiles/phone-rocks.jpg", alt: "Phone on rocks" },
-  { src: "/tiles/phone-couch.jpg", alt: "Phone on couch" },
-  { src: "/tiles/dark-portrait.jpg", alt: "Dark portrait" },
+  { src: "/hero/tile-1.png", alt: "Closeup" },
+  { src: "/hero/tile-2.png", alt: "Phone on rocks" },
+  { src: "/hero/tile-3.png", alt: "Phone on couch" },
+  { src: "/hero/tile-4.png", alt: "Dark portrait" },
 ];
 
 const tilesRight: Tile[] = [
-  { src: "/tiles/office.jpg", alt: "Office" },
-  { src: "/tiles/gallery.jpg", alt: "Gallery" },
-  { src: "/tiles/laptop.jpg", alt: "Laptop" },
+  { src: "/hero/tile-5.png", alt: "Office" },
+  { src: "/hero/tile-6.png", alt: "Gallery" },
+  { src: "/hero/tile-7.png", alt: "Laptop" },
 ];
 
 function GoogleMark({ className = "" }: { className?: string }) {
@@ -171,7 +171,7 @@ export function Hero() {
             </div>
 
             <div className="mt-10 flex flex-wrap items-center gap-4">
-              <button className="bg-violet-600 px-6 py-3 text-sm font-medium transition hover:bg-violet-500">
+              <button className="bg-violet-400 px-6 py-3 text-black text-sm font-medium transition hover:bg-violet-500">
                 BOOK A CALL
               </button>
               <button className="bg-white px-6 py-3 text-sm font-medium text-black transition hover:bg-white/90">

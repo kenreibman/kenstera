@@ -1,12 +1,13 @@
 import type { Metadata } from "next";
-import { Figtree } from "next/font/google";
+import { Inter } from "next/font/google";
 import "./globals.css";
 import { MainNavigation } from "@/components/MainNavigation";
 import { Analytics } from "@vercel/analytics/next";
 
-const figtree = Figtree({
+export const inter = Inter({
   subsets: ["latin"],
-  variable: "--font-figtree",
+  display: "swap",
+  variable: "--font-inter",
 });
 
 export const metadata: Metadata = {
@@ -35,7 +36,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${figtree.variable} antialiased`}
+        className={`${inter.className} antialiased`}
       >
         <MainNavigation />
         {children}

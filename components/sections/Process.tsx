@@ -74,7 +74,7 @@ export function Process() {
           {stages.map((stage, index) => (
             <article
               key={stage.title}
-              className="rounded-3xl border border-white/10 bg-neutral-900/70 p-6 text-sm text-neutral-200"
+              className="border border-white/10 bg-neutral-900/70 p-6 text-sm text-neutral-200"
             >
               {/* Dynamic stage badge */}
               <div className="mb-4 inline-flex items-center rounded-full border border-white/15 bg-black/70 px-3 py-1 text-[11px] font-medium text-neutral-300">

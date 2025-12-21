@@ -53,7 +53,7 @@ export function PricingCards({ plans }: PricingCardsProps) {
           <article
             key={plan.id}
             className={[
-              "flex flex-col rounded-3xl border bg-neutral-950/80 p-6 text-sm text-neutral-200",
+              "flex flex-col border bg-neutral-950/80 p-6 text-sm text-neutral-200",
               isFeatured
                 ? "border-violet-400/60 bg-linear-to-b from-violet-900/30 via-neutral-950/90 to-black shadow-[0_0_40px_rgba(88,28,135,0.45)]"
                 : "border-white/10",

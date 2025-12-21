@@ -1,5 +1,7 @@
 "use client";
 
+import * as React from "react";
+import Link from "next/link";
 import { SectionHeader } from "@/components/SectionHeader";
 import {
   Carousel,
@@ -11,142 +13,186 @@ import {
 
 type CaseStudy = {
   id: string;
-  image: {
-    alt: string;
-  };
-  logo: string;
+  href: string;
+  category: string;
   company: string;
-  title: string;
-  subtitle: string;
-  impact: string[];
+  blurb: string;
+  tags: string[];
+  // Replace this with real image later
+  imageAlt: string;
 };
 
 const CASE_STUDIES: CaseStudy[] = [
   {
-    id: "logistics",
-    image: {
-      alt: "Warehouse with shelving and forklift",
-    },
-    logo: "MedixChain",
-    company: "Healthcare logistics platform",
-    title: "Streamlined operations and reduced errors across their supply chain.",
-    subtitle:
-      "We redesigned their site, clarified the offer, and built a lead gen funnel that connects directly into their CRM—so sales gets clean, qualified opportunities instead of noise.",
-    impact: [
-      "80% reduction in form drop-offs",
-      "2.3x increase in qualified demos booked",
-      "40% faster response time from lead to first touch",
-      "Integrated analytics across marketing and sales",
-    ],
+    id: "arslan",
+    href: "/case-studies/arslan",
+    category: "Construction",
+    company: "Arslan Group",
+    blurb:
+      "A fast-growing construction and home expert, ready to elevate its digital presence to match its practical…",
+    tags: ["Brand strategy & identity", "Digital development", "Digital marketing"],
+    imageAlt: "Construction site with building facade",
   },
   {
-    id: "saas",
-    image: {
-      alt: "SaaS dashboard on a laptop",
-    },
-    logo: "Flowboard",
-    company: "B2B SaaS workflow tool",
-    title: "Turned a confusing product story into a clear, conversion-focused site.",
-    subtitle:
-      "Flowboard's product was strong, but their marketing site wasn't telling the story. We rebuilt their homepage, pricing, and onboarding funnel to match how customers actually buy.",
-    impact: [
-      "30% lift in trial sign-ups",
-      "Higher conversion from trial to paid",
-      "New feature pages launched in days, not weeks",
-      "Messaging playbook the whole team can use",
-    ],
+    id: "hotel-four-stories",
+    href: "/case-studies/hotel-four-stories",
+    category: "Hospitality / Hotels",
+    company: "Hotel Four Stories",
+    blurb:
+      "Custom hotel website with multilingual structure, MEWS integration, and a complete photo and video shoot for…",
+    tags: ["Digital development", "Photography & visual production"],
+    imageAlt: "Coastline aerial with beach and pier",
   },
   {
-    id: "agency",
-    image: {
-      alt: "Modern office interior",
-    },
-    logo: "Northline Studio",
-    company: "Creative production agency",
-    title: "A portfolio that finally reflects the quality of their work.",
-    subtitle:
-      "We created a fast, visual-first portfolio experience that puts their best projects front and center while making it effortless for prospects to get in touch.",
-    impact: [
-      "60% more project enquiries",
-      "Site performance in the high 90s on Lighthouse",
-      "Editing new case studies without touching code",
-      "Shorter sales cycles with better-informed leads",
-    ],
+    id: "avra",
+    href: "/case-studies/avra",
+    category: "Telecom & Engineering",
+    company: "Avra Gruppe",
+    blurb:
+      "Complete rebranding and new website for a leading German telecom and engineering company.",
+    tags: ["Brand strategy & identity"],
+    imageAlt: "Dark tech device close-up",
+  },
+  {
+    id: "test",
+    href: "/case-studies/test",
+    category: "Telecom & Engineering",
+    company: "Avra Gruppe",
+    blurb:
+      "Complete rebranding and new website for a leading German telecom and engineering company.",
+    tags: ["Brand strategy & identity"],
+    imageAlt: "Dark tech device close-up",
   },
 ];
 
+function DotsIcon(props: React.SVGProps<SVGSVGElement>) {
+  return (
+    <svg viewBox="0 0 24 24" aria-hidden="true" {...props}>
+      <circle cx="12" cy="5" r="1.7" />
+      <circle cx="12" cy="12" r="1.7" />
+      <circle cx="12" cy="19" r="1.7" />
+    </svg>
+  );
+}
+
 export function CaseStudies() {
   return (
-    <section className="relative invert w-full bg-black px-0 md:px-20 py-12 md:py-20">
-      <div className="mx-auto max-w-[1000px]">
-        <SectionHeader
-          eyebrow="Case Studies"
-          title={
-            <>
-              See How Better Websites
-              <br />
-              Transform Businesses
-            </>
-          }
-          subtitle={
-            <>
-              A few examples of how strategic design, clean development, and
-              conversion-focused funnels have helped our clients win more of the
-              right customers.
-            </>
-          }
-          align="center"
-        />
+    <section className="w-full bg-black px-4 py-12 md:px-20 md:py-20">
+      <div className="mx-auto max-w-6xl">
+        {/* Header row */}
+        <div className="flex items-start justify-center">
+          <SectionHeader
+            eyebrow="Cases"
+            title="Featured cases"
+            subtitle={
+              <>
+                We believe in work that’s not just built to function, but built to shift brand perception, elevate
+                experience, and drive measurable results. That’s the standard we create for.
+              </>
+            }
+          />
+        </div>
 
-        <Carousel className="mt-12">
-          <CarouselContent className="md:ml-0">
-            {CASE_STUDIES.map((study) => (
-              <CarouselItem key={study.id} className="pl-4 md:pl-0 basis-[85%] md:basis-full">
-                <article className="grid gap-8 rounded-3xl border border-white/10 bg-neutral-950/80 p-6 md:grid-cols-2 lg:p-8">
-                  {/* Left: image / visual placeholder */}
-                  <div className="flex items-center justify-center">
-                    <div className="relative h-64 w-full max-w-sm overflow-hidden rounded-2xl bg-neutral-900/90">
-                      {/* Placeholder – swap this for an <Image /> later */}
-                      <div className="flex h-full w-full items-center justify-center text-xs uppercase tracking-wide text-neutral-900">
-                        {study.image.alt}
+        {/* Cards */}
+        <div className="mt-10">
+          <Carousel className="relative">
+            <CarouselContent className="-ml-6">
+              {CASE_STUDIES.map((study) => (
+                <CarouselItem key={study.id} className="pl-6 basis-[88%] sm:basis-1/2 lg:basis-1/3">
+                  {/* Whole card clickable */}
+                  <Link
+                    href={study.href}
+                    aria-label={`View case study: ${study.company}`}
+                    className="group block"
+                  >
+                    <article className="relative h-[520px] w-full overflow-hidden bg-neutral-200">
+                      {/* Image area (placeholder) */}
+                      <div className="absolute inset-0">
+                        {/* Swap this for <Image /> later */}
+                        <div className="h-full w-full bg-neutral-300">
+                          <div className="flex h-full w-full items-center justify-center px-6 text-center text-xs font-semibold uppercase tracking-widest text-neutral-500">
+                            {study.imageAlt}
+                          </div>
+                        </div>
+
+                        {/* Dark overlay to match screenshot */}
+                        <div className="absolute inset-0 bg-black/45 transition-colors duration-300 group-hover:bg-black/25" />
+                        {/* Bottom fade for text readability */}
+                        <div className="absolute inset-x-0 bottom-0 h-64 bg-gradient-to-t from-black/75 to-transparent transition-opacity duration-300 group-hover:opacity-80" />
                       </div>
-                    </div>
-                  </div>
 
-                  {/* Right: details */}
-                  <div className="flex flex-col justify-center gap-4 text-sm text-neutral-200">
-                    <div className="text-xs font-medium uppercase tracking-wide text-neutral-400">
-                      {study.logo}
-                    </div>
-
-                    <h3 className="text-lg font-semibold text-white sm:text-xl">
-                      {study.title}
-                    </h3>
-
-                    <p className="text-sm text-neutral-300 hidden md:block">{study.subtitle}</p>
-
-                    <div className="mt-2 hidden md:block">
-                      <div className="text-xs font-semibold uppercase tracking-wide text-neutral-400">
-                        Impact
+                      {/* Top-left category */}
+                      <div className="absolute left-6 top-6 flex items-center gap-2">
+                        <span className="h-2 w-2 bg-white transition-colors duration-300 group-hover:bg-blue-600" />
+                        <span className="text-xs font-semibold uppercase tracking-wider text-white">
+                          {study.category}
+                        </span>
                       </div>
-                      <ul className="mt-2 space-y-1.5 text-sm text-neutral-200">
-                        {study.impact.map((item) => (
-                          <li key={item} className="flex gap-2">
-                            <span className="mt-1.5 h-[3px] w-[3px] rounded-full bg-neutral-500" />
-                            <span>{item}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  </div>
-                </article>
-              </CarouselItem>
-            ))}
-          </CarouselContent>
 
-            <CarouselPrevious className="h-8 w-8 rounded-full border hidden md:flex" />
-            <CarouselNext className="h-8 w-8 rounded-full hidden md:flex" />
-        </Carousel>
+                      {/* Main content */}
+                      <div className="absolute inset-x-0 bottom-20 px-6">
+                        <h3 className="text-3xl font-semibold leading-tight text-white transition-colors duration-300 group-hover:text-blue-50">
+                          {study.company}
+                        </h3>
+
+                        <p className="mt-3 max-w-[34ch] text-sm leading-relaxed text-white/85 transition-colors duration-300 group-hover:text-white">
+                          {study.blurb}
+                        </p>
+
+                        <div className="mt-5 flex flex-wrap gap-2">
+                          {study.tags.map((tag) => (
+                            <span
+                              key={tag}
+                              className="inline-flex items-center border border-white/60 px-3 py-2 text-[10px] font-semibold uppercase tracking-wider text-white transition-colors duration-300 group-hover:border-blue-200 group-hover:text-blue-50"
+                            >
+                              {tag}
+                            </span>
+                          ))}
+                        </div>
+                      </div>
+
+                      {/* Bottom bar: becomes black on hover (like screenshot), otherwise blue */}
+                      <div className="absolute inset-x-0 bottom-0 flex h-16 items-center justify-between bg-blue-600 px-6 transition-colors duration-300 group-hover:bg-black">
+                        <span className="text-xs font-semibold uppercase tracking-wider text-white">
+                          See work
+                        </span>
+                        <DotsIcon className="h-5 w-5 fill-white" />
+                      </div>
+                    </article>
+                  </Link>
+                </CarouselItem>
+              ))}
+            </CarouselContent>
+
+            {/* Nav (square, no rounded edges) */}
+            <CarouselPrevious className="hidden md:flex h-10 w-10 border border-black/20 bg-white text-black shadow-none" />
+            <CarouselNext className="hidden md:flex h-10 w-10 border border-black/20 bg-white text-black shadow-none" />
+          </Carousel>
+
+          {/* Bottom-right button */}
+          <div className="mt-6 hidden w-full justify-end gap-3 md:flex">
+            <Link
+              href="/case-studies"
+              type="button"
+              className="hidden md:inline-flex items-center justify-center bg-blue-600 px-5 py-4 text-xs font-semibold uppercase tracking-wider text-white"
+            >
+              View more cases
+              <DotsIcon className="ml-3 h-4 w-4 fill-white" />
+            </Link>
+          </div>
+
+          {/* Mobile header button */}
+          <div className="mt-6 md:hidden">
+            <Link
+              href="/case-studies"
+              type="button"
+              className="inline-flex w-full items-center justify-center bg-blue-600 px-5 py-4 text-xs font-semibold uppercase tracking-wider text-white"
+            >
+              View more cases
+              <DotsIcon className="ml-3 h-4 w-4 fill-white" />
+            </Link>
+          </div>
+        </div>
       </div>
     </section>
   );

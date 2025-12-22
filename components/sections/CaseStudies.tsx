@@ -2,6 +2,7 @@
 
 import * as React from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { SectionHeader } from "@/components/SectionHeader";
 import {
   Carousel,
@@ -18,50 +19,65 @@ type CaseStudy = {
   company: string;
   blurb: string;
   tags: string[];
-  // Replace this with real image later
+  imageSrc: string;
   imageAlt: string;
 };
 
 const CASE_STUDIES: CaseStudy[] = [
   {
-    id: "arslan",
-    href: "/case-studies/arslan",
-    category: "Construction",
-    company: "Arslan Group",
+    id: "theticksuit",
+    href: "/case-studies/theticksuit",
+    category: "E-Commerce & Clothing",
+    company: "TheTickSuit",
     blurb:
-      "A fast-growing construction and home expert, ready to elevate its digital presence to match its practical…",
+      "TheTickSuit protects you while you garden, walk in the woods, or hike.",
     tags: ["Brand strategy & identity", "Digital development", "Digital marketing"],
-    imageAlt: "Construction site with building facade",
+    imageSrc: "/case-studies/theticksuit.webp",
+    imageAlt: "Man wearing TheTickSuit in the woods",
   },
   {
-    id: "hotel-four-stories",
-    href: "/case-studies/hotel-four-stories",
-    category: "Hospitality / Hotels",
-    company: "Hotel Four Stories",
+    id: "texaslonghorns",
+    href: "/case-studies/texaslonghorns",
+    category: "Sports",
+    company: "Texas Longhorns",
     blurb:
-      "Custom hotel website with multilingual structure, MEWS integration, and a complete photo and video shoot for…",
-    tags: ["Digital development", "Photography & visual production"],
+      "Custom website for the University of Texas Longhorns",
+    tags: ["Digital development", "Digital Marketing"],
+    imageSrc: "/case-studies/texaslonghorns.webp",
     imageAlt: "Coastline aerial with beach and pier",
   },
   {
-    id: "avra",
-    href: "/case-studies/avra",
-    category: "Telecom & Engineering",
-    company: "Avra Gruppe",
+    id: "thedavidimage",
+    href: "/case-studies/thedavidimage",
+    category: "Photography",
+    company: "The David Image",
     blurb:
-      "Complete rebranding and new website for a leading German telecom and engineering company.",
+      "Complete rebranding and new website for photographer The David Image.",
     tags: ["Brand strategy & identity"],
-    imageAlt: "Dark tech device close-up",
+    imageSrc: "/case-studies/thedavidimage.webp",
+    imageAlt: "The David Image",
   },
   {
-    id: "test",
-    href: "/case-studies/test",
-    category: "Telecom & Engineering",
-    company: "Avra Gruppe",
+    id: "sidearm",
+    href: "/case-studies/sidearm-sports",
+    category: "Sports & Entertainment",
+    company: "SIDEARM Sports",
     blurb:
-      "Complete rebranding and new website for a leading German telecom and engineering company.",
-    tags: ["Brand strategy & identity"],
-    imageAlt: "Dark tech device close-up",
+      "Complete rebranding and new website for a college sports company.",
+    tags: ["Brand strategy & identity", "Digital development"],
+    imageSrc: "/case-studies/sidearm-sports.webp",
+    imageAlt: "SIDEARM Sports",
+  },
+    {
+    id: "learfield",
+    href: "/case-studies/learfield",
+    category: "Sports & Entertainment",
+    company: "LEARFIELD",
+    blurb:
+      "Complete rebranding and new website for a LEARFIELD IMG College",
+    tags: ["Brand strategy & identity", "Digital development"],
+    imageSrc: "/case-studies/learfield.webp",
+    imageAlt: "LEARFIELD",
   },
 ];
 
@@ -86,8 +102,7 @@ export function CaseStudies() {
             title="Featured cases"
             subtitle={
               <>
-                We believe in work that’s not just built to function, but built to shift brand perception, elevate
-                experience, and drive measurable results. That’s the standard we create for.
+                We build work that elevates brands, improves experiences, and delivers results you can measure.
               </>
             }
           />
@@ -106,18 +121,14 @@ export function CaseStudies() {
                     className="group block"
                   >
                     <article className="relative h-[520px] w-full overflow-hidden bg-neutral-200">
-                      {/* Image area (placeholder) */}
                       <div className="absolute inset-0">
-                        {/* Swap this for <Image /> later */}
-                        <div className="h-full w-full bg-neutral-300">
-                          <div className="flex h-full w-full items-center justify-center px-6 text-center text-xs font-semibold uppercase tracking-widest text-neutral-500">
-                            {study.imageAlt}
-                          </div>
-                        </div>
-
-                        {/* Dark overlay to match screenshot */}
+                        <Image
+                          src={study.imageSrc}
+                          alt={study.imageAlt}
+                          fill
+                          className="object-cover"
+                        />
                         <div className="absolute inset-0 bg-black/45 transition-colors duration-300 group-hover:bg-black/25" />
-                        {/* Bottom fade for text readability */}
                         <div className="absolute inset-x-0 bottom-0 h-64 bg-gradient-to-t from-black/75 to-transparent transition-opacity duration-300 group-hover:opacity-80" />
                       </div>
 

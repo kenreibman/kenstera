@@ -93,18 +93,10 @@ export function Footer() {
             <div className="flex items-start justify-between gap-6">
               <div>
                 <Link href="/" className="inline-flex items-center gap-3">
-                  <div className="grid h-10 w-10 place-items-center bg-white/10 ring-1 ring-white/15">
-                    <span className="text-sm font-semibold tracking-tight">K</span>
-                  </div>
                   <span className="text-lg font-semibold tracking-tight">
                     Kenstera
                   </span>
                 </Link>
-
-                <p className="mt-5 max-w-md text-sm leading-6 text-white/60">
-                  A design and development studio building modern websites that
-                  convert—fast, scalable, and obsessively polished.
-                </p>
 
                 <div className="mt-8 flex flex-wrap gap-3">
                   <Link
@@ -117,18 +109,10 @@ export function Footer() {
                     href="mailto:hello@kenstera.com"
                     className="inline-flex items-center justify-center bg-white/0 px-5 py-3 text-sm font-semibold text-white ring-1 ring-white/15 transition hover:bg-white/5"
                   >
-                    hello@kenstera.com
+                    info@kenstera.com
                   </a>
                 </div>
               </div>
-
-              <Link
-                href="#top"
-                className="hidden shrink-0 bg-white/0 p-3 ring-1 ring-white/15 transition hover:bg-white/5 lg:inline-flex"
-                aria-label="Back to top"
-              >
-                <ArrowUpRight className="h-5 w-5 rotate-[-45deg]" />
-              </Link>
             </div>
 
             {/* Social row */}

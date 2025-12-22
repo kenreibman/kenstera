@@ -38,6 +38,7 @@ export function MainNavigation() {
             className="
             bg-violet-400
               px-4 py-2
+              rounded-none
               text-sm
               font-semibold
               text-primary

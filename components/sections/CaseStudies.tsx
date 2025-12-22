@@ -93,7 +93,7 @@ function DotsIcon(props: React.SVGProps<SVGSVGElement>) {
 
 export function CaseStudies() {
   return (
-    <section className="w-full bg-black px-4 py-12 md:px-20 md:py-20">
+    <section className="w-full bg-black px-4 py-12 md:px-20 md:py-20" id="case-studies">
       <div className="mx-auto max-w-6xl">
         {/* Header row */}
         <div className="flex items-start justify-center">

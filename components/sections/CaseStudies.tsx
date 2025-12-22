@@ -26,7 +26,7 @@ type CaseStudy = {
 const CASE_STUDIES: CaseStudy[] = [
   {
     id: "theticksuit",
-    href: "/case-studies/theticksuit",
+    href: "https://theticksuit.com",
     category: "E-Commerce & Clothing",
     company: "TheTickSuit",
     blurb:
@@ -37,7 +37,7 @@ const CASE_STUDIES: CaseStudy[] = [
   },
   {
     id: "texaslonghorns",
-    href: "/case-studies/texaslonghorns",
+    href: "https://texaslonghorns.com",
     category: "Sports",
     company: "Texas Longhorns",
     blurb:
@@ -48,7 +48,7 @@ const CASE_STUDIES: CaseStudy[] = [
   },
   {
     id: "thedavidimage",
-    href: "/case-studies/thedavidimage",
+    href: "https://thedavidimage.com",
     category: "Photography",
     company: "The David Image",
     blurb:
@@ -59,7 +59,7 @@ const CASE_STUDIES: CaseStudy[] = [
   },
   {
     id: "sidearm",
-    href: "/case-studies/sidearm-sports",
+    href: "https://sidearmsports.com",
     category: "Sports & Entertainment",
     company: "SIDEARM Sports",
     blurb:
@@ -70,7 +70,7 @@ const CASE_STUDIES: CaseStudy[] = [
   },
     {
     id: "learfield",
-    href: "/case-studies/learfield",
+    href: "https://learfield.com",
     category: "Sports & Entertainment",
     company: "LEARFIELD",
     blurb:

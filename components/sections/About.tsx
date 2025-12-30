@@ -38,7 +38,7 @@ export function About() {
     <section className="relative bg-white text-black">
       <div className="mx-auto max-w-6xl px-6 py-16 lg:py-24">
         <div className="grid grid-cols-1 gap-12 lg:grid-cols-12 lg:items-center">
-          <div className="hidden lg:block lg:col-span-6">
+          <div className="hidden aspect-square lg:block lg:col-span-6">
             <Video
               mp4Src="/video/blob.mp4"
               webmSrc="/video/blob.webm"

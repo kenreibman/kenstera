@@ -125,11 +125,12 @@ export function CaseStudies() {
                         <Image
                           src={study.imageSrc}
                           alt={study.imageAlt}
-                          fill
-                          className="object-cover"
+                          width={370}
+                          height={520}
+                          className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
                         />
                         <div className="absolute inset-0 bg-black/45 transition-colors duration-300 group-hover:bg-black/25" />
-                        <div className="absolute inset-x-0 bottom-0 h-64 bg-gradient-to-t from-black/75 to-transparent transition-opacity duration-300 group-hover:opacity-80" />
+                        <div className="absolute inset-x-0 bottom-0 h-64 bg-linear-to-t from-black/75 to-transparent transition-opacity duration-300 group-hover:opacity-80" />
                       </div>
 
                       {/* Top-left category */}

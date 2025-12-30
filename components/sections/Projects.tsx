@@ -12,7 +12,7 @@ import {
   CarouselPrevious,
 } from "@/components/ui/carousel";
 
-type CaseStudy = {
+type Projects = {
   id: string;
   href: string;
   category: string;
@@ -23,7 +23,7 @@ type CaseStudy = {
   imageAlt: string;
 };
 
-const CASE_STUDIES: CaseStudy[] = [
+const PROJECTS: Projects[] = [
   {
     id: "theticksuit",
     href: "https://theticksuit.com",
@@ -91,7 +91,7 @@ function DotsIcon(props: React.SVGProps<SVGSVGElement>) {
   );
 }
 
-export function CaseStudies() {
+export function Projects() {
   return (
     <section className="w-full bg-black px-4 py-12 md:px-20 md:py-20" id="case-studies">
       <div className="mx-auto max-w-6xl">
@@ -112,7 +112,7 @@ export function CaseStudies() {
         <div className="mt-10">
           <Carousel className="relative">
             <CarouselContent className="-ml-6">
-              {CASE_STUDIES.map((study) => (
+              {PROJECTS.map((study) => (
                 <CarouselItem key={study.id} className="pl-6 basis-[88%] sm:basis-1/2 lg:basis-1/3">
                   {/* Whole card clickable */}
                   <Link

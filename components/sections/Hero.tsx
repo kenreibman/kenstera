@@ -16,11 +16,12 @@ export function Hero() {
 
         <div className="mt-10 sm:mt-14">
           <div className="relative overflow-hidden rounded-2xl ring-1 ring-black/10">
-            <div className="relative aspect-video w-full bg-neutral-950">
+            <div className="relative aspect-square sm:aspect-video w-full bg-neutral-950">
               <Video
                 mp4Src="/video/short.mp4"
                 webmSrc="/video/hero.webm"
                 posterSrc="/video/hero-poster.jpg"
+                className="w-full h-full"
               />
             </div>
           </div>

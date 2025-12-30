@@ -1,6 +1,5 @@
 import { Hero } from "@/components/sections/Hero";
-import { Testimonials } from "@/components/sections/Testimonials";
-import { Video } from "@/components/sections/Video";
+import { AboutCTA } from "@/components/sections/AboutCTA";
 import { Services } from "@/components/sections/Services";
 import { Process } from "@/components/sections/Process";
 import { CaseStudies } from "@/components/sections/CaseStudies";
@@ -10,11 +9,10 @@ export default function Home() {
   return (
       <main className="">
         <Hero />
-        <Testimonials />
-        <Video />
+        <AboutCTA />
+        <CaseStudies />
         <Services />
         <Process />
-        <CaseStudies />
         <Pricing />
       </main>
   );

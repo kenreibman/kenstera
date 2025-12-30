@@ -98,8 +98,8 @@ export function CaseStudies() {
         {/* Header row */}
         <div className="flex items-start justify-center">
           <SectionHeader
-            eyebrow="Cases"
-            title="Featured cases"
+            eyebrow="Projects"
+            title="Featured projects"
             subtitle={
               <>
                 We build work that elevates brands, improves experiences, and delivers results you can measure.

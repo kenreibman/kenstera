@@ -1,8 +1,10 @@
+import Image from "next/image";
 import Link from "next/link";
 
 type Service = {
   title: string;
   description: string;
+  image?: string;
 };
 
 const services: Service[] = [
@@ -10,39 +12,44 @@ const services: Service[] = [
     title: "Web Design & Development",
     description:
       "High-performing with clean code, responsive layouts, and a premium feel. SEO optimizations and more.",
+    image: "/services/website.webp"
   },
   {
     title: "Brand Identity",
     description:
       "Brand systems that clarify your message, build trust, and make you instantly recognizable.",
+      image: "/services/branding.webp"
   },
   {
     title: "Content Marketing",
     description:
       "Modern, conversion-focused interfaces built to guide visitors and drive action.",
+      image: "/services/marketing.webp"
   },
 ];
 
 function ServiceCard({
   title,
   description,
-  tone = "dark",
+  image,
 }: {
   title: string;
   description: string;
-  tone?: "light" | "dark";
+  image?: string;
 }) {
   return (
     <div className="w-full">
       {/* Image block (placeholder) */}
-      <div
-        className={[
-          "aspect-4/5 w-full rounded-2xl",
-          tone === "light"
-            ? "bg-neutral-200"
-            : "bg-neutral-900 border border-white/10",
-        ].join(" ")}
-      />
+      
+      {image && (
+        <Image
+          className={"aspect-4/5 w-full rounded-2xl bg-black"}
+          src={image}
+          alt={title}
+          width={444}
+          height={555}
+        />
+      )}
 
       {/* Text */}
       <div className="mt-4">
@@ -77,7 +84,7 @@ export function Services() {
             <ServiceCard
               title={services[0].title}
               description={services[0].description}
-              tone="light"
+              image={services[0].image}
             />
           </div>
           <div>
@@ -86,7 +93,7 @@ export function Services() {
             <ServiceCard
               title={services[1].title}
               description={services[1].description}
-              tone="dark"
+              image={services[1].image}
             />
           </div>
 
@@ -95,7 +102,7 @@ export function Services() {
             <ServiceCard
               title={services[2].title}
               description={services[2].description}
-              tone="dark"
+              image={services[2].image}
             />
           </div>
           </div>

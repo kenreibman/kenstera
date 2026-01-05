@@ -18,7 +18,6 @@ type Projects = {
   category: string;
   company: string;
   blurb: string;
-  tags: string[];
   imageSrc: string;
   imageAlt: string;
 };
@@ -31,7 +30,6 @@ const PROJECTS: Projects[] = [
     company: "TheTickSuit",
     blurb:
       "TheTickSuit protects you while you garden, walk in the woods, or hike.",
-    tags: ["Brand strategy & identity", "Digital development", "Digital marketing"],
     imageSrc: "/case-studies/theticksuit.webp",
     imageAlt: "Man wearing TheTickSuit in the woods",
   },
@@ -42,7 +40,6 @@ const PROJECTS: Projects[] = [
     company: "Texas Longhorns",
     blurb:
       "Custom website for the University of Texas Longhorns",
-    tags: ["Digital development", "Digital Marketing"],
     imageSrc: "/case-studies/texaslonghorns.webp",
     imageAlt: "Coastline aerial with beach and pier",
   },
@@ -53,7 +50,6 @@ const PROJECTS: Projects[] = [
     company: "The David Image",
     blurb:
       "Complete rebranding and new website for photographer The David Image.",
-    tags: ["Brand strategy & identity"],
     imageSrc: "/case-studies/thedavidimage.webp",
     imageAlt: "The David Image",
   },
@@ -64,7 +60,6 @@ const PROJECTS: Projects[] = [
     company: "SIDEARM Sports",
     blurb:
       "Complete rebranding and new website for a college sports company.",
-    tags: ["Brand strategy & identity", "Digital development"],
     imageSrc: "/case-studies/sidearm-sports.webp",
     imageAlt: "SIDEARM Sports",
   },
@@ -75,7 +70,6 @@ const PROJECTS: Projects[] = [
     company: "LEARFIELD",
     blurb:
       "Complete rebranding and new website for a LEARFIELD IMG College",
-    tags: ["Brand strategy & identity", "Digital development"],
     imageSrc: "/case-studies/learfield.webp",
     imageAlt: "LEARFIELD",
   },
@@ -93,20 +87,12 @@ function DotsIcon(props: React.SVGProps<SVGSVGElement>) {
 
 export function Projects() {
   return (
-    <section className="w-full bg-black px-4 py-12 md:px-20 md:py-20" id="case-studies">
+    <section className="w-full bg-black px-4 py-12 md:px-20 md:py-20" id="projects">
       <div className="mx-auto max-w-6xl">
         {/* Header row */}
-        <div className="flex items-start justify-center">
-          <SectionHeader
-            eyebrow="Projects"
-            title="Featured projects"
-            subtitle={
-              <>
-                We build work that elevates brands, improves experiences, and delivers results you can measure.
-              </>
-            }
-          />
-        </div>
+        <h2 className="text-left text-5xl sm:text-7xl font-semibold tracking-tight text-white">
+          Projects
+        </h2>
 
         {/* Cards */}
         <div className="mt-10">
@@ -151,17 +137,6 @@ export function Projects() {
                         <p className="mt-3 max-w-[34ch] text-sm leading-relaxed text-white/85 transition-colors duration-300 group-hover:text-white">
                           {study.blurb}
                         </p>
-
-                        <div className="mt-5 flex flex-wrap gap-2">
-                          {study.tags.map((tag) => (
-                            <span
-                              key={tag}
-                              className="inline-flex items-center border border-white/60 px-3 py-2 text-[10px] font-semibold uppercase tracking-wider text-white transition-colors duration-300 group-hover:border-blue-200 group-hover:text-blue-50"
-                            >
-                              {tag}
-                            </span>
-                          ))}
-                        </div>
                       </div>
 
                       {/* Bottom bar: becomes black on hover (like screenshot), otherwise blue */}
@@ -183,7 +158,7 @@ export function Projects() {
           </Carousel>
 
           {/* Bottom-right button */}
-          <div className="mt-6 hidden w-full justify-end gap-3 md:flex">
+          {/* <div className="mt-6 hidden w-full justify-end gap-3 md:flex">
             <Link
               href="/case-studies"
               type="button"
@@ -192,7 +167,7 @@ export function Projects() {
               View more cases
               <DotsIcon className="ml-3 h-4 w-4 fill-white" />
             </Link>
-          </div>
+          </div> */}
 
           {/* Mobile header button */}
           <div className="mt-6 md:hidden">

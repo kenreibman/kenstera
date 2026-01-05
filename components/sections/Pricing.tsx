@@ -73,7 +73,7 @@ const FEATURED_PLANS: Plan[] = [
 
 export function Pricing() {
   return (
-    <section className="relative w-full invert bg-black px-4 py-20 md:py-28" id="pricing">
+    <section className="relative w-full bg-black px-4 py-20 md:py-28" id="pricing">
       <div className="mx-auto max-w-[1000px]">
         <SectionHeader
           eyebrow="Pricing"

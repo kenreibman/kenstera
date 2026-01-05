@@ -30,7 +30,7 @@ export function Footer() {
 
           {/* Navigation */}
           <div className="md:col-span-3">
-            <div className="mb-4 text-xs uppercase tracking-widest text-black/50">
+            <div className="mb-4 text-xs uppercase tracking-widest text-black">
               Navigation
             </div>
             <ul className="space-y-3 text-sm">
@@ -38,7 +38,7 @@ export function Footer() {
                 <li key={item.label}>
                   <Link
                     href={item.href}
-                    className="text-black/70 hover:text-black"
+                    className="text-black hover:text-black"
                   >
                     {item.label}
                   </Link>
@@ -49,11 +49,11 @@ export function Footer() {
 
           {/* Contact */}
           <div className="md:col-span-4">
-            <div className="mb-4 text-xs uppercase tracking-widest text-black/50">
+            <div className="mb-4 text-xs uppercase tracking-widest text-black">
               Contact
             </div>
 
-            <div className="space-y-3 text-sm text-black/70">
+            <div className="space-y-3 text-sm text-black">
               <div>
                 <a
                   href="mailto:info@kenstera.com"
@@ -73,7 +73,7 @@ export function Footer() {
 
         {/* Bottom */}
         <div className="mt-16 flex flex-col items-start justify-between gap-6 border-t border-black/10 pt-8 md:flex-row md:items-center">
-          <div className="pt-2 text-xs text-black/50">
+          <div className="pt-2 text-xs text-black">
             © {new Date().getFullYear()} Kenstera LLC
           </div>
 
@@ -82,7 +82,7 @@ export function Footer() {
               <li key={item.label}>
                 <Link
                   href={item.href}
-                  className="text-black/60 hover:text-black"
+                  className="text-black hover:text-black"
                 >
                   {item.label}
                 </Link>

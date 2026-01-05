@@ -1,46 +1,46 @@
+// Pricing.tsx
+
 import { SectionHeader } from "@/components/SectionHeader";
 import { PricingCards, Plan } from "@/components/PricingCards";
-import { Zap, Sparkles, Crown } from "lucide-react";
 
 const FEATURED_PLANS: Plan[] = [
   {
     id: "seo",
     name: "SEO",
-    icon: <Sparkles className="h-4 w-4 text-purple-300" />,
+    icon: "sparkles",
     description:
       "Search Engine Optimization Rankings, Boost your online presence and leads.",
     startingAt: "$750",
     startingSuffix: "/month",
     cta: {
-      type: "schedule",
+      type: "link",
       label: "Schedule a Call",
-      calLink: "kenstera/30min"
+      href: "https://cal.com/kenstera/30min",
     },
     features: [
       "Discovery & strategy call",
       "1-3 page marketing site or landing page",
       "Responsive, mobile-first design",
-      "Basic on-page SEO setup",
-      "Launch support & handoff",
+      "Professional SEO setup",
+      "Support and Analytics",
     ],
   },
   {
     id: "website",
     name: "Website",
-    icon: <Zap className="h-4 w-4 text-purple-300" />,
+    icon: "zap",
     badge: "Most popular",
-    description:
-      "For businesses that want a high-quality site, built to scale.",
+    description: "For businesses that want a high-quality site, built to scale.",
     startingAt: "$4500",
     startingSuffix: "/project",
     featured: true,
     cta: {
-      type: "schedule",
+      type: "link",
       label: "Schedule a Call",
-      calLink: "kenstera/30min"
+      href: "https://cal.com/kenstera/30min",
     },
     features: [
-      "Full website design up to 15 pages",
+      "Full website design",
       "SEO Ready",
       "Custom-designed homepage",
       "CMS Integration",
@@ -51,20 +51,19 @@ const FEATURED_PLANS: Plan[] = [
   {
     id: "partner",
     name: "Partner",
-    icon: <Crown className="h-4 w-4 text-purple-300" />,
-    description:
-      "Marketing, web hosting, maintenance and more.",
+    icon: "crown",
+    description: "Marketing, web hosting, maintenance and more.",
     startingAt: "$149",
     startingSuffix: "/month",
     cta: {
-      type: "schedule",
+      type: "link",
       label: "Schedule a Call",
-      calLink: "kenstera/30min"
+      href: "https://cal.com/kenstera/30min",
     },
     features: [
       "Priority access & dedicated contact",
       "Ongoing design & dev iterations",
-      "A/B testing & CRO support",
+      "A/B testing",
       "Performance & SEO improvements",
       "Roadmap planning each quarter",
     ],
@@ -73,7 +72,10 @@ const FEATURED_PLANS: Plan[] = [
 
 export function Pricing() {
   return (
-    <section className="relative w-full bg-black px-4 py-20 md:py-28" id="pricing">
+    <section
+      className="relative w-full bg-black px-4 py-20 md:py-28"
+      id="pricing"
+    >
       <div className="mx-auto max-w-[1000px]">
         <SectionHeader
           eyebrow="Pricing"

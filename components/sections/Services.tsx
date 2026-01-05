@@ -43,12 +43,13 @@ function ServiceCard({
       
       {image && (
         <Image
-          className={" w-full rounded-2xl bg-black"}
+          className={"w-full rounded-2xl bg-black object-cover"}
           src={image}
           alt={title}
           width={444}
           height={555}
-          sizes="(max-width: 768px) 100vw, 50vw"
+          loading="lazy"
+          sizes="(min-width: 768px) 460px, 100vw"
         />
       )}
 

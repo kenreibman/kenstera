@@ -1,27 +1,19 @@
-import { ReactNode } from "react";
 import Link from "next/link";
-import { ScheduleModal } from '@/components/ScheduleModal';
 import { Button } from "@/components/ui/button";
-import { Check } from "lucide-react";
+import { Check, Zap, Sparkles, Crown } from "lucide-react";
 
-export type PlanCTA =
-  | {
-      type: "link";
-      label: string;
-      href: string;
-    }
-  | {
-      type: "schedule";
-      label: string;
-      calLink: string;
-      modalTitle?: string;
-  };
+export type PlanCTA = {
+  type: "link";
+  label: string;
+  href: string;
+};
 
+export type PlanIcon = "sparkles" | "zap" | "crown";
 
 export type Plan = {
   id: string;
   name: string;
-  icon: ReactNode;
+  icon: PlanIcon;
   badge?: string;
   description: string;
   startingAt: string;
@@ -35,17 +27,16 @@ type PricingCardsProps = {
   plans: Plan[];
 };
 
+function PlanIcon({ name }: { name: PlanIcon }) {
+  const cls = "h-4 w-4 text-purple-300";
+  if (name === "sparkles") return <Sparkles className={cls} />;
+  if (name === "zap") return <Zap className={cls} />;
+  return <Crown className={cls} />;
+}
+
 export function PricingCards({ plans }: PricingCardsProps) {
   return (
-    <div
-      className="
-        mt-10 
-        grid 
-        gap-6 
-        sm:grid-cols-2 
-        lg:grid-cols-3
-      "
-    >
+    <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
       {plans.map((plan) => {
         const isFeatured = plan.featured;
 
@@ -53,17 +44,17 @@ export function PricingCards({ plans }: PricingCardsProps) {
           <article
             key={plan.id}
             className={[
-              "flex flex-col border bg-neutral-950/80 p-6 text-sm text-neutral-200",
+              "flex flex-col border p-6 text-sm text-neutral-200",
               isFeatured
                 ? "border-violet-400/60 bg-linear-to-b from-violet-900/30 via-neutral-950/90 to-black shadow-[0_0_40px_rgba(88,28,135,0.45)]"
-                : "border-white/10",
+                : "border-white/10 bg-neutral-950/80",
             ].join(" ")}
           >
             {/* Header */}
             <div className="mb-4 flex items-center justify-between gap-2">
               <div className="flex items-center gap-2 text-white">
                 <span className="flex h-8 w-8 items-center justify-center rounded-full bg-white/5">
-                  {plan.icon}
+                  <PlanIcon name={plan.icon} />
                 </span>
                 <span className="text-base font-semibold">{plan.name}</span>
               </div>
@@ -91,45 +82,28 @@ export function PricingCards({ plans }: PricingCardsProps) {
             </div>
 
             {/* Description */}
-            <p className="mt-4 text-sm text-neutral-300">{plan.description}</p>
+            <p className="mt-4 text-sm text-neutral-300">
+              {plan.description}
+            </p>
 
             {/* CTA */}
             <div className="mt-6">
-              {plan.cta.type === 'link' && plan.cta.href ? (
-                <Button
-                  asChild
-                  className={
-                    isFeatured
-                      ? "w-full rounded-full bg-violet-400 hover:bg-violet-500"
-                      : "w-full rounded-full bg-white/5 text-white hover:bg-white/10"
-                  }
-                >
-                  <Link href={plan.cta.href}>{plan.cta.label}</Link>
-                </Button>
-              ) : plan.cta.type === "schedule" && plan.cta.calLink ? (
-                <ScheduleModal
-                  label={plan.cta.label}
-                  calLink={plan.cta.calLink}
-                  theme="auto"
-                  layout="month_view"
-                  className={
-                    isFeatured
-                      ? "w-full rounded-full bg-violet-400 px-4 py-2 text-sm font-semibold text-black hover:bg-violet-500 cursor-pointer transition"
-                      : "w-full rounded-full bg-white/5 px-4 py-2 text-sm font-semibold text-white hover:bg-white/10 cursor-pointer transition"
-                  }
-                />
-              ) : (
-                <Button
-                  disabled
-                  className={
-                    isFeatured
-                      ? "w-full rounded-full bg-violet-400/60 text-black"
-                      : "w-full rounded-full bg-white/5 text-neutral-400"
-                  }
+              <Button
+                asChild
+                className={
+                  isFeatured
+                    ? "w-full rounded-full bg-violet-400 hover:bg-violet-500"
+                    : "w-full rounded-full bg-white/5 text-white hover:bg-white/10"
+                }
+              >
+                <Link
+                  href={plan.cta.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
                 >
                   {plan.cta.label}
-                </Button>
-              )}
+                </Link>
+              </Button>
             </div>
 
             {/* Features */}

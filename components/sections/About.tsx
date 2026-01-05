@@ -65,7 +65,7 @@ export function About() {
               <span className="text-xs">5.0</span>
               <div className="flex items-center gap-1" aria-hidden="true">
                 {STARS.map((i) => (
-                  <Star key={i} size={16} fill="currentColor" className="text-yellow-400" />
+                  <Star key={i} size={14} fill="currentColor" className="text-yellow-400" />
                 ))}
               </div>
             </div>

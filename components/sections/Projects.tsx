@@ -123,11 +123,12 @@ export function Projects() {
                     <article className="relative h-[520px] w-full overflow-hidden bg-neutral-200">
                       <div className="absolute inset-0">
                         <Image
+                          className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
                           src={study.imageSrc}
                           alt={study.imageAlt}
                           width={370}
                           height={520}
-                          className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
+                          sizes="(max-width: 768px) 100vw, 50vw"
                         />
                         <div className="absolute inset-0 bg-black/45 transition-colors duration-300 group-hover:bg-black/25" />
                         <div className="absolute inset-x-0 bottom-0 h-64 bg-linear-to-t from-black/75 to-transparent transition-opacity duration-300 group-hover:opacity-80" />

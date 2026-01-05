@@ -43,11 +43,12 @@ function ServiceCard({
       
       {image && (
         <Image
-          className={"aspect-4/5 w-full rounded-2xl bg-black"}
+          className={" w-full rounded-2xl bg-black"}
           src={image}
           alt={title}
           width={444}
           height={555}
+          sizes="(max-width: 768px) 100vw, 50vw"
         />
       )}
 

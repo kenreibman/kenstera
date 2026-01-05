@@ -7,20 +7,10 @@ type VideoProps = {
   mp4Src: string;
   webmSrc?: string;
   posterSrc: string;
-
-  /** Optional: controls how the poster is loaded for LCP (Hero should set true) */
   priorityPoster?: boolean;
-
-  /** next/image sizes attribute (important for performance) */
   sizes?: string;
-
-  /** Tailwind/class styling */
   className?: string;
-
-  /** If true, don't attempt to autoplay until the element is near viewport */
   lazyStart?: boolean;
-
-  /** Optional: override preload behavior */
   preload?: "none" | "metadata" | "auto";
 };
 
@@ -34,7 +24,9 @@ export function Video({
   lazyStart = true,
   preload = "metadata",
 }: VideoProps) {
+  const containerRef = useRef<HTMLDivElement | null>(null);
   const videoRef = useRef<HTMLVideoElement | null>(null);
+
   const [reducedMotion, setReducedMotion] = useState(false);
   const [shouldLoadVideo, setShouldLoadVideo] = useState(!lazyStart);
 
@@ -43,37 +35,55 @@ export function Video({
     const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
     const apply = () => setReducedMotion(mq.matches);
     apply();
-    mq.addEventListener?.("change", apply);
-    return () => mq.removeEventListener?.("change", apply);
+
+    // Safari < 14 fallback
+    if (mq.addEventListener) {
+      mq.addEventListener("change", apply);
+      return () => mq.removeEventListener("change", apply);
+    } else {
+      mq.addListener(apply);
+      return () => mq.removeListener(apply);
+    }
   }, []);
 
-  // If we're lazy-starting, only "load" the video when near viewport
+  // Lazy-start: only mount <video> when near viewport
   useEffect(() => {
-    if (!lazyStart) return;
-    const el = videoRef.current;
-    // We observe the wrapper via the video ref once it exists; until then we just don't load.
-    // We'll create a tiny sentinel observer by setting shouldLoadVideo in the wrapper below.
-  }, [lazyStart]);
+    if (!lazyStart || reducedMotion) return;
+    const el = containerRef.current;
+    if (!el) return;
 
-  // Autoplay + pause offscreen
+    const io = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setShouldLoadVideo(true);
+          io.disconnect();
+        }
+      },
+      { rootMargin: "300px 0px", threshold: 0.01 }
+    );
+
+    io.observe(el);
+    return () => io.disconnect();
+  }, [lazyStart, reducedMotion]);
+
+  // Autoplay + pause offscreen (only when video is mounted)
   useEffect(() => {
+    if (reducedMotion || !shouldLoadVideo) return;
     const video = videoRef.current;
-    if (!video || reducedMotion) return;
+    if (!video) return;
 
     const tryPlay = async () => {
       try {
         await video.play();
       } catch {
-        // Autoplay blocked — keep poster visible (muted+playsInline usually works)
+        // Autoplay blocked; leave poster visible underneath
       }
     };
 
-    // Only attempt play when video is actually mounted
     tryPlay();
 
     const io = new IntersectionObserver(
       ([entry]) => {
-        if (!video) return;
         if (entry.isIntersecting) {
           tryPlay();
         } else {
@@ -89,26 +99,11 @@ export function Video({
 
   return (
     <div
+      ref={containerRef}
       className={className}
       style={{ position: "relative", overflow: "hidden" }}
-      ref={(node) => {
-        // Lazy-load trigger: start loading video shortly before it enters viewport
-        if (!lazyStart || !node || reducedMotion) return;
-
-        const io = new IntersectionObserver(
-          ([entry]) => {
-            if (entry.isIntersecting) {
-              setShouldLoadVideo(true);
-              io.disconnect();
-            }
-          },
-          { rootMargin: "300px 0px", threshold: 0.01 }
-        );
-
-        io.observe(node);
-      }}
     >
-      {/* Poster / fallback is ALWAYS there (fast LCP) */}
+      {/* Poster is always present (good for LCP) */}
       <Image
         src={posterSrc}
         alt=""
@@ -119,7 +114,6 @@ export function Video({
         style={{ objectFit: "cover" }}
       />
 
-      {/* Video overlays poster only when allowed */}
       {!reducedMotion && shouldLoadVideo && (
         <video
           ref={videoRef}
@@ -130,7 +124,6 @@ export function Video({
           controls={false}
           disablePictureInPicture
           aria-hidden="true"
-          // key forces remount when sources change (useful if reused with dynamic src)
           key={`${mp4Src}|${webmSrc ?? ""}`}
           style={{
             position: "absolute",

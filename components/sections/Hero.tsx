@@ -23,10 +23,8 @@ export function Hero() {
                 posterSrc="/video/short.webp"
                 className="w-full h-full"
                 priorityPoster
-                // This is key: tell the browser how big it will render at breakpoints
                 sizes="(min-width: 1024px) 1104px, (min-width: 640px) 960px, 600px"
-                // For hero: you *can* keep lazyStart true (recommended for Lighthouse)
-                // If you insist on immediate playback, set lazyStart={false}
+                preload="none"
               />
             </div>
           </div>

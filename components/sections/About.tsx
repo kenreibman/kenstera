@@ -1,8 +1,8 @@
-"use client";
-
 import { Star } from "lucide-react";
 import Link from "next/link";
 import { Video } from "@/components/Video";
+
+const STARS = [0,1,2,3,4];
 
 function GoogleMark({ className = "" }: { className?: string }) {
   return (
@@ -40,22 +40,16 @@ export function About() {
         <div className="grid grid-cols-1 gap-12 lg:grid-cols-12 lg:items-center">
           <div className="hidden aspect-square lg:block lg:col-span-6">
             <Video
-              mp4Src="/video/blob.mp4"
-              webmSrc="/video/blob.webm"
-              posterSrc="/video/blob.webp"
-              className="w-full h-full"
-              sizes="(min-width:1024px) 528px, 0px"
+                mp4Src="/video/blob.mp4"
+                webmSrc="/video/blob.webm"
+                posterSrc="/video/blob.webp"
+                className="w-full h-full"
+                sizes="(min-width: 1024px) 528px, 1px"
+                preload="none"
               />
           </div>
 
           <div className="lg:col-span-6">
-            <div className="mb-6 flex items-center gap-3 text-xs tracking-[0.2em] text-black/60">
-              <span className="h-px w-12 bg-black/15" />
-              <span className="inline-flex items-center gap-2">
-                <span className="h-2 w-2 rounded-full uppercase bg-emerald-400" />
-                Now Creating
-              </span>
-            </div>
 
             <h2 className="text-balance text-5xl font-semibold leading-[1.02] tracking-[-0.02em] sm:text-6xl">
               Why Kenstera?
@@ -70,8 +64,8 @@ export function About() {
               <GoogleMark className="h-4 w-4" />
               <span className="text-xs">5.0</span>
               <div className="flex items-center gap-1" aria-hidden="true">
-                {Array.from({ length: 5 }).map((_, i) => (
-                  <Star key={i} className="h-3 w-3 fill-black text-black" />
+                {STARS.map((i) => (
+                  <Star key={i} size={16} fill="currentColor" className="text-yellow-400" />
                 ))}
               </div>
             </div>

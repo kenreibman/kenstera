@@ -68,7 +68,7 @@ function ServiceCard({
 
 export function Services() {
   return (
-    <section className="w-full bg-white py-12 md:py-16">
+    <section className="w-full bg-white py-12 md:py-16" id="services">
       <div className="mx-auto max-w-[1000px] px-4 md:px-6">
         <h2 className="text-left text-5xl sm:text-7xl font-semibold tracking-tight text-black">
           Our services

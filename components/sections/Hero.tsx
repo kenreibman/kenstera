@@ -6,11 +6,11 @@ export function Hero() {
       <div className="mx-auto max-w-6xl px-3 sm:px-6 py-12 lg:py-16">
         <div className="mx-auto max-w-5xl text-center">
           <h1 className="text-balance font-semibold leading-[1.05] tracking-[-0.02em] text-5xl sm:text-7xl text-left sm:text-center">
-            The design agency your brand has been looking for
+            The agency that delivers results
           </h1>
 
           <p className="mx-auto mt-6 max-w-3xl text-left sm:text-center text-balance sm:text-pretty text-lg leading-6 text-black/70 sm:text-2xl sm:leading-7">
-            Kenstera builds experiences that grow with your ambitions. Driven by thoughtful design, smart technology, and a future-ready mindset.
+            Kenstera builds cutting-edge websites and marketing solutions using AI to help your business grow faster and smarter.
           </p>
         </div>
 

@@ -56,8 +56,8 @@ export function About() {
             </h2>
 
             <p className="mt-6 max-w-xl text-pretty text-lg leading-6 text-black">
-              Since 2018, we've partnered with brands to craft standout digital experiences. We design and build websites and products that leave a lasting impression.<br /><br />
-              At Kenstera, we don't believe in one-size-fits-all solutions. Every product is developed with precision and care, staying true to the original design vision—no shortcuts, no compromises.
+              Since 2018, we've partnered with brands to craft standout digital experiences. We design and build websites and products that generate growth.<br /><br />
+              At Kenstera, we don't believe in one-size-fits-all solutions. Every product is developed with precision and care.
             </p>
 
             <div className="mt-6 flex items-center gap-3 text-black/70">

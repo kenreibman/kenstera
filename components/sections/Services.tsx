@@ -9,21 +9,21 @@ type Service = {
 
 const services: Service[] = [
   {
-    title: "Web Design & Development",
+    title: "Custom Development",
     description:
-      "High-performing with clean code, responsive layouts, and a premium feel. SEO optimizations and more.",
+      "Website Design & Development tailored to your unique business needs, ensuring scalability and performance.",
     image: "/services/website.webp"
   },
   {
-    title: "Brand Identity",
+    title: "AI Automation",
     description:
-      "Brand systems that clarify your message, build trust, and make you instantly recognizable.",
+      "Integrate cutting-edge AI solutions to streamline operations, enhance user experiences, and drive innovation.",
       image: "/services/branding.webp"
   },
   {
     title: "Content Marketing",
     description:
-      "Modern, conversion-focused interfaces built to guide visitors and drive action.",
+      "Data-driven marketing strategies powered by AI to maximize your reach and ROI.",
       image: "/services/marketing.webp"
   },
 ];

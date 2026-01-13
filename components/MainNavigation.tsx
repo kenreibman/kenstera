@@ -2,11 +2,13 @@
 
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
+import Image from "next/image";
 
 const navItems = [
   { href: "/", label: "Home" },
-  { href: "#services", label: "Services" },
   { href: "#projects", label: "Projects" },
+  { href: "#services", label: "Services" },
+  { href: "#blog", label: "Blog" },
   { href: "#pricing", label: "Pricing" },
 ];
 
@@ -16,6 +18,12 @@ export function MainNavigation() {
       <div className="mx-auto flex h-16 max-w-[1440px] items-center justify-between px-4 md:px-6">
         {/* Logo / Brand */}
         <Link href="/" className="flex items-center gap-2">
+          <Image
+            src="../logo-main.svg"
+            width={30}
+            height={30}
+            alt=""
+          />
           <span className="text-2xl font-semibold text-black">
             Kenstera
           </span>

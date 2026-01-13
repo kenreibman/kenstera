@@ -27,7 +27,7 @@ const FEATURED_PLANS: Plan[] = [
   },
   {
     id: "website",
-    name: "Website",
+    name: "Development",
     icon: "zap",
     badge: "Most popular",
     description: "For businesses that want a high-quality site, built to scale.",
@@ -77,23 +77,9 @@ export function Pricing() {
       id="pricing"
     >
       <div className="mx-auto max-w-[1000px]">
-        <SectionHeader
-          eyebrow="Pricing"
-          title={
-            <>
-              Websites that pay for themselves,
-              <br />
-              priced for where you are now.
-            </>
-          }
-          subtitle={
-            <>
-              Choose a starting point that fits your needs. Every project
-              includes strategy, thoughtful design, and clean implementation.
-            </>
-          }
-          align="center"
-        />
+        <h2 className="text-left text-5xl sm:text-7xl font-semibold tracking-tight text-white">
+          Pricing
+        </h2>
 
         <PricingCards plans={FEATURED_PLANS} />
       </div>

@@ -17,20 +17,20 @@ const legal = [
 
 export function Footer() {
   return (
-    <footer className="border-t border-black/10 bg-white">
+    <footer className="border-t border-black/10 bg-black">
       <div className="mx-auto max-w-6xl px-5 py-20">
         {/* Top */}
         <div className="grid grid-cols-1 gap-12 md:grid-cols-12">
           {/* Brand */}
           <div className="md:col-span-5">
-            <div className="text-2xl tracking-tight text-black">
+            <div className="text-2xl tracking-tight text-white">
               Kenstera
             </div>
           </div>
 
           {/* Navigation */}
           <div className="md:col-span-3">
-            <div className="mb-4 text-xs uppercase tracking-widest text-black">
+            <div className="mb-4 text-xs uppercase tracking-widest text-white">
               Navigation
             </div>
             <ul className="space-y-3 text-sm">
@@ -38,7 +38,7 @@ export function Footer() {
                 <li key={item.label}>
                   <Link
                     href={item.href}
-                    className="text-black hover:text-black"
+                    className="text-white hover:text-white"
                   >
                     {item.label}
                   </Link>
@@ -49,21 +49,21 @@ export function Footer() {
 
           {/* Contact */}
           <div className="md:col-span-4">
-            <div className="mb-4 text-xs uppercase tracking-widest text-black">
+            <div className="mb-4 text-xs uppercase tracking-widest text-white">
               Contact
             </div>
 
-            <div className="space-y-3 text-sm text-black">
+            <div className="space-y-3 text-sm text-white">
               <div>
                 <a
                   href="mailto:info@kenstera.com"
-                  className="hover:text-black"
+                  className="hover:text-white"
                 >
                   info@kenstera.com
                 </a>
               </div>
               <div>
-                <a href="tel:+19293579256" className="hover:text-black">
+                <a href="tel:+19293579256" className="hover:text-white">
                   +1 (929) 357-9256
                 </a>
               </div>
@@ -73,7 +73,7 @@ export function Footer() {
 
         {/* Bottom */}
         <div className="mt-16 flex flex-col items-start justify-between gap-6 border-t border-black/10 pt-8 md:flex-row md:items-center">
-          <div className="pt-2 text-xs text-black">
+          <div className="pt-2 text-xs text-white">
             © {new Date().getFullYear()} Kenstera LLC
           </div>
 
@@ -82,7 +82,7 @@ export function Footer() {
               <li key={item.label}>
                 <Link
                   href={item.href}
-                  className="text-black hover:text-black"
+                  className="text-white hover:text-white"
                 >
                   {item.label}
                 </Link>

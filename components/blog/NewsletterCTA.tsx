@@ -23,7 +23,7 @@ export function NewsletterCTA() {
           Get the latest insights on AI, automation, and digital transformation
           delivered to your inbox. No spam, just valuable content.
         </p>
-        <form onSubmit={handleSubmit} className="flex gap-3">
+        <form onSubmit={handleSubmit} className="flex flex-col md:flex-row gap-3">
           <input
             type="email"
             value={email}

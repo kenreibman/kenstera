@@ -16,18 +16,18 @@ export function AuthorCard({
 }: AuthorCardProps) {
   return (
     <div className="flex items-center gap-4 py-4">
-      <div className="relative h-12 w-12 rounded-full overflow-hidden bg-neutral-900 flex items-center justify-center ring-2 ring-border">
+      <div className="hidden sm:flex relative h-6 w-6 overflow-hidden bg-black items-center justify-center">
         <Image
           src="/logo-main.svg"
           alt={author}
-          width={48}
-          height={48}
+          width={32}
+          height={32}
           className="object-cover"
         />
       </div>
       <div className="flex flex-col">
         <span className="font-semibold text-foreground">{author}</span>
-        <div className="flex items-center gap-2 text-sm text-muted-foreground">
+        <div className="flex flex-wrap sm:flex-row sm:items-center gap-1 sm:gap-2 text-xs text-muted-foreground">
           <time dateTime={date}>{formatDate(date)}</time>
           {updated && (
             <>

@@ -10,7 +10,7 @@ export function Hero() {
           </h1>
 
           <p className="mx-auto mt-6 max-w-3xl text-left sm:text-center text-balance sm:text-pretty text-lg leading-6 text-black/70 sm:text-2xl sm:leading-7">
-            Kenstera builds cutting-edge websites and marketing solutions using AI to help your business grow faster and smarter.
+            Kenstera accelerates your businesses with automated marketing, lead generation, customer support, and more.
           </p>
         </div>
 

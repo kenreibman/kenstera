@@ -14,14 +14,14 @@ export const inter = Inter({
 export const metadata: Metadata = {
   metadataBase: new URL("https://kenstera.com"),
   title: "Kenstera",
-  description: "Kenstera is an AI driven web design agency that helps businesses with lead generation, audience engagement, and building a strong online presence.",
+  description: "Kenstera accelerates your businesses with automated marketing, lead generation, customer support, and more.",
     alternates: {
     canonical: "https://kenstera.com",
   },
   openGraph: {
     title: "Kenstera — Digital Agency",
     description:
-      "Kenstera is an AI driven web design agency that helps businesses with lead generation, audience engagement, and building a strong online presence.",
+      "Kenstera accelerates your businesses with automated marketing, lead generation, customer support, and more.",
     url: "https://kenstera.com",
     siteName: "Kenstera",
     locale: "en_US",

@@ -1,9 +1,8 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import { MainNavigation } from "@/components/MainNavigation";
+import { LayoutWrapper } from "@/components/LayoutWrapper";
 import { Analytics } from "@vercel/analytics/next";
-import { Footer } from "@/components/Footer";
 
 export const inter = Inter({
   subsets: ["latin"],
@@ -39,9 +38,9 @@ export default function RootLayout({
       <body
         className={`${inter.className} antialiased`}
       >
-        <MainNavigation />
-        {children}
-        <Footer />
+        <LayoutWrapper>
+          {children}
+        </LayoutWrapper>
         <Analytics />
       </body>
     </html>

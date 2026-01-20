@@ -217,7 +217,7 @@ export default function Hero() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.8 }}
-            className="text-xs md:text-xl text-gray-600 mb-10 max-w-2xl mx-auto leading-relaxed"
+            className="text-sm md:text-xl text-gray-600 mb-10 max-w-2xl mx-auto leading-relaxed"
           >
             Implement AI with your firm to answer calls and messages instantly, qualify leads, and book appointments 24/7 — so every inquiry turns into an opportunity.
           </motion.p>

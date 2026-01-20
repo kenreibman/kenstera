@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useSyncExternalStore, useCallback } from "react";
 import { cn } from "@/lib/utils";
 
 interface TOCItem {
@@ -9,38 +9,60 @@ interface TOCItem {
   level: number;
 }
 
+function getHeadingsSnapshot(): TOCItem[] {
+  if (typeof document === "undefined") return [];
+  const article = document.querySelector("article");
+  if (!article) return [];
+
+  const elements = article.querySelectorAll("h2, h3");
+  return Array.from(elements).map((el) => ({
+    id: el.id,
+    text: el.textContent || "",
+    level: parseInt(el.tagName[1]),
+  }));
+}
+
+function subscribeToHeadings(callback: () => void) {
+  // Re-check headings when DOM mutations occur
+  const observer = new MutationObserver(callback);
+  const article = document.querySelector("article");
+  if (article) {
+    observer.observe(article, { childList: true, subtree: true });
+  }
+  return () => observer.disconnect();
+}
+
+const getServerSnapshot = () => [] as TOCItem[];
+
 export function TableOfContents() {
-  const [headings, setHeadings] = useState<TOCItem[]>([]);
+  const headings = useSyncExternalStore(
+    subscribeToHeadings,
+    getHeadingsSnapshot,
+    getServerSnapshot
+  );
   const [activeId, setActiveId] = useState<string>("");
+
+  const handleIntersection = useCallback((entries: IntersectionObserverEntry[]) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        setActiveId(entry.target.id);
+      }
+    });
+  }, []);
 
   useEffect(() => {
     const article = document.querySelector("article");
     if (!article) return;
 
     const elements = article.querySelectorAll("h2, h3");
-    const items: TOCItem[] = Array.from(elements).map((el) => ({
-      id: el.id,
-      text: el.textContent || "",
-      level: parseInt(el.tagName[1]),
-    }));
-
-    setHeadings(items);
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setActiveId(entry.target.id);
-          }
-        });
-      },
-      { rootMargin: "-80px 0px -80% 0px" }
-    );
+    const observer = new IntersectionObserver(handleIntersection, {
+      rootMargin: "-80px 0px -80% 0px",
+    });
 
     elements.forEach((el) => observer.observe(el));
 
     return () => observer.disconnect();
-  }, []);
+  }, [handleIntersection]);
 
   if (headings.length === 0) return null;
 

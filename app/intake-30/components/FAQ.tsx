@@ -9,6 +9,10 @@ const faqs = [
     answer: 'Most firms are live within 1-2 weeks. That includes configuring your intake scripts, integrating with your CRM and calendar, setting up routing rules, and testing. We handle the technical work—your team just needs to provide input on qualification criteria and preferences.'
   },
   {
+    question: 'Does the AI give legal advice?',
+    answer: 'No. The AI is designed to gather information, qualify leads, and book consultations. It does not provide legal advice or opinions. All legal guidance is provided by your attorneys during scheduled consultations.'
+  },
+  {
     question: 'What CRM and practice management systems do you integrate with?',
     answer: 'We integrate with Clio, Litify, Filevine, Salesforce, HubSpot, and most other legal CRMs. For calendar booking, we work with Calendly, Acuity, Microsoft Bookings, and Google Calendar. If you use something else, we can usually build a custom integration.'
   },
@@ -35,8 +39,8 @@ export default function FAQ() {
 
   return (
     <section className="relative py-20 bg-gray-50">
-      <div className="w-full max-w-[1120px] mx-auto px-5">
-        <p className="text-[13px] font-semibold tracking-wide uppercase text-red-600 mb-3">
+      <div className="w-full max-w-[1120px] mx-auto px-5 flex flex-col items-center">
+        <p className="text-[13px] font-semibold tracking-wide uppercase text-sky-600 mb-3">
           FAQ
         </p>
         <h2 className="text-[clamp(28px,5vw,42px)] font-bold leading-[1.15] mb-5 text-gray-900">
@@ -56,7 +60,7 @@ export default function FAQ() {
               >
                 <span className="text-base font-semibold text-gray-900 leading-snug">{faq.question}</span>
                 <span
-                  className={`shrink-0 flex items-center justify-center w-7 h-7 text-red-600 transition-transform duration-200 ${openIndex === index ? 'rotate-45' : ''}`}
+                  className={`shrink-0 flex items-center justify-center w-7 h-7 text-sky-600 transition-transform duration-200 ${openIndex === index ? 'rotate-45' : ''}`}
                 >
                   <Plus className="w-5 h-5" />
                 </span>

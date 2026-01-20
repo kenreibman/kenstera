@@ -3,7 +3,7 @@
 import { Check } from 'lucide-react'
 
 // PLACEHOLDER: Replace with your actual booking URL
-const CTA_URL = '#book-call'
+const CTA_URL = '/contact-sales'
 
 export default function FinalCTA() {
   return (
@@ -39,9 +39,9 @@ export default function FinalCTA() {
             <div className="flex justify-center mb-4">
               <a
                 href={CTA_URL}
-                className="inline-flex items-center justify-center px-9 py-4 text-base font-semibold text-white bg-red-600 rounded-lg no-underline transition-all hover:bg-red-700"
+                className="inline-flex items-center justify-center px-9 py-4 text-base font-semibold text-white bg-sky-600 rounded-lg no-underline transition-all hover:bg-sky-700"
               >
-                Book a Call
+                Contact Now
                 <svg width="20" height="20" viewBox="0 0 20 20" fill="none" className="ml-1">
                   <path d="M6 10H14M14 10L10 6M14 10L10 14" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                 </svg>

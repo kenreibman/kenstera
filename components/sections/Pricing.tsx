@@ -1,6 +1,5 @@
 // Pricing.tsx
 
-import { SectionHeader } from "@/components/SectionHeader";
 import { PricingCards, Plan } from "@/components/PricingCards";
 
 const FEATURED_PLANS: Plan[] = [

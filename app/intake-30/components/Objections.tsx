@@ -4,8 +4,8 @@ export default function Objections() {
   return (
     <section className="relative py-20">
       <div className="w-full max-w-[1120px] mx-auto px-5">
-        <p className="text-[13px] font-semibold tracking-wide uppercase text-red-600 mb-3">
-          Common Questions
+        <p className="text-[13px] font-semibold tracking-wide uppercase text-sky-600 mb-3">
+          Common concerns
         </p>
         <h2 className="text-[clamp(28px,5vw,42px)] font-bold leading-[1.15] mb-5 text-gray-900">
           &ldquo;But What About...&rdquo;

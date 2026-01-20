@@ -1,9 +1,11 @@
 import {
   Hero,
+  StickyNav,
   CredibilityStrip,
   ProblemSection,
   HowItWorks,
   Deliverables,
+  SecurityCompliance,
   CaseStudy,
   Objections,
   FAQ,
@@ -27,7 +29,7 @@ export default function PIIntakePage() {
             '@type': 'ProfessionalService',
             'name': SITE_CONFIG.agencyName,
             'description': 'AI-powered intake automation system for Personal Injury law firms. 24/7 lead response, qualification, and booking.',
-            'url': `${SITE_CONFIG.siteUrl}/pi-intake`,
+            'url': `${SITE_CONFIG.siteUrl}/intake-30`,
             'serviceType': 'Legal Technology Services',
             'areaServed': 'United States',
             'offers': {
@@ -39,12 +41,14 @@ export default function PIIntakePage() {
         }}
       />
 
+      <StickyNav />
       <main>
         <Hero />
         <CredibilityStrip />
         <ProblemSection />
         <HowItWorks />
         <Deliverables />
+        <SecurityCompliance />
         <CaseStudy />
         <Objections />
         <FAQ />

@@ -67,7 +67,7 @@ function AIMessage({ text, delay }: { text: string; delay: number }) {
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5, delay, ease: 'easeOut' }}
-      className="flex items-start gap-3"
+      className="flex items-start gap-3 h-[121px]"
     >
       <AIAvatar />
       <div className="bg-gray-900 text-white px-4 py-3 rounded-2xl rounded-bl-md max-w-[280px] text-[15px] leading-relaxed shadow-lg">
@@ -201,41 +201,14 @@ export default function Hero() {
       <div className="absolute inset-0 bg-gradient-to-r from-sky-100/30 via-transparent to-sky-100/30" />
 
       {/* Content */}
-      <div className="relative z-10 w-full max-w-[1120px] mx-auto px-5 pt-1 pb-20">
-        {/* Chat mockup */}
-        <div className="flex justify-center mb-12">
-          <div className="w-full max-w-[380px]">
-            <motion.div
-              initial={{ opacity: 0, scale: 0.95 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.6 }}
-              className="bg-white/80 backdrop-blur-sm rounded-3xl shadow-xl border border-gray-200/50 p-5 space-y-4"
-            >
-              <AnimatePresence>
-                {showMessages && (
-                  <>
-                    <UserMessage delay={0.2}>
-                      I was injured in a car accident last week and I need a lawyer.
-                    </UserMessage>
-                    <AIMessage
-                      text="I'm sorry to hear about your accident. I can ask you a few questions to see if this is something we can help with."
-                      delay={1.2}
-                    />
-                  </>
-                )}
-              </AnimatePresence>
-              <ChatInput />
-            </motion.div>
-          </div>
-        </div>
-
+      <div className="relative z-10 w-full max-w-[1120px] mx-auto px-5 pt-12 pb-20">
         {/* Headline and CTAs */}
         <div className="text-center max-w-3xl mx-auto">
           <motion.h1
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.4 }}
-            className="text-2xl md:text-[clamp(36px,7vw,64px)] font-bold leading-[1.1] tracking-tight text-gray-900 mb-6"
+            className="text-3xl md:text-[clamp(36px,7vw,64px)] font-bold leading-[1.1] tracking-tight text-gray-900 mb-6"
           >
             Get 30 qualified leads per month while you sleep.
           </motion.h1>
@@ -269,6 +242,34 @@ export default function Hero() {
             </a>
           </motion.div>
         </div>
+
+        {/* Chat mockup */}
+        <div className="flex justify-center mt-6">
+          <div className="w-full max-w-[380px]">
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 1, delay: 1.5, }}
+              className="h-[325px] grid items-end bg-white/80 backdrop-blur-sm rounded-3xl shadow-xl border border-gray-200/50 p-5 space-y-4"
+            >
+              <AnimatePresence>
+                {showMessages && (
+                  <>
+                    <UserMessage delay={0.2}>
+                      I was injured in a car accident last week and I need a lawyer.
+                    </UserMessage>
+                    <AIMessage
+                      text="I'm sorry to hear about your accident. I can ask you a few questions to see if this is something we can help with."
+                      delay={1.2}
+                    />
+                  </>
+                )}
+              </AnimatePresence>
+              <ChatInput />
+            </motion.div>
+          </div>
+        </div>
+
 
         {/* Logo strip */}
         <div className="mt-20">

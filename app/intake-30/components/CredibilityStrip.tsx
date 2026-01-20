@@ -3,7 +3,7 @@
 export default function CredibilityStrip() {
   const stats = [
     { value: "24/7", label: "Instant response" },
-    { value: "<45s", label: "Average reply time" },
+    { value: "<5s", label: "Average reply time" },
     { value: "100%", label: "Calls answered" },
     { value: "0", label: "Leads missed" },
   ]

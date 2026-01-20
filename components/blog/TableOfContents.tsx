@@ -9,17 +9,35 @@ interface TOCItem {
   level: number;
 }
 
+let cachedHeadings: TOCItem[] = [];
+
 function getHeadingsSnapshot(): TOCItem[] {
-  if (typeof document === "undefined") return [];
+  if (typeof document === "undefined") return cachedHeadings;
   const article = document.querySelector("article");
-  if (!article) return [];
+  if (!article) return cachedHeadings;
 
   const elements = article.querySelectorAll("h2, h3");
-  return Array.from(elements).map((el) => ({
+  const newHeadings = Array.from(elements).map((el) => ({
     id: el.id,
     text: el.textContent || "",
     level: parseInt(el.tagName[1]),
   }));
+
+  // Only update cache if headings actually changed
+  const hasChanged =
+    newHeadings.length !== cachedHeadings.length ||
+    newHeadings.some(
+      (h, i) =>
+        h.id !== cachedHeadings[i]?.id ||
+        h.text !== cachedHeadings[i]?.text ||
+        h.level !== cachedHeadings[i]?.level
+    );
+
+  if (hasChanged) {
+    cachedHeadings = newHeadings;
+  }
+
+  return cachedHeadings;
 }
 
 function subscribeToHeadings(callback: () => void) {
@@ -32,7 +50,7 @@ function subscribeToHeadings(callback: () => void) {
   return () => observer.disconnect();
 }
 
-const getServerSnapshot = () => [] as TOCItem[];
+const getServerSnapshot = () => cachedHeadings;
 
 export function TableOfContents() {
   const headings = useSyncExternalStore(

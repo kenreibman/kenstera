@@ -18,7 +18,7 @@ export const metadata: Metadata = {
     canonical: "https://kenstera.com",
   },
   openGraph: {
-    title: "Kenstera — Digital Agency",
+    title: "Kenstera",
     description:
       "Kenstera accelerates your businesses with automated marketing, lead generation, customer support, and more.",
     url: "https://kenstera.com",

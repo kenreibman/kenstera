@@ -5,7 +5,7 @@ import { MainNavigation } from '@/components/MainNavigation'
 import { Footer } from '@/components/Footer'
 
 // Routes where navigation and footer should be hidden (e.g., ad landing pages)
-const HIDDEN_LAYOUT_ROUTES = ['/intake-30']
+const HIDDEN_LAYOUT_ROUTES = ['/intake-30', '/intake', '/contact-sales']
 
 export function LayoutWrapper({ children }: { children: React.ReactNode }) {
   const pathname = usePathname()

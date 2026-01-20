@@ -52,7 +52,7 @@ export default function StickyNav() {
                 href="#book"
                 className="px-5 py-2 text-sm font-medium text-white bg-gray-900 rounded-full hover:bg-gray-800 transition-colors"
               >
-                Contact Now
+                Contact Us
               </a>
             </div>
           </div>

@@ -52,7 +52,7 @@ const servicesDropdown = {
     icon: Sparkles,
     title: "AI Intake for PI Firms",
     description: "Get 30 qualified leads per month",
-    href: "/intake-30"
+    href: "/intake-1"
   }
 };
 

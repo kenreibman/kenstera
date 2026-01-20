@@ -67,7 +67,7 @@ function AIMessage({ text, delay }: { text: string; delay: number }) {
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5, delay, ease: 'easeOut' }}
-      className="flex items-start gap-3 h-[121px]"
+      className="flex items-start gap-3"
     >
       <AIAvatar />
       <div className="bg-gray-900 text-white px-4 py-3 rounded-2xl rounded-bl-md max-w-[280px] text-[15px] leading-relaxed shadow-lg">
@@ -210,7 +210,7 @@ export default function Hero() {
             transition={{ duration: 0.6, delay: 0.4 }}
             className="text-3xl md:text-[clamp(36px,7vw,64px)] font-bold leading-[1.1] tracking-tight text-gray-900 mb-6"
           >
-            Get 30 qualified leads per month while you sleep.
+            Book qualified leads while you sleep.
           </motion.h1>
 
           <motion.p

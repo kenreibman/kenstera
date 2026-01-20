@@ -41,7 +41,7 @@ export default function ContactPage() {
   return (
     <main className="lg:h-screen flex flex-col lg:flex-row">
       {/* Left side - Dark */}
-      <div className="h-full w-full lg:w-1/2 bg-black text-white p-8 md:p-12 lg:p-16 flex flex-col relative overflow-hidden order-2 lg:order-1">
+      <div className="hidden lg:flex h-full w-full lg:w-1/2 bg-black text-white p-8 md:p-12 lg:p-16 flex-col relative order-2 lg:order-1">
         {/* Logo */}
         <div className="mb-12">
           <span className="text-xl font-bold">Kenstera</span>

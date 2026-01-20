@@ -49,7 +49,7 @@ export default function StickyNav() {
             {/* Right: CTAs */}
             <div className="flex items-center gap-3">
               <a
-                href="#book"
+                href="/contact-sales"
                 className="px-5 py-2 text-sm font-medium text-white bg-gray-900 rounded-full hover:bg-gray-800 transition-colors"
               >
                 Contact Us

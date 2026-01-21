@@ -22,7 +22,7 @@ function MiniChatMockup() {
           {/* User message */}
           <div className="flex justify-end">
             <div className="bg-gray-100 text-gray-900 px-3 py-2 rounded-xl rounded-br-sm text-sm max-w-[200px]">
-              So do you think I have a case?
+              What are the next steps?
             </div>
           </div>
 
@@ -30,7 +30,7 @@ function MiniChatMockup() {
           <div className="flex items-start gap-2">
             <div className="w-6 h-6 rounded-full bg-gradient-to-br from-sky-400 to-indigo-600 flex-shrink-0" />
             <div className="bg-gray-900 text-white px-3 py-2 rounded-xl rounded-bl-sm text-sm max-w-[220px]">
-              I cannot guarantee outcomes or provide legal advice. However, based on what you shared, I will connect you to one of our attorneys who can further assist you.
+              Based on what you shared, I can connect you to one of our attorneys who will further assist you.
             </div>
           </div>
 

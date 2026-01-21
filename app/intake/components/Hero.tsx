@@ -232,11 +232,11 @@ export default function Hero() {
               href="/contact-sales"
               className="inline-flex items-center justify-center px-8 py-4 bg-gray-900 text-white font-semibold rounded-full hover:bg-gray-800 transition-colors shadow-lg hover:shadow-xl"
             >
-              Contact Us
+              Check Availability
             </a>
             <a
               href="#how-it-works"
-              className="inline-flex items-center justify-center px-6 py-4 text-gray-900 font-semibold hover:text-gray-600 transition-colors"
+              className="inline-flex items-center justify-center rounded-full border border-gray-900 px-6 py-4 text-gray-900 font-semibold hover:text-gray-600 transition-colors"
             >
               See How It Works
             </a>

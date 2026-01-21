@@ -7,15 +7,15 @@ import { Zap, ShieldCheck, HeadphonesIcon, Star } from 'lucide-react'
 function CalEmbed() {
   useEffect(() => {
     (async function () {
-      const cal = await getCalApi({ namespace: "intake-45-minutes" })
+      const cal = await getCalApi({ namespace: "intake-15-minutes" })
       cal("ui", { theme: "light", hideEventTypeDetails: true, layout: "month_view" })
     })()
   }, [])
 
   return (
     <Cal
-      namespace="intake-45-minutes"
-      calLink="kenstera/intake-45-minutes"
+      namespace="intake-15-minutes"
+      calLink="kenstera/intake-15-minutes"
       style={{ width: "100%", height: "100%", minHeight: "600px" }}
       config={{ layout: "month_view", theme: "light", hideEventTypeDetails: "true" }}
     />

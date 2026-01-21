@@ -204,28 +204,19 @@ export default function Hero() {
       <div className="relative z-10 w-full max-w-[1120px] mx-auto px-5 pt-12 pb-20">
         {/* Headline and CTAs */}
         <div className="text-center max-w-3xl mx-auto">
-          <motion.h1
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.4 }}
+          <h1
             className="text-3xl md:text-[clamp(36px,7vw,64px)] font-bold leading-[1.1] tracking-tight text-gray-900 mb-6"
           >
             Stop missing calls from high-intent prospects.
-          </motion.h1>
+          </h1>
 
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.8 }}
+          <p                                                                                
             className="text-sm md:text-xl text-gray-600 mb-10 max-w-2xl mx-auto leading-relaxed"
           >
             Implement AI with your firm to answer calls and messages instantly, qualify leads, and book appointments 24/7 — so every inquiry turns into an opportunity.
-          </motion.p>
+          </p>
 
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 1 }}
+          <div
             className="flex flex-col sm:flex-row items-center justify-center gap-4"
           >
             <a
@@ -240,7 +231,7 @@ export default function Hero() {
             >
               See How It Works
             </a>
-          </motion.div>
+          </div>
         </div>
 
         {/* Chat mockup */}
@@ -249,18 +240,18 @@ export default function Hero() {
             <motion.div
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 1, delay: 1.5, }}
+              transition={{ duration: 0.4, delay: 0.4, }}
               className="h-[325px] grid items-end bg-white/80 backdrop-blur-sm rounded-3xl shadow-xl border border-gray-200/50 p-5 space-y-4"
             >
               <AnimatePresence>
                 {showMessages && (
                   <>
-                    <UserMessage delay={0.2}>
+                    <UserMessage delay={0.8}>
                       I was injured in a car accident last week and I need a lawyer.
                     </UserMessage>
                     <AIMessage
                       text="I'm sorry to hear about your accident. I can ask you a few questions to see if this is something we can help with."
-                      delay={1.2}
+                      delay={1.4}
                     />
                   </>
                 )}

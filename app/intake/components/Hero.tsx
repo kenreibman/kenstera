@@ -207,7 +207,7 @@ export default function Hero() {
           <h1
             className="text-3xl md:text-[clamp(36px,7vw,64px)] font-bold leading-[1.1] tracking-tight text-gray-900 mb-6"
           >
-            Stop missing calls from high-intent prospects.
+            Stop missing calls from possible high value clients.
           </h1>
 
           <p                                                                                

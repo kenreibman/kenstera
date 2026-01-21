@@ -65,20 +65,6 @@ export default function CRMIntegrations() {
 
             {/* Footer row */}
             <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
-              <div>
-                <p className="text-sm text-gray-500 mb-3">Join 20+ firms already connected</p>
-                <div className="flex items-center gap-8">
-                  <div>
-                    <div className="text-3xl font-bold text-gray-900">50+</div>
-                    <div className="text-sm text-gray-500">Integrations</div>
-                  </div>
-                  <div>
-                    <div className="text-3xl font-bold text-gray-900">99.9%</div>
-                    <div className="text-sm text-gray-500">Uptime</div>
-                  </div>
-                </div>
-              </div>
-
               <a
                 href="/contact-sales"
                 className="inline-flex items-center gap-2 text-gray-900 font-medium hover:gap-3 transition-all"

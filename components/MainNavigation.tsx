@@ -143,17 +143,17 @@ function MobileNavItem({
       <div>
         <button
           onClick={onToggle}
-          className="flex items-center justify-between w-full px-6 py-4 text-[16px] text-gray-900 font-medium transition-colors hover:text-gray-600"
+          className="flex items-center justify-between w-full px-6 py-3.5 text-[15px] text-gray-900 font-medium transition-colors hover:bg-gray-50"
         >
           {item.label}
           <ChevronRight
-            className={`w-5 h-5 text-gray-400 transition-transform duration-200 ${isExpanded ? 'rotate-90' : ''}`}
+            className={`w-4 h-4 text-gray-300 transition-transform duration-200 ${isExpanded ? 'rotate-90' : ''}`}
           />
         </button>
         {isExpanded && (
-          <div className="py-4 space-y-1 animate-in fade-in slide-in-from-top-2 duration-200 px-6 bg-gray-50 border-y border-gray-100">
+          <div className="py-2 space-y-1 px-6 bg-gray-50">
             {item.dropdown.columns.map((column, colIdx) => (
-              <div key={colIdx} className="mb-3">
+              <div key={colIdx} className="mb-2">
                 <p className="text-xs font-medium text-gray-400 uppercase tracking-wide mb-2">
                   {column.title}
                 </p>
@@ -162,7 +162,7 @@ function MobileNavItem({
                     key={subIdx}
                     href={subItem.href}
                     onClick={onClose}
-                    className="block py-2 text-[15px] text-gray-600 hover:text-black transition-colors"
+                    className="block py-2 text-[14px] text-gray-600 hover:text-black transition-colors"
                   >
                     {subItem.title}
                   </Link>
@@ -173,7 +173,7 @@ function MobileNavItem({
               <Link
                 href={item.dropdown.featured.href}
                 onClick={onClose}
-                className="flex items-center gap-3 py-2 text-[15px] text-sky-600 font-medium hover:text-sky-700 transition-colors"
+                className="flex items-center gap-2 py-2 text-[14px] text-sky-600 font-medium hover:text-sky-700 transition-colors"
               >
                 <item.dropdown.featured.icon className="w-4 h-4" />
                 {item.dropdown.featured.title}
@@ -189,10 +189,10 @@ function MobileNavItem({
     <Link
       href={item.href}
       onClick={onClose}
-      className="flex items-center justify-between px-6 py-4 text-[16px] text-gray-900 font-medium transition-colors hover:text-gray-600"
+      className="flex items-center justify-between px-6 py-3.5 text-[15px] text-gray-900 font-medium transition-colors hover:bg-gray-50"
     >
       {item.label}
-      <ChevronRight className="w-5 h-5 text-gray-400" />
+      <ChevronRight className="w-4 h-4 text-gray-300" />
     </Link>
   );
 }
@@ -241,6 +241,7 @@ export function MainNavigation() {
   };
 
   return (
+    <>
     <header
       className={`main-navigation sticky top-0 z-50 bg-white border-b border-gray-100 transition-transform duration-300 ${
         isVisible ? 'translate-y-0' : '-translate-y-full'
@@ -306,17 +307,19 @@ export function MainNavigation() {
         </div>
       </div>
 
-      {/* Mobile Dropdown Menu */}
+      </header>
+
+      {/* Mobile Dropdown Menu - Outside header to avoid stacking issues */}
       {mobileMenuOpen && (
         <>
           {/* Backdrop */}
           <div
-            className="fixed inset-0 top-14 bg-black/20 md:hidden z-40"
+            className="fixed inset-0 bg-black/20 md:hidden z-40"
             onClick={closeMobileMenu}
           />
-          {/* Menu Panel */}
-          <div className="fixed top-14 left-0 right-0 bottom-0 bg-white md:hidden z-50 animate-in fade-in slide-in-from-top-2 duration-200 flex flex-col">
-            <nav className="flex flex-col py-2 flex-1 overflow-y-auto">
+          {/* Menu Panel - Full height */}
+          <div className="fixed top-14 left-0 right-0 bottom-0 bg-white md:hidden z-50 flex flex-col overflow-hidden">
+            <nav className="flex flex-col py-4 flex-1 overflow-y-auto">
               {navItems.map((item) => (
                 <MobileNavItem
                   key={item.href}
@@ -327,11 +330,11 @@ export function MainNavigation() {
                 />
               ))}
             </nav>
-            <div className="px-6 py-6 border-t border-gray-100 flex gap-3">
+            <div className="px-6 py-6 border-t border-gray-100 flex gap-3 mt-auto">
               <Link
                 href="/contact-sales"
                 onClick={closeMobileMenu}
-                className="flex-1 text-center px-4 py-3 text-[14px] font-medium text-white bg-black rounded-full hover:bg-gray-800 transition-colors"
+                className="flex-1 text-center px-4 py-3.5 text-[14px] font-medium text-white bg-black rounded-full hover:bg-gray-800 transition-colors"
               >
                 Contact Us
               </Link>
@@ -339,6 +342,6 @@ export function MainNavigation() {
           </div>
         </>
       )}
-    </header>
+    </>
   );
 }

@@ -1,12 +1,12 @@
 import {
   Hero,
   StickyNav,
-  CredibilityStrip,
-  ProblemSection,
-  HowItWorks,
-  Deliverables,
+  IntakeCall,
+  IntakeBooking,
+  IntakeSetup,
+  DashboardPreview,
+  CRMIntegrations,
   SecurityCompliance,
-  CaseStudy,
   Objections,
   FAQ,
   FinalCTA,
@@ -44,12 +44,12 @@ export default function PIIntakePage() {
       <StickyNav />
       <main>
         <Hero />
-        <CredibilityStrip />
-        <ProblemSection />
-        <HowItWorks />
-        <Deliverables />
+        <IntakeCall />
+        <IntakeBooking />
+        <IntakeSetup />
+        <DashboardPreview />
+        <CRMIntegrations />
         <SecurityCompliance />
-        <CaseStudy />
         <Objections />
         <FAQ />
         <FinalCTA />

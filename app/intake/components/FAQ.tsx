@@ -40,9 +40,6 @@ export default function FAQ() {
   return (
     <section className="relative py-20 bg-gray-50">
       <div className="w-full max-w-[1120px] mx-auto px-5 flex flex-col items-center">
-        <p className="text-[13px] font-semibold tracking-wide uppercase text-sky-600 mb-3">
-          FAQ
-        </p>
         <h2 className="text-[clamp(28px,5vw,42px)] font-bold leading-[1.15] mb-5 text-gray-900">
           Frequently Asked Questions
         </h2>

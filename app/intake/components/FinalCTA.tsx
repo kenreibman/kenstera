@@ -39,7 +39,7 @@ export default function FinalCTA() {
             <div className="flex justify-center mb-4">
               <a
                 href={CTA_URL}
-                className="inline-flex items-center justify-center px-9 py-4 text-base font-semibold text-white bg-sky-600 rounded-lg no-underline transition-all hover:bg-sky-700"
+                className="inline-flex items-center justify-center px-9 py-4 text-base font-semibold text-white bg-gray-900 rounded-lg no-underline transition-all hover:bg-sky-700"
               >
                 Check Availability
                 <svg width="20" height="20" viewBox="0 0 20 20" fill="none" className="ml-1">

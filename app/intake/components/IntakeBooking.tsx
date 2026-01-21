@@ -29,7 +29,7 @@ export default function IntakeBooking() {
 
       <div className="w-full max-w-[1120px] mx-auto px-5">
         {/* Label */}
-        <p className="text-sm font-medium text-sky-600 mb-16">
+        <p className="text-sm font-medium text-gray-900 mb-16">
           Appointments locked in on the first try
         </p>
 

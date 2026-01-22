@@ -41,7 +41,7 @@ export default function FinalCTA() {
                 href={CTA_URL}
                 className="inline-flex items-center justify-center px-9 py-4 text-base font-semibold text-white bg-gray-900 rounded-lg no-underline transition-all hover:bg-sky-700"
               >
-                Check Availability
+                Schedule a Call
                 <svg width="20" height="20" viewBox="0 0 20 20" fill="none" className="ml-1">
                   <path d="M6 10H14M14 10L10 6M14 10L10 14" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                 </svg>

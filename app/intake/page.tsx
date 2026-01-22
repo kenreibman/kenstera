@@ -47,9 +47,9 @@ export default function PIIntakePage() {
         <IntakeCall />
         <IntakeBooking />
         <IntakeSetup />
-        <DashboardPreview />
         <CRMIntegrations />
         <SecurityCompliance />
+        <DashboardPreview />
         <Objections />
         <FAQ />
         <FinalCTA />

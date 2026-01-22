@@ -43,7 +43,7 @@ export default function StickyNav() {
           <div className="w-full max-w-[1120px] mx-auto px-5 py-3 flex items-center justify-between">
             {/* Left: Tagline */}
             <span className="text-[12px] text-gray-900">
-              Never miss a call
+              Scale Your Firm
             </span>
 
             {/* Right: CTAs */}
@@ -52,7 +52,7 @@ export default function StickyNav() {
                 href="/contact-sales"
                 className="px-5 py-2 text-sm font-medium text-white bg-gray-900 rounded-full hover:bg-gray-800 transition-colors"
               >
-                Check Availability
+                Schedule a Call
               </a>
             </div>
           </div>

@@ -94,15 +94,15 @@ export default function Hero() {
         {/* Headline and CTAs */}
         <div className="text-center max-w-3xl mx-auto">
           <h1
-            className="text-3xl md:text-[clamp(36px,7vw,64px)] font-semibold leading-[1.1] tracking-tight text-gray-900 mb-6"
+            className="text-3xl md:text-4xl font-semibold leading-[1.1] tracking-tight text-gray-900 mb-6"
           >
-            Capture, Qualify, Book, and Follow Up Automatically. Never lose a high-value lead again.
+            Capture, Qualify, Book, and Follow Up Automatically.
           </h1>
 
           <p
             className="text-sm md:text-xl text-gray-600 mb-10 max-w-2xl mx-auto leading-relaxed"
           >
-            Implement AI with your firm to answer calls and messages instantly, qualify leads, and book appointments 24/7 — so every inquiry turns into an opportunity.
+            Implement AI with your firm to answer calls and messages instantly, qualify leads, and book appointments 24/7. Never lose a high-value lead again..
           </p>
 
           <div className="flex justify-center">

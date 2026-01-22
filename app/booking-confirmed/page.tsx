@@ -1,3 +1,4 @@
+import Script from 'next/script'
 import {
   ConfirmationHero,
   NextSteps,
@@ -7,6 +8,13 @@ import {
 export default function BookingConfirmedPage() {
   return (
     <main className="min-h-screen bg-white">
+      <Script
+        id="meta-pixel-schedule"
+        strategy="afterInteractive"
+        dangerouslySetInnerHTML={{
+          __html: `fbq('track', 'PageView'); fbq('track', 'Schedule');`,
+        }}
+      />
       <ConfirmationHero />
       <NextSteps />
       <FeaturedPosts />

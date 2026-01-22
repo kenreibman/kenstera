@@ -94,7 +94,7 @@ export default function Hero() {
         {/* Headline and CTAs */}
         <div className="text-center max-w-3xl mx-auto">
           <h1
-            className="text-3xl md:text-4xl font-semibold leading-[1.1] tracking-tight text-gray-900 mb-6"
+            className="text-3xl md:text-5xl font-semibold leading-[1.1] tracking-tight text-gray-900 mb-6"
           >
             Capture, Qualify, Book, and Follow Up Automatically.
           </h1>

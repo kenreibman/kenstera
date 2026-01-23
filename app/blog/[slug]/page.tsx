@@ -86,7 +86,7 @@ export default async function BlogPostPage({ params }: PageProps) {
       <main className="bg-background min-h-screen">
         {/* Header */}
         <header className="border-b border-border">
-          <div className="mx-auto max-w-6xl px-4 sm:px-6 py-8 sm:py-12">
+          <div className="mx-auto max-w-7xl px-4 sm:px-6 py-8 sm:py-12">
             <Link
               href="/blog"
               className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors mb-6"
@@ -130,7 +130,7 @@ export default async function BlogPostPage({ params }: PageProps) {
         </header>
 
         {/* Content */}
-        <div className="mx-auto max-w-6xl px-4 sm:px-6 py-12">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 py-12">
           <div className="grid grid-cols-1 xl:grid-cols-[1fr_250px] gap-12">
             {/* Article */}
             <article className="max-w-3xl prose-lg">

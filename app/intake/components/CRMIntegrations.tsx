@@ -17,7 +17,7 @@ export default function CRMIntegrations() {
       {/* Dotted line separator */}
       <div className="absolute top-0 left-0 right-0 h-px bg-[repeating-linear-gradient(90deg,transparent,transparent_4px,#e5e7eb_4px,#e5e7eb_8px)]" />
 
-      <div className="w-full max-w-[1120px] mx-auto px-5">
+      <div className="w-full max-w-7xl mx-auto px-5">
         {/* Header */}
         <div className="text-center mb-12">
           <h2 className="text-[clamp(32px,5vw,52px)] font-bold leading-[1.1] tracking-tight text-gray-900 mb-5">

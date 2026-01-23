@@ -55,7 +55,7 @@ export default function DashboardPreview() {
       {/* Background */}
       <div className="absolute inset-0 bg-gradient-to-b from-gray-50 to-white" />
 
-      <div className="relative z-10 w-full max-w-[1120px] mx-auto px-5">
+      <div className="relative z-10 w-full max-w-7xl mx-auto px-5">
         {/* Header */}
         <div className="text-center mb-12">
           <motion.h2

@@ -36,7 +36,7 @@ function GoogleMark({ className = "" }: { className?: string }) {
 export function About() {
   return (
     <section className="relative bg-white text-black">
-      <div className="mx-auto max-w-6xl px-6 py-16 lg:py-24">
+      <div className="mx-auto max-w-7xl px-6 py-16 lg:py-24">
         <div className="grid grid-cols-1 gap-12 lg:grid-cols-12 lg:items-center">
           <div className="hidden aspect-square lg:block lg:col-span-6">
             <Video
@@ -56,31 +56,17 @@ export function About() {
             </h2>
 
             <p className="mt-6 max-w-xl text-pretty text-lg leading-6 text-black">
-              Since 2018, we&apos;ve partnered with brands to craft standout digital experiences. We design and build websites and products that generate growth.<br /><br />
-              At Kenstera, we don&apos;t believe in one-size-fits-all solutions. Every product is developed with precision and care.
+              What if your business could respond to leads in seconds?  Kenstera helps you bridge connections with prospects before they move on to your competitors. <br></br> <br></br> Our AI-powered lead engagement software automates follow-ups, schedules appointments, and nurtures relationships, allowing your team to focus on closing deals and growing your business. Experience the future of lead management with Kenstera.
             </p>
-
-            <div className="mt-6 flex items-center gap-3 text-black/70">
-              <GoogleMark className="h-4 w-4" />
-              <span className="text-xs">5.0</span>
-              <div className="flex items-center gap-1" aria-hidden="true">
-                {STARS.map((i) => (
-                  <Star key={i} size={14} fill="currentColor" className="text-yellow-400" />
-                ))}
-              </div>
-            </div>
 
             <div className="mt-10 flex flex-wrap items-center gap-4">
               <Link
-                href="https://cal.com/kenstera/15min"
+                href="/contact-sales"
                 target="_blank"
                 className="bg-white border border-black rounded-full px-6 py-3 text-black text-sm font-medium transition hover:bg-black hover:text-white inline-block"
               >
                 Book a call
               </Link>
-              <button className="bg-white px-6 py-3 text-sm font-medium text-black transition hover:bg-white/90">
-                Explore Our Work
-              </button>
             </div>
           </div>
         </div>

@@ -70,7 +70,7 @@ const PROJECTS: Projects[] = [
 export function Projects() {
   return (
     <section className="w-full bg-black px-4 py-12 md:px-20 md:py-20" id="projects">
-      <div className="mx-auto max-w-6xl">
+      <div className="mx-auto max-w-7xl">
         <h2 className="text-left text-5xl sm:text-7xl font-semibold tracking-tight text-white">
           Projects
         </h2>

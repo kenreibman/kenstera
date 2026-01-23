@@ -3,7 +3,7 @@
 export default function Objections() {
   return (
     <section className="relative py-20">
-      <div className="w-full max-w-[1120px] mx-auto px-5">
+      <div className="w-full max-w-7xl mx-auto px-5">
         <p className="text-[13px] font-semibold tracking-wide uppercase text-sky-600 mb-3">
           Common concerns
         </p>

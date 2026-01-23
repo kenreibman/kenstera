@@ -40,7 +40,7 @@ export default function StickyNav() {
           transition={{ duration: 0.3, ease: 'easeOut' }}
           className="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-md border-b border-gray-200/50"
         >
-          <div className="w-full max-w-[1120px] mx-auto px-5 py-3 flex items-center justify-between">
+          <div className="w-full max-w-7xl mx-auto px-5 py-3 flex items-center justify-between">
             {/* Left: Tagline */}
             <span className="text-[12px] text-gray-900">
               Scale Your Firm

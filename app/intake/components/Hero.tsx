@@ -10,7 +10,7 @@ export default function Hero() {
       <div className="absolute inset-0 bg-gradient-to-r from-sky-100/30 via-transparent to-sky-100/30" />
 
       {/* Content */}
-      <div className="relative z-10 w-full max-w-[1120px] mx-auto px-5 pt-12 pb-16">
+      <div className="relative z-10 w-full max-w-7xl mx-auto px-5 pt-12 pb-16">
         {/* Headline and CTAs */}
         <div className="text-center max-w-3xl mx-auto">
           <h1

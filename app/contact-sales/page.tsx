@@ -5,25 +5,23 @@ import Cal, { getCalApi } from "@calcom/embed-react"
 import { useEffect } from "react"
 import { Zap, ShieldCheck, HeadphonesIcon, Star } from 'lucide-react'
 
-function CalEmbed() {
+export default function ContactPage() {
   useEffect(() => {
     (async function () {
-      const cal = await getCalApi({ namespace: "intake-15-minutes" })
-      cal("ui", { theme: "light", hideEventTypeDetails: true, layout: "month_view" })
-    })()
-  }, [])
+      const cal = await getCalApi({ namespace: "contact" });
+      cal("on", {
+        action: "__iframeReady",
+        callback: () => {
+          cal("ui", {
+            hideEventTypeDetails: true,
+            theme: "light",
+            layout: "month_view"
+          });
+        }
+      });
+    })();
+  }, []);
 
-  return (
-    <Cal
-      namespace="intake-15-minutes"
-      calLink="kenstera/intake-15-minutes"
-      style={{ width: "100%", height: "100%", minHeight: "600px" }}
-      config={{ layout: "month_view", theme: "light", hideEventTypeDetails: "true" }}
-    />
-  )
-}
-
-export default function ContactPage() {
   const benefits = [
     {
       icon: Zap,
@@ -49,7 +47,7 @@ export default function ContactPage() {
         }}
       />
       {/* Left side - Dark */}
-      <div className="hidden lg:flex h-full w-full lg:w-1/2 bg-black text-white p-8 md:p-12 lg:p-16 flex-col relative order-2 lg:order-1">
+      <div className="flex h-full w-full lg:w-1/2 bg-black text-white p-8 md:p-12 lg:p-16 flex-col relative order-1 lg:order-1">
         {/* Logo */}
         <div className="mb-12">
           <span className="text-xl font-bold">Kenstera</span>
@@ -113,18 +111,18 @@ export default function ContactPage() {
       </div>
 
       {/* Right side - White with Cal embed */}
-      <div className="w-full lg:w-1/2 bg-white p-8 md:p-12 lg:p-16 flex flex-col order-1 lg:order-2 overflow-auto">
+      <div className="w-full lg:w-1/2 bg-white p-8 md:p-12 lg:p-16 flex flex-col order-2 lg:order-2 overflow-auto">
         <div className="mx-auto w-full flex-1">
-          {/* <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-2">
+          <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-2">
             Book a call
           </h2>
           <p className="text-gray-500 mb-8">
             Pick a time that works for you
-          </p> */}
+          </p>
 
           {/* Cal.com embed */}
           <div className="flex-1">
-            <CalEmbed />
+              <Cal namespace="contact" calLink="kenstera/intake-15-minutes" />
           </div>
         </div>
       </div>

@@ -9,7 +9,7 @@ export default function FeaturedPosts() {
 
   return (
     <section className="relative py-16 bg-gray-50 border-t border-gray-200">
-      <div className="w-full max-w-[1120px] mx-auto px-5">
+      <div className="w-full max-w-7xl mx-auto px-5">
         <div className="text-center mb-10">
           <p className="text-[13px] font-semibold tracking-wide uppercase text-red-600 mb-3">
             While you wait

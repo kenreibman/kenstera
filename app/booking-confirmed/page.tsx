@@ -21,7 +21,7 @@ export default function BookingConfirmedPage() {
 
       {/* Footer with contact info */}
       <footer className="py-10 border-t border-gray-200">
-        <div className="w-full max-w-[1120px] mx-auto px-5 text-center">
+        <div className="w-full max-w-7xl mx-auto px-5 text-center">
           <p className="text-sm text-gray-500 mb-2">
             Questions before your call?
           </p>

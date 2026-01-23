@@ -21,7 +21,7 @@ const steps = [
 export default function NextSteps() {
   return (
     <section className="relative py-16">
-      <div className="w-full max-w-[1120px] mx-auto px-5">
+      <div className="w-full max-w-7xl mx-auto px-5">
         <div className="max-w-[800px] mx-auto">
           <p className="text-[13px] font-semibold tracking-wide uppercase text-red-600 mb-3 text-center">
             What happens next

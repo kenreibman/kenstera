@@ -3,7 +3,7 @@ import { CheckCircle2 } from 'lucide-react'
 export default function ConfirmationHero() {
   return (
     <section className="relative pt-20 pb-12">
-      <div className="w-full max-w-[1120px] mx-auto px-5">
+      <div className="w-full max-w-7xl mx-auto px-5">
         <div className="mx-auto text-center max-w-[640px]">
           <div className="flex justify-center mb-6">
             <div className="w-20 h-20 rounded-full bg-emerald-100 flex items-center justify-center">

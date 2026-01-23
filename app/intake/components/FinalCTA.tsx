@@ -8,7 +8,7 @@ const CTA_URL = '/contact-sales'
 export default function FinalCTA() {
   return (
     <section className="relative py-20">
-      <div className="w-full max-w-[1120px] mx-auto px-5">
+      <div className="w-full max-w-7xl mx-auto px-5">
         <div className="bg-gray-50 border border-gray-200 rounded-2xl p-12 text-center">
           <div className="max-w-[560px] mx-auto">
             <h2 className="text-[clamp(28px,5vw,40px)] font-bold leading-[1.15] mb-5 text-gray-900">

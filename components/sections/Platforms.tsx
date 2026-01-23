@@ -356,7 +356,7 @@ function WebDevMockup() {
 export function Platforms() {
   return (
     <section className="bg-white py-20">
-      <div className="mx-auto max-w-6xl px-5">
+      <div className="mx-auto max-w-7xl px-5">
         <div className="grid md:grid-cols-2 gap-8 lg:gap-12">
           {/* Left - Web Development */}
           <div className="flex flex-col">

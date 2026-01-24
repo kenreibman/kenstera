@@ -1,0 +1,10 @@
+export { IndustriesHero } from "./IndustriesHero";
+export { IndustriesUseCases } from "./IndustriesUseCases";
+export { IndustriesVoiceAgents } from "./IndustriesVoiceAgents";
+export { IndustriesMultimodal } from "./IndustriesMultimodal";
+export { IndustriesWorkflows } from "./IndustriesWorkflows";
+export { IndustriesCustomizable } from "./IndustriesCustomizable";
+export { IndustriesIntegrations } from "./IndustriesIntegrations";
+export { IndustriesGettingStarted } from "./IndustriesGettingStarted";
+export { IndustriesFaqBlog } from "./IndustriesFaqBlog";
+export { IndustriesCta } from "./IndustriesCta";

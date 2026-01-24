@@ -1,11 +1,29 @@
+import { notFound } from "next/navigation";
 import { IndustriesHero, IndustriesUseCases, IndustriesVoiceAgents, IndustriesMultimodal, IndustriesWorkflows, IndustriesCustomizable, IndustriesIntegrations, IndustriesGettingStarted, IndustriesFaqBlog, IndustriesCta } from "@/components/industries";
 import { getAllPosts } from "@/lib/blog";
-import { defaultContent } from "@/content/industries/default";
+import { getIndustryContent, getAllIndustrySlugs } from "@/lib/industry-content";
 
-export default function IndustriesPage() {
+interface IndustryPageProps {
+  params: Promise<{ slug: string }>;
+}
+
+export const dynamicParams = false;
+
+export async function generateStaticParams() {
+  const slugs = getAllIndustrySlugs();
+  return slugs.map((slug) => ({ slug }));
+}
+
+export default async function IndustryPage({ params }: IndustryPageProps) {
+  const { slug } = await params;
+  const content = getIndustryContent(slug);
+
+  if (!content) {
+    notFound();
+  }
+
   const posts = getAllPosts();
   const blogPosts = posts.map(post => ({ slug: post.slug, title: post.title }));
-  const content = defaultContent;
 
   return (
     <main className="min-h-screen bg-white">

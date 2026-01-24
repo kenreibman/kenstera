@@ -1,50 +1,14 @@
-import { Video } from "@/components/Video";
-
-function Sparkles() {
-  return (
-    <svg
-      className="absolute -top-3 -left-2 w-8 h-8"
-      viewBox="0 0 32 32"
-      fill="none"
-      aria-hidden="true"
-    >
-      {/* Main sparkle */}
-      <path
-        d="M16 4L17.5 12.5L26 14L17.5 15.5L16 24L14.5 15.5L6 14L14.5 12.5L16 4Z"
-        fill="url(#sparkle-gradient)"
-      />
-      {/* Small sparkle top-right */}
-      <path
-        d="M26 2L26.75 5.25L30 6L26.75 6.75L26 10L25.25 6.75L22 6L25.25 5.25L26 2Z"
-        fill="url(#sparkle-gradient)"
-      />
-      {/* Tiny sparkle */}
-      <circle cx="8" cy="6" r="1.5" fill="url(#sparkle-gradient)" />
-      <defs>
-        <linearGradient id="sparkle-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stopColor="#818cf8" />
-          <stop offset="100%" stopColor="#6366f1" />
-        </linearGradient>
-      </defs>
-    </svg>
-  );
-}
-
 export function Hero() {
   return (
     <section className="relative bg-gradient-to-b from-gray-50/80 to-white text-black overflow-hidden">
       <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 pt-20 pb-12 lg:pt-28 lg:pb-16">
         <div className="mx-auto max-w-4xl text-center">
           <h1 className="text-balance font-semibold leading-[1.1] tracking-[-0.02em] text-4xl sm:text-5xl lg:text-6xl text-center text-gray-900">
-            <span className="relative inline-block">
-              <Sparkles />
-              <span className="text-indigo-500">AI</span>
-            </span>{" "}
-            lead engagement software that helps you scale.
+            After-Hours Conversion System for Your Business.
           </h1>
 
           <p className="mx-auto mt-6 max-w-2xl text-center text-balance text-lg leading-relaxed text-gray-600 sm:text-lg sm:leading-8">
-            Respond instantly, follow up automatically, and book more appointments with automation designed for how modern service teams work.
+            Capture leads, book appointments, and close sales 24/7 with AI-powered voice agents that engage prospects in natural, human-like conversations.
           </p>
 
           <div className="flex flex-row items-center justify-center gap-3 mt-10">

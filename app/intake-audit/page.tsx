@@ -138,7 +138,7 @@ export default function IntakeAuditPage() {
 
         {/* Bottom section - form section */}
         <div className="flex items-start justify-center">
-          <div className="w-full max-w-6xl px-6 py-12">
+          <div className="w-full max-w-4xl px-8 py-12">
             {step === 'form' && (
               <QualifierForm onSubmit={handleFormSubmit} initialData={formData} />
             )}

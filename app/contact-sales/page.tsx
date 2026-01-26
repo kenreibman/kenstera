@@ -1,6 +1,5 @@
 'use client'
 
-import Script from 'next/script'
 import Cal, { getCalApi } from "@calcom/embed-react"
 import { useEffect } from "react"
 import { Zap, ShieldCheck, HeadphonesIcon, Star } from 'lucide-react'
@@ -39,13 +38,6 @@ export default function ContactPage() {
 
   return (
     <main className="lg:h-screen flex flex-col lg:flex-row">
-      <Script
-        id="meta-pixel-pageview"
-        strategy="afterInteractive"
-        dangerouslySetInnerHTML={{
-          __html: `fbq('track', 'PageView');`,
-        }}
-      />
       {/* Left side - Dark */}
       <div className="flex h-full w-full lg:w-1/2 bg-black text-white p-8 md:p-12 lg:p-16 flex-col relative order-1 lg:order-1">
         {/* Logo */}

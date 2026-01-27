@@ -160,18 +160,16 @@ export default function IntakeAuditPage() {
                   <QualifierForm onSubmit={handleFormSubmit} initialData={formData} />
                 )}
 
-                {/* Calendar - always mounted once formData exists, hidden when not active */}
+                {/* Calendar - always mounted, hidden when not active, loads while user fills form */}
                 <div
                   className={step === 'calendar' ? '' : 'hidden'}
                   aria-hidden={step !== 'calendar'}
                 >
-                  {formData && (
-                    <CalendarEmbed
-                      formData={formData}
-                      onBack={handleBack}
-                      onComplete={handleComplete}
-                    />
-                  )}
+                  <CalendarEmbed
+                    formData={formData}
+                    onBack={handleBack}
+                    onComplete={handleComplete}
+                  />
                 </div>
 
                 {step === 'not-fit' && formData && (

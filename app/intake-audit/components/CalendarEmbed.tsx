@@ -6,7 +6,7 @@ import { ArrowLeft } from 'lucide-react'
 import { FormData } from './QualifierForm'
 
 interface CalendarEmbedProps {
-  formData: FormData
+  formData: FormData | null
   onBack: () => void
   onComplete?: () => void
 }
@@ -77,10 +77,10 @@ export default function CalendarEmbed({ formData, onBack, onComplete }: Calendar
         <Cal
           namespace="intake-audit"
           calLink="kenstera/intake-15-minutes"
-          config={{
+          config={formData ? {
             email: formData.email,
             notes: `Website: ${formData.website}\nRole: ${formData.role}\nLeads/mo: ${formData.inboundLeads}`,
-          }}
+          } : {}}
           style={{ width: '100%', height: '100%', overflow: 'hidden' }}
         />
       </div>

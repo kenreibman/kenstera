@@ -30,10 +30,16 @@ export default function CalendarEmbed({ formData, onBack, onComplete }: Calendar
   useEffect(() => {
     ;(async function () {
       const cal = await getCalApi({ namespace: 'intake-audit' })
-      cal('ui', {
-        hideEventTypeDetails: true,
-        theme: 'light',
-        layout: 'month_view',
+      // Apply UI settings after iframe is ready
+      cal('on', {
+        action: '__iframeReady',
+        callback: () => {
+          cal('ui', {
+            hideEventTypeDetails: true,
+            theme: 'light',
+            layout: 'month_view',
+          })
+        },
       })
       // Listen for booking confirmation
       cal('on', {

@@ -30,20 +30,10 @@ export default function CalendarEmbed({ formData, onBack, onComplete }: Calendar
   useEffect(() => {
     ;(async function () {
       const cal = await getCalApi({ namespace: 'intake-audit' })
-      cal('on', {
-        action: '__iframeReady',
-        callback: () => {
-          cal('ui', {
-            hideEventTypeDetails: true,
-            theme: 'light',
-            layout: 'month_view',
-          })
-          // Scroll calendar into view after load
-          document.getElementById('calendar-container')?.scrollIntoView({
-            behavior: 'smooth',
-            block: 'start'
-          })
-        },
+      cal('ui', {
+        hideEventTypeDetails: true,
+        theme: 'light',
+        layout: 'month_view',
       })
       // Listen for booking confirmation
       cal('on', {

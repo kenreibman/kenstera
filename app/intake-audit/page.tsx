@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useCallback } from 'react'
 import Script from 'next/script'
+import { getCalApi } from '@calcom/embed-react'
 import {
   QualifierForm,
   CalendarEmbed,
@@ -21,6 +22,11 @@ export default function IntakeAuditPage() {
   const [step, setStep] = useState<Step>('form')
   const [formData, setFormData] = useState<FormData | null>(null)
   const [isInitialized, setIsInitialized] = useState(false)
+
+  // Preload Cal.com embed while user fills the form
+  useEffect(() => {
+    getCalApi({ namespace: 'intake-audit' })
+  }, [])
 
   // Restore state from localStorage on mount
   useEffect(() => {
@@ -154,13 +160,19 @@ export default function IntakeAuditPage() {
                   <QualifierForm onSubmit={handleFormSubmit} initialData={formData} />
                 )}
 
-                {step === 'calendar' && formData && (
-                  <CalendarEmbed
-                    formData={formData}
-                    onBack={handleBack}
-                    onComplete={handleComplete}
-                  />
-                )}
+                {/* Calendar - always mounted once formData exists, hidden when not active */}
+                <div
+                  className={step === 'calendar' ? '' : 'hidden'}
+                  aria-hidden={step !== 'calendar'}
+                >
+                  {formData && (
+                    <CalendarEmbed
+                      formData={formData}
+                      onBack={handleBack}
+                      onComplete={handleComplete}
+                    />
+                  )}
+                </div>
 
                 {step === 'not-fit' && formData && (
                   <NotAFit formData={formData} onBack={handleBack} />

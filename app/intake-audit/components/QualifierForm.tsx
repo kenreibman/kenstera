@@ -8,7 +8,6 @@ export interface FormData {
   email: string
   website: string
   role: string
-  practiceArea: string
   inboundLeads: string
 }
 
@@ -27,13 +26,6 @@ const roleOptions = [
   { value: 'other', label: 'Other' },
 ]
 
-const practiceOptions = [
-  { value: '', label: 'Select practice area' },
-  { value: 'pi-auto', label: 'PI - Auto Accidents' },
-  { value: 'pi-other', label: 'PI - Other' },
-  { value: 'other', label: 'Other Practice Area' },
-]
-
 const leadsOptions = [
   { value: '', label: 'Select inbound leads/mo' },
   { value: '0-20', label: '0 - 20 leads' },
@@ -46,13 +38,12 @@ const emptyFormData: FormData = {
   email: '',
   website: '',
   role: '',
-  practiceArea: '',
   inboundLeads: '',
 }
 
 function ProgressIndicator({ currentStep, totalSteps }: { currentStep: number; totalSteps: number }) {
   return (
-    <div className="flex items-center gap-1.5">
+    <div className="hidden md:flex items-center gap-1.5">
       {Array.from({ length: totalSteps }, (_, i) => (
         <div
           key={i}
@@ -152,7 +143,6 @@ export default function QualifierForm({ onSubmit, initialData }: QualifierFormPr
     formData.website.trim() !== '' &&
     formData.email.trim() !== '' &&
     formData.role !== '' &&
-    formData.practiceArea !== '' &&
     formData.inboundLeads !== ''
 
   // Restore form data from localStorage on mount
@@ -204,12 +194,8 @@ export default function QualifierForm({ onSubmit, initialData }: QualifierFormPr
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
 
-    // Qualification logic:
-    // Qualified if: PI auto accidents AND leads >= 20/mo
-    const isPIAuto = formData.practiceArea === 'pi-auto'
-    const hasLeads = ['20-60', '60-150', '150+'].includes(formData.inboundLeads)
-
-    const isQualified = isPIAuto && hasLeads
+    // Qualification logic: Qualified if leads >= 20/mo
+    const isQualified = ['20-60', '60-150', '150+'].includes(formData.inboundLeads)
 
     // Clear saved data on successful submit
     localStorage.removeItem(STORAGE_KEY)
@@ -234,16 +220,6 @@ export default function QualifierForm({ onSubmit, initialData }: QualifierFormPr
       </div>
 
       <form onSubmit={handleSubmit} className="flex flex-col gap-6">
-        {/* Company Website */}
-        <InputField
-          label="Company Website"
-          name="website"
-          type="text"
-          placeholder="yourfirm.com"
-          value={formData.website}
-          onChange={handleChange}
-        />
-
         {/* Business Email */}
         <InputField
           label="Business Email"
@@ -254,21 +230,22 @@ export default function QualifierForm({ onSubmit, initialData }: QualifierFormPr
           onChange={handleChange}
         />
 
+        {/* Company Website */}
+        <InputField
+          label="Company Website"
+          name="website"
+          type="text"
+          placeholder="yourfirm.com"
+          value={formData.website}
+          onChange={handleChange}
+        />
+
         {/* Role */}
         <SelectField
           label="Your Role"
           name="role"
           value={formData.role}
           options={roleOptions}
-          onChange={handleChange}
-        />
-
-        {/* Practice Area */}
-        <SelectField
-          label="Practice Area"
-          name="practiceArea"
-          value={formData.practiceArea}
-          options={practiceOptions}
           onChange={handleChange}
         />
 
@@ -285,13 +262,13 @@ export default function QualifierForm({ onSubmit, initialData }: QualifierFormPr
         <div className="flex items-center justify-between mt-4">
           <button
             type="submit"
-            className={`px-8 py-3 text-white font-medium rounded-full transition-colors ${
+            className={`px-8 py-3 text-white text-sm font-medium rounded-full transition-colors ${
               isFormComplete
                 ? 'bg-gray-900 hover:bg-gray-800'
                 : 'bg-gray-400 hover:bg-gray-500'
             }`}
           >
-            Next
+            Continue to Schedule
           </button>
           <ProgressIndicator currentStep={1} totalSteps={3} />
         </div>

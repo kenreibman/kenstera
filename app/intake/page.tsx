@@ -1,4 +1,3 @@
-import Script from 'next/script'
 import {
   Hero,
   StickyNav,
@@ -22,13 +21,6 @@ const SITE_CONFIG = {
 export default function PIIntakePage() {
   return (
     <>
-      <Script
-        id="meta-pixel-pageview"
-        strategy="afterInteractive"
-        dangerouslySetInnerHTML={{
-          __html: `fbq('track', 'PageView');`,
-        }}
-      />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{

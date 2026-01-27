@@ -14,7 +14,7 @@ interface CalendarEmbedProps {
 
 function ProgressIndicator({ currentStep, totalSteps }: { currentStep: number; totalSteps: number }) {
   return (
-    <div className="flex items-center gap-1.5">
+    <div className="hidden md:flex items-center gap-1.5">
       {Array.from({ length: totalSteps }, (_, i) => (
         <div
           key={i}
@@ -74,8 +74,11 @@ export default function CalendarEmbed({ formData, onBack, onComplete }: Calendar
         <h2 className="text-3xl md:text-4xl font-semibold text-gray-900 mb-3">
           Almost there!
         </h2>
-        <p className="text-gray-500">
+        <p className="text-gray-500 mb-3">
           Pick a time for your free 15-minute intake leak audit.
+        </p>
+        <p className="text-sm text-gray-400">
+          No commitment. No pitch deck.
         </p>
       </div>
 
@@ -86,7 +89,7 @@ export default function CalendarEmbed({ formData, onBack, onComplete }: Calendar
           calLink="kenstera/intake-15-minutes"
           config={{
             email: formData.email,
-            notes: `Website: ${formData.website}\nRole: ${formData.role}\nPractice: ${formData.practiceArea}\nLeads/mo: ${formData.inboundLeads}`,
+            notes: `Website: ${formData.website}\nRole: ${formData.role}\nLeads/mo: ${formData.inboundLeads}`,
           }}
           style={{ width: '100%', height: '100%', overflow: 'hidden' }}
         />

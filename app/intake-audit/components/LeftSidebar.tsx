@@ -1,7 +1,7 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { Check, Shield, Headphones, Play } from 'lucide-react'
+import { Check, Shield, Headphones } from 'lucide-react'
 
 const bullets = [
   {
@@ -35,9 +35,8 @@ export default function LeftSidebar() {
           transition={{ duration: 0.6, delay: 0.1 }}
           className="text-3xl lg:text-4xl font-semibold leading-tight mb-4"
         >
-          Free 15-Minute Intake
+          Free 15-Minute Intake Leak Audit <br></br> for <span className="text-cyan-400">PI Auto Accident Firms</span>
           <br />
-          Leak Audit
         </motion.h1>
 
         {/* Subheading */}
@@ -65,21 +64,30 @@ export default function LeftSidebar() {
           ))}
         </motion.ul> */}
 
-        {/* Video section */}
+        {/* What you'll get */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.6, delay: 0.4 }}
-          className="mt-8"
+          className="mt-8 bg-white/10 rounded-xl border border-white/20 p-6"
         >
-          <div className="aspect-video bg-white/10 rounded-xl border border-white/20 flex items-center justify-center cursor-pointer hover:bg-white/15 transition-colors">
-            <div className="flex flex-col items-center gap-3">
-              <div className="w-14 h-14 rounded-full bg-white flex items-center justify-center">
-                <Play className="w-5 h-5 text-gray-900 ml-0.5" />
-              </div>
-              <span className="text-sm text-white/60">Watch 60-second overview</span>
-            </div>
-          </div>
+          <p className="text-sm font-semibold text-white mb-4">
+            In 15 minutes you&apos;ll leave with:
+          </p>
+          <ul className="flex flex-col gap-3">
+            <li className="flex items-start gap-3">
+              <Check className="w-4 h-4 text-cyan-400 mt-0.5 flex-shrink-0" />
+              <span className="text-sm text-white/90">Your #1 intake leak (after-hours, speed-to-lead, follow-up, or no-shows)</span>
+            </li>
+            <li className="flex items-start gap-3">
+              <Check className="w-4 h-4 text-cyan-400 mt-0.5 flex-shrink-0" />
+              <span className="text-sm text-white/90">A conservative estimate of cases you&apos;re losing</span>
+            </li>
+            <li className="flex items-start gap-3">
+              <Check className="w-4 h-4 text-cyan-400 mt-0.5 flex-shrink-0" />
+              <span className="text-sm text-white/90">A 7-day fix plan you can implement immediately</span>
+            </li>
+          </ul>
         </motion.div>
 
         {/* CTA text */}

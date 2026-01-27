@@ -7,6 +7,7 @@ import {
   CalendarEmbed,
   NotAFit,
   StickyNav,
+  TrustSections,
   FormData,
 } from './components'
 import LeftSidebar from './components/LeftSidebar'
@@ -156,6 +157,9 @@ export default function IntakeAuditPage() {
             )}
           </div>
         </div>
+
+        {/* Trust sections - only show on form step */}
+        {step === 'form' && <TrustSections />}
       </main>
     </>
   )

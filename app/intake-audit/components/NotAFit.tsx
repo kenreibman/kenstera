@@ -11,7 +11,7 @@ interface NotAFitProps {
 
 function ProgressIndicator({ currentStep, totalSteps }: { currentStep: number; totalSteps: number }) {
   return (
-    <div className="flex items-center gap-1.5">
+    <div className="hidden md:flex items-center gap-1.5">
       {Array.from({ length: totalSteps }, (_, i) => (
         <div
           key={i}
@@ -30,11 +30,6 @@ export default function NotAFit({ formData, onBack }: NotAFitProps) {
       title: 'Get to 20+ inbound leads per month',
       description:
         'Focus on ad spend or referral partnerships to hit this threshold before automation makes sense.',
-    },
-    {
-      title: 'Focus on PI auto accidents',
-      description:
-        'This audit is specifically designed for auto accident intake workflows.',
     },
     {
       title: 'Track your current leak points',
@@ -60,7 +55,7 @@ export default function NotAFit({ formData, onBack }: NotAFitProps) {
           Thanks for your interest!
         </h2>
         <p className="text-gray-500">
-          Based on your responses, this audit works best for PI auto accident firms with 20+ inbound leads per month. Here&apos;s what to focus on to get there:
+          This audit works best for firms with 20+ inbound leads per month. Here&apos;s what to focus on to get there:
         </p>
       </div>
 

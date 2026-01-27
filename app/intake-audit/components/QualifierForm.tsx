@@ -1,7 +1,6 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
 import { ChevronDown } from 'lucide-react'
 
 export interface FormData {
@@ -73,8 +72,8 @@ function SelectField({
 }) {
   return (
     <div className="flex flex-col gap-2">
-      <label htmlFor={name} className="text-[15px] font-medium text-gray-900">
-        {label}{required && <span className="text-red-500 ml-0.5">*</span>}
+      <label htmlFor={name} className="text-sm font-medium text-gray-700">
+        {label}{required && <span className="text-rose-400 ml-0.5">*</span>}
       </label>
       <div className="relative">
         <select
@@ -83,7 +82,7 @@ function SelectField({
           value={value}
           onChange={onChange}
           required={required}
-          className="w-full px-4 py-3.5 appearance-none border border-gray-300 rounded-xl text-gray-900 bg-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+          className="w-full px-4 py-3 appearance-none border border-white/60 rounded-xl text-gray-900 bg-white/50 backdrop-blur-sm focus:outline-none focus:ring-2 focus:ring-blue-400/50 focus:border-transparent focus:bg-white/70 transition-all shadow-[0_2px_8px_rgba(0,0,0,0.04)]"
         >
           {options.map((option) => (
             <option key={option.value} value={option.value}>
@@ -116,8 +115,8 @@ function InputField({
 }) {
   return (
     <div className="flex flex-col gap-2">
-      <label htmlFor={name} className="text-[15px] font-medium text-gray-900">
-        {label}{required && <span className="text-red-500 ml-0.5">*</span>}
+      <label htmlFor={name} className="text-sm font-medium text-gray-700">
+        {label}{required && <span className="text-rose-400 ml-0.5">*</span>}
       </label>
       <input
         id={name}
@@ -127,7 +126,7 @@ function InputField({
         value={value}
         onChange={onChange}
         required={required}
-        className="w-full px-4 py-3.5 border border-gray-300 rounded-xl text-gray-900 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+        className="w-full px-4 py-3 border border-white/60 rounded-xl text-gray-900 bg-white/50 backdrop-blur-sm placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-400/50 focus:border-transparent focus:bg-white/70 transition-all shadow-[0_2px_8px_rgba(0,0,0,0.04)]"
       />
     </div>
   )
@@ -204,22 +203,17 @@ export default function QualifierForm({ onSubmit, initialData }: QualifierFormPr
   }
 
   return (
-    <motion.div
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ duration: 0.4 }}
-      className="w-full"
-    >
-      <div className="mb-8">
-        <h2 className="text-3xl md:text-4xl font-semibold text-gray-900 mb-3">
-          Get your free intake audit
+    <div className="w-full bg-white/30 backdrop-blur-xl rounded-3xl p-6 sm:p-8 border border-white/60 shadow-[0_8px_32px_rgba(0,0,0,0.08)]">
+      <div className="mb-6">
+        <h2 className="text-xl font-semibold text-gray-900 mb-1">
+          See if you qualify 👇
         </h2>
-        <p className="text-gray-500">
-          Please fill out the form below to get started
+        <p className="text-sm text-gray-500">
+          Takes less than 30 seconds
         </p>
       </div>
 
-      <form onSubmit={handleSubmit} className="flex flex-col gap-6">
+      <form onSubmit={handleSubmit} className="flex flex-col gap-4">
         {/* Business Email */}
         <InputField
           label="Business Email"
@@ -259,13 +253,13 @@ export default function QualifierForm({ onSubmit, initialData }: QualifierFormPr
         />
 
         {/* Button row with progress indicator */}
-        <div className="flex items-center justify-between mt-4">
+        <div className="flex items-center justify-between mt-2">
           <button
             type="submit"
-            className={`px-8 py-3 text-white text-sm font-medium rounded-full transition-colors ${
+            className={`px-8 py-3 text-white text-sm font-medium rounded-full transition-all shadow-lg ${
               isFormComplete
-                ? 'bg-gray-900 hover:bg-gray-800'
-                : 'bg-gray-400 hover:bg-gray-500'
+                ? 'bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-500 hover:to-purple-500 shadow-blue-500/25 hover:shadow-blue-500/40'
+                : 'bg-gray-400/80 backdrop-blur-sm'
             }`}
           >
             Continue to Schedule
@@ -275,35 +269,27 @@ export default function QualifierForm({ onSubmit, initialData }: QualifierFormPr
       </form>
 
       {/* Resume prompt */}
-      <AnimatePresence>
-        {showResume && (
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: 20 }}
-            transition={{ duration: 0.3 }}
-            className="mt-8 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 px-5 py-4 bg-gray-50 border border-gray-200 rounded-xl"
-          >
-            <p className="text-[15px] text-gray-900">Pick up where you left off?</p>
-            <div className="flex items-center gap-3">
-              <button
-                type="button"
-                onClick={handleContinue}
-                className="px-5 py-2 bg-gray-900 text-white text-sm font-medium rounded-full hover:bg-gray-800 transition-colors"
-              >
-                Continue
-              </button>
-              <button
-                type="button"
-                onClick={handleStartFresh}
-                className="px-5 py-2 bg-white text-gray-900 text-sm font-medium rounded-full border border-gray-300 hover:bg-gray-50 transition-colors"
-              >
-                Start Fresh
-              </button>
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </motion.div>
+      {showResume && (
+        <div className="mt-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 px-4 py-3 bg-white/40 backdrop-blur-sm border border-white/60 rounded-xl">
+          <p className="text-sm text-gray-700">Pick up where you left off?</p>
+          <div className="flex items-center gap-3">
+            <button
+              type="button"
+              onClick={handleContinue}
+              className="px-5 py-2 bg-gradient-to-r from-blue-600 to-purple-600 text-white text-sm font-medium rounded-full hover:from-blue-500 hover:to-purple-500 transition-all"
+            >
+              Continue
+            </button>
+            <button
+              type="button"
+              onClick={handleStartFresh}
+              className="px-5 py-2 bg-white/60 backdrop-blur-sm text-gray-900 text-sm font-medium rounded-full border border-white/80 hover:bg-white/80 transition-all"
+            >
+              Start Fresh
+            </button>
+          </div>
+        </div>
+      )}
+    </div>
   )
 }

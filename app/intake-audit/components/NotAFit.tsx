@@ -1,6 +1,3 @@
-'use client'
-
-import { motion } from 'framer-motion'
 import { ArrowLeft, CheckCircle } from 'lucide-react'
 import { FormData } from './QualifierForm'
 
@@ -44,14 +41,9 @@ export default function NotAFit({ formData, onBack }: NotAFitProps) {
   ]
 
   return (
-    <motion.div
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ duration: 0.4 }}
-      className="w-full"
-    >
+    <div className="w-full bg-white/30 backdrop-blur-xl rounded-3xl p-6 sm:p-8 border border-white/60 shadow-[0_8px_32px_rgba(0,0,0,0.08)]">
       <div className="mb-8">
-        <h2 className="text-3xl md:text-4xl font-semibold text-gray-900 mb-3">
+        <h2 className="text-2xl md:text-3xl font-semibold text-gray-900 mb-3">
           Thanks for your interest!
         </h2>
         <p className="text-gray-500">
@@ -60,15 +52,15 @@ export default function NotAFit({ formData, onBack }: NotAFitProps) {
       </div>
 
       {/* Checklist */}
-      <div className="bg-gray-50 border border-gray-200 rounded-xl p-6 mb-6">
+      <div className="bg-white/50 backdrop-blur-sm border border-white/60 rounded-2xl p-6 mb-6">
         <h3 className="text-sm font-semibold text-gray-900 mb-4">
           Your pre-audit checklist:
         </h3>
         <ul className="flex flex-col gap-5">
           {checklist.map((item, index) => (
             <li key={index} className="flex items-start gap-4">
-              <div className="w-6 h-6 rounded-full bg-gray-200 flex items-center justify-center flex-shrink-0 mt-0.5">
-                <span className="text-xs font-medium text-gray-600">
+              <div className="w-6 h-6 rounded-full bg-gradient-to-br from-blue-500/20 to-purple-500/20 flex items-center justify-center flex-shrink-0 mt-0.5">
+                <span className="text-xs font-medium text-gray-700">
                   {index + 1}
                 </span>
               </div>
@@ -84,7 +76,7 @@ export default function NotAFit({ formData, onBack }: NotAFitProps) {
       </div>
 
       {/* Confirmation message */}
-      <div className="bg-emerald-50 border border-emerald-200 rounded-xl p-5 mb-8">
+      <div className="bg-gradient-to-br from-emerald-50/80 to-green-50/60 backdrop-blur-sm border border-emerald-200/50 rounded-2xl p-5 mb-8">
         <div className="flex items-start gap-4">
           <CheckCircle className="w-5 h-5 text-emerald-600 flex-shrink-0 mt-0.5" />
           <div>
@@ -102,13 +94,13 @@ export default function NotAFit({ formData, onBack }: NotAFitProps) {
       <div className="flex items-center justify-between">
         <button
           onClick={onBack}
-          className="p-3 bg-gray-100 text-gray-700 rounded-full hover:bg-gray-200 transition-colors"
+          className="p-3 bg-white/60 backdrop-blur-sm text-gray-700 rounded-full hover:bg-white/80 transition-all border border-white/60"
           aria-label="Go back"
         >
           <ArrowLeft className="w-5 h-5" />
         </button>
         <ProgressIndicator currentStep={2} totalSteps={3} />
       </div>
-    </motion.div>
+    </div>
   )
 }

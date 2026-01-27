@@ -1,104 +1,95 @@
-'use client'
+import { Search, Calculator, Zap } from 'lucide-react'
 
-import { motion } from 'framer-motion'
-import { Check, Shield, Headphones } from 'lucide-react'
-
-const bullets = [
+const deliverables = [
   {
-    icon: Check,
-    text: 'After-hours + overflow capture (calls + web)',
+    icon: Search,
+    title: '#1 Intake Leak Analysis',
+    description: 'After-hours, speed-to-lead, follow-up, or no-shows',
+    iconBg: 'bg-gradient-to-br from-sky-400/20 to-blue-500/20',
+    iconColor: 'text-sky-600',
   },
   {
-    icon: Shield,
-    text: 'PI auto-accident qualification → booked consults',
+    icon: Calculator,
+    title: 'Boosted Revenue Projection',
+    description: 'Conservative projection of missed opportunities',
+    iconBg: 'bg-gradient-to-br from-violet-400/20 to-purple-500/20',
+    iconColor: 'text-violet-600',
   },
   {
-    icon: Headphones,
-    text: 'Follow-up + show-rate system (no-show rescue)',
+    icon: Zap,
+    title: '7-Day Fix Plan',
+    description: 'Actionable steps you can implement immediately',
+    iconBg: 'bg-gradient-to-br from-amber-400/20 to-orange-500/20',
+    iconColor: 'text-amber-600',
   },
 ]
 
+
 export default function LeftSidebar() {
   return (
-    <div className="relative bg-gray-950 text-white flex flex-col">
+    <div className="relative h-full flex flex-col justify-center">
+      {/* Glass background */}
+      <div className="absolute inset-0 bg-white/40 backdrop-blur-xl border-r border-white/50" />
+
       {/* Content */}
-      <div className="max-w-4xl mx-auto flex-1 px-8 lg:px-12 py-12 flex flex-col">
+      <div className="relative max-w-lg mx-auto px-6 sm:px-8 lg:px-12 py-8 lg:py-12 flex flex-col">
         {/* Logo */}
-        <div className="mb-12">
-          <span className="text-xl font-semibold tracking-tight">Kenstera</span>
+        <div className="mb-8">
+          <span className="text-lg font-semibold tracking-tight text-gray-900">Kenstera</span>
         </div>
 
         {/* Headline */}
-        <motion.h1
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.1 }}
-          className="text-3xl lg:text-4xl font-semibold leading-tight mb-4"
-        >
-          Free 15-Minute Intake Leak Audit <br></br> for <span className="text-cyan-400">PI Auto Accident Firms</span>
-          <br />
-        </motion.h1>
+        <h1 className="text-2xl lg:text-3xl font-semibold leading-tight mb-4 text-gray-900">
+          Free 15-Minute Intake Leak Audit
+        </h1>
 
         {/* Subheading */}
-        <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.15 }}
-          className="text-md text-white/80 leading-relaxed mb-8"
-        >
-          If you're paying for leads, but missing calls after-hours, responding late to web leads, or losing people to no-shows, I'll map the leaks and give you a fix plan you can implement immediately.
-        </motion.p>
+        <p className="text-sm text-gray-500 leading-relaxed mb-8">
+          For Personal Injury auto accident firms paying for leads but losing cases to missed calls, slow follow-up, or no-shows.
+        </p>
 
-        {/* Bullets */}
-        {/* <motion.ul
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.2 }}
-          className="flex flex-col gap-4 mb-auto"
-        >
-          {bullets.map((bullet, index) => (
-            <li key={index} className="flex items-start gap-3">
-              <bullet.icon className="w-5 h-5 text-white/70 mt-0.5 flex-shrink-0" />
-              <span className="text-[15px] text-white/90">{bullet.text}</span>
-            </li>
-          ))}
-        </motion.ul> */}
-
-        {/* What you'll get */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.6, delay: 0.4 }}
-          className="mt-8 bg-white/10 rounded-xl border border-white/20 p-6"
-        >
-          <p className="text-sm font-semibold text-white mb-4">
-            In 15 minutes you&apos;ll leave with:
+        {/* Bento Grid Cards */}
+        <div className="mb-3">
+          <p className="text-xs font-medium text-gray-400 uppercase tracking-wider">
+            You&apos;ll leave with
           </p>
-          <ul className="flex flex-col gap-3">
-            <li className="flex items-start gap-3">
-              <Check className="w-4 h-4 text-cyan-400 mt-0.5 flex-shrink-0" />
-              <span className="text-sm text-white/90">Your #1 intake leak (after-hours, speed-to-lead, follow-up, or no-shows)</span>
-            </li>
-            <li className="flex items-start gap-3">
-              <Check className="w-4 h-4 text-cyan-400 mt-0.5 flex-shrink-0" />
-              <span className="text-sm text-white/90">A conservative estimate of cases you&apos;re losing</span>
-            </li>
-            <li className="flex items-start gap-3">
-              <Check className="w-4 h-4 text-cyan-400 mt-0.5 flex-shrink-0" />
-              <span className="text-sm text-white/90">A 7-day fix plan you can implement immediately</span>
-            </li>
-          </ul>
-        </motion.div>
+        </div>
 
-        {/* CTA text */}
-        <motion.p
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.6, delay: 0.5 }}
-          className="mt-6 text-center text-white text-sm font-medium"
-        >
-          👇 See if you qualify below 👇
-        </motion.p>
+        <div className="flex flex-col gap-2">
+          {deliverables.map((item, index) => (
+            <div
+              key={index}
+              className="
+                group flex items-center gap-3 p-3
+                bg-white/60 backdrop-blur-sm rounded-xl
+                border border-white/80
+                shadow-[0_8px_32px_rgba(0,0,0,0.04)]
+                hover:bg-white/80 hover:shadow-[0_8px_32px_rgba(0,0,0,0.08)]
+                transition-all duration-300
+              "
+            >
+              {/* Icon */}
+              <div className={`
+                w-9 h-9 rounded-xl flex-shrink-0
+                flex items-center justify-center
+                backdrop-blur-sm
+                ${item.iconBg}
+              `}>
+                <item.icon className={`w-4 h-4 ${item.iconColor}`} />
+              </div>
+
+              {/* Text */}
+              <div>
+                <h3 className="text-sm font-medium text-gray-900">
+                  {item.title}
+                </h3>
+                <p className="text-xs text-gray-500">
+                  {item.description}
+                </p>
+              </div>
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   )

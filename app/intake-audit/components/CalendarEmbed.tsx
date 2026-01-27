@@ -1,9 +1,8 @@
 'use client'
 
 import { useEffect } from 'react'
-import { motion } from 'framer-motion'
 import Cal, { getCalApi } from '@calcom/embed-react'
-import { Check, ArrowLeft } from 'lucide-react'
+import { ArrowLeft } from 'lucide-react'
 import { FormData } from './QualifierForm'
 
 interface CalendarEmbedProps {
@@ -64,14 +63,9 @@ export default function CalendarEmbed({ formData, onBack, onComplete }: Calendar
   ]
 
   return (
-    <motion.div
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ duration: 0.4 }}
-      className="w-full"
-    >
+    <div className="w-full bg-white/30 backdrop-blur-xl rounded-3xl p-6 sm:p-8 border border-white/60 shadow-[0_8px_32px_rgba(0,0,0,0.08)]">
       <div className="mb-6">
-        <h2 className="text-3xl md:text-4xl font-semibold text-gray-900 mb-3">
+        <h2 className="text-2xl md:text-3xl font-semibold text-gray-900 mb-3">
           Almost there!
         </h2>
         <p className="text-gray-500 mb-3">
@@ -83,7 +77,7 @@ export default function CalendarEmbed({ formData, onBack, onComplete }: Calendar
       </div>
 
       {/* Calendar embed */}
-      <div id="calendar-container" className="p-4 overflow-auto mb-6">
+      <div id="calendar-container" className="overflow-auto mb-6 bg-white/50 rounded-2xl p-2">
         <Cal
           namespace="intake-audit"
           calLink="kenstera/intake-15-minutes"
@@ -95,35 +89,17 @@ export default function CalendarEmbed({ formData, onBack, onComplete }: Calendar
         />
       </div>
 
-      {/* What you'll get */}
-      {/* <div className="bg-emerald-50/50 border border-emerald-200/50 rounded-xl p-5 mb-6">
-        <p className="text-sm font-semibold text-emerald-800 mb-3">
-          What you&apos;ll get on the call:
-        </p>
-        <ul className="flex flex-col gap-2">
-          {whatYouGet.map((item, index) => (
-            <li
-              key={index}
-              className="flex items-start gap-3 text-sm text-emerald-700"
-            >
-              <Check className="w-4 h-4 text-emerald-600 mt-0.5 flex-shrink-0" />
-              <span>{item}</span>
-            </li>
-          ))}
-        </ul>
-      </div> */}
-
       {/* Back button and progress indicator row */}
       <div className="flex items-center justify-between">
         <button
           onClick={onBack}
-          className="p-3 bg-gray-100 text-gray-700 rounded-full hover:bg-gray-200 transition-colors"
+          className="p-3 bg-white/60 backdrop-blur-sm text-gray-700 rounded-full hover:bg-white/80 transition-all border border-white/60"
           aria-label="Go back"
         >
           <ArrowLeft className="w-5 h-5" />
         </button>
         <ProgressIndicator currentStep={2} totalSteps={3} />
       </div>
-    </motion.div>
+    </div>
   )
 }

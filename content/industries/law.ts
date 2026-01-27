@@ -2,151 +2,148 @@ import { IndustryContent } from "@/lib/industry-content";
 
 export const lawContent: IndustryContent = {
   slug: "law",
-  name: "Law Firms",
+  name: "Personal Injury",
   hero: {
-    headline: "AI Voice Agents\nfor Law Firms",
+    headline: "Stop Losing Cases\nAfter the Lead Comes In",
     description:
-      "The firm that responds first wins the case. Kenstera captures every inquiry, qualifies potential clients instantly, and books consultations—even at 2am.",
+      "Kenstera installs 24/7 intake coverage that answers fast, qualifies leads, books consults, and follows up relentlessly—so more of your paid leads turn into signed cases.",
   },
   useCases: [
     {
-      title: "Lead Intake",
+      title: "24/7 Intake Coverage",
       description:
-        "automated with voice agents that capture case details, qualify potential clients, and route to the right attorney 24/7.",
+        "after-hours and overflow handled instantly. No more missed calls at 2am or during trial. Every inquiry gets a response in seconds.",
       gradient: "from-indigo-100 via-purple-50 to-white",
     },
     {
-      title: "Consultation Scheduling",
+      title: "Qualification + Booking",
       description:
-        "handled by intelligent agents that check attorney availability and book consultations without back-and-forth.",
+        "incident date, injury type, treatment status, liability signals captured. Qualified leads routed to your calendar or warm-transferred immediately.",
       gradient: "from-sky-100 via-blue-50 to-white",
     },
     {
-      title: "Client Follow-ups",
+      title: "Follow-up + No-Show Prevention",
       description:
-        "managed through automated agents that send reminders, collect documents, and keep cases moving forward.",
+        "multi-touch sequences via text, email, and call. Show-up reminders before consultations. Leads never go cold.",
       gradient: "from-emerald-100 via-teal-50 to-white",
     },
   ],
   voiceAgents: {
-    label: "24/7 Availability",
-    heading: "Legal Voice Agents",
+    label: "More Signed Cases",
+    heading: "Fix the Four Leak Points",
     description:
-      "78% of clients hire the first firm to respond. Kenstera ensures you never miss a lead—capturing inquiries, qualifying cases, and booking consultations around the clock while maintaining attorney-client privilege.",
+      "78% of claimants hire the first firm to respond. Kenstera fixes the four places firms lose cases: after-hours coverage, speed-to-lead, qualification/booking, and follow-up. The result: higher intake conversion without adding staff.",
   },
   multimodal: {
-    heading:
-      "From first call to signed retainer — handled intelligently",
+    heading: "From first ring to signed retainer—nothing slips through",
     features: [
       {
-        title: "Case qualification in real-time",
+        title: "PI-specific qualification",
         description:
-          "Smart intake questions determine case type, timeline, jurisdiction, and fit. Non-qualifying leads are declined politely or routed to referral partners.",
+          "Incident date, state, injury severity, treatment status, police report, at-fault party, insurance carrier, representation status, and vehicle type (trucking, rideshare, commercial). Non-fits declined politely with optional referral.",
       },
       {
-        title: "Integrate with your legal tech stack",
+        title: "Tiered routing based on case value",
         description:
-          "Connect to Clio, MyCase, PracticePanther, and other practice management systems. Leads sync automatically with full intake details.",
+          "High-value cases (trucking, catastrophic): warm transfer to your team in under 60 seconds. Good fits: book consult + send intake checklist. Not a fit: polite decline or referral partner handoff.",
       },
       {
-        title: "Multi-channel lead capture",
+        title: "Multi-channel capture, instant response",
         description:
-          "Website forms, phone calls, Google LSA, chat widgets—Kenstera captures leads from every source and responds instantly.",
+          "Phone, web form, Google LSA, chat—wherever leads come from, Kenstera responds in seconds and starts qualification immediately.",
       },
     ],
   },
   workflows: {
-    heading:
-      "Build intake workflows with conflict checks and practice area routing",
+    heading: "Automated sequences that sign more cases",
     features: [
       {
-        title: "Practice area routing",
+        title: "Speed-to-lead sequences",
         description:
-          "Automatically route personal injury to PI attorneys, family law to family attorneys. Each practice area can have custom qualification criteria.",
+          "Text within 10 seconds of missed call. Callback attempts at 1 min, 5 min, 30 min, and next day. Your leads hear from you before they call the next firm.",
       },
       {
-        title: "Conflict checking",
+        title: "Escalation for high-value cases",
         description:
-          "Integrate with your conflicts database. Flag potential conflicts before booking consultations and alert the appropriate staff.",
+          "Trucking, catastrophic injury, and wrongful death cases get warm-transferred to your team in under 60 seconds. Your best leads always reach a person immediately.",
       },
       {
-        title: "Performance tracking",
+        title: "Red-flag screening",
         description:
-          "Track lead sources, conversion rates, and response times. Identify which marketing channels deliver the best ROI.",
+          "Shared fault, statute limitations, prior representation, and other red flags are flagged before you invest time in a consult.",
       },
     ],
   },
   customizable: {
-    heading: "Tailored to your practice areas and intake process",
+    heading: "Configured for your firm's case criteria",
     features: [
       {
-        title: "Train on your firm's criteria and procedures",
+        title: "Your qualification rules enforced",
         description:
-          "Define what makes a qualified lead for each practice area. Set minimum case values, statute of limitations checks, and jurisdiction requirements.",
+          "Set minimum case value thresholds, accepted injury types, geographic coverage, and statute of limitations rules. Every call is screened against your criteria.",
       },
       {
-        title: "Professional voice and tone",
+        title: "Compliant by design",
         description:
-          "Choose voice profiles that convey authority and empathy. Multilingual support for diverse client populations.",
+          "Call disclosure at start of conversation. Recording consent logic based on state. Minimal PHI collection. Configurable data retention. Built for PI intake compliance.",
       },
       {
-        title: "Deep practice management integration",
+        title: "Deep case management integration",
         description:
-          "Two-way sync with Clio, MyCase, Smokeball, and more. New matters created automatically with all intake information.",
+          "Two-way sync with Clio, Filevine, Litify, SmartAdvocate, and more. New matters created automatically with all qualification data attached.",
       },
     ],
   },
   integrations: {
-    heading:
-      "Integrate with the legal software you already use",
+    heading: "Connects to the tools you already use",
     description:
-      "Connect agents to your practice management system, calendar, billing platform, and communication tools. Enterprise-grade integrations with leading legal tech vendors.",
+      "Your case management system, intake CRM, calendar, and communication tools. Enterprise-grade integrations built for personal injury workflows.",
     additionalText: "Plus custom integrations via APIs and webhooks.",
     items: [
       "Clio",
-      "MyCase",
-      "PracticePanther",
-      "Smokeball",
+      "Filevine",
+      "Litify",
+      "SmartAdvocate",
+      "CASEpeer",
       "Lawmatics",
-      "Calendly",
       "Google Calendar",
+      "Calendly",
       "Twilio",
-      "Zapier",
     ],
   },
   gettingStarted: {
     heading: "Go live in days, not weeks",
     description:
-      "Our legal implementation team helps you configure intake flows, integrate with your practice management system, and train your staff—so you can start capturing more leads immediately.",
+      "We configure your qualification criteria, integrate with your case management system, and set up follow-up sequences—so you start signing more cases this week.",
   },
   faqs: [
     {
-      question: "How quickly does Kenstera respond to leads?",
+      question: "How fast does Kenstera respond to leads?",
       answer:
-        "Instantly—within seconds. Whether it's a phone call, web form, or chat at 2am, prospects get an immediate response 24/7.",
+        "Instantly—under 3 seconds. Phone calls answered on first ring. Web forms trigger immediate callback. Text follow-up goes out within 10 seconds of a missed call.",
     },
     {
-      question: "Can Kenstera handle different practice areas?",
+      question: "What happens with high-value cases like trucking or catastrophic injury?",
       answer:
-        "Yes. Configure for any practice area—personal injury, family law, criminal defense, estate planning, and more. Each can have custom qualification questions and routing rules.",
-    },
-    {
-      question: "Does this integrate with my practice management system?",
-      answer:
-        "Yes. Kenstera integrates with Clio, MyCase, PracticePanther, Smokeball, and more. Leads and new matters sync automatically.",
+        "High-value cases get warm-transferred to your team in under 60 seconds. The case value and priority are flagged before the transfer so your team is prepared.",
     },
     {
       question: "What happens to leads that don't qualify?",
       answer:
-        "Non-qualifying leads can be declined politely or routed to referral partners. You set the criteria and rules.",
+        "Non-qualifying leads are declined politely. Optionally, we route them to referral partners you specify—so you can still monetize cases outside your criteria.",
     },
     {
-      question: "Is attorney-client privilege maintained?",
+      question: "Is this software or a service?",
       answer:
-        "Yes. All communications are encrypted and handled according to legal ethics requirements. We can sign confidentiality agreements as needed.",
+        "Both. You get the system built and managed, plus the automation layer that runs it. If you already have staff answering, we integrate with them; if not, we cover after-hours and overflow.",
+    },
+    {
+      question: "What exactly am I buying?",
+      answer:
+        "A working intake machine: 24/7 coverage (after-hours + overflow), lead capture + instant response, qualification + booking, follow-up + no-show reduction, and CRM integration + reporting so you see where cases leak.",
     },
   ],
   cta: {
-    heading: "Stop losing leads to slow response times",
+    heading: "Stop losing cases to slow response times",
   },
 };

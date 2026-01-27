@@ -41,7 +41,7 @@ export default function StickyNav({ onCtaClick }: StickyNavProps) {
       // Scroll to the form section with offset for sticky nav
       const formSection = document.querySelector('form')
       if (formSection) {
-        const offset = 200 // Account for sticky nav height + padding
+        const offset = 150 // Account for sticky nav height + padding
         const elementPosition = formSection.getBoundingClientRect().top + window.scrollY
         window.scrollTo({
           top: elementPosition - offset,

@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import Image from "next/image";
 import { UseCase } from "@/lib/industry-content";
 
 const defaultUseCases: UseCase[] = [
@@ -42,10 +43,34 @@ export function IndustriesUseCases({ useCases = defaultUseCases }: IndustriesUse
               transition={{ duration: 0.5, delay: index * 0.1 }}
               className="flex flex-col"
             >
-              {/* Video placeholder with gradient */}
-              <div
-                className={`aspect-[4/5] rounded-2xl bg-gradient-to-br ${useCase.gradient || "from-gray-100 via-gray-50 to-white"} mb-6`}
-              />
+              {/* Card visual - images for first two cards, gradient for others */}
+              {index === 0 ? (
+                <div className="aspect-[4/5] rounded-2xl overflow-hidden mb-6 relative">
+                  <Image
+                    src="/images/24-7-coverage.webp"
+                    alt="24/7 AI-powered coverage - instant response conversation"
+                    fill
+                    className="object-cover"
+                    sizes="(max-width: 768px) 100vw, 33vw"
+                    priority
+                  />
+                </div>
+              ) : index === 1 ? (
+                <div className="aspect-[4/5] rounded-2xl overflow-hidden mb-6 relative">
+                  <Image
+                    src="/images/qualification-booking.webp"
+                    alt="Qualification and instant booking automation"
+                    fill
+                    className="object-cover"
+                    sizes="(max-width: 768px) 100vw, 33vw"
+                    priority
+                  />
+                </div>
+              ) : (
+                <div
+                  className={`aspect-[4/5] rounded-2xl bg-gradient-to-br ${useCase.gradient || "from-gray-100 via-gray-50 to-white"} mb-6`}
+                />
+              )}
 
               {/* Text content */}
               <p className="text-sm text-gray-600 leading-relaxed">

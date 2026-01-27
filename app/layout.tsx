@@ -5,7 +5,7 @@ import "./globals.css";
 import { LayoutWrapper } from "@/components/LayoutWrapper";
 import { Analytics } from "@vercel/analytics/next";
 
-export const inter = Inter({
+const inter = Inter({
   subsets: ["latin"],
   display: "swap",
   variable: "--font-inter",
@@ -56,7 +56,7 @@ export default function RootLayout({
         />
       </head>
       <body
-        className={`${inter.className} antialiased`}
+        className={`${inter.variable} font-sans antialiased`}
       >
         <LayoutWrapper>
           {children}

@@ -50,25 +50,18 @@ export function IndustriesGettingStarted({
               Get started with Kenstera Agents featuring enterprise-grade FDE deployment, global language readiness, and rapid integration support.
             </p>
 
-            <div className="mb-8">
-              <p className="text-gray-900">
-                <span className="font-semibold">$0.08</span> per minute & lower
-              </p>
-              <p className="text-xs text-gray-400">On annual Business plans</p>
-            </div>
-
             <div className="flex items-center gap-6">
               <Link
                 href="/contact-sales"
                 className="inline-flex items-center justify-center px-5 py-2.5 bg-gray-900 text-white text-sm font-medium rounded-full hover:bg-gray-800 transition-colors"
               >
-                Talk to Sales
+                Contact Us
               </Link>
               <Link
-                href="/contact-sales"
+                href="/pricing"
                 className="text-sm text-gray-900 hover:text-gray-600 transition-colors"
               >
-                Create an AI Agent
+                View Pricing
               </Link>
             </div>
           </div>
@@ -76,32 +69,21 @@ export function IndustriesGettingStarted({
           {/* Card 2 - White with border */}
           <div className="border border-gray-200 rounded-2xl p-16 lg:p-32">
             <h3 className="text-xl font-semibold text-gray-900 mb-4">
-              Kenstera Grant Program for new products & startups
+              Dedicated onboarding and support
             </h3>
             <p className="text-sm text-gray-500 leading-relaxed mb-8">
-              Apply for Kenstera Grant to integrate Conversational Agents for your new product or startup – get 33M free credits valid for a year, worth over $4,000
+              Our team will guide you through setup, integration, and optimization to ensure your Conversational Agent delivers maximum value from day one.
             </p>
-
-            <div className="flex gap-12 mb-8">
-              <div>
-                <p className="font-semibold text-gray-900">680 hours</p>
-                <p className="text-xs text-gray-400">Total</p>
-              </div>
-              <div>
-                <p className="font-semibold text-gray-900">12 Months free</p>
-                <p className="text-xs text-gray-400">To build, launch & test</p>
-              </div>
-            </div>
 
             <div className="flex items-center gap-6">
               <Link
-                href="/grants"
+                href="/contact-sales"
                 className="inline-flex items-center justify-center px-5 py-2.5 bg-gray-900 text-white text-sm font-medium rounded-full hover:bg-gray-800 transition-colors"
               >
-                Apply for a Grant
+                Contact Us
               </Link>
               <Link
-                href="/grants"
+                href="/contact-sales"
                 className="text-sm text-gray-900 hover:text-gray-600 transition-colors"
               >
                 Learn more

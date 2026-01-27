@@ -4,54 +4,54 @@ export const defaultContent: IndustryContent = {
   slug: "default",
   name: "Industries",
   hero: {
-    headline: "The conversational\nagents platform",
+    headline: "Stop Losing Customers\nto Slow Response",
     description:
-      "Build and deploy AI-powered voice agents that handle complex conversations with human-like understanding and empathy, transforming customer experiences across industries.",
+      "Kenstera installs 24/7 coverage that answers instantly, qualifies leads, books appointments, and follows up—so more inquiries turn into customers.",
   },
   useCases: [
     {
-      title: "Customer Support",
+      title: "24/7 Coverage",
       description:
-        "now powered by always-on, empathetic voice agents that resolve issues instantly, reduce wait times, and boost satisfaction.",
+        "after-hours and overflow handled instantly. No more missed calls or delayed responses. Every inquiry gets answered in seconds.",
       gradient: "from-gray-100 via-gray-50 to-white",
     },
     {
-      title: "Inbound Scheduling",
+      title: "Instant Booking",
       description:
-        "automated through voice agents that coordinate calendars and handle booking requests with ease.",
+        "calendar coordination handled automatically. Leads book appointments without hold times or back-and-forth.",
       gradient: "from-sky-100 via-blue-50 to-white",
     },
     {
-      title: "Learning & Development",
+      title: "Follow-up Sequences",
       description:
-        "powered by voice-driven roleplay agents that simulate real-world scenarios and build employee skills.",
+        "multi-touch follow-up via text, email, and call. Appointment reminders. No lead goes cold.",
       gradient: "from-purple-200 via-pink-100 to-blue-100",
     },
   ],
   voiceAgents: {
-    label: "Industry-leading",
-    heading: "Voice Agents",
+    label: "More Conversions",
+    heading: "Fix the Response Gap",
     description:
-      "Kenstera Agents are intelligent, real-time AI agents that talk, type, and take action. Resolve customer issues, automate tasks, and deliver accurate answers — all grounded in your data, tailored to your workflows, and ready to deploy at scale.",
+      "Most businesses lose leads to slow response. Kenstera fixes the gap: 24/7 coverage, instant response, qualification, booking, and follow-up. Higher conversion without adding staff.",
   },
   multimodal: {
     heading:
       "Kenstera Agents resolve issues, deliver answers, and take action - anytime, anywhere",
     features: [
       {
-        title: "Conversational agents that speak, read, and see",
+        title: "Lead qualification",
         description:
-          "Multimodal by design, Kenstera Agents understand spoken or written inputs, retrieve the right answers, and respond naturally in real time. Agents listen, read, and interact just like a human would, across voice and chat.",
+          "Capture the details that matter for your business. Route qualified leads to your team or calendar instantly. Non-fits handled politely.",
       },
       {
-        title: "Take action with external tool calls",
+        title: "Flexible routing",
         description:
-          "Connect your agents to external APIs and tools. Schedule appointments, look up information, process payments, and more — all within the conversation flow.",
+          "High-priority leads: warm transfer immediately. Standard leads: book + send confirmation. Not a fit: polite decline or referral.",
       },
       {
-        title: "Deploy anywhere your customers are",
+        title: "Multi-channel capture",
         description:
-          "Embed agents on your website, mobile app, phone system, or messaging platforms. Meet customers where they are with consistent, intelligent support.",
+          "Phone, web form, chat—wherever leads come from, Kenstera responds in seconds.",
       },
     ],
   },
@@ -60,19 +60,19 @@ export const defaultContent: IndustryContent = {
       "Create multi-agent workflows with strict guardrails and track results with in depth testing and analytics",
     features: [
       {
-        title: "Build multi-agent workflows",
+        title: "Speed-to-lead sequences",
         description:
-          "Design rich conversational flows using intuitive visual tools. Combine scripted steps with dynamic agents, customize behavior at each stage, and define exactly how your AI responds, across both voice and chat.",
+          "Text within 10 seconds of missed call. Callback attempts at 1 min, 5 min, 30 min, and next day.",
       },
       {
-        title: "Test guardrails",
+        title: "Warm transfer for priority leads",
         description:
-          "Set up automated testing to ensure your agents stay on track. Define boundaries, test edge cases, and validate responses before going live.",
+          "High-value inquiries get transferred to your team immediately. Your best leads always reach a person.",
       },
       {
-        title: "Monitor performance",
+        title: "Appointment reminders",
         description:
-          "Track key metrics, analyze conversation outcomes, and continuously improve your agents with detailed analytics and insights.",
+          "Automated reminders reduce no-shows. Leads who reschedule get re-engaged automatically.",
       },
     ],
   },
@@ -80,28 +80,26 @@ export const defaultContent: IndustryContent = {
     heading: "Fully customizable to your brand and systems",
     features: [
       {
-        title:
-          "Agents that deeply understand your business, powered by your knowledge base",
+        title: "Your rules enforced",
         description:
-          "Connect internal documents, FAQs, and URLs in just a few clicks. With built-in Retrieval-Augmented Generation (RAG), agents provide accurate, real-time answers grounded in your own content, automatically reindexed as it changes.",
+          "Define your qualification criteria. Set routing rules. Every call is handled according to your process.",
       },
       {
-        title: "Custom voices & tailored personalities",
+        title: "Compliant by design",
         description:
-          "Create unique voice profiles that match your brand identity. Fine-tune tone, pace, and personality to deliver consistent experiences across every interaction.",
+          "Call disclosure, recording consent logic, configurable data retention.",
       },
       {
-        title: "Tight integration with your stack",
+        title: "Deep integration",
         description:
-          "Connect seamlessly with your CRM, helpdesk, calendar, and other tools. Agents can read and write data, trigger workflows, and keep everything in sync.",
+          "Two-way sync with your CRM, calendar, and tools. Leads and appointments sync automatically.",
       },
     ],
   },
   integrations: {
-    heading:
-      "Integrate seamlessly with your tech stack and the tools you already use",
+    heading: "Connects to the tools you already use",
     description:
-      "Connect agents to your CRM, support desk, calendar, payment system, or telephony provider. Whether it's Salesforce, Stripe, Zendesk, or Twilio, integrations work out of the box with minimal setup",
+      "Your CRM, calendar, and communication tools. Integrations built for lead response workflows.",
     additionalText: "And hundreds more via APIs or MCPs.",
     items: [
       "Pipedrive",
@@ -116,39 +114,38 @@ export const defaultContent: IndustryContent = {
     ],
   },
   gettingStarted: {
-    heading: "Start in days, not months",
+    heading: "Go live in days, not weeks",
     description:
-      "Get started easily with minimal setup and hands-on support to explore what Conversational Agents can unlock for your business.",
+      "We configure your qualification rules, integrate with your systems, and set up follow-up sequences—so you start converting more leads this week.",
   },
   faqs: [
     {
-      question: "Can I integrate Kenstera Conversational AI into my own app?",
+      question: "How fast does Kenstera respond?",
       answer:
-        "Yes, Kenstera provides APIs and SDKs that allow you to seamlessly integrate our Conversational AI into your existing applications, websites, or custom platforms.",
+        "Instantly—under 3 seconds. Phone calls answered on first ring. Web forms trigger immediate callback.",
     },
     {
-      question: "How many agents can I create?",
+      question: "What happens with high-priority leads?",
       answer:
-        "The number of agents you can create depends on your plan. Business plans offer unlimited agent creation, while starter plans include up to 5 agents.",
+        "High-priority leads get warm-transferred to your team immediately.",
     },
     {
-      question: "What LLMs can I use with my voice agents?",
+      question: "What happens to leads that don't qualify?",
       answer:
-        "Kenstera supports multiple LLM providers including OpenAI, Anthropic Claude, and custom fine-tuned models. You can choose the model that best fits your use case.",
+        "Declined politely. Optionally routed to partners you specify.",
     },
     {
-      question: "Can my agent make API calls to external services?",
+      question: "Is this software or a service?",
       answer:
-        "Absolutely. Kenstera agents can be configured to make external API calls, enabling them to fetch data, update records, or trigger actions in your existing systems.",
+        "Both. You get the system built and managed, plus the automation that runs it.",
     },
     {
-      question:
-        "How can I make and receive phone calls with Conversational AI?",
+      question: "What exactly am I buying?",
       answer:
-        "Kenstera provides telephony integration out of the box. You can provision phone numbers, configure inbound call routing, and enable outbound calling capabilities for your agents.",
+        "A working lead response system: 24/7 coverage, instant response, qualification + booking, follow-up, and CRM integration.",
     },
   ],
   cta: {
-    heading: "The most realistic voice AI platform",
+    heading: "Stop losing customers to slow response",
   },
 };

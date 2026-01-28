@@ -8,7 +8,7 @@ export function Hero() {
           </h1>
 
           <p className="mx-auto mt-6 max-w-2xl text-center text-balance text-lg leading-relaxed text-gray-600 sm:text-lg sm:leading-8">
-            Capture leads, book appointments, and close sales 24/7 with AI-powered voice agents that engage prospects in natural, human-like conversations.
+            Capture leads, book appointments, and close sales 24/7. Save time and grow your business with our proven system.
           </p>
 
           <div className="flex flex-row items-center justify-center gap-3 mt-10">

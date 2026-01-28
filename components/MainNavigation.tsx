@@ -63,7 +63,6 @@ const navItems = [
     hasDropdown: true,
     dropdown: servicesDropdown
   },
-  { href: "/intake", label: "AI Intake" },
   { href: "/blog", label: "Blog" },
   { href: "/pricing", label: "Pricing" },
 ];

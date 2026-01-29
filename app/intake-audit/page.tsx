@@ -137,12 +137,12 @@ export default function IntakeAuditPage() {
 
       <StickyNav />
 
-      <main className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50/30 to-purple-50/40 relative overflow-hidden">
+      <main className="min-h-screen bg-gray-200 bg-linear-to-br from-slate-50 via-blue-50/30 to-purple-50/40 relative overflow-hidden">
         {/* Animated gradient blobs for liquid glass effect */}
         <div className="fixed inset-0 overflow-hidden pointer-events-none">
-          <div className="absolute -top-40 -right-40 w-96 h-96 bg-gradient-to-br from-blue-200/40 to-purple-200/40 rounded-full blur-3xl animate-pulse" />
-          <div className="absolute top-1/2 -left-40 w-80 h-80 bg-gradient-to-br from-cyan-200/30 to-blue-200/30 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }} />
-          <div className="absolute -bottom-40 right-1/3 w-72 h-72 bg-gradient-to-br from-purple-200/30 to-pink-200/30 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '2s' }} />
+          <div className="absolute -top-40 -right-40 w-96 h-96 bg-linear-to-br from-blue-200/40 to-purple-200/40 rounded-full blur-3xl animate-pulse" />
+          <div className="absolute top-1/2 -left-40 w-80 h-80 bg-linear-to-br from-cyan-200/30 to-blue-200/30 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }} />
+          <div className="absolute -bottom-40 right-1/3 w-72 h-72 bg-linear-to-br from-purple-200/30 to-pink-200/30 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '2s' }} />
         </div>
 
         {/* Hero section - side by side layout */}
@@ -154,7 +154,7 @@ export default function IntakeAuditPage() {
 
           {/* Right side - Form */}
           <div className="lg:w-1/2 flex flex-col">
-            <div className="flex-1 flex items-start lg:items-center justify-center px-6 sm:px-8 lg:px-12 py-8 lg:py-12">
+            <div className="flex-1 flex items-start lg:items-center justify-center lg:px-12 py-8 lg:py-12">
               <div className="w-full">
                 {step === 'form' && (
                   <QualifierForm onSubmit={handleFormSubmit} initialData={formData} />

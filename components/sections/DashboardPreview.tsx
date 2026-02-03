@@ -1,7 +1,5 @@
 'use client'
 
-import { motion } from 'framer-motion'
-
 // Mini sparkline chart
 function Sparkline({ color = 'stroke-sky-500', trend = 'up' }: { color?: string; trend?: 'up' | 'down' | 'flat' }) {
   const paths = {
@@ -58,32 +56,20 @@ export function DashboardPreview() {
       <div className="relative z-10 w-full max-w-7xl mx-auto px-5">
         {/* Header */}
         <div className="text-center mb-12">
-          <motion.h2
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
+          <h2
             className="text-[clamp(28px,5vw,44px)] font-bold leading-[1.15] tracking-tight text-gray-900 mb-4"
           >
-            Your AI Client & Sales Coordinator
-          </motion.h2>
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.1 }}
+            Your Client & Sales Coordinator
+          </h2>
+          <p
             className="text-lg text-gray-600 max-w-2xl mx-auto"
           >
             Answer calls and messages instantly, qualify leads, and book appointments 24/7.
-          </motion.p>
+          </p>
         </div>
 
         {/* Dashboard mockup */}
-        <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.7, delay: 0.2 }}
+        <div
           className="relative"
         >
           {/* Glow effect */}
@@ -258,7 +244,7 @@ export function DashboardPreview() {
               </div>
             </div>
           </div>
-        </motion.div>
+        </div>
       </div>
     </section>
   )

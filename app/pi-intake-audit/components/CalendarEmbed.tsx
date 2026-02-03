@@ -64,6 +64,7 @@ export function CalendarEmbed({ formData, onBack, onComplete }: CalendarEmbedPro
       {/* Calendar embed */}
       <div className="overflow-auto mb-6 bg-gray-50 rounded-xl p-2 min-h-[400px]">
         <Cal
+          key={`${formData.fullName}-${formData.email}`}
           namespace="pi-intake-audit"
           calLink="kenstera/intake-15-minutes"
           config={{

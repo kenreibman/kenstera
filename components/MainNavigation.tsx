@@ -11,17 +11,17 @@ const servicesDropdown = {
       title: "Services",
       items: [
         {
-          title: "AI Intake Systems",
+          title: "Intake and Scheduling",
           description: "24/7 lead qualification and booking",
-          href: "/intake"
+          href: "/intake-audit"
         },
         {
-          title: "Marketing Automation",
-          description: "Automated campaigns that convert",
+          title: "Custom Development",
+          description: "Website, Software, Integrations & More.",
           href: "/services/marketing"
         },
         {
-          title: "Customer Support AI",
+          title: "Support Automation",
           description: "Instant responses, happy customers",
           href: "/services/support"
         },
@@ -50,9 +50,9 @@ const servicesDropdown = {
   ],
   featured: {
     icon: Sparkles,
-    title: "AI Intake for PI Firms",
-    description: "Get 30 qualified leads per month",
-    href: "/intake-1"
+    title: "After-Hours Intake for Personal Injury Firms",
+    description: "Get leads and book consultations 24/7.",
+    href: "/industries/law"
   }
 };
 

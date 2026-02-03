@@ -397,7 +397,7 @@ export function Platforms() {
               </p>
               <div className="flex flex-wrap items-center justify-center gap-3">
                 <a
-                  href="/intake"
+                  href="/intake-audit"
                   className="inline-flex items-center justify-center px-6 py-3 bg-black text-white text-[13px] font-semibold tracking-wide uppercase rounded-full hover:bg-gray-800 transition-colors"
                 >
                   Discover Our AI

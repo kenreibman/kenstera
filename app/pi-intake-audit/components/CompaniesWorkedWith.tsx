@@ -2,7 +2,7 @@ import Image from 'next/image'
 
 const companies = [
   { name: 'Reibman & Weiner', logo: '/images/firm1.webp' },
-  { name: 'MassimiLaw', logo: '/images/firm2.webp' },
+  // { name: 'MassimiLaw', logo: '/images/firm2.webp' },
 ]
 
 export function CompaniesWorkedWith() {
@@ -18,7 +18,7 @@ export function CompaniesWorkedWith() {
               alt={company.name}
               width={140}
               height={48}
-              className="h-10 w-auto object-contain grayscale opacity-70 hover:grayscale-0 hover:opacity-100 transition-all duration-300"
+              className="h-10 w-auto object-contain"
             />
           ))}
         </div>

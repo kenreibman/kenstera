@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
 import { ContactForm } from './ContactForm'
 import { CalendarEmbed } from './CalendarEmbed'
 
@@ -19,15 +20,53 @@ const leadOptions = [
   { value: '300+', label: '300+ Leads' },
 ]
 
+const slideVariants = {
+  enter: (direction: number) => ({
+    x: direction > 0 ? 100 : -100,
+    opacity: 0,
+  }),
+  center: {
+    x: 0,
+    opacity: 1,
+  },
+  exit: (direction: number) => ({
+    x: direction > 0 ? -100 : 100,
+    opacity: 0,
+  }),
+}
+
+const overlayVariants = {
+  hidden: { opacity: 0 },
+  visible: { opacity: 1 },
+  exit: { opacity: 0 },
+}
+
+const contentVariants = {
+  hidden: { opacity: 0, y: 20, scale: 0.98 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    scale: 1,
+    transition: { delay: 0.1, duration: 0.3 }
+  },
+  exit: { opacity: 0, y: -20, scale: 0.98 },
+}
+
 function ProgressIndicator({ currentStep, totalSteps }: { currentStep: number; totalSteps: number }) {
   return (
     <div className="flex items-center gap-1.5">
       {Array.from({ length: totalSteps }, (_, i) => (
-        <div
+        <motion.div
           key={i}
-          className={`h-1 w-12 rounded-full transition-colors ${
+          className={`h-1 w-12 rounded-full ${
             i < currentStep ? 'bg-blue-950' : 'bg-gray-200'
           }`}
+          initial={false}
+          animate={{
+            backgroundColor: i < currentStep ? '#172554' : '#e5e7eb',
+            scale: i === currentStep - 1 ? [1, 1.1, 1] : 1,
+          }}
+          transition={{ duration: 0.3 }}
         />
       ))}
     </div>
@@ -36,6 +75,8 @@ function ProgressIndicator({ currentStep, totalSteps }: { currentStep: number; t
 
 export function IntakeWizard() {
   const [step, setStep] = useState(1)
+  const [direction, setDirection] = useState(1)
+  const [leadId, setLeadId] = useState<string | null>(null)
   const [formData, setFormData] = useState<FormData>({
     fullName: '',
     email: '',
@@ -46,15 +87,36 @@ export function IntakeWizard() {
 
   const handleLeadSelect = (value: string) => {
     setFormData((prev) => ({ ...prev, inboundLeads: value }))
+    setDirection(1)
     setStep(2)
   }
 
-  const handleContactSubmit = (data: Partial<FormData>) => {
-    setFormData((prev) => ({ ...prev, ...data }))
+  const handleContactSubmit = async (data: Partial<FormData>) => {
+    const updatedFormData = { ...formData, ...data }
+    setFormData(updatedFormData)
+
+    // Capture lead data and get leadId
+    try {
+      const response = await fetch('/api/pi-intake-audit/capture', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(updatedFormData),
+      })
+
+      const result = await response.json()
+      if (result.success && result.leadId) {
+        setLeadId(result.leadId)
+      }
+    } catch (error) {
+      console.error('Failed to capture lead:', error)
+    }
+
+    setDirection(1)
     setStep(3)
   }
 
   const handleBack = () => {
+    setDirection(-1)
     setStep((prev) => Math.max(1, prev - 1))
   }
 
@@ -64,37 +126,57 @@ export function IntakeWizard() {
       <section className="bg-white py-8 px-5">
         <div className="max-w-md mx-auto">
           {/* Header */}
-          <div className="text-center mb-4">
+          <motion.div
+            className="text-center mb-4"
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.4 }}
+          >
             <h2 className="text-sm font-medium text-blue-950 mb-1">
               See if you qualify - takes 30 seconds
             </h2>
             <p className="text-xs text-gray-500">
               🔒 No commitment • No pitch deck
             </p>
-          </div>
+          </motion.div>
 
           {/* Question */}
-          <h3 className="text-2xl font-bold text-gray-900 text-center mb-4">
+          <motion.h3
+            className="text-2xl font-bold text-gray-900 text-center mb-4"
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.4, delay: 0.1 }}
+          >
             How many leads do you get per month?
-          </h3>
+          </motion.h3>
 
           {/* Options */}
           <div className="flex flex-col gap-2 mb-6">
-            {leadOptions.map((option) => (
-              <button
+            {leadOptions.map((option, index) => (
+              <motion.button
                 key={option.value}
                 onClick={() => handleLeadSelect(option.value)}
-                className="w-full px-6 py-4 text-left font-medium rounded-xl transition-all bg-blue-950 text-white hover:bg-blue-900"
+                className="w-full px-6 py-4 text-left font-medium rounded-xl bg-blue-950 text-white hover:bg-blue-900"
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.3, delay: 0.15 + index * 0.05 }}
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
               >
                 {option.label}
-              </button>
+              </motion.button>
             ))}
           </div>
 
           {/* Progress */}
-          <div className="flex justify-center">
+          <motion.div
+            className="flex justify-center"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.4, delay: 0.4 }}
+          >
             <ProgressIndicator currentStep={1} totalSteps={3} />
-          </div>
+          </motion.div>
         </div>
 
         {/* Pre-load calendar while user is on step 1 */}
@@ -107,27 +189,63 @@ export function IntakeWizard() {
 
   // Fullscreen focus mode for steps 2+
   return (
-    <div className="fixed inset-0 z-50 bg-white overflow-y-auto">
+    <motion.div
+      className="fixed inset-0 z-50 bg-white overflow-y-auto"
+      variants={overlayVariants}
+      initial="hidden"
+      animate="visible"
+      exit="exit"
+      transition={{ duration: 0.3 }}
+    >
       <div className="min-h-full flex items-center justify-center py-8 px-5">
         <div className="max-w-md w-full">
-          {/* Step 2: Contact Form */}
-          {step === 2 && (
-            <ContactForm
-              initialData={formData}
-              onSubmit={handleContactSubmit}
-              onBack={handleBack}
-            />
-          )}
+          <AnimatePresence mode="wait" custom={direction}>
+            {/* Step 2: Contact Form */}
+            {step === 2 && (
+              <motion.div
+                key="contact-form"
+                custom={direction}
+                variants={slideVariants}
+                initial="enter"
+                animate="center"
+                exit="exit"
+                transition={{
+                  type: 'spring',
+                  stiffness: 300,
+                  damping: 30,
+                  duration: 0.3
+                }}
+              >
+                <ContactForm
+                  initialData={formData}
+                  onSubmit={handleContactSubmit}
+                  onBack={handleBack}
+                />
+              </motion.div>
+            )}
 
-          {/* Calendar - always mounted, visible only on step 3 */}
-          <div
-            className={step === 3 ? '' : 'hidden'}
-            aria-hidden={step !== 3}
-          >
-            <CalendarEmbed formData={formData} onBack={handleBack} />
-          </div>
+            {/* Step 3: Calendar */}
+            {step === 3 && (
+              <motion.div
+                key="calendar"
+                custom={direction}
+                variants={slideVariants}
+                initial="enter"
+                animate="center"
+                exit="exit"
+                transition={{
+                  type: 'spring',
+                  stiffness: 300,
+                  damping: 30,
+                  duration: 0.3
+                }}
+              >
+                <CalendarEmbed formData={formData} leadId={leadId} onBack={handleBack} />
+              </motion.div>
+            )}
+          </AnimatePresence>
         </div>
       </div>
-    </div>
+    </motion.div>
   )
 }

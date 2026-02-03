@@ -1,12 +1,13 @@
 'use client'
 
-import { useEffect } from 'react'
+import { useEffect, useCallback } from 'react'
 import Cal, { getCalApi } from '@calcom/embed-react'
 import { ArrowLeft } from 'lucide-react'
 import { FormData } from './IntakeWizard'
 
 interface CalendarEmbedProps {
   formData: FormData
+  leadId?: string | null
   onBack: () => void
   onComplete?: () => void
 }
@@ -26,7 +27,21 @@ function ProgressIndicator({ currentStep, totalSteps }: { currentStep: number; t
   )
 }
 
-export function CalendarEmbed({ formData, onBack, onComplete }: CalendarEmbedProps) {
+export function CalendarEmbed({ formData, leadId, onBack, onComplete }: CalendarEmbedProps) {
+  const markAsBooked = useCallback(async () => {
+    if (!leadId) return
+
+    try {
+      await fetch('/api/pi-intake-audit/booked', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ leadId }),
+      })
+    } catch (error) {
+      console.error('Failed to mark lead as booked:', error)
+    }
+  }, [leadId])
+
   useEffect(() => {
     ;(async function () {
       const cal = await getCalApi({ namespace: 'pi-intake-audit' })
@@ -43,11 +58,12 @@ export function CalendarEmbed({ formData, onBack, onComplete }: CalendarEmbedPro
       cal('on', {
         action: 'bookingSuccessful',
         callback: () => {
+          markAsBooked()
           onComplete?.()
         },
       })
     })()
-  }, [onComplete])
+  }, [onComplete, markAsBooked])
 
   return (
     <>

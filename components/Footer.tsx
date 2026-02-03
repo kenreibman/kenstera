@@ -62,11 +62,6 @@ export function Footer() {
                   info@kenstera.com
                 </a>
               </div>
-              <div>
-                <a href="tel:+19293579256" className="hover:text-white">
-                  +1 (929) 357-9256
-                </a>
-              </div>
             </div>
           </div>
         </div>

@@ -1,7 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
-import { getCalApi } from '@calcom/embed-react'
+import { useState } from 'react'
 import { ContactForm } from './ContactForm'
 import { CalendarEmbed } from './CalendarEmbed'
 
@@ -44,11 +43,6 @@ export function IntakeWizard() {
     role: '',
     inboundLeads: '',
   })
-
-  // Pre-fetch Cal.com embed on page load
-  useEffect(() => {
-    getCalApi({ namespace: 'pi-intake-audit' })
-  }, [])
 
   const handleLeadSelect = (value: string) => {
     setFormData((prev) => ({ ...prev, inboundLeads: value }))
@@ -102,6 +96,11 @@ export function IntakeWizard() {
             <ProgressIndicator currentStep={1} totalSteps={3} />
           </div>
         </div>
+
+        {/* Pre-load calendar while user is on step 1 */}
+        <div className="hidden" aria-hidden="true">
+          <CalendarEmbed formData={formData} onBack={() => {}} />
+        </div>
       </section>
     )
   }
@@ -120,13 +119,13 @@ export function IntakeWizard() {
             />
           )}
 
-          {/* Step 3: Calendar */}
-          {step === 3 && (
-            <CalendarEmbed
-              formData={formData}
-              onBack={handleBack}
-            />
-          )}
+          {/* Calendar - always mounted, visible only on step 3 */}
+          <div
+            className={step === 3 ? '' : 'hidden'}
+            aria-hidden={step !== 3}
+          >
+            <CalendarEmbed formData={formData} onBack={handleBack} />
+          </div>
         </div>
       </div>
     </div>

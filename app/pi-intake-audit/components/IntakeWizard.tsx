@@ -1,7 +1,6 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import { ArrowLeft } from 'lucide-react'
 import { getCalApi } from '@calcom/embed-react'
 import { ContactForm } from './ContactForm'
 import { CalendarEmbed } from './CalendarEmbed'

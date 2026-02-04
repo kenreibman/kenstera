@@ -4,6 +4,7 @@ import Script from "next/script";
 import "./globals.css";
 import { LayoutWrapper } from "@/components/LayoutWrapper";
 import { Analytics } from "@vercel/analytics/next";
+import { SpeedInsights } from "@vercel/speed-insights/next"
 
 const inter = Inter({
   subsets: ["latin"],
@@ -62,6 +63,7 @@ export default function RootLayout({
           {children}
         </LayoutWrapper>
         <Analytics />
+        <SpeedInsights/>
       </body>
     </html>
   );

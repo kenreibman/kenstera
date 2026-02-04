@@ -11,7 +11,9 @@ function getResend(): Resend {
 }
 
 export async function sendAbandonmentEmail(lead: Lead): Promise<{ success: boolean; error?: string }> {
-  const bookingUrl = `${process.env.NEXT_PUBLIC_BASE_URL}/pi-intake-audit?leadId=${lead.id}`
+  const bookingUrl = new URL('https://cal.com/kenstera/intake-15-minutes')
+  bookingUrl.searchParams.set('name', lead.fullName)
+  bookingUrl.searchParams.set('email', lead.email)
   const fromEmail = process.env.FROM_EMAIL || 'notifications@yourdomain.com'
   const fromName = process.env.FROM_NAME || 'Kenstera'
 
@@ -37,7 +39,7 @@ export async function sendAbandonmentEmail(lead: Lead): Promise<{ success: boole
   <p>On the call, we'll walk through your current intake process and identify quick wins to improve your conversion rate. No pitch, just actionable insights you can implement right away.</p>
 
   <p style="margin: 30px 0;">
-    <a href="${bookingUrl}" style="background-color: #172554; color: white; padding: 14px 28px; text-decoration: none; border-radius: 8px; display: inline-block; font-weight: 500;">
+    <a href="${bookingUrl.toString()}" style="background-color: #172554; color: white; padding: 14px 28px; text-decoration: none; border-radius: 8px; display: inline-block; font-weight: 500;">
       Book Your Free Audit
     </a>
   </p>
@@ -67,7 +69,7 @@ No worries—your spot is still available.
 
 On the call, we'll walk through your current intake process and identify quick wins to improve your conversion rate. No pitch, just actionable insights you can implement right away.
 
-Book Your Free Audit: ${bookingUrl}
+Book Your Free Audit: ${bookingUrl.toString()}
 
 If you have any questions, just reply to this email.
 

@@ -68,7 +68,6 @@ export function CalendarEmbed({ formData, leadId, onBack, onComplete, isVisible 
         callback: () => {
           cal('ui', {
             hideEventTypeDetails: true,
-            theme: 'light',
             layout: 'month_view',
           })
         },
@@ -88,15 +87,16 @@ export function CalendarEmbed({ formData, leadId, onBack, onComplete, isVisible 
 
   // Memoize config to prevent unnecessary re-renders
   // Only include user data if we have it (when form is filled)
-  const calConfig = useMemo<Record<string, string> | undefined>(() => {
-    if (formData.fullName && formData.email) {
-      return {
-        name: formData.fullName,
-        email: formData.email,
-        notes: `Website: ${formData.website}\nRole: ${formData.role}\nLeads/mo: ${formData.inboundLeads}`,
-      }
+  const calConfig = useMemo<Record<string, string>>(() => {
+    const config: Record<string, string> = {
+      theme: 'light',
     }
-    return undefined
+    if (formData.fullName && formData.email) {
+      config.name = formData.fullName
+      config.email = formData.email
+      config.notes = `Website: ${formData.website}\nRole: ${formData.role}\nLeads/mo: ${formData.inboundLeads}`
+    }
+    return config
   }, [formData.fullName, formData.email, formData.website, formData.role, formData.inboundLeads])
 
   // Generate a key based on whether we have user data

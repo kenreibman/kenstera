@@ -1,8 +1,8 @@
 import Image from 'next/image'
 
 const companies = [
-  { name: 'Reibman & Weiner', logo: '/images/firm1.webp' },
-  // { name: 'MassimiLaw', logo: '/images/firm2.webp' },
+  { name: 'Firm 1', logo: '/images/firm1.webp' },
+  { name: 'Firm 2', logo: '/images/firm2.svg' },
 ]
 
 export function CompaniesWorkedWith() {

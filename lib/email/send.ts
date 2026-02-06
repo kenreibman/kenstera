@@ -21,7 +21,7 @@ export async function sendAbandonmentEmail(lead: Lead): Promise<{ success: boole
     const { error } = await getResend().emails.send({
       from: `${fromName} <${fromEmail}>`,
       to: lead.email,
-      subject: 'Your free intake audit is waiting',
+      subject: 'Quick question about your intake process',
       html: `
 <!DOCTYPE html>
 <html>
@@ -36,11 +36,13 @@ export async function sendAbandonmentEmail(lead: Lead): Promise<{ success: boole
 
   <p>No worries—your spot is still available.</p>
 
-  <p>On the call, we'll walk through your current intake process and identify quick wins to improve your conversion rate. No pitch, just actionable insights you can implement right away.</p>
+  <p>I took a quick look at your website and noticed a few things about your intake flow that are worth discussing—like how your contact form routes and what happens to leads that come in after hours.</p>
+
+  <p>On the call, we'll walk through your intake process together and identify the top gaps costing you signed cases. No pitch, just specific findings you can act on this week.</p>
 
   <p style="margin: 30px 0;">
-    <a href="${bookingUrl.toString()}" style="background-color: #172554; color: white; padding: 14px 28px; text-decoration: none; border-radius: 8px; display: inline-block; font-weight: 500;">
-      Book Your Free Audit
+    <a href="${bookingUrl.toString()}" style="background-color: #f59e0b; color: #1a1a1a; padding: 14px 28px; text-decoration: none; border-radius: 8px; display: inline-block; font-weight: 600;">
+      Claim Your Audit Slot
     </a>
   </p>
 
@@ -67,9 +69,11 @@ I noticed you started your free intake audit but didn't get a chance to book a t
 
 No worries—your spot is still available.
 
-On the call, we'll walk through your current intake process and identify quick wins to improve your conversion rate. No pitch, just actionable insights you can implement right away.
+I took a quick look at your website and noticed a few things about your intake flow that are worth discussing—like how your contact form routes and what happens to leads that come in after hours.
 
-Book Your Free Audit: ${bookingUrl.toString()}
+On the call, we'll walk through your intake process together and identify the top gaps costing you signed cases. No pitch, just specific findings you can act on this week.
+
+Claim Your Audit Slot: ${bookingUrl.toString()}
 
 If you have any questions, just reply to this email.
 

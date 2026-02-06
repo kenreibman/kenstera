@@ -12,6 +12,7 @@ const inter = Inter({
   variable: "--font-inter",
 });
 
+
 export const metadata: Metadata = {
   metadataBase: new URL("https://kenstera.com"),
   title: "Kenstera",

@@ -25,7 +25,7 @@ function ProgressIndicator({ currentStep, totalSteps }: { currentStep: number; t
         <div
           key={i}
           className={`h-1 w-12 rounded-full transition-colors ${
-            i < currentStep ? 'bg-blue-950' : 'bg-gray-200'
+            i < currentStep ? 'bg-black' : 'bg-gray-200'
           }`}
         />
       ))}
@@ -60,16 +60,15 @@ export function ContactForm({ initialData, onSubmit, onBack }: ContactFormProps)
   return (
     <>
       {/* Header */}
-      <p className="text-xs text-center text-gray-500">No commitment. No pitch deck.</p>
-      <h2 className="text-xl font-bold text-gray-900 text-center mb-6">
-        Book Your Intake Audit:
+      <h2 className="text-xl font-bold text-black text-center mb-6">
+        Almost there — where should we send your audit results?
       </h2>
 
       {/* Form */}
       <form onSubmit={handleSubmit} className="flex flex-col gap-4">
         {/* Full Name */}
         <div className="flex flex-col gap-1.5">
-          <label htmlFor="fullName" className="text-sm font-medium text-gray-700">
+          <label htmlFor="fullName" className="text-sm font-medium text-black/80">
             Full Name
           </label>
           <input
@@ -80,13 +79,13 @@ export function ContactForm({ initialData, onSubmit, onBack }: ContactFormProps)
             value={formData.fullName}
             onChange={handleChange}
             required
-            className="w-full px-4 py-4 border border-gray-200 rounded-xl text-gray-900 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all"
+            className="w-full px-4 py-4 border border-gray-200 rounded-xl text-black placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-black/20 focus:border-black transition-all"
           />
         </div>
 
         {/* Business Email */}
         <div className="flex flex-col gap-1.5">
-          <label htmlFor="email" className="text-sm font-medium text-gray-700">
+          <label htmlFor="email" className="text-sm font-medium text-black/80">
             Business Email
           </label>
           <input
@@ -97,13 +96,13 @@ export function ContactForm({ initialData, onSubmit, onBack }: ContactFormProps)
             value={formData.email}
             onChange={handleChange}
             required
-            className="w-full px-4 py-4 border border-gray-200 rounded-xl text-gray-900 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all"
+            className="w-full px-4 py-4 border border-gray-200 rounded-xl text-black placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-black/20 focus:border-black transition-all"
           />
         </div>
 
         {/* Company Website */}
         <div className="flex flex-col gap-1.5">
-          <label htmlFor="website" className="text-sm font-medium text-gray-700">
+          <label htmlFor="website" className="text-sm font-medium text-black/80">
             Company Website
           </label>
           <input
@@ -114,13 +113,13 @@ export function ContactForm({ initialData, onSubmit, onBack }: ContactFormProps)
             value={formData.website}
             onChange={handleChange}
             required
-            className="w-full px-4 py-4 border border-gray-200 rounded-xl text-gray-900 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all"
+            className="w-full px-4 py-4 border border-gray-200 rounded-xl text-black placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-black/20 focus:border-black transition-all"
           />
         </div>
 
         {/* Role */}
         <div className="flex flex-col gap-1.5">
-          <label htmlFor="role" className="text-sm font-medium text-gray-700">
+          <label htmlFor="role" className="text-sm font-medium text-black/80">
             Your Role
           </label>
           <div className="relative">
@@ -130,7 +129,7 @@ export function ContactForm({ initialData, onSubmit, onBack }: ContactFormProps)
               value={formData.role}
               onChange={handleChange}
               required
-              className="w-full px-4 py-4 border border-gray-200 rounded-xl text-gray-900 bg-white focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all appearance-none"
+              className="w-full px-4 py-4 border border-gray-200 rounded-xl text-black bg-white focus:outline-none focus:ring-2 focus:ring-black/20 focus:border-black transition-all appearance-none"
             >
               {roleOptions.map((option) => (
                 <option key={option.value} value={option.value} disabled={option.value === ''}>
@@ -138,7 +137,7 @@ export function ContactForm({ initialData, onSubmit, onBack }: ContactFormProps)
                 </option>
               ))}
             </select>
-            <ChevronDown className="absolute right-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400 pointer-events-none" />
+            <ChevronDown className="absolute right-4 top-1/2 -translate-y-1/2 w-5 h-5 text-black pointer-events-none" />
           </div>
         </div>
 
@@ -147,7 +146,7 @@ export function ContactForm({ initialData, onSubmit, onBack }: ContactFormProps)
           <button
             type="button"
             onClick={onBack}
-            className="p-3 bg-gray-100 text-gray-700 rounded-full hover:bg-gray-200 transition-all"
+            className="p-3 bg-gray-100 text-black/60 rounded-full hover:bg-gray-200 transition-all"
             aria-label="Go back"
           >
             <ArrowLeft className="w-5 h-5" />
@@ -162,7 +161,7 @@ export function ContactForm({ initialData, onSubmit, onBack }: ContactFormProps)
                 : 'bg-gray-200 text-gray-400 cursor-not-allowed'
             }`}
           >
-            Continue →
+            See Available Times
           </button>
         </div>
 
@@ -174,7 +173,7 @@ export function ContactForm({ initialData, onSubmit, onBack }: ContactFormProps)
 
       {/* Footer */}
       <div className="text-center mt-6 space-y-1">
-        <p className="text-sm text-gray-500">
+        <p className="text-sm text-black">
           🔒 Your information is secure.
         </p>
       </div>

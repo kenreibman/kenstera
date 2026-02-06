@@ -20,7 +20,7 @@ function ProgressIndicator({ currentStep, totalSteps }: { currentStep: number; t
         <div
           key={i}
           className={`h-1 w-12 rounded-full transition-colors ${
-            i < currentStep ? 'bg-blue-950' : 'bg-gray-200'
+            i < currentStep ? 'bg-black' : 'bg-gray-200'
           }`}
         />
       ))}

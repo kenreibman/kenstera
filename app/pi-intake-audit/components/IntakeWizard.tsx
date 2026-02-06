@@ -156,7 +156,7 @@ export function IntakeWizard() {
                 <motion.button
                   key={option.value}
                   onClick={() => handleLeadSelect(option.value)}
-                  className="w-full px-6 py-4 text-left font-medium rounded-xl bg-blue-950 text-white hover:bg-blue-900"
+                  className="w-full px-6 py-4 text-left font-medium rounded-sm bg-blue-950 text-white hover:bg-blue-900"
                   initial={{ opacity: 0, x: -20 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ duration: 0.3, delay: 0.15 + index * 0.05 }}

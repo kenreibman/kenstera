@@ -69,7 +69,7 @@ I noticed you started your free intake audit but didn't get a chance to book a t
 
 No worries—your spot is still available.
 
-I took a quick look at your website and noticed a few things about your intake flow that are worth discussing—like how your contact form routes and what happens to leads that come in after hours.
+I took a quick look at your website and after hours intake, and I noticed a few things about your intake flow that are worth discussing—like how your contact form routes and what happens to leads that come in after hours.
 
 On the call, we'll walk through your intake process together and identify the top gaps costing you signed cases. No pitch, just specific findings you can act on this week.
 

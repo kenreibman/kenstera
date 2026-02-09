@@ -1,5 +1,3 @@
-'use client'
-
 export function Objections() {
   return (
     <section className="relative py-20">

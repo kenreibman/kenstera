@@ -1,6 +1,5 @@
-'use client'
-
 import { ArrowRight } from 'lucide-react'
+import Link from 'next/link'
 
 export function CRMIntegrations() {
   const integrations = [
@@ -65,13 +64,13 @@ export function CRMIntegrations() {
 
             {/* Footer row */}
             <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
-              <a
+              <Link
                 href="/contact-sales"
                 className="inline-flex items-center gap-2 text-gray-900 font-medium hover:gap-3 transition-all"
               >
                 Book a Demo
                 <ArrowRight className="w-4 h-4" />
-              </a>
+              </Link>
             </div>
           </div>
         </div>

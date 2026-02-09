@@ -30,6 +30,7 @@ export function NewsletterCTA() {
             onChange={(e) => setEmail(e.target.value)}
             placeholder="you@example.com"
             required
+            aria-label="Email address"
             className="flex-1 px-4 py-2.5 rounded-lg border border-border bg-background text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-colors"
           />
           <button

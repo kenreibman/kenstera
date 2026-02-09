@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Inter } from "next/font/google";
 import Script from "next/script";
 import "./globals.css";
@@ -12,10 +12,18 @@ const inter = Inter({
   variable: "--font-inter",
 });
 
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  themeColor: "#ffffff",
+};
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://kenstera.com"),
-  title: "Kenstera",
+  title: {
+    default: "Kenstera",
+    template: "%s | Kenstera",
+  },
   description: "Kenstera accelerates your businesses with automated marketing, lead generation, customer support, and more.",
     alternates: {
     canonical: "https://kenstera.com",
@@ -38,7 +46,14 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <head>
+      <body
+        className={`${inter.variable} font-sans antialiased`}
+      >
+        <LayoutWrapper>
+          {children}
+        </LayoutWrapper>
+        <Analytics />
+        <SpeedInsights/>
         <Script
           id="meta-pixel"
           strategy="afterInteractive"
@@ -56,15 +71,6 @@ export default function RootLayout({
             `,
           }}
         />
-      </head>
-      <body
-        className={`${inter.variable} font-sans antialiased`}
-      >
-        <LayoutWrapper>
-          {children}
-        </LayoutWrapper>
-        <Analytics />
-        <SpeedInsights/>
       </body>
     </html>
   );

@@ -53,12 +53,14 @@ export function IndustriesCustomizable({
           {features.map((feature, index) => (
             <div key={index} className="border-b border-gray-200">
               <button
+                type="button"
+                aria-expanded={activeIndex === index}
                 onClick={() => setActiveIndex(activeIndex === index ? -1 : index)}
                 className="w-full py-6 flex items-center justify-between text-left"
               >
                 <span
                   className={`text-base lg:text-lg font-semibold transition-colors ${
-                    activeIndex === index ? "text-gray-900" : "text-gray-900"
+                    activeIndex === index ? "text-gray-900" : "text-gray-300"
                   }`}
                 >
                   {feature.title}

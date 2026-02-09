@@ -1,6 +1,4 @@
-'use client'
-
-import { Phone, MessageSquare, MessageCircle, Mail, Globe, ArrowRight } from 'lucide-react'
+import { Phone, MessageSquare, MessageCircle, Mail, ArrowRight } from 'lucide-react'
 
 function GoogleIcon() {
   return (

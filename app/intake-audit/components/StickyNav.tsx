@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 
 interface StickyNavProps {
@@ -9,7 +9,7 @@ interface StickyNavProps {
 
 export default function StickyNav({ onCtaClick }: StickyNavProps) {
   const [isVisible, setIsVisible] = useState(false)
-  const [lastScrollY, setLastScrollY] = useState(0)
+  const lastScrollYRef = useRef(0)
 
   useEffect(() => {
     const handleScroll = () => {
@@ -19,7 +19,7 @@ export default function StickyNav({ onCtaClick }: StickyNavProps) {
       if (currentScrollY < scrollThreshold) {
         // At top of page, hide the nav
         setIsVisible(false)
-      } else if (currentScrollY > lastScrollY) {
+      } else if (currentScrollY > lastScrollYRef.current) {
         // Scrolling down, show the nav
         setIsVisible(true)
       } else {
@@ -27,12 +27,12 @@ export default function StickyNav({ onCtaClick }: StickyNavProps) {
         setIsVisible(false)
       }
 
-      setLastScrollY(currentScrollY)
+      lastScrollYRef.current = currentScrollY
     }
 
     window.addEventListener('scroll', handleScroll, { passive: true })
     return () => window.removeEventListener('scroll', handleScroll)
-  }, [lastScrollY])
+  }, [])
 
   const scrollToForm = () => {
     if (onCtaClick) {

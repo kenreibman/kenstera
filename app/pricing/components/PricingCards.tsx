@@ -112,8 +112,6 @@ function PricingCard({ tier }: { tier: PricingTier }) {
       <div className="px-6 py-4">
         <Link
           href={tier.cta.href}
-          target="_blank"
-          rel="noopener noreferrer"
           className="flex w-full items-center justify-center gap-2 rounded-full bg-neutral-900 px-4 py-2.5 text-sm font-medium text-white transition-colors hover:bg-neutral-800"
         >
           {tier.cta.label}

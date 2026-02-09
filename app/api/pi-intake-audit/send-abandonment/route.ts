@@ -7,10 +7,12 @@ let receiver: Receiver | null = null
 
 function getReceiver(): Receiver {
   if (!receiver) {
-    receiver = new Receiver({
-      currentSigningKey: process.env.QSTASH_CURRENT_SIGNING_KEY!,
-      nextSigningKey: process.env.QSTASH_NEXT_SIGNING_KEY!,
-    })
+    const currentSigningKey = process.env.QSTASH_CURRENT_SIGNING_KEY
+    const nextSigningKey = process.env.QSTASH_NEXT_SIGNING_KEY
+    if (!currentSigningKey || !nextSigningKey) {
+      throw new Error('Missing QSTASH_CURRENT_SIGNING_KEY or QSTASH_NEXT_SIGNING_KEY environment variables')
+    }
+    receiver = new Receiver({ currentSigningKey, nextSigningKey })
   }
   return receiver
 }
@@ -43,12 +45,21 @@ export async function POST(request: NextRequest) {
       )
     }
 
-    const { leadId } = JSON.parse(body)
-
-    if (!leadId) {
-      console.error('[Abandonment] No leadId provided')
+    let parsed: { leadId?: unknown }
+    try {
+      parsed = JSON.parse(body)
+    } catch {
       return NextResponse.json(
-        { success: false, error: 'leadId is required' },
+        { success: false, error: 'Invalid JSON body' },
+        { status: 400 }
+      )
+    }
+
+    const { leadId } = parsed
+    if (!leadId || typeof leadId !== 'string' || !leadId.startsWith('lead_')) {
+      console.error('[Abandonment] Invalid leadId provided')
+      return NextResponse.json(
+        { success: false, error: 'Valid leadId is required' },
         { status: 400 }
       )
     }
@@ -80,9 +91,9 @@ export async function POST(request: NextRequest) {
     const emailResult = await sendAbandonmentEmail(lead)
 
     if (!emailResult.success) {
-      console.error('[Abandonment] Failed to send email:', emailResult.error)
+      console.error('[Abandonment] Failed to send email for lead:', leadId)
       return NextResponse.json(
-        { success: false, error: emailResult.error },
+        { success: false, error: 'Failed to send email' },
         { status: 500 }
       )
     }
@@ -90,10 +101,7 @@ export async function POST(request: NextRequest) {
     // Update status to prevent duplicate emails
     await updateLeadStatus(leadId, 'email_sent')
 
-    console.log('[Abandonment] Email sent successfully:', {
-      leadId,
-      email: lead.email,
-    })
+    console.log('[Abandonment] Email sent successfully for lead:', leadId)
 
     return NextResponse.json({ success: true, emailSent: true })
   } catch (error) {

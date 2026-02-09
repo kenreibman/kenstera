@@ -2,7 +2,8 @@
 
 import { motion, AnimatePresence } from 'framer-motion'
 import { useState, useEffect } from 'react'
-import { ArrowUp, Mic, Code2, Layers, Palette } from 'lucide-react'
+import { ArrowUp, Mic } from 'lucide-react'
+import Link from 'next/link'
 
 // Typewriter hook
 function useTypewriter(text: string, speed: number = 30, startDelay: number = 0) {
@@ -369,18 +370,18 @@ export function Platforms() {
                 Beautiful, high-converting websites built for speed and results.
               </p>
               <div className="flex flex-wrap items-center justify-center gap-3">
-                <a
+                <Link
                   href="/services/web"
                   className="inline-flex items-center justify-center px-6 py-3 bg-black text-white text-[13px] font-semibold tracking-wide uppercase rounded-full hover:bg-gray-800 transition-colors"
                 >
                   Learn More
-                </a>
-                <a
+                </Link>
+                <Link
                   href="/contact-sales"
                   className="inline-flex items-center justify-center px-6 py-3 bg-white text-gray-900 text-[13px] font-semibold tracking-wide uppercase rounded-full hover:bg-gray-50 transition-colors border border-gray-300"
                 >
                   Contact Sales
-                </a>
+                </Link>
               </div>
             </div>
           </div>
@@ -396,18 +397,18 @@ export function Platforms() {
                 Speak to your customers with natural, human-sounding AI that feels truly personal.
               </p>
               <div className="flex flex-wrap items-center justify-center gap-3">
-                <a
+                <Link
                   href="/intake-audit"
                   className="inline-flex items-center justify-center px-6 py-3 bg-black text-white text-[13px] font-semibold tracking-wide uppercase rounded-full hover:bg-gray-800 transition-colors"
                 >
                   Discover Our AI
-                </a>
-                <a
+                </Link>
+                <Link
                   href="/contact-sales"
                   className="inline-flex items-center justify-center px-6 py-3 bg-white text-gray-900 text-[13px] font-semibold tracking-wide uppercase rounded-full hover:bg-gray-50 transition-colors border border-gray-300"
                 >
                   Contact Sales
-                </a>
+                </Link>
               </div>
             </div>
           </div>

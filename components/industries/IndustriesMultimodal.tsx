@@ -58,6 +58,8 @@ export function IndustriesMultimodal({
               {features.map((feature, index) => (
                 <div key={index}>
                   <button
+                    type="button"
+                    aria-expanded={activeIndex === index}
                     onClick={() => setActiveIndex(index)}
                     className={`text-left text-base font-semibold transition-colors ${
                       activeIndex === index ? "text-gray-900" : "text-gray-300"

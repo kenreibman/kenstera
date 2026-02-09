@@ -71,6 +71,8 @@ export function IndustriesFaqBlog({
               {faqs.map((faq, index) => (
                 <div key={index} className="border-b border-gray-200">
                   <button
+                    type="button"
+                    aria-expanded={openIndex === index}
                     onClick={() => toggleFaq(index)}
                     className="flex items-center justify-between w-full py-4 text-left"
                   >

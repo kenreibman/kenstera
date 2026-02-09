@@ -9,8 +9,6 @@ export function PricingCTA() {
         </h2>
         <Link
           href="/contact-sales"
-          target="_blank"
-          rel="noopener noreferrer"
           className="shrink-0 rounded-full bg-neutral-900 px-6 py-3 text-sm font-medium text-white transition-colors hover:bg-neutral-800"
         >
           Contact Us

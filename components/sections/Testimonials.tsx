@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 export function Testimonials() {
   return (
     <section className="bg-white py-20">
@@ -40,18 +42,18 @@ export function Testimonials() {
 
         {/* CTAs */}
         <div className="flex flex-row items-center justify-center gap-3 mt-12">
-          <a
+          <Link
             href="/contact-sales"
             className="inline-flex items-center justify-center px-6 py-3 bg-black text-white text-[13px] font-semibold tracking-wide uppercase rounded-full hover:bg-gray-800 transition-colors"
           >
             Talk to Sales
-          </a>
-          <a
+          </Link>
+          <Link
             href="/blog"
             className="inline-flex items-center justify-center px-6 py-3 bg-white text-gray-900 text-[13px] font-semibold tracking-wide uppercase rounded-full hover:bg-gray-50 transition-colors border border-gray-300"
           >
             Read Stories
-          </a>
+          </Link>
         </div>
       </div>
     </section>

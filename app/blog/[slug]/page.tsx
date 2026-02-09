@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { MDXRemote } from "next-mdx-remote/rsc";
@@ -134,7 +135,9 @@ export default async function BlogPostPage({ params }: PageProps) {
           <div className="grid grid-cols-1 xl:grid-cols-[1fr_250px] gap-12">
             {/* Article */}
             <article className="max-w-3xl prose-lg">
-              <MDXRemote source={post.content} components={mdxComponents} />
+              <Suspense fallback={<div className="animate-pulse space-y-4"><div className="h-4 bg-muted rounded w-3/4" /><div className="h-4 bg-muted rounded w-full" /><div className="h-4 bg-muted rounded w-5/6" /></div>}>
+                <MDXRemote source={post.content} components={mdxComponents} />
+              </Suspense>
 
               {/* Last Updated */}
               {post.updated && (

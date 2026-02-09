@@ -85,7 +85,7 @@ export function TableOfContents() {
   if (headings.length === 0) return null;
 
   return (
-    <nav className="hidden xl:block sticky top-24 max-h-[calc(100vh-8rem)] overflow-y-auto">
+    <nav aria-label="Table of contents" className="hidden xl:block sticky top-24 max-h-[calc(100vh-8rem)] overflow-y-auto">
       <p className="font-semibold text-sm uppercase tracking-wider text-muted-foreground mb-4">
         On this page
       </p>

@@ -1,5 +1,3 @@
-'use client'
-
 // Mini sparkline chart
 function Sparkline({ color = 'stroke-sky-500', trend = 'up' }: { color?: string; trend?: 'up' | 'down' | 'flat' }) {
   const paths = {

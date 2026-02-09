@@ -1,4 +1,6 @@
 import type { MDXComponents } from "mdx/types";
+import Image from "next/image";
+import Link from "next/link";
 import { Callout } from "./Callout";
 import { CodeBlock } from "./CodeBlock";
 
@@ -58,15 +60,39 @@ export const mdxComponents: MDXComponents = {
       {children}
     </blockquote>
   ),
-  a: ({ href, children }) => (
-    <a
-      href={href}
-      className="font-medium text-primary underline underline-offset-4 hover:text-primary/80 transition-colors"
-      target={href?.startsWith("http") ? "_blank" : undefined}
-      rel={href?.startsWith("http") ? "noopener noreferrer" : undefined}
-    >
-      {children}
-    </a>
+  a: ({ href, children }) => {
+    const isExternal = href?.startsWith("http");
+    if (isExternal) {
+      return (
+        <a
+          href={href}
+          className="font-medium text-primary underline underline-offset-4 hover:text-primary/80 transition-colors"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          {children}
+        </a>
+      );
+    }
+    return (
+      <Link
+        href={href || "#"}
+        className="font-medium text-primary underline underline-offset-4 hover:text-primary/80 transition-colors"
+      >
+        {children}
+      </Link>
+    );
+  },
+  img: ({ src, alt, ...props }) => (
+    <Image
+      src={src || ""}
+      alt={alt || ""}
+      width={800}
+      height={450}
+      className="rounded-lg my-6"
+      sizes="(max-width: 768px) 100vw, 800px"
+      {...props}
+    />
   ),
   hr: () => <hr className="my-8 border-border" />,
   table: ({ children }) => (
@@ -93,7 +119,6 @@ export const mdxComponents: MDXComponents = {
     </code>
   ),
   pre: ({ children }) => {
-    // Extract the code content from the children
     const codeElement = children as React.ReactElement<{ children: string; className?: string }>;
     const code = codeElement?.props?.children || "";
     const className = codeElement?.props?.className || "";

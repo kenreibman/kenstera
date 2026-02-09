@@ -1,8 +1,8 @@
 "use client";
 
 import Link from "next/link";
-import { useState, useEffect } from "react";
-import { Menu, X, ChevronDown, ChevronRight, Sparkles, Bot, FileText, DollarSign } from "lucide-react";
+import { useState, useEffect, useRef } from "react";
+import { Menu, X, ChevronDown, ChevronRight, Sparkles } from "lucide-react";
 
 // Dropdown menu data
 const servicesDropdown = {
@@ -200,7 +200,7 @@ export function MainNavigation() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [expandedItem, setExpandedItem] = useState<string | null>(null);
   const [isVisible, setIsVisible] = useState(true);
-  const [lastScrollY, setLastScrollY] = useState(0);
+  const lastScrollYRef = useRef(0);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -217,18 +217,18 @@ export function MainNavigation() {
         setIsVisible(true);
       }
       // Hide on scroll down, show on scroll up
-      else if (currentScrollY > lastScrollY && currentScrollY > 300) {
+      else if (currentScrollY > lastScrollYRef.current && currentScrollY > 300) {
         setIsVisible(false);
-      } else if (currentScrollY < lastScrollY) {
+      } else if (currentScrollY < lastScrollYRef.current) {
         setIsVisible(true);
       }
 
-      setLastScrollY(currentScrollY);
+      lastScrollYRef.current = currentScrollY;
     };
 
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
-  }, [lastScrollY, mobileMenuOpen]);
+  }, [mobileMenuOpen]);
 
   const toggleExpanded = (href: string) => {
     setExpandedItem(expandedItem === href ? null : href);

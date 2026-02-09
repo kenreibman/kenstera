@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useRef } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
+import Link from 'next/link'
 
 export function StickyNav() {
   const [isVisible, setIsVisible] = useState(false)
@@ -48,12 +49,12 @@ export function StickyNav() {
 
             {/* Right: CTAs */}
             <div className="flex items-center gap-3">
-              <a
+              <Link
                 href="/contact-sales"
                 className="px-5 py-2 text-sm font-medium text-white bg-gray-900 rounded-full hover:bg-gray-800 transition-colors"
               >
                 Schedule a Call
-              </a>
+              </Link>
             </div>
           </div>
         </motion.nav>

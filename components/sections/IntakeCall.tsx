@@ -48,6 +48,8 @@ export function IntakeCall() {
                   className="border-t border-gray-200 first:border-t-0"
                 >
                   <button
+                    type="button"
+                    aria-expanded={activeIndex === index}
                     onClick={() => setActiveIndex(index)}
                     className="w-full text-left py-5 group"
                   >

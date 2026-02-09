@@ -14,9 +14,13 @@ export function CodeBlock({ children, language, filename }: CodeBlockProps) {
   const [copied, setCopied] = useState(false);
 
   const handleCopy = async () => {
-    await navigator.clipboard.writeText(children);
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
+    try {
+      await navigator.clipboard.writeText(children);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    } catch {
+      // silently ignore clipboard errors
+    }
   };
 
   return (
@@ -28,6 +32,7 @@ export function CodeBlock({ children, language, filename }: CodeBlockProps) {
           </span>
           <button
             onClick={handleCopy}
+            aria-label="Copy code to clipboard"
             className={cn(
               "flex items-center gap-1.5 text-xs transition-colors",
               copied

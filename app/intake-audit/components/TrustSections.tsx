@@ -63,6 +63,8 @@ function FAQItem({ question, answer }: { question: string; answer: string }) {
   return (
     <div className="border-b border-white/40 last:border-b-0">
       <button
+        type="button"
+        aria-expanded={isOpen}
         onClick={() => setIsOpen(!isOpen)}
         className="w-full py-4 flex items-center justify-between text-left"
       >

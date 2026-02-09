@@ -64,7 +64,16 @@ export function getAllPosts(): BlogPostMeta[] {
 }
 
 export function getPostBySlug(slug: string): BlogPost | null {
+  // Prevent path traversal
+  if (slug.includes("..") || slug.includes("/") || slug.includes("\\")) {
+    return null;
+  }
+
   const filePath = path.join(BLOG_DIR, `${slug}.mdx`);
+  const resolvedPath = path.resolve(filePath);
+  if (!resolvedPath.startsWith(path.resolve(BLOG_DIR))) {
+    return null;
+  }
 
   if (!fs.existsSync(filePath)) {
     return null;

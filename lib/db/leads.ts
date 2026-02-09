@@ -4,10 +4,12 @@ let redis: Redis | null = null
 
 function getRedis(): Redis {
   if (!redis) {
-    redis = new Redis({
-      url: process.env.UPSTASH_REDIS_REST_URL!,
-      token: process.env.UPSTASH_REDIS_REST_TOKEN!,
-    })
+    const url = process.env.UPSTASH_REDIS_REST_URL
+    const token = process.env.UPSTASH_REDIS_REST_TOKEN
+    if (!url || !token) {
+      throw new Error('Missing UPSTASH_REDIS_REST_URL or UPSTASH_REDIS_REST_TOKEN environment variables')
+    }
+    redis = new Redis({ url, token })
   }
   return redis
 }
@@ -27,7 +29,7 @@ export interface Lead {
 }
 
 function generateLeadId(): string {
-  return `lead_${Date.now()}_${Math.random().toString(36).substring(2, 9)}`
+  return `lead_${crypto.randomUUID()}`
 }
 
 function getLeadKey(id: string): string {

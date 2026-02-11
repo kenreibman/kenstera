@@ -61,7 +61,7 @@ export function ContactForm({ initialData, onSubmit, onBack }: ContactFormProps)
     <>
       {/* Header */}
       <h2 className="text-xl font-bold text-black text-center mb-6">
-        Almost there — where should we send your audit results?
+        Almost there. Where should we send your audit results?
       </h2>
 
       {/* Form */}

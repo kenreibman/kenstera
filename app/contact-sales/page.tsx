@@ -63,14 +63,9 @@ export default function ContactPage() {
             ))}
           </div>
 
-          {/* Trusted by */}
+          {/* Reviews */}
           <div className="mt-auto">
-            <p className="text-sm text-white/50 mb-6">
-              Trusted by leading PI firms
-            </p>
-
-            {/* Reviews */}
-            <div className="flex items-center gap-2 mt-8">
+            <div className="flex items-center gap-2">
               <div className="flex">
                 {[...Array(5)].map((_, i) => (
                   <Star key={i} className="w-4 h-4 text-muted fill-muted" />
@@ -80,6 +75,10 @@ export default function ContactPage() {
                 5.0 stars from our clients
               </span>
             </div>
+
+            <a href="/" className="mt-8 inline-block text-sm text-white/40 hover:text-white/60 transition-colors">
+              &larr; Back to home
+            </a>
           </div>
         </div>
 

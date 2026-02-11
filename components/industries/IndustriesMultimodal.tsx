@@ -13,7 +13,7 @@ const defaultFeatures: Feature[] = [
   {
     title: "Take action with external tool calls",
     description:
-      "Connect your agents to external APIs and tools. Schedule appointments, look up information, process payments, and more — all within the conversation flow.",
+      "Connect your agents to external APIs and tools. Schedule appointments, look up information, process payments, and more, all within the conversation flow.",
   },
   {
     title: "Deploy anywhere your customers are",

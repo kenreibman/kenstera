@@ -9,7 +9,7 @@ const steps = [
   {
     icon: Calendar,
     title: 'Prepare (optional)',
-    description: 'Think about your current intake process—what\'s working, what\'s not. We\'ll discuss it on the call.',
+    description: 'Think about your current intake process: what\'s working, what\'s not. We\'ll discuss it on the call.',
   },
   {
     icon: MessageSquare,

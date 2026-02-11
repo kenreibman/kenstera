@@ -68,10 +68,10 @@ export function IndustriesIntegrations({
         {/* CTA Button */}
         <div className="flex justify-center">
           <Link
-            href="/integrations"
+            href="/contact-sales"
             className="inline-flex items-center justify-center px-6 py-3 border border-gray-200 text-gray-900 text-sm font-medium rounded-full hover:bg-gray-50 transition-colors"
           >
-            View all Integrations
+            Contact Us
           </Link>
         </div>
       </div>

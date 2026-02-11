@@ -14,7 +14,7 @@ export function FinalCTA() {
               Stop Losing Cases Tonight
             </h2>
             <p className="text-[17px] leading-relaxed text-gray-500 mb-8">
-              Every hour you wait, leads are calling your competitors. Book a 15-minute call to see exactly how this works for PI firms—no pitch deck, no pressure.
+              Every hour you wait, leads are calling your competitors. Book a 15-minute call to see exactly how this works for PI firms. No pitch deck, no pressure.
             </p>
 
             <div className="bg-white border border-gray-200 rounded-[10px] p-6 mb-8 text-left">

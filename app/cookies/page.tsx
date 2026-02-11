@@ -74,10 +74,10 @@ export default function CookiePolicyPage() {
               Most web browsers allow you to control cookies through their settings. You can typically find cookie settings in the &quot;Options,&quot; &quot;Settings,&quot; or &quot;Preferences&quot; menu of your browser. The following links may help you manage cookies in common browsers:
             </p>
             <ul className="list-disc space-y-2 pl-6">
-              <li>Google Chrome — Settings &gt; Privacy and security &gt; Cookies and other site data</li>
-              <li>Mozilla Firefox — Settings &gt; Privacy &amp; Security &gt; Cookies and Site Data</li>
-              <li>Safari — Preferences &gt; Privacy</li>
-              <li>Microsoft Edge — Settings &gt; Cookies and site permissions</li>
+              <li>Google Chrome: Settings &gt; Privacy and security &gt; Cookies and other site data</li>
+              <li>Mozilla Firefox: Settings &gt; Privacy &amp; Security &gt; Cookies and Site Data</li>
+              <li>Safari: Preferences &gt; Privacy</li>
+              <li>Microsoft Edge: Settings &gt; Cookies and site permissions</li>
             </ul>
             <p className="mt-3">
               Please note that disabling certain cookies may affect the functionality of our website. Essential cookies cannot be disabled as they are necessary for the site to operate.

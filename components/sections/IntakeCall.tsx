@@ -10,7 +10,7 @@ export function IntakeCall() {
   const features = [
     {
       title: "More signed cases, fewer missed calls",
-      description: "AI intake specialists answer every inbound call, qualify leads, and route high-value cases to your team in real time — so no potential client slips away."
+      description: "AI intake specialists answer every inbound call, qualify leads, and route high-value cases to your team in real time, so no potential client slips away."
     },
     {
       title: "Conversations that build client trust",

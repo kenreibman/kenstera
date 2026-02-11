@@ -50,7 +50,7 @@ export default function TermsPage() {
           <section>
             <h2 className="mb-4 text-xl font-semibold text-neutral-900">Intellectual Property</h2>
             <p>
-              All content on this website — including text, graphics, logos, images, and software — is the property of Kenstera LLC or its licensors and is protected by applicable intellectual property laws. You may not reproduce, distribute, modify, or create derivative works from any content without our prior written consent.
+              All content on this website, including text, graphics, logos, images, and software, is the property of Kenstera LLC or its licensors and is protected by applicable intellectual property laws. You may not reproduce, distribute, modify, or create derivative works from any content without our prior written consent.
             </p>
           </section>
 

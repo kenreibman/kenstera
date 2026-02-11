@@ -30,13 +30,13 @@ export default function PrivacyPage() {
             <p className="mb-3">We may collect the following types of information:</p>
             <ul className="list-disc space-y-2 pl-6">
               <li>
-                <strong>Personal information you provide directly</strong> — such as your name, email address, company name, and phone number when you fill out a contact form or schedule a consultation.
+                <strong>Personal information you provide directly</strong>: such as your name, email address, company name, and phone number when you fill out a contact form or schedule a consultation.
               </li>
               <li>
-                <strong>Usage data</strong> — including your IP address, browser type, operating system, referring URLs, pages visited, and time spent on those pages.
+                <strong>Usage data</strong>: including your IP address, browser type, operating system, referring URLs, pages visited, and time spent on those pages.
               </li>
               <li>
-                <strong>Cookies and tracking technologies</strong> — we use cookies, pixels, and similar technologies to collect information about your browsing activity. See our <a href="/cookies" className="text-neutral-900 underline underline-offset-2 hover:text-black">Cookie Policy</a> for details.
+                <strong>Cookies and tracking technologies</strong>: we use cookies, pixels, and similar technologies to collect information about your browsing activity. See our <a href="/cookies" className="text-neutral-900 underline underline-offset-2 hover:text-black">Cookie Policy</a> for details.
               </li>
             </ul>
           </section>
@@ -60,13 +60,13 @@ export default function PrivacyPage() {
             <p className="mb-3">We use the following third-party services that may collect data:</p>
             <ul className="list-disc space-y-2 pl-6">
               <li>
-                <strong>Vercel Analytics</strong> — for website performance monitoring and anonymous usage analytics. Vercel&apos;s privacy policy governs their handling of this data.
+                <strong>Vercel Analytics</strong>: for website performance monitoring and anonymous usage analytics. Vercel&apos;s privacy policy governs their handling of this data.
               </li>
               <li>
-                <strong>Meta Pixel (Facebook)</strong> — for measuring the effectiveness of advertising campaigns and understanding user actions on our site. Data collected is subject to Meta&apos;s Data Policy.
+                <strong>Meta Pixel (Facebook)</strong>: for measuring the effectiveness of advertising campaigns and understanding user actions on our site. Data collected is subject to Meta&apos;s Data Policy.
               </li>
               <li>
-                <strong>Cal.com</strong> — for scheduling consultations and meetings. When you book through Cal.com, your scheduling information is processed according to Cal.com&apos;s privacy policy.
+                <strong>Cal.com</strong>: for scheduling consultations and meetings. When you book through Cal.com, your scheduling information is processed according to Cal.com&apos;s privacy policy.
               </li>
             </ul>
           </section>

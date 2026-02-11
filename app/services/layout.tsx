@@ -3,11 +3,11 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Services | Kenstera",
   description:
-    "Intake and scheduling, custom development, and support automation—built, managed, and improved by Kenstera.",
+    "Intake and scheduling, custom development, and support automation. Built, managed, and improved by Kenstera.",
   openGraph: {
     title: "Services | Kenstera",
     description:
-      "Intake and scheduling, custom development, and support automation—built, managed, and improved by Kenstera.",
+      "Intake and scheduling, custom development, and support automation. Built, managed, and improved by Kenstera.",
   },
 };
 

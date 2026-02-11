@@ -12,7 +12,7 @@ interface IndustriesVoiceAgentsProps {
 export function IndustriesVoiceAgents({
   label = "Industry-leading",
   heading = "Voice Agents",
-  description = "Kenstera's platform is intelligent. Real-time agents that talk, type, and take action. Resolve customer issues, automate tasks, and deliver accurate answers — all grounded in your data, tailored to your workflows, and ready to deploy at scale.",
+  description = "Kenstera's platform is intelligent. Real-time agents that talk, type, and take action. Resolve customer issues, automate tasks, and deliver accurate answers, all grounded in your data, tailored to your workflows, and ready to deploy at scale.",
 }: IndustriesVoiceAgentsProps) {
   return (
     <section className="py-20 lg:py-28">

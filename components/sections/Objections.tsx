@@ -18,7 +18,7 @@ export function Objections() {
               &ldquo;Will leads know they&apos;re not talking to a person?&rdquo;
             </h3>
             <p className="text-[15px] leading-relaxed text-gray-500">
-              Modern conversational AI sounds natural—not robotic or scripted. Most callers can&apos;t tell the difference, and more importantly, they don&apos;t care. They want their questions answered and an appointment booked. That happens instantly, every time.
+              Modern conversational AI sounds natural, not robotic or scripted. Most callers can&apos;t tell the difference, and more importantly, they don&apos;t care. They want their questions answered and an appointment booked. That happens instantly, every time.
             </p>
           </div>
 
@@ -36,7 +36,7 @@ export function Objections() {
               &ldquo;We already have intake staff.&rdquo;
             </h3>
             <p className="text-[15px] leading-relaxed text-gray-500">
-              This isn&apos;t about replacing your team—it&apos;s about extending their reach. Your staff can&apos;t answer 10 calls simultaneously at 2am. The system handles overflow, after-hours, and peak times while your team focuses on high-touch cases.
+              This isn&apos;t about replacing your team. It&apos;s about extending their reach. Your staff can&apos;t answer 10 calls simultaneously at 2am. The system handles overflow, after-hours, and peak times while your team focuses on high-touch cases.
             </p>
           </div>
 

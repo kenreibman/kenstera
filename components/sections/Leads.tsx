@@ -31,7 +31,7 @@ function ResponseTimeCard() {
         Be the first to speak to every new lead
       </h3>
       <p className="text-gray-600 text-sm leading-relaxed">
-        The firm that replies first usually wins the case. Kenstera helps you respond in seconds—so you never miss your shot at a client.
+        The firm that replies first usually wins the case. Kenstera helps you respond in seconds, so you never miss your shot at a client.
       </p>
     </div>
   )
@@ -89,7 +89,7 @@ function ContactCard() {
         Guide prospects to the right next step
       </h3>
       <p className="text-gray-600 text-sm leading-relaxed">
-        Calls. Bookings. Retainers. Every lead gets exactly what they need—automatically, and without wasting your team's time.
+        Calls. Bookings. Retainers. Every lead gets exactly what they need, automatically and without wasting your team's time.
       </p>
     </div>
   )
@@ -163,7 +163,7 @@ export function Leads() {
             from <em className="italic">more places</em>
           </h2>
           <p className="text-gray-600 max-w-2xl mx-auto">
-            Reach high-intent prospects across chat, text, LSA, WhatsApp, Meta, and phone—from one intake platform built to convert for law firms.
+            Reach high-intent prospects across chat, text, LSA, WhatsApp, Meta, and phone. One intake platform built to convert for law firms.
           </p>
         </div>
 

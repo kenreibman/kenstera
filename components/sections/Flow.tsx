@@ -72,7 +72,7 @@ export function Flow() {
             Every channel. One inbox.
           </h2>
           <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-            Capture leads from every source and automatically qualify them—no matter where the conversation starts.
+            Capture leads from every source and automatically qualify them, no matter where the conversation starts.
           </p>
         </div>
 

@@ -36,6 +36,21 @@ export const metadata: Metadata = {
     siteName: "Kenstera",
     locale: "en_US",
     type: "website",
+    images: [
+      {
+        url: "/og-image.jpg",
+        width: 1456,
+        height: 816,
+        alt: "Kenstera",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Kenstera",
+    description:
+      "Kenstera accelerates your businesses with automated marketing, lead generation, customer support, and more.",
+    images: ["/og-image.jpg"],
   },
 };
 

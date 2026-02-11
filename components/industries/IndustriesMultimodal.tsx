@@ -40,7 +40,7 @@ export function IndustriesMultimodal({
         <div className="border-t-2 border-dotted border-gray-300 mb-4" />
 
         {/* Section label */}
-        <p className="text-sm font-medium text-gray-900 mb-12">Multimodal Agents</p>
+        <p className="text-sm font-medium text-gray-900 mb-12">Robust</p>
 
         {/* Two column layout */}
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-20">

@@ -13,17 +13,17 @@ const servicesDropdown = {
         {
           title: "Intake and Scheduling",
           description: "24/7 lead qualification and booking",
-          href: "/intake-audit"
+          href: "/services/intake-and-scheduling"
         },
         {
           title: "Custom Development",
           description: "Website, Software, Integrations & More.",
-          href: "/services/marketing"
+          href: "/services/custom-development"
         },
         {
           title: "Support Automation",
           description: "Instant responses, happy customers",
-          href: "/services/support"
+          href: "/services/support-automation"
         },
       ]
     },

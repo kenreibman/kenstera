@@ -12,7 +12,7 @@ interface IndustriesVoiceAgentsProps {
 export function IndustriesVoiceAgents({
   label = "Industry-leading",
   heading = "Voice Agents",
-  description = "Kenstera Agents are intelligent, real-time AI agents that talk, type, and take action. Resolve customer issues, automate tasks, and deliver accurate answers — all grounded in your data, tailored to your workflows, and ready to deploy at scale.",
+  description = "Kenstera's platform is intelligent. Real-time agents that talk, type, and take action. Resolve customer issues, automate tasks, and deliver accurate answers — all grounded in your data, tailored to your workflows, and ready to deploy at scale.",
 }: IndustriesVoiceAgentsProps) {
   return (
     <section className="py-20 lg:py-28">
@@ -29,10 +29,10 @@ export function IndustriesVoiceAgents({
             <h2 className="text-4xl sm:text-5xl font-medium tracking-tight text-gray-900 mb-8">
               {heading}
             </h2>
-            <button className="inline-flex items-center gap-2 px-5 py-3 bg-gray-100 text-gray-900 text-sm font-medium rounded-full hover:bg-gray-200 transition-colors">
+            {/* <button className="inline-flex items-center gap-2 px-5 py-3 bg-gray-100 text-gray-900 text-sm font-medium rounded-full hover:bg-gray-200 transition-colors">
               <Play className="w-4 h-4 fill-current" />
               Watch Video
-            </button>
+            </button> */}
           </motion.div>
 
           {/* Right */}

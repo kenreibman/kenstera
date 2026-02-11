@@ -75,7 +75,7 @@ export function IndustriesHero({
             href="/contact-sales"
             className="inline-flex items-center justify-center px-6 py-3 bg-gray-900 text-white text-sm font-medium rounded-full hover:bg-gray-800 transition-colors"
           >
-            Talk to Sales
+            Contact Us
           </Link>
           <Link
             href="/contact-sales"

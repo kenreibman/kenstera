@@ -103,10 +103,10 @@ export function IndustriesFaqBlog({
             </div>
 
             <Link
-              href="/faq"
+              href="/contact-sales"
               className="inline-flex items-center justify-center px-5 py-2.5 mt-8 border border-gray-300 text-sm font-medium text-gray-900 rounded-full hover:bg-gray-50 transition-colors"
             >
-              View FAQs
+              Contact Us
             </Link>
           </div>
 

@@ -46,7 +46,7 @@ export function Testimonials() {
             href="/contact-sales"
             className="inline-flex items-center justify-center px-6 py-3 bg-black text-white text-[13px] font-semibold tracking-wide uppercase rounded-full hover:bg-gray-800 transition-colors"
           >
-            Talk to Sales
+            Contact Us
           </Link>
           <Link
             href="/blog"

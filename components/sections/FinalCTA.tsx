@@ -1,55 +1,104 @@
-import { Check } from 'lucide-react'
-import Link from 'next/link'
+"use client"
 
-// PLACEHOLDER: Replace with your actual booking URL
-const CTA_URL = '/contact-sales'
+import { useState } from "react"
+import { ArrowRight } from "lucide-react"
 
 export function FinalCTA() {
+  const [email, setEmail] = useState("")
+  const [submitted, setSubmitted] = useState(false)
+  const [submitting, setSubmitting] = useState(false)
+  const [error, setError] = useState("")
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault()
+    setSubmitting(true)
+    setError("")
+
+    try {
+      const res = await fetch("/api/newsletter", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email }),
+      })
+
+      const data = await res.json()
+
+      if (!res.ok) {
+        setError(data.error || "Something went wrong")
+        return
+      }
+
+      setEmail("")
+      setSubmitted(true)
+      setTimeout(() => setSubmitted(false), 3000)
+    } catch {
+      setError("Something went wrong. Please try again.")
+    } finally {
+      setSubmitting(false)
+    }
+  }
+
   return (
     <section className="relative py-20">
       <div className="w-full max-w-7xl mx-auto px-5">
-        <div className="bg-gray-50 border border-gray-200 rounded-2xl p-12 text-center">
-          <div className="max-w-[560px] mx-auto">
-            <h2 className="text-[clamp(28px,5vw,40px)] font-bold leading-[1.15] mb-5 text-gray-900">
-              Stop Losing Cases Tonight
+        <div
+          className="relative rounded-3xl overflow-hidden min-h-[480px] flex flex-col justify-between p-10 sm:p-14 md:p-16 lg:p-20"
+          style={{ backgroundColor: "#0a1628" }}
+        >
+          {/* Aurora gradient blob */}
+          <div className="absolute inset-0 opacity-70 pointer-events-none" aria-hidden="true">
+            <div
+              className="absolute inset-0"
+              style={{
+                background: [
+                  "radial-gradient(ellipse 80% 60% at 70% 20%, rgba(217,70,239,0.5) 0%, transparent 70%)",
+                  "radial-gradient(ellipse 60% 80% at 40% 80%, rgba(236,72,153,0.4) 0%, transparent 70%)",
+                  "radial-gradient(ellipse 50% 50% at 80% 60%, rgba(124,58,237,0.35) 0%, transparent 70%)",
+                  "radial-gradient(ellipse 70% 40% at 20% 40%, rgba(167,57,208,0.3) 0%, transparent 70%)",
+                ].join(", "),
+              }}
+            />
+          </div>
+
+          {/* Content */}
+          <div className="relative z-10 flex flex-col justify-between flex-1">
+            {/* Top: Headline */}
+            <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white leading-[1.1] max-w-2xl">
+              Built to scale
             </h2>
-            <p className="text-[17px] leading-relaxed text-gray-500 mb-8">
-              Every hour you wait, leads are calling your competitors. Book a 15-minute call to see exactly how this works for PI firms. No pitch deck, no pressure.
-            </p>
 
-            <div className="bg-white border border-gray-200 rounded-[10px] p-6 mb-8 text-left">
-              <p className="text-sm font-semibold text-gray-900 mb-4">On the call, we&apos;ll:</p>
-              <ul className="flex flex-col gap-3">
-                <li className="flex items-center gap-3 text-[15px] text-gray-500">
-                  <Check className="w-4 h-4 text-emerald-600" />
-                  Review your current intake process
-                </li>
-                <li className="flex items-center gap-3 text-[15px] text-gray-500">
-                  <Check className="w-4 h-4 text-emerald-600" />
-                  Show you a live demo with PI-specific scenarios
-                </li>
-                <li className="flex items-center gap-3 text-[15px] text-gray-500">
-                  <Check className="w-4 h-4 text-emerald-600" />
-                  Give you an honest assessment of fit
-                </li>
-              </ul>
-            </div>
+            {/* Bottom: Subtitle + Form */}
+            <div className="mt-auto pt-16">
+              <p className="text-white/70 text-lg mb-6 max-w-md">
+                Subscribe to our newsletter for our product updates.
+              </p>
 
-            <div className="flex justify-center mb-4">
-              <Link
-                href={CTA_URL}
-                className="inline-flex items-center justify-center px-9 py-4 text-base font-semibold text-white bg-gray-900 rounded-lg no-underline transition-all hover:bg-sky-700"
+              <form
+                onSubmit={handleSubmit}
+                className="flex flex-col sm:flex-row gap-3 max-w-lg"
               >
-                Schedule a Call
-                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" className="ml-1">
-                  <path d="M6 10H14M14 10L10 6M14 10L10 14" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                </svg>
-              </Link>
+                <input
+                  type="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  placeholder="Your email"
+                  required
+                  aria-label="Email address"
+                  className="flex-1 px-5 py-3 rounded-full bg-white text-gray-900 placeholder:text-gray-400 text-sm focus:outline-none focus:ring-2 focus:ring-white/30"
+                />
+                <button
+                  type="submit"
+                  disabled={submitting}
+                  className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full bg-white text-gray-900 font-medium text-sm hover:bg-white/90 transition-colors disabled:opacity-50"
+                >
+                  {submitted ? "Subscribed!" : submitting ? "Subscribing..." : "Submit"}
+                  {!submitted && !submitting && <ArrowRight className="h-4 w-4" />}
+                </button>
+              </form>
+              {error && (
+                <p className="text-red-300 text-sm mt-2">{error}</p>
+              )}
             </div>
-
-            <p className="text-sm text-gray-500">
-              15 minutes. No commitment. No pitch deck.
-            </p>
           </div>
         </div>
       </div>

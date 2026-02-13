@@ -3,7 +3,7 @@ import type { Lead } from '@/lib/db/leads'
 
 let resend: Resend | null = null
 
-function getResend(): Resend {
+export function getResend(): Resend {
   if (!resend) {
     const apiKey = process.env.RESEND_API_KEY
     if (!apiKey) {

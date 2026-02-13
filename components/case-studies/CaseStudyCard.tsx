@@ -21,17 +21,7 @@ export function CaseStudyCard({ study }: CaseStudyCardProps) {
               className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
             />
           ) : (
-            <div className="h-full w-full bg-gradient-to-br from-neutral-100 to-neutral-200 flex items-center justify-center">
-              {study.clientPhoto && (
-                <Image
-                  src={study.clientPhoto}
-                  alt={study.clientName}
-                  width={120}
-                  height={120}
-                  className="rounded-full object-cover object-top w-24 h-24"
-                />
-              )}
-            </div>
+            <div className="h-full w-full bg-gradient-to-br from-neutral-100 to-neutral-200" />
           )}
         </div>
 

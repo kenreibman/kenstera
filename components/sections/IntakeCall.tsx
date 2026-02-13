@@ -136,12 +136,12 @@ export function IntakeCall() {
                 {/* Input bar */}
                 <div className="flex items-center gap-2 mt-6 bg-gray-100 rounded-full px-4 py-3">
                   <span className="text-gray-400 text-[14px] flex-1">Or send a message...</span>
-                  <button className="w-9 h-9 rounded-full bg-gray-300/80 flex items-center justify-center text-gray-600">
+                  <div className="w-9 h-9 rounded-full bg-gray-300/80 flex items-center justify-center text-gray-600" aria-hidden="true">
                     <Mic className="w-4 h-4" />
-                  </button>
-                  <button className="w-9 h-9 rounded-full bg-gray-300/80 flex items-center justify-center text-gray-600">
+                  </div>
+                  <div className="w-9 h-9 rounded-full bg-gray-300/80 flex items-center justify-center text-gray-600" aria-hidden="true">
                     <Phone className="w-4 h-4" />
-                  </button>
+                  </div>
                 </div>
               </div>
             </div>

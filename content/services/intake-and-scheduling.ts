@@ -6,19 +6,19 @@ export const intakeAndSchedulingContent: IndustryContent = {
   hero: {
     headline: "Never Miss Another Lead.\nEver.",
     description:
-      "Kenstera answers every call, qualifies every lead, and books appointments 24/7—phone, web, and chat. Your calendar fills while you sleep.",
+      "Kenstera answers every call, qualifies every lead, and books appointments 24/7 by phone, web, and chat. Your calendar fills while you sleep.",
   },
   useCases: [
     {
       title: "After-Hours Coverage",
       description:
-        "Nights, weekends, holidays—every inquiry gets answered in seconds. No voicemail, no delayed callbacks. Leads that call at 2 AM get the same experience as 2 PM.",
+        "Nights, weekends, and holidays. Every inquiry gets answered in seconds. No voicemail, no delayed callbacks. Leads that call at 2 AM get the same experience as 2 PM.",
       gradient: "from-sky-100 via-blue-50 to-white",
     },
     {
       title: "Instant Booking",
       description:
-        "Qualified leads book directly onto your calendar without back-and-forth. Real-time availability, confirmation texts, and calendar invites—all handled automatically.",
+        "Qualified leads book directly onto your calendar without back-and-forth. Real-time availability, confirmation texts, and calendar invites, all handled automatically.",
       gradient: "from-gray-100 via-gray-50 to-white",
     },
     {
@@ -32,7 +32,7 @@ export const intakeAndSchedulingContent: IndustryContent = {
     label: "24/7 Lead Response",
     heading: "Close the Speed-to-Lead Gap",
     description:
-      "78% of customers buy from the first business that responds. Kenstera makes sure that's you—every time. Instant answer, instant qualification, instant booking. No staffing headaches, no missed opportunities.",
+      "78% of customers buy from the first business that responds. Kenstera makes sure that's you, every single time. Instant answer, instant qualification, instant booking. No staffing headaches, no missed opportunities.",
   },
   multimodal: {
     heading:
@@ -51,7 +51,7 @@ export const intakeAndSchedulingContent: IndustryContent = {
       {
         title: "Multi-channel capture",
         description:
-          "Phone calls, web forms, live chat, and SMS—wherever a lead reaches out, they get an instant response and a path to your calendar.",
+          "Phone calls, web forms, live chat, and SMS. Wherever a lead reaches out, they get an instant response and a path to your calendar.",
       },
     ],
   },
@@ -77,7 +77,7 @@ export const intakeAndSchedulingContent: IndustryContent = {
     ],
   },
   customizable: {
-    heading: "Your intake process, your rules—enforced automatically",
+    heading: "Your intake process, your rules, enforced automatically",
     features: [
       {
         title: "Custom qualification criteria",
@@ -116,7 +116,7 @@ export const intakeAndSchedulingContent: IndustryContent = {
   gettingStarted: {
     heading: "Live in under a week",
     description:
-      "We configure your qualification rules, connect your calendar and CRM, set up follow-up sequences, and test everything—so you start catching leads this week, not next month.",
+      "We configure your qualification rules, connect your calendar and CRM, set up follow-up sequences, and test everything so you start catching leads this week, not next month.",
   },
   faqs: [
     {
@@ -137,7 +137,7 @@ export const intakeAndSchedulingContent: IndustryContent = {
     {
       question: "Does it work with my existing phone number?",
       answer:
-        "Yes. We can forward your existing number to Kenstera for after-hours coverage, or handle all calls 24/7—your choice.",
+        "Yes. We can forward your existing number to Kenstera for after-hours coverage, or handle all calls 24/7. Your choice.",
     },
     {
       question: "How do I know it's working?",

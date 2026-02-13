@@ -6,25 +6,25 @@ export const supportAutomationContent: IndustryContent = {
   hero: {
     headline: "Your Customers Get Answers.\nNot Hold Music.",
     description:
-      "AI support agents that resolve tier-1 issues instantly, route complex problems to the right team, and keep response times under a minute—across every channel.",
+      "AI support agents that resolve tier-1 issues instantly, route complex problems to the right team, and keep response times under a minute, across every channel.",
   },
   useCases: [
     {
       title: "Tier-1 Resolution",
       description:
-        "Common questions answered instantly. Password resets, order status, billing questions, and how-to guides—handled without a human in the loop.",
+        "Common questions answered instantly. Password resets, order status, billing questions, and how-to guides, all handled without a human in the loop.",
       gradient: "from-sky-100 via-blue-50 to-white",
     },
     {
       title: "Smart Routing",
       description:
-        "Issues that need a human get categorized, prioritized, and routed to the right team—with full context attached. No repetition for the customer.",
+        "Issues that need a human get categorized, prioritized, and routed to the right team with full context attached. No repetition for the customer.",
       gradient: "from-gray-100 via-gray-50 to-white",
     },
     {
       title: "Multi-Channel Support",
       description:
-        "Phone, email, chat, and SMS—all handled by the same AI agents with consistent quality. Customers get help wherever they reach out.",
+        "Phone, email, chat, and SMS. All handled by the same AI agents with consistent quality. Customers get help wherever they reach out.",
       gradient: "from-purple-200 via-pink-100 to-blue-100",
     },
   ],
@@ -32,7 +32,7 @@ export const supportAutomationContent: IndustryContent = {
     label: "Faster Resolution",
     heading: "Scale Support Without Scaling Headcount",
     description:
-      "Most support teams are buried in repetitive tickets. Kenstera handles the volume—resolving common issues instantly and escalating the rest with full context. Your team focuses on problems that actually need them.",
+      "Most support teams are buried in repetitive tickets. Kenstera handles the volume, resolving common issues instantly and escalating the rest with full context. Your team focuses on problems that actually need them.",
   },
   multimodal: {
     heading:
@@ -41,12 +41,12 @@ export const supportAutomationContent: IndustryContent = {
       {
         title: "Instant resolution",
         description:
-          "AI agents trained on your knowledge base answer common questions in seconds. Accurate, consistent, and available 24/7—no ticket queue required.",
+          "AI agents trained on your knowledge base answer common questions in seconds. Accurate, consistent, and available 24/7 with no ticket queue required.",
       },
       {
         title: "Contextual escalation",
         description:
-          "When an issue needs a human, the agent collects details, categorizes the problem, and routes it to the right team—with full conversation history attached.",
+          "When an issue needs a human, the agent collects details, categorizes the problem, and routes it to the right team with full conversation history attached.",
       },
       {
         title: "Proactive outreach",
@@ -82,7 +82,7 @@ export const supportAutomationContent: IndustryContent = {
       {
         title: "Brand-consistent responses",
         description:
-          "AI agents match your tone, terminology, and communication style. Responses feel like your team wrote them—because you defined the voice.",
+          "AI agents match your tone, terminology, and communication style. Responses feel like your team wrote them, because you defined the voice.",
       },
       {
         title: "Custom escalation paths",
@@ -116,7 +116,7 @@ export const supportAutomationContent: IndustryContent = {
   gettingStarted: {
     heading: "Resolving tickets within a week of setup",
     description:
-      "We connect your knowledge base, configure triage rules, set up escalation paths, and test across channels—so your AI support agents start handling volume immediately.",
+      "We connect your knowledge base, configure triage rules, set up escalation paths, and test across channels, so your AI support agents start handling volume immediately.",
   },
   faqs: [
     {
@@ -132,7 +132,7 @@ export const supportAutomationContent: IndustryContent = {
     {
       question: "What happens when the AI can't resolve an issue?",
       answer:
-        "It collects all relevant details, categorizes the issue, and routes it to the right team member—with full context. The customer never has to repeat themselves.",
+        "It collects all relevant details, categorizes the issue, and routes it to the right team member with full context. The customer never has to repeat themselves.",
     },
     {
       question: "Can it handle multiple languages?",
@@ -146,6 +146,6 @@ export const supportAutomationContent: IndustryContent = {
     },
   ],
   cta: {
-    heading: "Ready to resolve tickets faster—without hiring?",
+    heading: "Ready to resolve tickets faster without hiring?",
   },
 };

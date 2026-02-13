@@ -40,7 +40,7 @@ export function FinalCTA() {
 
   return (
     <section className="relative py-20">
-      <div className="w-full max-w-7xl mx-auto px-5">
+      <div className="w-full max-w-7xl mx-auto">
         <div
           className="relative rounded-3xl overflow-hidden min-h-[480px] flex flex-col justify-between p-10 sm:p-14 md:p-16 lg:p-20"
           style={{ backgroundColor: "#0a1628" }}
@@ -64,7 +64,7 @@ export function FinalCTA() {
           <div className="relative z-10 flex flex-col justify-between flex-1">
             {/* Top: Headline */}
             <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white leading-[1.1] max-w-2xl">
-              Built to scale
+              Built to scale with your firm.
             </h2>
 
             {/* Bottom: Subtitle + Form */}
@@ -75,7 +75,7 @@ export function FinalCTA() {
 
               <form
                 onSubmit={handleSubmit}
-                className="flex flex-col sm:flex-row gap-3 max-w-lg"
+                className="flex gap-3 max-w-lg"
               >
                 <input
                   type="email"
@@ -89,10 +89,18 @@ export function FinalCTA() {
                 <button
                   type="submit"
                   disabled={submitting}
-                  className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full bg-white text-gray-900 font-medium text-sm hover:bg-white/90 transition-colors disabled:opacity-50"
+                  className="inline-flex items-center justify-center px-5 py-2.5 sm:gap-2 sm:px-6 sm:py-3 rounded-full bg-white text-gray-900 font-medium text-sm hover:bg-white/90 transition-colors disabled:opacity-50"
                 >
-                  {submitted ? "Subscribed!" : submitting ? "Subscribing..." : "Submit"}
-                  {!submitted && !submitting && <ArrowRight className="h-4 w-4" />}
+                  {submitted ? (
+                    <span className="sm:hidden">✓</span>
+                  ) : submitting ? (
+                    <span className="sm:hidden">...</span>
+                  ) : (
+                    <ArrowRight className="h-4 w-4 sm:order-last" />
+                  )}
+                  <span className="hidden sm:inline">
+                    {submitted ? "Subscribed!" : submitting ? "Subscribing..." : "Submit"}
+                  </span>
                 </button>
               </form>
               {error && (

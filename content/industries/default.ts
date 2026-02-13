@@ -6,7 +6,7 @@ export const defaultContent: IndustryContent = {
   hero: {
     headline: "Stop Losing Customers\nto Slow Response",
     description:
-      "Kenstera installs 24/7 coverage that answers instantly, qualifies leads, books appointments, and follows up—so more inquiries turn into customers.",
+      "Kenstera installs 24/7 coverage that answers instantly, qualifies leads, books appointments, and follows up, so more inquiries turn into customers.",
   },
   useCases: [
     {
@@ -51,7 +51,7 @@ export const defaultContent: IndustryContent = {
       {
         title: "Multi-channel capture",
         description:
-          "Phone, web form, chat—wherever leads come from, Kenstera responds in seconds.",
+          "Phone, web form, and chat. Wherever leads come from, Kenstera responds in seconds.",
       },
     ],
   },
@@ -116,13 +116,13 @@ export const defaultContent: IndustryContent = {
   gettingStarted: {
     heading: "Go live in days, not weeks",
     description:
-      "We configure your qualification rules, integrate with your systems, and set up follow-up sequences—so you start converting more leads this week.",
+      "We configure your qualification rules, integrate with your systems, and set up follow-up sequences, so you start converting more leads this week.",
   },
   faqs: [
     {
       question: "How fast does Kenstera respond?",
       answer:
-        "Instantly—under 3 seconds. Phone calls answered on first ring. Web forms trigger immediate callback.",
+        "Instantly, under 3 seconds. Phone calls answered on first ring. Web forms trigger immediate callback.",
     },
     {
       question: "What happens with high-priority leads?",

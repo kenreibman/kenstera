@@ -6,7 +6,7 @@ export const lawContent: IndustryContent = {
   hero: {
     headline: "Stop Losing Cases\nAfter the Lead Comes In",
     description:
-      "Kenstera installs 24/7 intake coverage that answers fast, qualifies leads, books consults, and follows up relentlessly—so more of your paid leads turn into signed cases.",
+      "Kenstera installs 24/7 intake coverage that answers fast, qualifies leads, books consults, and follows up relentlessly, so more of your paid leads turn into signed cases.",
   },
   useCases: [
     {
@@ -35,7 +35,7 @@ export const lawContent: IndustryContent = {
       "78% of claimants hire the first firm to respond. Kenstera fixes the four places firms lose cases: after-hours coverage, speed-to-lead, qualification/booking, and follow-up. The result: higher intake conversion without adding staff.",
   },
   multimodal: {
-    heading: "From first ring to signed retainer—nothing slips through",
+    heading: "From first ring to signed retainer, nothing slips through",
     features: [
       {
         title: "PI-specific qualification",
@@ -50,7 +50,7 @@ export const lawContent: IndustryContent = {
       {
         title: "Multi-channel capture, instant response",
         description:
-          "Phone, web form, Google LSA, chat—wherever leads come from, Kenstera responds in seconds and starts qualification immediately.",
+          "Phone, web form, Google LSA, and chat. Wherever leads come from, Kenstera responds in seconds and starts qualification immediately.",
       },
     ],
   },
@@ -114,13 +114,13 @@ export const lawContent: IndustryContent = {
   gettingStarted: {
     heading: "Go live in days, not weeks",
     description:
-      "We configure your qualification criteria, integrate with your case management system, and set up follow-up sequences—so you start signing more cases this week.",
+      "We configure your qualification criteria, integrate with your case management system, and set up follow-up sequences, so you start signing more cases this week.",
   },
   faqs: [
     {
       question: "How fast does Kenstera respond to leads?",
       answer:
-        "Instantly—under 3 seconds. Phone calls answered on first ring. Web forms trigger immediate callback. Text follow-up goes out within 10 seconds of a missed call.",
+        "Instantly, under 3 seconds. Phone calls answered on first ring. Web forms trigger immediate callback. Text follow-up goes out within 10 seconds of a missed call.",
     },
     {
       question: "What happens with high-value cases like trucking or catastrophic injury?",
@@ -130,7 +130,7 @@ export const lawContent: IndustryContent = {
     {
       question: "What happens to leads that don't qualify?",
       answer:
-        "Non-qualifying leads are declined politely. Optionally, we route them to referral partners you specify—so you can still monetize cases outside your criteria.",
+        "Non-qualifying leads are declined politely. Optionally, we route them to referral partners you specify, so you can still monetize cases outside your criteria.",
     },
     {
       question: "Is this software or a service?",

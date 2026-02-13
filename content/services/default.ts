@@ -12,13 +12,13 @@ export const defaultContent: IndustryContent = {
     {
       title: "Intake & Scheduling",
       description:
-        "24/7 lead qualification, appointment booking, and follow-up sequences. Every inquiry gets answered in seconds—phone, web, or chat.",
+        "24/7 lead qualification, appointment booking, and follow-up sequences. Every inquiry gets answered in seconds, whether by phone, web, or chat.",
       gradient: "from-sky-100 via-blue-50 to-white",
     },
     {
       title: "Custom Development",
       description:
-        "Websites, internal tools, integrations, and workflow automation. We build the software your business actually needs—no bloated platforms.",
+        "Websites, internal tools, integrations, and workflow automation. We build the software your business actually needs, without bloated platforms.",
       gradient: "from-gray-100 via-gray-50 to-white",
     },
     {
@@ -36,7 +36,7 @@ export const defaultContent: IndustryContent = {
   },
   multimodal: {
     heading:
-      "Kenstera systems work across every channel your customers use—phone, chat, email, and web",
+      "Kenstera systems work across every channel your customers use, including phone, chat, email, and web",
     features: [
       {
         title: "Intake & qualification",
@@ -46,7 +46,7 @@ export const defaultContent: IndustryContent = {
       {
         title: "Custom workflows",
         description:
-          "From internal dashboards to client portals to API integrations—we build the tools your operations actually need, without the overhead of enterprise platforms.",
+          "From internal dashboards to client portals to API integrations, we build the tools your operations actually need, without the overhead of enterprise platforms.",
       },
       {
         title: "Support triage & resolution",
@@ -67,7 +67,7 @@ export const defaultContent: IndustryContent = {
       {
         title: "Custom application development",
         description:
-          "Websites, portals, scheduling systems, and integrations—designed for your specific workflow and delivered fast.",
+          "Websites, portals, scheduling systems, and integrations, all designed for your specific workflow and delivered fast.",
       },
       {
         title: "Automated support routing",
@@ -82,7 +82,7 @@ export const defaultContent: IndustryContent = {
       {
         title: "Your rules enforced",
         description:
-          "Define qualification criteria, routing rules, and escalation paths. Every interaction follows your process—not a generic template.",
+          "Define qualification criteria, routing rules, and escalation paths. Every interaction follows your process, not a generic template.",
       },
       {
         title: "Compliant by design",
@@ -92,7 +92,7 @@ export const defaultContent: IndustryContent = {
       {
         title: "Deep integration",
         description:
-          "Two-way sync with your CRM, calendar, helpdesk, and internal tools. Data flows where it needs to—automatically.",
+          "Two-way sync with your CRM, calendar, helpdesk, and internal tools. Data flows where it needs to, automatically.",
       },
     ],
   },

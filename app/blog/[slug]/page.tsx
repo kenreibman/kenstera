@@ -2,6 +2,7 @@ import { Suspense } from "react";
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { MDXRemote } from "next-mdx-remote/rsc";
+import remarkGfm from "remark-gfm";
 import { getPostBySlug, getAllSlugs, formatDate } from "@/lib/blog";
 import {
   TableOfContents,
@@ -136,7 +137,7 @@ export default async function BlogPostPage({ params }: PageProps) {
             {/* Article */}
             <article className="max-w-3xl prose-lg">
               <Suspense fallback={<div className="animate-pulse space-y-4"><div className="h-4 bg-muted rounded w-3/4" /><div className="h-4 bg-muted rounded w-full" /><div className="h-4 bg-muted rounded w-5/6" /></div>}>
-                <MDXRemote source={post.content} components={mdxComponents} />
+                <MDXRemote source={post.content} components={mdxComponents} options={{ mdxOptions: { remarkPlugins: [remarkGfm] } }} />
               </Suspense>
 
               {/* Last Updated */}

@@ -6,7 +6,7 @@ export const healthcareContent: IndustryContent = {
   hero: {
     headline: "AI Voice Agents\nfor Healthcare",
     description:
-      "Transform patient experiences with intelligent voice agents that handle scheduling, answer questions, and provide 24/7 support — all while maintaining HIPAA compliance.",
+      "Transform patient experiences with intelligent voice agents that handle scheduling, answer questions, and provide 24/7 support, all while maintaining HIPAA compliance.",
   },
   useCases: [
     {
@@ -36,7 +36,7 @@ export const healthcareContent: IndustryContent = {
   },
   multimodal: {
     heading:
-      "Agents that understand healthcare — from scheduling to symptom triage",
+      "Agents that understand healthcare, from scheduling to symptom triage",
     features: [
       {
         title: "Medical-aware conversations",
@@ -51,7 +51,7 @@ export const healthcareContent: IndustryContent = {
       {
         title: "Multi-channel patient engagement",
         description:
-          "Reach patients on their preferred channel — phone, text, patient portal, or mobile app. Consistent care coordination across every touchpoint.",
+          "Reach patients on their preferred channel: phone, text, patient portal, or mobile app. Consistent care coordination across every touchpoint.",
       },
     ],
   },
@@ -117,7 +117,7 @@ export const healthcareContent: IndustryContent = {
   gettingStarted: {
     heading: "Go live in weeks, not months",
     description:
-      "Our healthcare implementation team helps you configure agents, integrate with your systems, and train your staff — with full HIPAA compliance from day one.",
+      "Our healthcare implementation team helps you configure agents, integrate with your systems, and train your staff, with full HIPAA compliance from day one.",
   },
   faqs: [
     {
@@ -138,7 +138,7 @@ export const healthcareContent: IndustryContent = {
     {
       question: "Can patients schedule appointments through the voice agent?",
       answer:
-        "Yes, agents can check provider availability, book appointments, send confirmations, and add reminders — all integrated with your scheduling system.",
+        "Yes, agents can check provider availability, book appointments, send confirmations, and add reminders, all integrated with your scheduling system.",
     },
     {
       question: "What languages do healthcare agents support?",

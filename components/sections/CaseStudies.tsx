@@ -1,7 +1,8 @@
 'use client'
 
 import Image from 'next/image'
-import { motion } from 'framer-motion'
+import Link from 'next/link'
+
 
 const caseStudies = [
   {
@@ -16,6 +17,7 @@ const caseStudies = [
       "Kenstera cut our missed-call rate by 83% in the first month. Every after-hours lead now gets a live conversation instead of a voicemail box. Our signed-case volume is up and our front desk finally has breathing room.",
     name: 'David W.',
     title: 'Managing Partner',
+    slug: 'david-w-personal-injury',
     topValue: '80px',
   },
   {
@@ -27,9 +29,10 @@ const caseStudies = [
     btnBorder: 'border-gray-300 hover:border-gray-500',
     image: '/images/case-studies-card-2.webp',
     quote:
-      "We were losing leads on nights and weekends — the busiest time for accident calls. Since switching to Kenstera the AI qualifies and books them while we sleep. Our cost-per-signed-case dropped by 40%.",
+      "We were losing leads on nights and weekends, the busiest time for accident calls. Since switching to Kenstera, we receive qualified bookings while we sleep. Our cost-per-signed-case dropped by 40%.",
     name: 'Maria T.',
     title: 'Director of Operations',
+    slug: 'maria-t-operations',
     topValue: '80px',
   },
   {
@@ -41,16 +44,17 @@ const caseStudies = [
     btnBorder: 'border-gray-300 hover:border-gray-500',
     image: '/images/case-studies-card-3.webp',
     quote:
-      "The intake AI handles bilingual calls seamlessly and routes high-value cases to the right attorney immediately. We stopped paying for a call center and got better results. That never happens.",
+      "The intake system handles bilingual calls seamlessly and routes high-value cases to the right attorney immediately. We stopped paying for a call center and got better results. That never happens.",
     name: 'Lily N.',
     title: 'Founding Attorney',
+    slug: 'lily-n-bilingual-intake',
     topValue: '80px',
   },
 ]
 
 export function CaseStudies() {
   return (
-    <section className="relative py-20 md:py-28">
+    <section className="relative py-10 md:py-28">
       {/* Dotted line separator */}
       <div className="absolute top-0 left-0 right-0 h-px bg-[repeating-linear-gradient(90deg,transparent,transparent_4px,#e5e7eb_4px,#e5e7eb_8px)]" />
 
@@ -70,11 +74,7 @@ export function CaseStudies() {
               style={{ top: study.topValue, zIndex: 10 + i }}
             >
               {/* Animated card — transform lives here, inside the sticky wrapper */}
-              <motion.div
-                initial={{ opacity: 0, y: 40 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, amount: 0.15 }}
-                transition={{ duration: 0.5 }}
+              <div
                 className={`${study.bg} rounded-2xl overflow-hidden lg:mb-6`}
               >
                 <div className="grid grid-cols-1 lg:grid-cols-5 lg:h-[440px]">
@@ -97,15 +97,25 @@ export function CaseStudies() {
                     <div className="mt-8 flex flex-col gap-6">
                       {/* Read Case Study button */}
                       <div>
-                        <button
+                        <Link
+                          href={`/case-studies/${study.slug}`}
                           className={`inline-flex items-center px-5 py-2.5 rounded-full border ${study.btnBorder} ${study.btnText} text-sm font-medium transition-colors`}
                         >
                           Read Case Study
-                        </button>
+                        </Link>
                       </div>
 
                       {/* Attribution row */}
-                      <div className="flex items-center gap-4">
+                      <div className="flex items-center gap-3">
+                        <div className="relative w-10 h-10 rounded-full overflow-hidden flex-shrink-0 lg:hidden">
+                          <Image
+                            src={study.image}
+                            alt={`Portrait of ${study.name}`}
+                            fill
+                            className="object-cover object-top"
+                            sizes="40px"
+                          />
+                        </div>
                         <div className="flex flex-col">
                           <span
                             className={`text-sm font-semibold ${study.textColor}`}
@@ -120,7 +130,7 @@ export function CaseStudies() {
                     </div>
                   </div>
 
-                  {/* Right: person photo — hidden on mobile */}
+                  {/* Right: person photo — desktop only */}
                   <div className="hidden lg:block lg:col-span-2 relative lg:min-h-0 p-4 md:p-6">
                     <div className="relative w-full h-full overflow-hidden rounded-xl">
                       <Image
@@ -133,7 +143,7 @@ export function CaseStudies() {
                     </div>
                   </div>
                 </div>
-              </motion.div>
+              </div>
             </div>
           ))}
         </div>

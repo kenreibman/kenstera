@@ -6,7 +6,7 @@ export const realEstateContent: IndustryContent = {
   hero: {
     headline: "AI Voice Agents\nfor Real Estate",
     description:
-      "Every lead answered. Every showing booked. Kenstera captures inquiries from Zillow, Realtor.com, and your website—qualifying leads and booking showings even when you're at a closing.",
+      "Every lead answered. Every showing booked. Kenstera captures inquiries from Zillow, Realtor.com, and your website, qualifying leads and booking showings even when you're at a closing.",
   },
   useCases: [
     {
@@ -32,11 +32,11 @@ export const realEstateContent: IndustryContent = {
     label: "Instant Response",
     heading: "Real Estate Voice Agents",
     description:
-      "78% of buyers choose the first agent to reply. Kenstera responds to leads instantly—from Zillow, Realtor.com, your website, and more—so you never lose a deal to a faster competitor.",
+      "78% of buyers choose the first agent to reply. Kenstera responds to leads instantly from Zillow, Realtor.com, your website, and more, so you never lose a deal to a faster competitor.",
   },
   multimodal: {
     heading:
-      "From inquiry to showing — handled automatically",
+      "From inquiry to showing, handled automatically",
     features: [
       {
         title: "Qualify buyers and sellers instantly",
@@ -51,7 +51,7 @@ export const realEstateContent: IndustryContent = {
       {
         title: "Multi-source lead capture",
         description:
-          "Zillow, Realtor.com, Redfin, your website, Facebook ads—Kenstera captures leads from every source and responds in seconds.",
+          "Zillow, Realtor.com, Redfin, your website, and Facebook ads. Kenstera captures leads from every source and responds in seconds.",
       },
     ],
   },
@@ -117,7 +117,7 @@ export const realEstateContent: IndustryContent = {
   gettingStarted: {
     heading: "Go live this week",
     description:
-      "Our real estate team helps you connect lead sources, integrate your CRM, and configure qualification criteria—so you can start converting more leads immediately.",
+      "Our real estate team helps you connect lead sources, integrate your CRM, and configure qualification criteria, so you can start converting more leads immediately.",
   },
   faqs: [
     {
@@ -128,12 +128,12 @@ export const realEstateContent: IndustryContent = {
     {
       question: "How quickly does Kenstera respond to leads?",
       answer:
-        "Instantly—within seconds. Whether it's a Zillow inquiry at 2am or a website form during a showing, leads get an immediate response.",
+        "Instantly, within seconds. Whether it's a Zillow inquiry at 2am or a website form during a showing, leads get an immediate response.",
     },
     {
       question: "Can I customize qualification questions?",
       answer:
-        "Yes. Control exactly what's collected—budget, timeline, pre-approval, preferred neighborhoods, property type, and more.",
+        "Yes. You control exactly what's collected: budget, timeline, pre-approval, preferred neighborhoods, property type, and more.",
     },
     {
       question: "Does this work for teams?",

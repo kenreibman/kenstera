@@ -6,19 +6,19 @@ export const customDevelopmentContent: IndustryContent = {
   hero: {
     headline: "Software Built for\nHow You Actually Work",
     description:
-      "Websites, internal tools, integrations, and workflow automation—designed around your operations, not the other way around. Built fast, managed end-to-end.",
+      "Websites, internal tools, integrations, and workflow automation, all designed around your operations, not the other way around. Built fast, managed end-to-end.",
   },
   useCases: [
     {
       title: "Websites & Portals",
       description:
-        "Marketing sites, client portals, booking pages, and dashboards. Fast, modern, and built to convert—not pulled from a template library.",
+        "Marketing sites, client portals, booking pages, and dashboards. Fast, modern, and built to convert, not pulled from a template library.",
       gradient: "from-gray-100 via-gray-50 to-white",
     },
     {
       title: "Integrations & APIs",
       description:
-        "Connect the tools your team already uses. CRM to billing, intake to calendar, helpdesk to Slack—data flows where it needs to, automatically.",
+        "Connect the tools your team already uses. CRM to billing, intake to calendar, helpdesk to Slack. Data flows where it needs to, automatically.",
       gradient: "from-sky-100 via-blue-50 to-white",
     },
     {
@@ -32,21 +32,21 @@ export const customDevelopmentContent: IndustryContent = {
     label: "End-to-End Delivery",
     heading: "Built, Shipped, and Managed",
     description:
-      "You don't get a handoff and a Jira board. Kenstera scopes, builds, deploys, and maintains your software. We handle hosting, updates, and improvements—so your team stays focused on the business, not the tech stack.",
+      "You don't get a handoff and a Jira board. Kenstera scopes, builds, deploys, and maintains your software. We handle hosting, updates, and improvements so your team stays focused on the business, not the tech stack.",
   },
   multimodal: {
     heading:
-      "From concept to production—Kenstera builds the tools your operations actually need",
+      "From concept to production, Kenstera builds the tools your operations actually need",
     features: [
       {
         title: "Marketing & conversion",
         description:
-          "High-performance websites and landing pages designed for your audience. SEO, speed, and conversion built in from day one—not bolted on after.",
+          "High-performance websites and landing pages designed for your audience. SEO, speed, and conversion built in from day one, not bolted on after.",
       },
       {
         title: "Workflow automation",
         description:
-          "Replace manual processes with systems that run themselves. Data entry, approvals, notifications, and handoffs—automated and reliable.",
+          "Replace manual processes with systems that run themselves. Data entry, approvals, notifications, and handoffs, all automated and reliable.",
       },
       {
         title: "System integration",
@@ -67,7 +67,7 @@ export const customDevelopmentContent: IndustryContent = {
       {
         title: "Production-grade delivery",
         description:
-          "Clean code, proper infrastructure, CI/CD pipelines, and monitoring. Your software runs reliably from day one—not a fragile MVP that breaks under load.",
+          "Clean code, proper infrastructure, CI/CD pipelines, and monitoring. Your software runs reliably from day one, not a fragile MVP that breaks under load.",
       },
       {
         title: "Ongoing improvement",
@@ -82,7 +82,7 @@ export const customDevelopmentContent: IndustryContent = {
       {
         title: "Your brand, everywhere",
         description:
-          "Custom design that matches your brand guidelines. Fonts, colors, layout, and tone—consistent across every touchpoint your customers see.",
+          "Custom design that matches your brand guidelines. Fonts, colors, layout, and tone, all consistent across every touchpoint your customers see.",
       },
       {
         title: "Security & compliance",
@@ -99,7 +99,7 @@ export const customDevelopmentContent: IndustryContent = {
   integrations: {
     heading: "Connects to the platforms your business runs on",
     description:
-      "CRMs, payment processors, calendars, helpdesks, and internal systems. We build integrations that actually work—not demo-only connections.",
+      "CRMs, payment processors, calendars, helpdesks, and internal systems. We build integrations that actually work, not demo-only connections.",
     additionalText: "And hundreds more via APIs or MCPs.",
     items: [
       "Salesforce",
@@ -114,7 +114,7 @@ export const customDevelopmentContent: IndustryContent = {
     ],
   },
   gettingStarted: {
-    heading: "From scoping call to working software—fast",
+    heading: "From scoping call to working software, fast",
     description:
       "We start with a scoping call to understand your requirements. You get a timeline, a quote, and a working prototype before any major build begins. Most projects launch within weeks.",
   },
@@ -142,7 +142,7 @@ export const customDevelopmentContent: IndustryContent = {
     {
       question: "Can you work with my existing systems?",
       answer:
-        "Yes. We build around what you already use—CRMs, calendars, payment systems, and internal tools. Integration is a core part of every project.",
+        "Yes. We build around what you already use, including CRMs, calendars, payment systems, and internal tools. Integration is a core part of every project.",
     },
   ],
   cta: {

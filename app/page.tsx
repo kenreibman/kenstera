@@ -1,4 +1,4 @@
-import { Hero } from "@/components/sections/Hero";
+import { ShaderHero } from "@/components/sections/ShaderHero";
 import { IntakeCall } from "@/components/sections/IntakeCall";
 import { IntakeBooking } from "@/components/sections/IntakeBooking";
 import { IntakeSetup } from "@/components/sections/IntakeSetup";
@@ -37,7 +37,7 @@ export default function Home() {
 
   return (
     <main className="">
-      <Hero />
+      <ShaderHero />
       <IntakeCall />
       <IntakeBooking />
       <IntakeSetup />

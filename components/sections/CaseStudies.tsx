@@ -6,12 +6,12 @@ import Link from 'next/link'
 
 const caseStudies = [
   {
-    bg: 'bg-gray-50 border border-gray-200',
-    textColor: 'text-gray-900',
-    mutedColor: 'text-gray-500',
-    borderColor: 'border-gray-200',
-    btnText: 'text-gray-900',
-    btnBorder: 'border-gray-300 hover:border-gray-500',
+    bg: 'bg-amber-950 border border-amber-800',
+    textColor: 'text-amber-50',
+    mutedColor: 'text-amber-400',
+    borderColor: 'border-amber-800',
+    btnText: 'text-amber-50',
+    btnBorder: 'border-amber-50/30 hover:border-amber-50/60',
     image: '/images/case-studies-card-1.webp',
     quote:
       "Kenstera cut our missed-call rate by 83% in the first month. Every after-hours lead now gets a live conversation instead of a voicemail box. Our signed-case volume is up and our front desk finally has breathing room.",
@@ -21,12 +21,12 @@ const caseStudies = [
     topValue: '80px',
   },
   {
-    bg: 'bg-gray-50 border border-gray-200',
-    textColor: 'text-gray-900',
-    mutedColor: 'text-gray-500',
-    borderColor: 'border-gray-200',
-    btnText: 'text-gray-900',
-    btnBorder: 'border-gray-300 hover:border-gray-500',
+    bg: 'bg-emerald-950 border border-emerald-800',
+    textColor: 'text-emerald-50',
+    mutedColor: 'text-emerald-400',
+    borderColor: 'border-emerald-800',
+    btnText: 'text-emerald-50',
+    btnBorder: 'border-emerald-50/30 hover:border-emerald-50/60',
     image: '/images/case-studies-card-2.webp',
     quote:
       "We were losing leads on nights and weekends, the busiest time for accident calls. Since switching to Kenstera, we receive qualified bookings while we sleep. Our cost-per-signed-case dropped by 40%.",
@@ -36,12 +36,12 @@ const caseStudies = [
     topValue: '80px',
   },
   {
-    bg: 'bg-gray-50 border border-gray-200',
-    textColor: 'text-gray-900',
-    mutedColor: 'text-gray-500',
-    borderColor: 'border-gray-200',
-    btnText: 'text-gray-900',
-    btnBorder: 'border-gray-300 hover:border-gray-500',
+    bg: 'bg-sky-950 border border-sky-800',
+    textColor: 'text-sky-50',
+    mutedColor: 'text-sky-400',
+    borderColor: 'border-sky-800',
+    btnText: 'text-sky-50',
+    btnBorder: 'border-sky-50/30 hover:border-sky-50/60',
     image: '/images/case-studies-card-3.webp',
     quote:
       "The intake system handles bilingual calls seamlessly and routes high-value cases to the right attorney immediately. We stopped paying for a call center and got better results. That never happens.",
@@ -83,7 +83,7 @@ export function CaseStudies() {
                     {/* Decorative quote mark */}
                     <div>
                       <span
-                        className={`block text-7xl md:text-8xl leading-none font-serif ${study.mutedColor} select-none -mb-4`}
+                        className={`block text-7xl md:text-8xl leading-none font-serif ${study.textColor} select-none -mb-4`}
                       >
                         &ldquo;
                       </span>
@@ -122,7 +122,7 @@ export function CaseStudies() {
                           >
                             {study.name}
                           </span>
-                          <span className={`text-sm ${study.mutedColor}`}>
+                          <span className={`text-sm ${study.textColor}`}>
                             {study.title}
                           </span>
                         </div>

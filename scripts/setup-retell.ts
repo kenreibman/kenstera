@@ -26,14 +26,32 @@ import Retell from 'retell-sdk';
 import fs from 'fs';
 import path from 'path';
 
+// ─── Load .env.local so RETELL_API_KEY is available ─────────────────────────
+const envPath = path.join(process.cwd(), '.env.local');
+if (fs.existsSync(envPath)) {
+  const envContent = fs.readFileSync(envPath, 'utf8');
+  for (const line of envContent.split('\n')) {
+    const trimmed = line.trim();
+    if (!trimmed || trimmed.startsWith('#')) continue;
+    const eqIdx = trimmed.indexOf('=');
+    if (eqIdx > 0) {
+      const key = trimmed.slice(0, eqIdx).trim();
+      const value = trimmed.slice(eqIdx + 1).trim();
+      if (!process.env[key]) {
+        process.env[key] = value;
+      }
+    }
+  }
+}
+
 // ─── Sentinel names (stable identifiers for idempotency) ────────────────────
 const SENTINEL_LLM_NAME = 'kenstera-intake-llm';
 const SENTINEL_AGENT_NAME = 'kenstera-intake-agent';
 
 // Voice ID — professional female, warm, American English.
-// "11labs-Matilda" is a well-regarded ElevenLabs voice on Retell.
+// "11labs-Marissa" is a well-regarded ElevenLabs voice on Retell.
 // Tunable: run `client.voice.list()` to browse alternatives.
-const DEFAULT_VOICE_ID = '11labs-Matilda';
+const DEFAULT_VOICE_ID = '11labs-Marissa';
 
 // NYC area codes tried in order. Area code type must be number (not string).
 const NYC_AREA_CODES = [212, 646, 917, 347, 929];
@@ -41,12 +59,17 @@ const NYC_AREA_CODES = [212, 646, 917, 347, 929];
 // ─── Step 1/3: LLM ──────────────────────────────────────────────────────────
 
 async function ensureLlm(client: Retell): Promise<string> {
-  const existing = await client.llm.list();
-  const found = existing.find((llm) => llm.llm_name === SENTINEL_LLM_NAME);
-
-  if (found) {
-    console.log(`  LLM already exists: ${found.llm_id}`);
-    return found.llm_id;
+  // Retell's llm.list() does NOT return llm_name, so we can't match by name.
+  // Instead, check if RETELL_LLM_ID is already set and verify it still exists.
+  const existingId = process.env.RETELL_LLM_ID;
+  if (existingId) {
+    try {
+      await client.llm.retrieve(existingId);
+      console.log(`  LLM already exists: ${existingId}`);
+      return existingId;
+    } catch {
+      console.log(`  Stored LLM ID ${existingId} no longer valid, creating new one...`);
+    }
   }
 
   const created = await client.llm.create({

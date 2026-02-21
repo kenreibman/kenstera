@@ -48,16 +48,19 @@ Plans:
 - [ ] 02-02-PLAN.md — Verify all security controls via curl (human checkpoint)
 
 ### Phase 3: Agent Prompt
-**Goal**: The dual-path agent reliably greets callers, routes them to their chosen path, and completes the call naturally within 2 minutes — validated by real test calls
+**Goal**: The single-path Kate intake agent greets callers by name, walks through a car accident intake simulation, and completes the call naturally within 2 minutes — validated by real test calls
 **Depends on**: Phase 2
 **Requirements**: AGNT-01, AGNT-02, AGNT-03, AGNT-04, AGNT-05
 **Success Criteria** (what must be TRUE):
-  1. A caller who picks the intake path is asked about their situation, injuries, and timeline in a natural conversational sequence
-  2. A caller who picks the Q&A path hears a concise kenstera pitch and is directed to book a sales call via the website
-  3. A caller who says something off-topic, abusive, or tries to manipulate the agent has the call terminated within 2–3 exchanges
-  4. The agent begins wrapping up the conversation before the 180-second hard cut fires (graceful exit, not a mid-sentence drop)
-  5. Both paths complete successfully across at least 5 real test calls each with no path-blending or branching failures
-**Plans**: TBD
+  1. A caller is greeted by name, given a car accident scenario, and asked about their situation, injuries, and timeline in a natural conversational sequence
+  2. The agent ends the call cleanly after the intake demo without pitching or asking for feedback
+  3. A caller who says something off-topic, abusive, or tries to manipulate the agent has the call terminated within 2-3 exchanges
+  4. The agent begins wrapping up the conversation before the 120-second hard cut fires (graceful exit, not a mid-sentence drop)
+  5. The intake flow completes successfully across at least 5 real test calls with no failures
+**Plans:** 2 plans
+Plans:
+- [ ] 03-01-PLAN.md — Create Kate persona prompt update script and modify API route for caller name injection + 120s cap
+- [ ] 03-02-PLAN.md — Run update script and verify agent behavior via real test calls (human checkpoint)
 
 ### Phase 4: Form UI
 **Goal**: Visitors on the homepage can fill out the demo form and receive clear feedback at every step — idle, loading, success, and each error state
@@ -92,6 +95,6 @@ Phases execute in strict numeric order: 1 -> 2 -> 3 -> 4 -> 5
 |-------|----------------|--------|-----------|
 | 1. Provisioning | 1/1 | Complete    | 2026-02-21 |
 | 2. Secure API Route | 2/2 | Complete   | 2026-02-21 |
-| 3. Agent Prompt | 0/TBD | Not started | - |
+| 3. Agent Prompt | 0/2 | Planned | - |
 | 4. Form UI | 0/TBD | Not started | - |
 | 5. Verification | 0/TBD | Not started | - |

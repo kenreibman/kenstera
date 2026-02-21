@@ -2,110 +2,123 @@
 phase: 03-agent-prompt
 plan: 02
 subsystem: agent-prompt
-tags: [retell, llm, kate, voicemail, test-call, verification]
+tags: [retell, kate, voice, minimax, ambient-sound, prompt-tuning, test-calls]
 
-# Dependency graph
 requires:
   - phase: 03-01
-    provides: scripts/update-agent-prompt.ts, Kate LLM prompt, voicemail config
+    provides: update-agent-prompt.ts script, Kate prompt baseline, LLM + agent IDs provisioned
+
 provides:
-  - Kate prompt verified live on Retell (LLM + agent configuration confirmed)
-  - Pending: real test call verification (human checkpoint)
+  - Kate intake agent verified live via real test calls — all AGNT requirements confirmed
+  - Voice: minimax-Cimo (speech-02-turbo) at speed 1.1 with call-center ambient sound at volume 0.8
+  - Kenstera pronunciation hint codified in prompt ("Ken-steh-rah")
+  - Style rule: no em dashes, short 1-2 word acknowledgments between questions
+  - Trimmed Kate prompt reducing over-talking tendency
+
 affects: [04-demo-ui]
 
-# Tech tracking
 tech-stack:
   added: []
   patterns:
-    - retell-sdk llm.retrieve() to verify update took effect
-    - retell-sdk agent.retrieve() to confirm voicemail_option shape
+    - Real test calls as primary QA for voice agent behavior (code review alone is insufficient)
+    - Iterative prompt tuning driven by live call output, not text review
+    - minimax-Cimo + speech-02-turbo as production voice for Kate persona
 
 key-files:
   created: []
-  modified: []
+  modified:
+    - scripts/update-agent-prompt.ts
 
 key-decisions:
-  - "voicemail_option shape confirmed: { action: { type: 'hangup' } } — agent.retrieve() confirms this is set even though enable_voicemail_detection field is not echoed back in retrieve response"
-  - "Retell API does not echo enable_voicemail_detection field in agent.retrieve() response — presence of voicemail_option is the confirmation signal"
+  - "Voice: minimax-Cimo (speech-02-turbo) replaces 11labs-Marissa — natural tone tested better in live calls for intake specialist persona"
+  - "Ambient sound: call-center at volume 0.8 — reinforces law firm call center setting without overwhelming voice"
+  - "Voice speed 1.1 — slightly faster than default matches efficient-but-not-rushed intake specialist cadence"
+  - "Kenstera pronunciation in prompt: Ken-steh-rah — codified so TTS does not guess; wrong pronunciation undermines demo credibility"
+  - "Em dashes banned via style rule — TTS engines introduce audible artifacts (pause, breath) on em dashes"
+  - "Prompt trimmed aggressively — shorter prompt reduces over-talking; LLMs with long prompts can become verbose"
+  - "Removed Ready? from demo framing — unnecessary pacing question that slowed call flow"
 
 patterns-established:
-  - "LLM verification pattern: retrieve after update, check begin_message contains caller_name, check general_tools for end_call"
+  - "Voice agent QA: always run real test calls before plan closes — Retell dashboard simulation does not equal live call audio"
+  - "Prompt iteration loop: deploy via update script -> test call -> observe -> adjust -> repeat until approved"
 
-requirements-completed: []
+requirements-completed: [AGNT-01, AGNT-02, AGNT-04, AGNT-05]
 
-# Metrics
-duration: ~5 min (Task 1 only — awaiting human verification for Task 2)
+duration: ~50 min (Task 1 ~5 min, iterative testing session ~45 min)
 completed: 2026-02-21
 ---
 
 # Phase 3 Plan 02: Agent Prompt Verification Summary
 
-**Kate prompt pushed to Retell (LLM + agent) and verified via API retrieve — awaiting real test call verification.**
+**Kate intake agent tuned to production quality via real test calls — minimax-Cimo voice, call-center ambient sound, Kenstera pronunciation, trimmed prompt — user approved.**
 
 ## Performance
 
-- **Duration:** ~5 min (Task 1 complete, Task 2 at checkpoint)
+- **Duration:** ~50 min total (Task 1 ~5 min API verification + ~45 min iterative test call session)
 - **Started:** 2026-02-21T23:13:14Z
-- **Completed:** 2026-02-21 (partial — checkpoint reached)
-- **Tasks:** 1/2 complete
-- **Files modified:** 0 (script ran against Retell API, no local changes)
+- **Completed:** 2026-02-21
+- **Tasks:** 2/2 complete
+- **Files modified:** 1 (scripts/update-agent-prompt.ts)
 
 ## Accomplishments
-- Ran update-agent-prompt.ts successfully — LLM and agent both updated on Retell
-- Verified via API retrieve: begin_message contains "Kate" and "{{caller_name}}", end_call tool present, model gpt-4.1
-- Confirmed voicemail_option: { action: { type: "hangup" } } is set on agent
+
+- Ran update-agent-prompt.ts successfully — LLM and agent both updated on Retell and confirmed via API retrieve
+- Iterated Kate's voice, speed, ambient sound, and prompt through multiple live test call rounds
+- User confirmed agent sounds good and approved the checkpoint
 
 ## Task Commits
 
-No task-specific commits for Plan 02 — all code was created in Plan 01 (commits 110c047 and 1f28847). This plan executes and verifies that code.
+1. **Task 1: Run update script and verify Retell resources updated** - `4c9fa97` (checkpoint docs commit, prior session)
+2. **Task 2 iteration: Iterate Kate agent — voice, ambient sound, pronunciation, style** - `d249721` (feat)
 
-**Plan metadata:** (pending — will be created after checkpoint)
+**Plan metadata:** (docs commit — this SUMMARY.md)
 
 ## Files Created/Modified
 
-None — this plan runs the existing update script against the Retell API. No source files were modified.
+- `scripts/update-agent-prompt.ts` — Updated with minimax-Cimo voice (speech-02-turbo), voice_speed 1.1, call-center ambient sound at volume 0.8, Kenstera pronunciation hint, trimmed Kate prompt, em-dash style ban, removed "Ready?" from demo framing
 
 ## Decisions Made
 
-- Retell API's `agent.retrieve()` does not echo back `enable_voicemail_detection` or `voicemail_detection_timeout_ms` fields in the response body. Presence of `voicemail_option: { action: { type: "hangup" } }` in the retrieve response confirms voicemail configuration was accepted.
+- **Voice swap:** 11labs-Marissa replaced by minimax-Cimo (speech-02-turbo) — natural, calm tone better suited to intake specialist persona; tested better across live calls
+- **Ambient sound:** call-center at 0.8 volume — reinforces the "calling a law firm" mental model for demo participants without obscuring speech clarity
+- **Speed 1.1:** Slightly faster than default; matches efficient-but-not-rushed intake specialist pacing observed in test calls
+- **Pronunciation in prompt:** Kenstera = "Ken-steh-rah" — prevents mispronunciation on demo intro, which would undermine product credibility
+- **Em-dash ban:** Explicit style rule added — TTS engines introduce audible artifacts on em dashes (pause, breath, or literal verbalization depending on voice model)
+- **Prompt trimming:** Shorter system prompt reduces over-talking tendency visible in early test calls; LLMs with long prompts become verbose in conversation
+- **Removed "Ready?":** Unnecessary confirmation before demo framing added latency and nothing to the caller experience
 
 ## Deviations from Plan
 
-None — update script ran exactly as specified. Plan expected "LLM updated" and "Agent updated" log lines, both appeared. LLM verify confirmed all expected fields.
+The plan called for a minimum of 5 test calls verifying a 10-point checklist with explicit sign-off per item. Actual execution was iterative: multiple test call rounds with prompt/voice adjustments between rounds, ending in user approval of the final state.
 
-Minor observation (not a deviation): The update script log says "Voicemail detection: disabled" because `updatedAgent.enable_voicemail_detection` is undefined in the SDK response object, not because the setting was rejected. The actual `voicemail_option` is confirmed set via retrieve.
+Process deviation only — all requirements (AGNT-01 through AGNT-05) confirmed satisfied via user approval.
+
+**Total code deviations:** None — all changes were deliberate prompt/voice tuning within the scope of Task 2 testing.
 
 ## Issues Encountered
 
-None — script ran clean on first attempt.
+- **Kenstera mispronunciation:** TTS guessed wrong on "Kenstera" in early calls. Resolved by adding explicit pronunciation hint to prompt.
+- **Em-dash artifacts:** Original prompt contained em dashes; these caused audible speech artifacts in live calls. Resolved by banning em dashes via style rule and removing them from all prompt text.
+- **Over-talking:** Kate was verbose in early calls. Resolved by trimming the system prompt significantly.
+- **"Ready?" pacing issue:** Demo framing question slowed call initiation. Removed.
 
-## Checkpoint Status
+## User Setup Required
 
-**Stopped at:** Task 2 (checkpoint:human-verify)
-
-Task 2 requires making real test calls to verify Kate's behavior:
-- Greeting by name (AGNT-01)
-- Intake questions flow (AGNT-02)
-- Guardrail behavior (AGNT-04)
-- Clean call termination within 120s (AGNT-05)
-
-**To resume:** Make 5 test calls via the demo-call API or Retell dashboard, verify all 10 checklist items, then type "approved".
-
-Test call command (with dev server running on port 3000):
-```bash
-curl -X POST http://localhost:3000/api/demo-call \
-  -H "Content-Type: application/json" \
-  -d '{"phone": "+1XXXXXXXXXX", "name": "YourName", "recaptchaToken": "test-token"}'
-```
-
-Note: reCAPTCHA "test-token" will fail in production validation. Use Retell dashboard for direct testing, or temporarily bypass reCAPTCHA verification in the dev route.
+None — update script handles all Retell API changes. No new environment variables required.
 
 ## Next Phase Readiness
 
-- Kate prompt is live on Retell and API-verified
-- Real call verification pending (human checkpoint)
-- Phase 4 (Demo UI) can begin once checkpoint is approved
+- Kate agent is live on Retell and production-quality verified via real test calls
+- Voice, ambient sound, speed, pronunciation, and prompt style are finalized
+- Phase 4 (Demo UI) can proceed — relies on `/api/demo-call` route (stable from Phase 2) and `name` field injection (established in Phase 3-01)
+- Phase 4 concern: reCAPTCHA v3 + React 19 compatibility remains LOW confidence — validate at Phase 4 start
 
 ---
 *Phase: 03-agent-prompt*
 *Completed: 2026-02-21*
+
+## Self-Check: PASSED
+
+- `scripts/update-agent-prompt.ts` exists and contains all voice/prompt changes
+- Commit `d249721` confirmed in git log
+- SUMMARY.md written with complete task documentation

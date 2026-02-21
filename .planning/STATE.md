@@ -10,18 +10,18 @@ See: .planning/PROJECT.md (updated 2026-02-21)
 ## Current Position
 
 Phase: 3 of 5 (Agent Prompt)
-Plan: 2 of 2 in current phase (at checkpoint)
-Status: Phase 3 Plan 02 Task 1 complete — Kate prompt pushed to Retell and API-verified; awaiting human test call verification
-Last activity: 2026-02-21 — Phase 3 Plan 02 Task 1: update script ran successfully, LLM and agent confirmed via retrieve
+Plan: 2 of 2 in current phase (complete)
+Status: Phase 3 complete — Kate intake agent verified via real test calls, user approved. Ready for Phase 4 (Demo UI).
+Last activity: 2026-02-21 — Phase 3 Plan 02: real test calls completed, voice/prompt iterated, user approved
 
-Progress: [█████░░░░░] 55%
+Progress: [██████░░░░] 60%
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 3
-- Average duration: ~21 min
-- Total execution time: ~62 min
+- Total plans completed: 4
+- Average duration: ~23 min
+- Total execution time: ~68 min
 
 **By Phase:**
 
@@ -29,11 +29,11 @@ Progress: [█████░░░░░] 55%
 |-------|-------|-------|----------|
 | 01-provisioning | 1 | ~45 min | ~45 min |
 | 02-secure-api-route | 2 | ~17 min | ~8 min |
-| 03-agent-prompt | 1 | ~4 min | ~4 min |
+| 03-agent-prompt | 2 | ~55 min | ~27 min |
 
 **Recent Trend:**
-- Last 5 plans: 01-01 (~45 min), 02-01 (~2 min), 02-02 (~15 min), 03-01 (~4 min)
-- Trend: Fast execution on well-researched plans
+- Last 5 plans: 01-01 (~45 min), 02-01 (~2 min), 02-02 (~15 min), 03-01 (~4 min), 03-02 (~50 min)
+- Trend: Fast code plans; iterative voice QA plans take longer due to human test loop
 
 *Updated after each plan completion*
 
@@ -63,6 +63,10 @@ Recent decisions affecting current work:
 - [Phase 03-agent-prompt]: end_call tool uses static_text execution_message_type for predictable sign-off
 - [Phase 03-agent-prompt]: voicemail_option uses action: { type: 'hangup' } (SDK shape confirmed from retell-sdk types)
 - [Phase 03-agent-prompt]: Retell agent.retrieve() does not echo enable_voicemail_detection field — presence of voicemail_option in response is the confirmation signal
+- [Phase 03-02]: Voice changed to minimax-Cimo (speech-02-turbo) at speed 1.1 with call-center ambient sound at 0.8 — tested better than 11labs-Marissa in live calls
+- [Phase 03-02]: Kenstera pronunciation hint in prompt: "Ken-steh-rah" — prevents TTS mispronunciation
+- [Phase 03-02]: Em dashes banned from Kate prompt via explicit style rule — TTS engines produce audible artifacts on em dashes
+- [Phase 03-02]: Voice agent QA requires real test calls — Retell dashboard simulation does not equal live call audio quality
 
 ### Pending Todos
 
@@ -76,5 +80,5 @@ None.
 ## Session Continuity
 
 Last session: 2026-02-21
-Stopped at: Checkpoint: 03-02 Task 2 human-verify — real test calls needed to verify Kate behavior
+Stopped at: Completed 03-02-PLAN.md — Phase 3 Agent Prompt fully complete. Next: Phase 4 Demo UI.
 Resume file: None

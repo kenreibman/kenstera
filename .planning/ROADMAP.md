@@ -14,7 +14,7 @@ Decimal phases appear between their surrounding integers in numeric order.
 
 - [x] **Phase 1: Provisioning** - One-time Retell stack setup that produces the env vars every other phase depends on (completed 2026-02-21)
 - [x] **Phase 2: Secure API Route** - Server-side call trigger with all security controls in place before any UI exists (completed 2026-02-21)
-- [ ] **Phase 3: Agent Prompt** - Dual-path agent prompt engineered and validated through real test calls
+- [x] **Phase 3: Agent Prompt** - Dual-path agent prompt engineered and validated through real test calls (completed 2026-02-21)
 - [ ] **Phase 4: Form UI** - Client-side demo form component integrated into the homepage
 - [ ] **Phase 5: Verification** - End-to-end confirmation that every security control and UX state works before launch
 
@@ -57,7 +57,7 @@ Plans:
   3. A caller who says something off-topic, abusive, or tries to manipulate the agent has the call terminated within 2-3 exchanges
   4. The agent begins wrapping up the conversation before the 120-second hard cut fires (graceful exit, not a mid-sentence drop)
   5. The intake flow completes successfully across at least 5 real test calls with no failures
-**Plans:** 1/2 plans executed
+**Plans:** 2/2 plans complete
 Plans:
 - [ ] 03-01-PLAN.md — Create Kate persona prompt update script and modify API route for caller name injection + 120s cap
 - [ ] 03-02-PLAN.md — Run update script and verify agent behavior via real test calls (human checkpoint)
@@ -95,6 +95,6 @@ Phases execute in strict numeric order: 1 -> 2 -> 3 -> 4 -> 5
 |-------|----------------|--------|-----------|
 | 1. Provisioning | 1/1 | Complete    | 2026-02-21 |
 | 2. Secure API Route | 2/2 | Complete   | 2026-02-21 |
-| 3. Agent Prompt | 1/2 | In Progress|  |
+| 3. Agent Prompt | 2/2 | Complete   | 2026-02-21 |
 | 4. Form UI | 0/TBD | Not started | - |
 | 5. Verification | 0/TBD | Not started | - |

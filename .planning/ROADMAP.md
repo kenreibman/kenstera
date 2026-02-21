@@ -42,7 +42,10 @@ Plans:
   3. A forged or missing reCAPTCHA token returns 401 and no call is placed
   4. A second submission from the same IP or phone number within the rate-limit window returns 429 and no call is placed
   5. The consent timestamp and submitter IP are logged server-side every time a call is successfully triggered
-**Plans**: TBD
+**Plans:** 2 plans
+Plans:
+- [ ] 02-01-PLAN.md — Install dependencies, create rate-limit and reCAPTCHA helpers, build POST /api/demo-call route handler
+- [ ] 02-02-PLAN.md — Verify all security controls via curl (human checkpoint)
 
 ### Phase 3: Agent Prompt
 **Goal**: The dual-path agent reliably greets callers, routes them to their chosen path, and completes the call naturally within 2 minutes — validated by real test calls
@@ -88,7 +91,7 @@ Phases execute in strict numeric order: 1 -> 2 -> 3 -> 4 -> 5
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
 | 1. Provisioning | 1/1 | Complete    | 2026-02-21 |
-| 2. Secure API Route | 0/TBD | Not started | - |
+| 2. Secure API Route | 0/2 | Planning complete | - |
 | 3. Agent Prompt | 0/TBD | Not started | - |
 | 4. Form UI | 0/TBD | Not started | - |
 | 5. Verification | 0/TBD | Not started | - |

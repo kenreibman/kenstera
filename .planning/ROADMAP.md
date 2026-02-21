@@ -30,7 +30,7 @@ Decimal phases appear between their surrounding integers in numeric order.
   3. The Retell client singleton is importable in any server-side file and uses the env var (never a hardcoded key)
 **Plans:** 1/1 plans complete
 Plans:
-- [ ] 01-01-PLAN.md — Install retell-sdk, create client singleton, and build idempotent provisioning script
+- [x] 01-01-PLAN.md — Install retell-sdk, create client singleton, and build idempotent provisioning script (completed 2026-02-21)
 
 ### Phase 2: Secure API Route
 **Goal**: Visitors can trigger a real outbound call through a server-side route that enforces all security controls — even before any UI exists

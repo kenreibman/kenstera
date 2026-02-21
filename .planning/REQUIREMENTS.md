@@ -13,11 +13,11 @@
 
 ### Security
 
-- [ ] **SEC-01**: Retell API key is accessed only server-side via API route (never in client bundle)
-- [ ] **SEC-02**: Submissions are rate-limited per IP address (sliding window via Upstash Redis)
-- [ ] **SEC-03**: Submissions are rate-limited per phone number (sliding window via Upstash Redis)
-- [ ] **SEC-04**: Call duration is hard-capped at 180 seconds via `max_call_duration_ms` set at the per-call API level
-- [ ] **SEC-05**: Consent timestamp and IP address are logged server-side when a call is triggered
+- [x] **SEC-01**: Retell API key is accessed only server-side via API route (never in client bundle)
+- [x] **SEC-02**: Submissions are rate-limited per IP address (sliding window via Upstash Redis)
+- [x] **SEC-03**: Submissions are rate-limited per phone number (sliding window via Upstash Redis)
+- [x] **SEC-04**: Call duration is hard-capped at 180 seconds via `max_call_duration_ms` set at the per-call API level
+- [x] **SEC-05**: Consent timestamp and IP address are logged server-side when a call is triggered
 
 ### Agent
 
@@ -80,11 +80,11 @@
 | FORM-01 | Phase 4 | Pending |
 | FORM-02 | Phase 4 | Pending |
 | FORM-03 | Phase 4 | Pending |
-| SEC-01 | Phase 2 | Pending |
-| SEC-02 | Phase 2 | Pending |
-| SEC-03 | Phase 2 | Pending |
-| SEC-04 | Phase 2 | Pending |
-| SEC-05 | Phase 2 | Pending |
+| SEC-01 | Phase 2 | Complete |
+| SEC-02 | Phase 2 | Complete |
+| SEC-03 | Phase 2 | Complete |
+| SEC-04 | Phase 2 | Complete |
+| SEC-05 | Phase 2 | Complete |
 | AGNT-01 | Phase 3 | Pending |
 | AGNT-02 | Phase 3 | Pending |
 | AGNT-03 | Phase 3 | Pending |

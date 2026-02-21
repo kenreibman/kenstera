@@ -10,11 +10,11 @@ See: .planning/PROJECT.md (updated 2026-02-21)
 ## Current Position
 
 Phase: 2 of 5 (Secure API Route)
-Plan: 0 of TBD in current phase
-Status: Ready to plan
-Last activity: 2026-02-21 — Phase 1 Plan 01 complete: Retell LLM, agent, and phone provisioned
+Plan: 1 of 1 in current phase
+Status: Phase complete — ready for Phase 3
+Last activity: 2026-02-21 — Phase 2 Plan 01 complete: POST /api/demo-call with full security pipeline
 
-Progress: [██░░░░░░░░] 20%
+Progress: [████░░░░░░] 40%
 
 ## Performance Metrics
 
@@ -28,10 +28,11 @@ Progress: [██░░░░░░░░] 20%
 | Phase | Plans | Total | Avg/Plan |
 |-------|-------|-------|----------|
 | 01-provisioning | 1 | ~45 min | ~45 min |
+| 02-secure-api-route | 1 | ~2 min | ~2 min |
 
 **Recent Trend:**
-- Last 5 plans: 01-01 (~45 min)
-- Trend: Baseline established
+- Last 5 plans: 01-01 (~45 min), 02-01 (~2 min)
+- Trend: Fast execution — well-researched plan
 
 *Updated after each plan completion*
 
@@ -52,6 +53,9 @@ Recent decisions affecting current work:
 - [Phase 01-01]: LLM idempotency via retrieve() by stored ID — llm.list() does not return llm_name field on Retell API
 - [Phase 01-01]: Voice changed to 11labs-Marissa (11labs-Matilda not available on Retell)
 - [Phase 01-01]: Scripts must manually parse .env.local (tsx does not auto-load env files)
+- [Phase 02-01]: reCAPTCHA score threshold 0.3 (below 0.5 default) to reduce false rejections for mobile users on low-stakes demo form
+- [Phase 02-01]: retryAfter field in 429 responses (seconds until reset) for Phase 4 UX-05 retry countdown compatibility
+- [Phase 02-01]: MAX_CALL_DURATION_MS=180000 at agent_override.agent per-call level — not agent-level — to avoid Retell agent version mismatch
 
 ### Pending Todos
 
@@ -65,5 +69,5 @@ None.
 ## Session Continuity
 
 Last session: 2026-02-21
-Stopped at: Completed 01-01-PLAN.md (Retell provisioning — all resources created and verified)
+Stopped at: Completed 02-01-PLAN.md (Secure API Route — POST /api/demo-call with full security pipeline)
 Resume file: None

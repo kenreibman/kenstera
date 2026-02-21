@@ -16,14 +16,14 @@
 - [x] **SEC-01**: Retell API key is accessed only server-side via API route (never in client bundle)
 - [x] **SEC-02**: Submissions are rate-limited per IP address (sliding window via Upstash Redis)
 - [x] **SEC-03**: Submissions are rate-limited per phone number (sliding window via Upstash Redis)
-- [x] **SEC-04**: Call duration is hard-capped at 180 seconds via `max_call_duration_ms` set at the per-call API level
+- [x] **SEC-04**: Call duration is hard-capped at 120 seconds via `max_call_duration_ms` set at the per-call API level
 - [x] **SEC-05**: Consent timestamp and IP address are logged server-side when a call is triggered
 
 ### Agent
 
-- [x] **AGNT-01**: Agent greets caller with a dual-path begin message offering intake simulation or kenstera Q&A
-- [x] **AGNT-02**: Intake path simulates a personal injury intake specialist — asks about situation, injuries, timeline, and qualifies the lead
-- [x] **AGNT-03**: Q&A path provides a brief pitch on kenstera's AI intake automation (24/7 coverage, booking, CRM integration) and nudges caller to book a sales call via the website
+- [x] **AGNT-01**: Agent greets caller by name and frames the demo as a car accident intake simulation
+- [x] **AGNT-02**: Intake path simulates a personal injury intake specialist — asks about situation, timing, injuries, and fault in a natural conversational sequence
+- [x] **AGNT-03**: Single-path design — Q&A path deferred to v2 Conversation Flow (AGNT-06); Phase 3 CONTEXT.md documents the decision to focus on intake-only for demo clarity
 - [x] **AGNT-04**: Agent detects off-topic, abusive, or exploitative callers and terminates the call promptly
 - [x] **AGNT-05**: Agent gracefully wraps up the conversation before the hard duration cutoff fires
 

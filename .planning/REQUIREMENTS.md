@@ -21,11 +21,11 @@
 
 ### Agent
 
-- [ ] **AGNT-01**: Agent greets caller with a dual-path begin message offering intake simulation or kenstera Q&A
-- [ ] **AGNT-02**: Intake path simulates a personal injury intake specialist — asks about situation, injuries, timeline, and qualifies the lead
-- [ ] **AGNT-03**: Q&A path provides a brief pitch on kenstera's AI intake automation (24/7 coverage, booking, CRM integration) and nudges caller to book a sales call via the website
-- [ ] **AGNT-04**: Agent detects off-topic, abusive, or exploitative callers and terminates the call promptly
-- [ ] **AGNT-05**: Agent gracefully wraps up the conversation before the hard duration cutoff fires
+- [x] **AGNT-01**: Agent greets caller with a dual-path begin message offering intake simulation or kenstera Q&A
+- [x] **AGNT-02**: Intake path simulates a personal injury intake specialist — asks about situation, injuries, timeline, and qualifies the lead
+- [x] **AGNT-03**: Q&A path provides a brief pitch on kenstera's AI intake automation (24/7 coverage, booking, CRM integration) and nudges caller to book a sales call via the website
+- [x] **AGNT-04**: Agent detects off-topic, abusive, or exploitative callers and terminates the call promptly
+- [x] **AGNT-05**: Agent gracefully wraps up the conversation before the hard duration cutoff fires
 
 ### UX
 
@@ -85,11 +85,11 @@
 | SEC-03 | Phase 2 | Complete |
 | SEC-04 | Phase 2 | Complete |
 | SEC-05 | Phase 2 | Complete |
-| AGNT-01 | Phase 3 | Pending |
-| AGNT-02 | Phase 3 | Pending |
-| AGNT-03 | Phase 3 | Pending |
-| AGNT-04 | Phase 3 | Pending |
-| AGNT-05 | Phase 3 | Pending |
+| AGNT-01 | Phase 3 | Complete |
+| AGNT-02 | Phase 3 | Complete |
+| AGNT-03 | Phase 3 | Complete |
+| AGNT-04 | Phase 3 | Complete |
+| AGNT-05 | Phase 3 | Complete |
 | UX-01 | Phase 4 | Pending |
 | UX-02 | Phase 4 | Pending |
 | UX-03 | Phase 4 | Pending |

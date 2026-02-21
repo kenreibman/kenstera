@@ -10,11 +10,11 @@ See: .planning/PROJECT.md (updated 2026-02-21)
 ## Current Position
 
 Phase: 3 of 5 (Agent Prompt)
-Plan: 0 of N in current phase
-Status: Phase 2 complete — ready for Phase 3
-Last activity: 2026-02-21 — Phase 2 Plan 02 complete: all SEC requirements runtime-verified via curl
+Plan: 1 of 1 in current phase
+Status: Phase 3 Plan 01 complete — Kate prompt live, route updated
+Last activity: 2026-02-21 — Phase 3 Plan 01 complete: Kate prompt + voicemail detection + name field in route
 
-Progress: [████░░░░░░] 45%
+Progress: [█████░░░░░] 55%
 
 ## Performance Metrics
 
@@ -29,9 +29,10 @@ Progress: [████░░░░░░] 45%
 |-------|-------|-------|----------|
 | 01-provisioning | 1 | ~45 min | ~45 min |
 | 02-secure-api-route | 2 | ~17 min | ~8 min |
+| 03-agent-prompt | 1 | ~4 min | ~4 min |
 
 **Recent Trend:**
-- Last 5 plans: 01-01 (~45 min), 02-01 (~2 min), 02-02 (~15 min)
+- Last 5 plans: 01-01 (~45 min), 02-01 (~2 min), 02-02 (~15 min), 03-01 (~4 min)
 - Trend: Fast execution on well-researched plans
 
 *Updated after each plan completion*
@@ -58,6 +59,9 @@ Recent decisions affecting current work:
 - [Phase 02-01]: MAX_CALL_DURATION_MS=180000 at agent_override.agent per-call level — not agent-level — to avoid Retell agent version mismatch
 - [Phase 02-02]: Lazy Proxy pattern for Ratelimit instances — defer getRedis() to first .limit() call to prevent build-time throw when UPSTASH env vars are absent
 - [Phase 02-02]: tsconfig.json excludes scripts/ to suppress pre-existing llm_name type error in setup-retell.ts (has own tsconfig.scripts.json)
+- [Phase 03-agent-prompt]: Single-path intake only — no Q&A/pitch path (per CONTEXT.md decision)
+- [Phase 03-agent-prompt]: end_call tool uses static_text execution_message_type for predictable sign-off
+- [Phase 03-agent-prompt]: voicemail_option uses action: { type: 'hangup' } (SDK shape confirmed from retell-sdk types)
 
 ### Pending Todos
 
@@ -71,5 +75,5 @@ None.
 ## Session Continuity
 
 Last session: 2026-02-21
-Stopped at: Completed 02-02-PLAN.md (Security verification — all SEC requirements runtime-verified via curl)
+Stopped at: Completed 03-01-PLAN.md (Kate prompt + voicemail detection + route name field + 120s cap)
 Resume file: None

@@ -28,7 +28,9 @@ Decimal phases appear between their surrounding integers in numeric order.
   1. Running `npm run setup:retell` with only `RETELL_API_KEY` set creates the LLM, agent, and phone number and writes their IDs to `.env.local`
   2. The provisioning script is idempotent — running it a second time does not create duplicate resources
   3. The Retell client singleton is importable in any server-side file and uses the env var (never a hardcoded key)
-**Plans**: TBD
+**Plans:** 1 plan
+Plans:
+- [ ] 01-01-PLAN.md — Install retell-sdk, create client singleton, and build idempotent provisioning script
 
 ### Phase 2: Secure API Route
 **Goal**: Visitors can trigger a real outbound call through a server-side route that enforces all security controls — even before any UI exists
@@ -81,11 +83,11 @@ Decimal phases appear between their surrounding integers in numeric order.
 ## Progress
 
 **Execution Order:**
-Phases execute in strict numeric order: 1 → 2 → 3 → 4 → 5
+Phases execute in strict numeric order: 1 -> 2 -> 3 -> 4 -> 5
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. Provisioning | 0/TBD | Not started | - |
+| 1. Provisioning | 0/1 | Planned | - |
 | 2. Secure API Route | 0/TBD | Not started | - |
 | 3. Agent Prompt | 0/TBD | Not started | - |
 | 4. Form UI | 0/TBD | Not started | - |

@@ -5,34 +5,34 @@
 See: .planning/PROJECT.md (updated 2026-02-21)
 
 **Core value:** Prospective clients feel the AI intake experience on their own phone before buying
-**Current focus:** Phase 2 — Secure API Route
+**Current focus:** Phase 3 — Agent Prompt
 
 ## Current Position
 
-Phase: 2 of 5 (Secure API Route)
-Plan: 1 of 1 in current phase
-Status: Phase complete — ready for Phase 3
-Last activity: 2026-02-21 — Phase 2 Plan 01 complete: POST /api/demo-call with full security pipeline
+Phase: 3 of 5 (Agent Prompt)
+Plan: 0 of N in current phase
+Status: Phase 2 complete — ready for Phase 3
+Last activity: 2026-02-21 — Phase 2 Plan 02 complete: all SEC requirements runtime-verified via curl
 
-Progress: [████░░░░░░] 40%
+Progress: [████░░░░░░] 45%
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 1
-- Average duration: ~45 min
-- Total execution time: ~45 min
+- Total plans completed: 3
+- Average duration: ~21 min
+- Total execution time: ~62 min
 
 **By Phase:**
 
 | Phase | Plans | Total | Avg/Plan |
 |-------|-------|-------|----------|
 | 01-provisioning | 1 | ~45 min | ~45 min |
-| 02-secure-api-route | 1 | ~2 min | ~2 min |
+| 02-secure-api-route | 2 | ~17 min | ~8 min |
 
 **Recent Trend:**
-- Last 5 plans: 01-01 (~45 min), 02-01 (~2 min)
-- Trend: Fast execution — well-researched plan
+- Last 5 plans: 01-01 (~45 min), 02-01 (~2 min), 02-02 (~15 min)
+- Trend: Fast execution on well-researched plans
 
 *Updated after each plan completion*
 
@@ -56,6 +56,8 @@ Recent decisions affecting current work:
 - [Phase 02-01]: reCAPTCHA score threshold 0.3 (below 0.5 default) to reduce false rejections for mobile users on low-stakes demo form
 - [Phase 02-01]: retryAfter field in 429 responses (seconds until reset) for Phase 4 UX-05 retry countdown compatibility
 - [Phase 02-01]: MAX_CALL_DURATION_MS=180000 at agent_override.agent per-call level — not agent-level — to avoid Retell agent version mismatch
+- [Phase 02-02]: Lazy Proxy pattern for Ratelimit instances — defer getRedis() to first .limit() call to prevent build-time throw when UPSTASH env vars are absent
+- [Phase 02-02]: tsconfig.json excludes scripts/ to suppress pre-existing llm_name type error in setup-retell.ts (has own tsconfig.scripts.json)
 
 ### Pending Todos
 
@@ -64,10 +66,10 @@ None.
 ### Blockers/Concerns
 
 - Phase 3 (Agent Prompt): Retell Conversation Flow as fallback if single-prompt two-path approach proves unreliable. Flag for plan-phase.
-- Phase 2 (API Route): reCAPTCHA v3 + React 19 compatibility is LOW confidence — validate early.
+- Phase 4 (Demo UI): reCAPTCHA v3 + React 19 compatibility is LOW confidence — validate at Phase 4 start.
 
 ## Session Continuity
 
 Last session: 2026-02-21
-Stopped at: Completed 02-01-PLAN.md (Secure API Route — POST /api/demo-call with full security pipeline)
+Stopped at: Completed 02-02-PLAN.md (Security verification — all SEC requirements runtime-verified via curl)
 Resume file: None

@@ -13,7 +13,7 @@ Five sequential phases deliver the homepage demo widget from zero to launch-read
 Decimal phases appear between their surrounding integers in numeric order.
 
 - [x] **Phase 1: Provisioning** - One-time Retell stack setup that produces the env vars every other phase depends on (completed 2026-02-21)
-- [ ] **Phase 2: Secure API Route** - Server-side call trigger with all security controls in place before any UI exists
+- [x] **Phase 2: Secure API Route** - Server-side call trigger with all security controls in place before any UI exists (completed 2026-02-21)
 - [ ] **Phase 3: Agent Prompt** - Dual-path agent prompt engineered and validated through real test calls
 - [ ] **Phase 4: Form UI** - Client-side demo form component integrated into the homepage
 - [ ] **Phase 5: Verification** - End-to-end confirmation that every security control and UX state works before launch
@@ -42,7 +42,7 @@ Plans:
   3. A forged or missing reCAPTCHA token returns 401 and no call is placed
   4. A second submission from the same IP or phone number within the rate-limit window returns 429 and no call is placed
   5. The consent timestamp and submitter IP are logged server-side every time a call is successfully triggered
-**Plans:** 1/2 plans executed
+**Plans:** 2/2 plans complete
 Plans:
 - [ ] 02-01-PLAN.md — Install dependencies, create rate-limit and reCAPTCHA helpers, build POST /api/demo-call route handler
 - [ ] 02-02-PLAN.md — Verify all security controls via curl (human checkpoint)
@@ -91,7 +91,7 @@ Phases execute in strict numeric order: 1 -> 2 -> 3 -> 4 -> 5
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
 | 1. Provisioning | 1/1 | Complete    | 2026-02-21 |
-| 2. Secure API Route | 1/2 | In Progress|  |
+| 2. Secure API Route | 2/2 | Complete   | 2026-02-21 |
 | 3. Agent Prompt | 0/TBD | Not started | - |
 | 4. Form UI | 0/TBD | Not started | - |
 | 5. Verification | 0/TBD | Not started | - |

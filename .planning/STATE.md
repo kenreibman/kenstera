@@ -46,6 +46,9 @@ Recent decisions affecting current work:
 - Research: Set `max_call_duration_ms: 180000` at the per-call level, not only at the agent level (agent version mismatch pitfall)
 - Research: Validate `react-google-recaptcha-v3` React 19 peer dep compatibility at start of Phase 2; swap to `next-recaptcha-v3` if needed
 - Research: TCPA consent log should use existing leads persistence layer (durable), not Redis (TTL-based)
+- [Phase 01-provisioning]: Use gpt-4.1 model (not gpt-4o which was deprecated on Retell in early 2026)
+- [Phase 01-provisioning]: Do NOT set max_call_duration_ms on agent — set per-call in Phase 2 (avoids agent version mismatch)
+- [Phase 01-provisioning]: tsconfig.scripts.json with node16 moduleResolution avoids bundler conflict with tsx
 
 ### Pending Todos
 

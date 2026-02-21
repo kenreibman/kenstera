@@ -12,7 +12,7 @@ Five sequential phases deliver the homepage demo widget from zero to launch-read
 
 Decimal phases appear between their surrounding integers in numeric order.
 
-- [ ] **Phase 1: Provisioning** - One-time Retell stack setup that produces the env vars every other phase depends on
+- [x] **Phase 1: Provisioning** - One-time Retell stack setup that produces the env vars every other phase depends on (completed 2026-02-21)
 - [ ] **Phase 2: Secure API Route** - Server-side call trigger with all security controls in place before any UI exists
 - [ ] **Phase 3: Agent Prompt** - Dual-path agent prompt engineered and validated through real test calls
 - [ ] **Phase 4: Form UI** - Client-side demo form component integrated into the homepage
@@ -28,7 +28,7 @@ Decimal phases appear between their surrounding integers in numeric order.
   1. Running `npm run setup:retell` with only `RETELL_API_KEY` set creates the LLM, agent, and phone number and writes their IDs to `.env.local`
   2. The provisioning script is idempotent — running it a second time does not create duplicate resources
   3. The Retell client singleton is importable in any server-side file and uses the env var (never a hardcoded key)
-**Plans:** 1 plan
+**Plans:** 1/1 plans complete
 Plans:
 - [ ] 01-01-PLAN.md — Install retell-sdk, create client singleton, and build idempotent provisioning script
 
@@ -87,7 +87,7 @@ Phases execute in strict numeric order: 1 -> 2 -> 3 -> 4 -> 5
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. Provisioning | 0/1 | Planned | - |
+| 1. Provisioning | 1/1 | Complete   | 2026-02-21 |
 | 2. Secure API Route | 0/TBD | Not started | - |
 | 3. Agent Prompt | 0/TBD | Not started | - |
 | 4. Form UI | 0/TBD | Not started | - |

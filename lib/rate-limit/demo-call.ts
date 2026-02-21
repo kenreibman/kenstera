@@ -13,16 +13,30 @@ function getRedis(): Redis {
   return redis
 }
 
-// 1 request per IP per 10-minute sliding window (per user decision)
-export const ipRatelimit = new Ratelimit({
-  redis: getRedis(),
-  limiter: Ratelimit.slidingWindow(1, '10 m'),
-  prefix: 'demo-call:ip',
-})
+// Lazy Ratelimit factory — getRedis() is deferred until first .limit() call so
+// the module can be imported during Next.js build without env vars present.
+function makeLazyRatelimit(prefix: string): Ratelimit {
+  let instance: Ratelimit | null = null
+  return new Proxy({} as Ratelimit, {
+    get(_target, prop: string | symbol) {
+      if (!instance) {
+        instance = new Ratelimit({
+          redis: getRedis(),
+          limiter: Ratelimit.slidingWindow(1, '10 m'),
+          prefix,
+        })
+      }
+      const value = (instance as unknown as Record<string | symbol, unknown>)[prop]
+      if (typeof value === 'function') {
+        return value.bind(instance)
+      }
+      return value
+    },
+  })
+}
 
-// 1 request per phone number per 10-minute sliding window (per user decision)
-export const phoneRatelimit = new Ratelimit({
-  redis: getRedis(),
-  limiter: Ratelimit.slidingWindow(1, '10 m'),
-  prefix: 'demo-call:phone',
-})
+// 1 request per IP per 10-minute sliding window
+export const ipRatelimit = makeLazyRatelimit('demo-call:ip')
+
+// 1 request per phone number per 10-minute sliding window
+export const phoneRatelimit = makeLazyRatelimit('demo-call:phone')

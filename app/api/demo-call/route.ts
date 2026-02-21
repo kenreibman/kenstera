@@ -6,10 +6,11 @@ import { ipRatelimit, phoneRatelimit } from '@/lib/rate-limit/demo-call'
 import { retell } from '@/lib/retell/client'
 
 const RECAPTCHA_THRESHOLD = 0.3
-const MAX_CALL_DURATION_MS = 180_000
+const MAX_CALL_DURATION_MS = 120_000
 
 const bodySchema = z.object({
   phone: z.string().min(1),
+  name: z.string().min(1).max(100),
   recaptchaToken: z.string().min(1),
 })
 
@@ -43,7 +44,7 @@ export async function POST(request: NextRequest) {
       )
     }
 
-    const { phone, recaptchaToken } = parsed.data
+    const { phone, name, recaptchaToken } = parsed.data
     const clientIp = getClientIp(request)
 
     // 3. Validate phone number as real US number (libphonenumber-js)
@@ -101,12 +102,15 @@ export async function POST(request: NextRequest) {
       recaptchaScore: score,
     }))
 
-    // 8. Create Retell outbound call with agent_override.agent.max_call_duration_ms: 180_000 (SEC-04)
+    // 8. Create Retell outbound call with agent_override.agent.max_call_duration_ms: 120_000 (SEC-04)
     // CRITICAL: Do NOT set max_call_duration_ms on the agent object — always use agent_override at the
     // per-call level to avoid agent version mismatch (per STATE.md decision from Phase 1).
     await retell.call.createPhoneCall({
       from_number: process.env.RETELL_PHONE_NUMBER!,
       to_number: e164Phone,
+      retell_llm_dynamic_variables: {
+        caller_name: name,
+      },
       agent_override: {
         agent: {
           max_call_duration_ms: MAX_CALL_DURATION_MS,

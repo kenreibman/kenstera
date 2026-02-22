@@ -3,6 +3,7 @@ import { IntakeCall } from "@/components/sections/IntakeCall";
 import { IntakeBooking } from "@/components/sections/IntakeBooking";
 import { IntakeSetup } from "@/components/sections/IntakeSetup";
 import { CRMIntegrations } from "@/components/sections/CRMIntegrations";
+import { DemoForm } from "@/components/sections/DemoForm";
 import { CaseStudies } from "@/components/sections/CaseStudies";
 import { IndustriesFaqBlog } from "@/components/industries";
 import { getAllPosts } from "@/lib/blog";
@@ -42,6 +43,7 @@ export default function Home() {
       <IntakeBooking />
       <IntakeSetup />
       <CRMIntegrations />
+      <DemoForm />
       <CaseStudies />
       <IndustriesFaqBlog faqs={faqs} blogPosts={blogPosts} />
       <FinalCTA />

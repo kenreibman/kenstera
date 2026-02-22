@@ -72,7 +72,10 @@ Plans:
   3. A visitor who hits the rate limit sees a distinct message telling them to try again later (not a generic error)
   4. A visitor who enters an invalid phone number sees a distinct validation error before submission is attempted
   5. The submit button is disabled after the first click and cannot trigger a double submission
-**Plans**: TBD
+**Plans:** 2 plans
+Plans:
+- [ ] 04-01-PLAN.md — Install next-recaptcha-v3, add ReCaptchaProvider to layout, build DemoForm.tsx component with all form states
+- [ ] 04-02-PLAN.md — Insert DemoForm into homepage and visually verify in browser (human checkpoint)
 
 ### Phase 5: Verification
 **Goal**: Every security control and UX state is confirmed to actually work through direct testing — not assumed to work because the code exists
@@ -96,5 +99,5 @@ Phases execute in strict numeric order: 1 -> 2 -> 3 -> 4 -> 5
 | 1. Provisioning | 1/1 | Complete    | 2026-02-21 |
 | 2. Secure API Route | 2/2 | Complete   | 2026-02-21 |
 | 3. Agent Prompt | 2/2 | Complete    | 2026-02-21 |
-| 4. Form UI | 0/TBD | Not started | - |
+| 4. Form UI | 0/2 | Planned | - |
 | 5. Verification | 0/TBD | Not started | - |

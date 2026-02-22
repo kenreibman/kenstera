@@ -87,7 +87,10 @@ Plans:
   3. Entering a non-US phone number and submitting returns a validation error and no Retell API call is recorded in the dashboard
   4. The string `RETELL_API_KEY` does not appear anywhere under `.next/static/` after a production build
   5. A Retell billing alert is configured at $20/day and confirmed active in the account dashboard
-**Plans**: TBD
+**Plans:** 2 plans
+Plans:
+- [ ] 05-01-PLAN.md — Production build and API key leak check + VERIFICATION.md scaffold
+- [ ] 05-02-PLAN.md — Browser-based manual verification: call duration, rate limit, phone validation, UX states (human checkpoint)
 
 ## Progress
 
@@ -100,4 +103,4 @@ Phases execute in strict numeric order: 1 -> 2 -> 3 -> 4 -> 5
 | 2. Secure API Route | 2/2 | Complete   | 2026-02-21 |
 | 3. Agent Prompt | 2/2 | Complete    | 2026-02-21 |
 | 4. Form UI | 2/2 | Complete    | 2026-02-22 |
-| 5. Verification | 0/TBD | Not started | - |
+| 5. Verification | 0/2 | Not started | - |

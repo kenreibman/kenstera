@@ -6,12 +6,13 @@ import Link from 'next/link'
 
 const caseStudies = [
   {
-    bg: 'bg-amber-950 border border-amber-800',
-    textColor: 'text-amber-50',
-    mutedColor: 'text-amber-400',
-    borderColor: 'border-amber-800',
-    btnText: 'text-amber-50',
-    btnBorder: 'border-amber-50/30 hover:border-amber-50/60',
+    bg: 'border border-[#1a3a5c]',
+    bgStyle: { backgroundColor: '#00122e' },
+    textColor: 'text-white',
+    mutedColor: 'text-blue-300',
+    borderColor: 'border-[#1a3a5c]',
+    btnText: 'text-white',
+    btnBorder: 'border-white/30 hover:border-white/60',
     image: '/images/case-studies-card-1.webp',
     quote:
       "Kenstera cut our missed-call rate by 83% in the first month. Every after-hours lead now gets a live conversation instead of a voicemail box. Our signed-case volume is up and our front desk finally has breathing room.",
@@ -21,12 +22,13 @@ const caseStudies = [
     topValue: '80px',
   },
   {
-    bg: 'bg-emerald-950 border border-emerald-800',
-    textColor: 'text-emerald-50',
-    mutedColor: 'text-emerald-400',
-    borderColor: 'border-emerald-800',
-    btnText: 'text-emerald-50',
-    btnBorder: 'border-emerald-50/30 hover:border-emerald-50/60',
+    bg: 'border border-[#e5a56a]',
+    bgStyle: { backgroundColor: '#ffbb7e' },
+    textColor: 'text-gray-900',
+    mutedColor: 'text-gray-700',
+    borderColor: 'border-[#e5a56a]',
+    btnText: 'text-gray-900',
+    btnBorder: 'border-gray-900/30 hover:border-gray-900/60',
     image: '/images/case-studies-card-2.webp',
     quote:
       "We were losing leads on nights and weekends, the busiest time for accident calls. Since switching to Kenstera, we receive qualified bookings while we sleep. Our cost-per-signed-case dropped by 40%.",
@@ -37,6 +39,7 @@ const caseStudies = [
   },
   {
     bg: 'bg-sky-950 border border-sky-800',
+    bgStyle: undefined as React.CSSProperties | undefined,
     textColor: 'text-sky-50',
     mutedColor: 'text-sky-400',
     borderColor: 'border-sky-800',
@@ -76,6 +79,7 @@ export function CaseStudies() {
               {/* Animated card — transform lives here, inside the sticky wrapper */}
               <div
                 className={`${study.bg} rounded-2xl overflow-hidden lg:mb-6`}
+                style={study.bgStyle}
               >
                 <div className="grid grid-cols-1 lg:grid-cols-5 lg:h-[440px]">
                   {/* Left: quote + attribution */}

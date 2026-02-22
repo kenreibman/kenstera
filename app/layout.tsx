@@ -5,7 +5,6 @@ import "./globals.css";
 import { LayoutWrapper } from "@/components/LayoutWrapper";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next"
-import { ReCaptchaProvider } from "next-recaptcha-v3"
 
 const inter = Inter({
   subsets: ["latin"],
@@ -65,11 +64,9 @@ export default function RootLayout({
       <body
         className={`${inter.variable} font-sans antialiased`}
       >
-        <ReCaptchaProvider reCaptchaKey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY}>
-          <LayoutWrapper>
-            {children}
-          </LayoutWrapper>
-        </ReCaptchaProvider>
+        <LayoutWrapper>
+          {children}
+        </LayoutWrapper>
         <Analytics />
         <SpeedInsights/>
         <Script

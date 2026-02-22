@@ -1,30 +1,66 @@
 "use client";
 
 import Link from "next/link";
-import { MeshGradient } from "@paper-design/shaders-react";
+import dynamic from "next/dynamic";
+import { useEffect, useState } from "react";
+
+const MeshGradient = dynamic(
+  () => import("@paper-design/shaders-react").then((mod) => mod.MeshGradient),
+  { ssr: false }
+);
+
+function useWebGLSupported() {
+  const [supported, setSupported] = useState(false);
+  useEffect(() => {
+    try {
+      const canvas = document.createElement("canvas");
+      const gl =
+        canvas.getContext("webgl") || canvas.getContext("experimental-webgl");
+      setSupported(!!gl);
+    } catch {
+      setSupported(false);
+    }
+  }, []);
+  return supported;
+}
 
 export function ShaderHero() {
+  const webgl = useWebGLSupported();
+
   return (
     <section className="relative min-h-[60vh] sm:min-h-[70vh] flex items-center overflow-hidden">
-      {/* Primary shader layer */}
-      <div className="absolute inset-0">
-        <MeshGradient
-          style={{ width: "100%", height: "100%" }}
-          speed={0.3}
-          colors={["#f8f8f8", "#e8e4e0", "#ffffff", "#f0ebe6", "#d6d0ca"]}
-        />
-      </div>
+      {webgl ? (
+        <>
+          {/* Primary shader layer */}
+          <div className="absolute inset-0">
+            <MeshGradient
+              style={{ width: "100%", height: "100%" }}
+              speed={0.3}
+              colors={["#f8f8f8", "#e8e4e0", "#ffffff", "#f0ebe6", "#d6d0ca"]}
+            />
+          </div>
 
-      {/* Secondary overlay layer for depth */}
-      <div className="absolute inset-0 opacity-50 mix-blend-soft-light">
-        <MeshGradient
-          style={{ width: "100%", height: "100%" }}
-          speed={0.2}
-          distortion={0.6}
-          swirl={0.3}
-          colors={["#ffffff", "#eae6e2", "#f5f3f0", "#ffffff"]}
+          {/* Secondary overlay layer for depth */}
+          <div className="absolute inset-0 opacity-50 mix-blend-soft-light">
+            <MeshGradient
+              style={{ width: "100%", height: "100%" }}
+              speed={0.2}
+              distortion={0.6}
+              swirl={0.3}
+              colors={["#ffffff", "#eae6e2", "#f5f3f0", "#ffffff"]}
+            />
+          </div>
+        </>
+      ) : (
+        /* CSS fallback when WebGL is unavailable */
+        <div
+          className="absolute inset-0"
+          style={{
+            background:
+              "linear-gradient(135deg, #f8f8f8 0%, #e8e4e0 25%, #ffffff 50%, #f0ebe6 75%, #d6d0ca 100%)",
+          }}
         />
-      </div>
+      )}
 
       {/* Hero content */}
       <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 pt-20 pb-12 lg:pt-28 lg:pb-16 w-full">

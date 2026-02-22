@@ -1,17 +1,14 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { z } from 'zod'
 import { parsePhoneNumberFromString } from 'libphonenumber-js'
-import { verifyRecaptchaToken } from '@/lib/recaptcha/verify'
 import { ipRatelimit, phoneRatelimit } from '@/lib/rate-limit/demo-call'
 import { retell } from '@/lib/retell/client'
 
-const RECAPTCHA_THRESHOLD = 0.3
 const MAX_CALL_DURATION_MS = 120_000
 
 const bodySchema = z.object({
   phone: z.string().min(1),
   name: z.string().min(1).max(100),
-  recaptchaToken: z.string().min(1),
 })
 
 function getClientIp(request: NextRequest): string {
@@ -44,7 +41,7 @@ export async function POST(request: NextRequest) {
       )
     }
 
-    const { phone, name, recaptchaToken } = parsed.data
+    const { phone, name } = parsed.data
     const clientIp = getClientIp(request)
 
     // 3. Validate phone number as real US number (libphonenumber-js)
@@ -57,16 +54,7 @@ export async function POST(request: NextRequest) {
     }
     const e164Phone = parsedPhone.format('E.164')
 
-    // 4. Verify reCAPTCHA token server-side (before rate limits to avoid counter poisoning by bots)
-    const score = await verifyRecaptchaToken(recaptchaToken, clientIp)
-    if (score === null || score < RECAPTCHA_THRESHOLD) {
-      return NextResponse.json(
-        { success: false, error: 'Verification failed.' },
-        { status: 401 }
-      )
-    }
-
-    // 5. Check IP rate limit (Upstash sliding window, 1 per 10 min)
+    // 4. Check IP rate limit (Upstash sliding window, 1 per 10 min)
     const ipResult = await ipRatelimit.limit(clientIp)
     if (!ipResult.success) {
       const retryAfter = Math.ceil((ipResult.reset - Date.now()) / 1000)
@@ -80,7 +68,7 @@ export async function POST(request: NextRequest) {
       )
     }
 
-    // 6. Check phone number rate limit (Upstash sliding window, 1 per 10 min)
+    // 5. Check phone number rate limit (Upstash sliding window, 1 per 10 min)
     const phoneResult = await phoneRatelimit.limit(e164Phone)
     if (!phoneResult.success) {
       const retryAfter = Math.ceil((phoneResult.reset - Date.now()) / 1000)
@@ -94,15 +82,14 @@ export async function POST(request: NextRequest) {
       )
     }
 
-    // 7. Log consent (SEC-05): structured console.log with timestamp, IP, phone, reCAPTCHA score
+    // 6. Log consent (SEC-05): structured console.log with timestamp, IP, phone
     console.log('[Demo Call] Consent logged:', JSON.stringify({
       timestamp: new Date().toISOString(),
       ip: clientIp,
       phone: e164Phone,
-      recaptchaScore: score,
     }))
 
-    // 8. Create Retell outbound call with agent_override.agent.max_call_duration_ms: 120_000 (SEC-04)
+    // 7. Create Retell outbound call with agent_override.agent.max_call_duration_ms: 120_000 (SEC-04)
     // CRITICAL: Do NOT set max_call_duration_ms on the agent object — always use agent_override at the
     // per-call level to avoid agent version mismatch (per STATE.md decision from Phase 1).
     await retell.call.createPhoneCall({
@@ -120,7 +107,7 @@ export async function POST(request: NextRequest) {
 
     console.log('[Demo Call] Call triggered:', { ip: clientIp, phone: e164Phone })
 
-    // 9. Return success response
+    // 8. Return success response
     return NextResponse.json({ success: true })
   } catch (error) {
     console.error('[Demo Call] Unexpected error:', error)

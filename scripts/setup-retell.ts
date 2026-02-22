@@ -48,10 +48,9 @@ if (fs.existsSync(envPath)) {
 const SENTINEL_LLM_NAME = 'kenstera-intake-llm';
 const SENTINEL_AGENT_NAME = 'kenstera-intake-agent';
 
-// Voice ID — professional female, warm, American English.
-// "11labs-Marissa" is a well-regarded ElevenLabs voice on Retell.
+// Voice ID — Minimax Cimo voice, optimized for telephony fidelity.
 // Tunable: run `client.voice.list()` to browse alternatives.
-const DEFAULT_VOICE_ID = '11labs-Marissa';
+const DEFAULT_VOICE_ID = 'minimax-Cimo';
 
 // NYC area codes tried in order. Area code type must be number (not string).
 const NYC_AREA_CODES = [212, 646, 917, 347, 929];
@@ -113,7 +112,6 @@ async function ensureAgent(client: Retell, llmId: string): Promise<string> {
       llm_id: llmId,
     },
     voice_id: DEFAULT_VOICE_ID,
-    voice_model: 'eleven_turbo_v2_5', // Fast, high-quality ElevenLabs model
     voice_temperature: 0.8,           // Slight variation — natural, not robotic
     voice_speed: 1.0,                 // Natural conversational pace
     language: 'en-US',

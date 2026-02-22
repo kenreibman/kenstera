@@ -18,12 +18,24 @@ export function DemoForm() {
   const [globalError, setGlobalError] = useState<string | null>(null)
   const isSubmitting = useRef(false)
 
+  const prevDigitsRef = useRef('')
+
   const handlePhoneChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
     const raw = e.target.value
-    const digits = raw.replace(/\D/g, '').slice(0, 10)
-    const formatted = new AsYouType('US').input(digits)
+    let digits = raw.replace(/\D/g, '')
+    // Strip leading country code '1' so users can paste/type +1 numbers
+    if (digits.length > 10 && digits.startsWith('1')) {
+      digits = digits.slice(1)
+    }
+    digits = digits.slice(0, 10)
+    // If backspace removed a formatting char but digit count didn't change, drop one more digit
+    if (digits.length === prevDigitsRef.current.length && digits.length > 0 && raw.length < phoneDisplay.length) {
+      digits = digits.slice(0, -1)
+    }
+    prevDigitsRef.current = digits
+    const formatted = digits.length > 0 ? new AsYouType('US').input(digits) : ''
     setPhoneDisplay(formatted)
-  }, [])
+  }, [phoneDisplay])
 
   const handleSubmit = useCallback(async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
@@ -257,7 +269,7 @@ export function DemoForm() {
                       <input
                         id="demo-phone"
                         type="tel"
-                        placeholder="+15551234567"
+                        placeholder="(555) 123-4567"
                         value={phoneDisplay}
                         onChange={handlePhoneChange}
                         className="w-full pb-2 border-b border-gray-300 bg-transparent text-gray-900 placeholder:text-gray-400 text-base focus:outline-none focus:border-gray-900 transition"

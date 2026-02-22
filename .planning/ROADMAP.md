@@ -15,7 +15,7 @@ Decimal phases appear between their surrounding integers in numeric order.
 - [x] **Phase 1: Provisioning** - One-time Retell stack setup that produces the env vars every other phase depends on (completed 2026-02-21)
 - [x] **Phase 2: Secure API Route** - Server-side call trigger with all security controls in place before any UI exists (completed 2026-02-21)
 - [x] **Phase 3: Agent Prompt** - Dual-path agent prompt engineered and validated through real test calls (completed 2026-02-21)
-- [ ] **Phase 4: Form UI** - Client-side demo form component integrated into the homepage
+- [x] **Phase 4: Form UI** - Client-side demo form component integrated into the homepage (completed 2026-02-22)
 - [ ] **Phase 5: Verification** - End-to-end confirmation that every security control and UX state works before launch
 
 ## Phase Details
@@ -72,7 +72,7 @@ Plans:
   3. A visitor who hits the rate limit sees a distinct message telling them to try again later (not a generic error)
   4. A visitor who enters an invalid phone number sees a distinct validation error before submission is attempted
   5. The submit button is disabled after the first click and cannot trigger a double submission
-**Plans:** 1/2 plans executed
+**Plans:** 2/2 plans complete
 Plans:
 - [ ] 04-01-PLAN.md — Install next-recaptcha-v3, add ReCaptchaProvider to layout, build DemoForm.tsx component with all form states
 - [ ] 04-02-PLAN.md — Insert DemoForm into homepage and visually verify in browser (human checkpoint)
@@ -99,5 +99,5 @@ Phases execute in strict numeric order: 1 -> 2 -> 3 -> 4 -> 5
 | 1. Provisioning | 1/1 | Complete    | 2026-02-21 |
 | 2. Secure API Route | 2/2 | Complete   | 2026-02-21 |
 | 3. Agent Prompt | 2/2 | Complete    | 2026-02-21 |
-| 4. Form UI | 1/2 | In Progress|  |
+| 4. Form UI | 2/2 | Complete   | 2026-02-22 |
 | 5. Verification | 0/TBD | Not started | - |

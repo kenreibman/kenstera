@@ -38,7 +38,7 @@
 
 - [x] **INFR-01**: One-time setup script provisions Retell LLM response engine, voice agent, and phone number via API using only the API key
 - [x] **INFR-02**: Provisioned resource IDs (LLM ID, agent ID, phone number) are written to `.env.local` as environment variables
-- [ ] **INFR-03**: Demo form section is rendered on the homepage between the CRM Integrations and Case Studies sections
+- [x] **INFR-03**: Demo form section is rendered on the homepage between the CRM Integrations and Case Studies sections
 
 ## v2 Requirements
 
@@ -96,7 +96,7 @@
 | UX-04 | Phase 4 | Complete |
 | INFR-01 | Phase 1 | Complete |
 | INFR-02 | Phase 1 | Complete |
-| INFR-03 | Phase 4 | Pending |
+| INFR-03 | Phase 4 | Complete |
 
 **Coverage:**
 - v1 requirements: 20 total

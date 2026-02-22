@@ -5,16 +5,16 @@
 See: .planning/PROJECT.md (updated 2026-02-21)
 
 **Core value:** Prospective clients feel the AI intake experience on their own phone before buying
-**Current focus:** Phase 4 — Form UI
+**Current focus:** Phase 5 — Verification
 
 ## Current Position
 
-Phase: 4 of 5 (Form UI)
-Plan: 1 of 2 in current phase (complete)
-Status: Phase 4 Plan 01 complete — DemoForm component and ReCaptchaProvider built. Ready for Plan 02 (homepage integration).
-Last activity: 2026-02-22 — Phase 4 Plan 01: DemoForm.tsx built with 4 form states, phone auto-format, reCAPTCHA v3
+Phase: 4 of 5 (Form UI) — COMPLETE
+Plan: 2 of 2 in phase (complete) — Phase 4 fully done
+Status: Phase 4 complete — DemoForm live on homepage, user-approved design. Ready for Phase 5 (Verification).
+Last activity: 2026-02-21 — Phase 4 Plan 02: DemoForm on homepage, orb redesign, reCAPTCHA removed, user-approved
 
-Progress: [███████░░░] 70%
+Progress: [████████░░] 80%
 
 ## Performance Metrics
 
@@ -35,7 +35,7 @@ Progress: [███████░░░] 70%
 - Last 5 plans: 01-01 (~45 min), 02-01 (~2 min), 02-02 (~15 min), 03-01 (~4 min), 03-02 (~50 min)
 - Trend: Fast code plans; iterative voice QA plans take longer due to human test loop
 
-| 04-form-ui | 1 (so far) | ~3 min | ~3 min |
+| 04-form-ui | 2 | ~33 min | ~16 min |
 
 *Updated after each plan completion*
 
@@ -72,6 +72,10 @@ Recent decisions affecting current work:
 - [Phase 04-form-ui]: ReCaptchaProvider wraps LayoutWrapper as server component leaf in Next.js App Router — valid pattern, no 'use client' needed on layout.tsx
 - [Phase 04-form-ui]: DemoForm button disabled only during formState === 'submitting' — re-enables on error so user can retry without page refresh (UX-04)
 - [Phase 04-form-ui]: executeRecaptcha called inside handleSubmit before fetch (not on mount) to prevent 2-minute token expiry
+- [Phase 04-02]: reCAPTCHA removed entirely — user decision, demo lead form friction not worth protection complexity
+- [Phase 04-02]: Two-card layout: orb animation card (desktop only) + form card — orb hidden on mobile, heading moves into form card
+- [Phase 04-02]: Underline-only inputs (border-b, no box) chosen over boxed inputs for cleaner white-card look
+- [Phase 04-02]: industry dropdown and "Back to Agent" link removed — name + phone + email sufficient for outbound demo call
 
 ### Pending Todos
 
@@ -84,6 +88,6 @@ None.
 
 ## Session Continuity
 
-Last session: 2026-02-22
-Stopped at: Completed 04-01-PLAN.md — DemoForm component and ReCaptchaProvider built. Next: Phase 4 Plan 02 (homepage integration).
+Last session: 2026-02-21
+Stopped at: Completed 04-02-PLAN.md — DemoForm live on homepage, animated orb design, reCAPTCHA removed, user-approved. Next: Phase 5 (Verification).
 Resume file: None

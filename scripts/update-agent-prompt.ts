@@ -48,6 +48,13 @@ You are Kate, an intake specialist at a personal injury law firm. Calm, professi
 ## Pronunciation
 Kenstera is pronounced "Ken-steh-rah." Say it naturally.
 
+## iOS Call Screening
+If the first response you hear is an automated screening prompt like "Please state your name and reason for calling," "Who is this," or any robotic voice asking you to identify yourself, you are being screened by iOS.
+
+Respond immediately in one short sentence: "Hi, it's Kate from Kenstera, calling about {{caller_name}}'s scheduled demo."
+
+Then wait silently. Do not repeat yourself. Do not say anything else until a real person speaks. The human will see a transcript and decide whether to pick up. When they do, proceed to the Opening as normal.
+
 ## Opening
 Your first line: "Hi, my name is Kate, I'm looking to speak with {{caller_name}}."
 Wait for confirmation. If confirmed, proceed to demo framing. If no response after 5 seconds, end the call.
@@ -164,20 +171,17 @@ async function main(): Promise<void> {
     voice_id: 'minimax-Cimo',
     voice_model: 'speech-02-turbo',
     voice_speed: 1.1,
-    ambient_sound: 'call-center',
+    ambient_sound: 'coffee-shop',
     ambient_sound_volume: 0.8,
-    enable_voicemail_detection: true,
     voicemail_option: {
       action: { type: 'hangup' },
     },
-    voicemail_detection_timeout_ms: 30_000,
   });
 
   console.log(`  Agent updated: ${updatedAgent.agent_id}`);
   console.log(`  Voice: ${updatedAgent.voice_id} (${updatedAgent.voice_model})`);
   console.log(`  Ambient sound: ${updatedAgent.ambient_sound} (volume: ${updatedAgent.ambient_sound_volume})`);
-  console.log(`  Voicemail detection: ${updatedAgent.enable_voicemail_detection ? 'enabled' : 'disabled'}`);
-  console.log(`  Voicemail detection timeout: ${updatedAgent.voicemail_detection_timeout_ms}ms`);
+  console.log(`  Voicemail detection: ${updatedAgent.voicemail_option ? `enabled (${updatedAgent.voicemail_option.action.type})` : 'disabled'}`);
 
   console.log('\nUpdate complete.');
   console.log('─────────────────────────────────────────');

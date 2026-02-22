@@ -124,7 +124,7 @@ export function DemoForm() {
               <CheckCircle className="w-14 h-14 text-emerald-500 mb-5" aria-hidden="true" />
               <p className="text-gray-900 text-2xl font-semibold mb-2">Your call is on its way</p>
               <p className="text-gray-500 mb-8">
-                You&apos;ll receive a call shortly from our AI intake specialist.
+                You&apos;ll receive a call shortly from our intake specialist.
               </p>
               <Link
                 href="/contact-sales"
@@ -331,7 +331,7 @@ export function DemoForm() {
 
         {/* Consent */}
         <p className="text-white/30 text-xs mt-4">
-          By submitting, you agree to receive an AI-powered phone call
+          By submitting, you agree to receive a phone call and a follow-up email
         </p>
       </div>
     </section>

@@ -89,7 +89,7 @@ Plans:
   5. A Retell billing alert is configured at $20/day and confirmed active in the account dashboard
 **Plans:** 2 plans
 Plans:
-- [ ] 05-01-PLAN.md — Production build and API key leak check + VERIFICATION.md scaffold
+- [x] 05-01-PLAN.md — Production build and API key leak check + VERIFICATION.md scaffold (completed 2026-02-22)
 - [ ] 05-02-PLAN.md — Browser-based manual verification: call duration, rate limit, phone validation, UX states (human checkpoint)
 
 ## Progress
@@ -103,4 +103,4 @@ Phases execute in strict numeric order: 1 -> 2 -> 3 -> 4 -> 5
 | 2. Secure API Route | 2/2 | Complete   | 2026-02-21 |
 | 3. Agent Prompt | 2/2 | Complete    | 2026-02-21 |
 | 4. Form UI | 2/2 | Complete    | 2026-02-22 |
-| 5. Verification | 0/2 | Not started | - |
+| 5. Verification | 1/2 | In progress | - |

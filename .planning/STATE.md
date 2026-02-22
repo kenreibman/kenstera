@@ -9,19 +9,19 @@ See: .planning/PROJECT.md (updated 2026-02-21)
 
 ## Current Position
 
-Phase: 4 of 5 (Form UI) — COMPLETE
-Plan: 2 of 2 in phase (complete) — Phase 4 fully done
-Status: Phase 4 complete — DemoForm live on homepage, user-approved design. Ready for Phase 5 (Verification).
-Last activity: 2026-02-21 — Phase 4 Plan 02: DemoForm on homepage, orb redesign, reCAPTCHA removed, user-approved
+Phase: 5 of 5 (Verification) — IN PROGRESS
+Plan: 1 of 2 in phase (complete) — Plan 01 done: SEC-01 key-leak check PASSED
+Status: Phase 5 Plan 01 complete — production build passes SEC-01, VERIFICATION.md created with Tests 2-5 templated. Ready for Phase 5 Plan 02 (manual browser tests).
+Last activity: 2026-02-22 — Phase 5 Plan 01: production build SEC-01 key-leak check passed, VERIFICATION.md checklist created
 
-Progress: [████████░░] 80%
+Progress: [█████████░] 90%
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 4
-- Average duration: ~23 min
-- Total execution time: ~68 min
+- Total plans completed: 5
+- Average duration: ~14 min
+- Total execution time: ~71 min
 
 **By Phase:**
 
@@ -30,12 +30,12 @@ Progress: [████████░░] 80%
 | 01-provisioning | 1 | ~45 min | ~45 min |
 | 02-secure-api-route | 2 | ~17 min | ~8 min |
 | 03-agent-prompt | 2 | ~55 min | ~27 min |
+| 04-form-ui | 2 | ~33 min | ~16 min |
+| 05-verification | 1 | ~3 min | ~3 min |
 
 **Recent Trend:**
-- Last 5 plans: 01-01 (~45 min), 02-01 (~2 min), 02-02 (~15 min), 03-01 (~4 min), 03-02 (~50 min)
+- Last 5 plans: 02-02 (~15 min), 03-01 (~4 min), 03-02 (~50 min), 04-01 (~17 min), 05-01 (~3 min)
 - Trend: Fast code plans; iterative voice QA plans take longer due to human test loop
-
-| 04-form-ui | 2 | ~33 min | ~16 min |
 
 *Updated after each plan completion*
 
@@ -85,9 +85,11 @@ None.
 
 - Phase 3 (Agent Prompt): Retell Conversation Flow as fallback if single-prompt two-path approach proves unreliable. Flag for plan-phase.
 - Phase 4 (Demo UI): reCAPTCHA v3 + React 19 compatibility was LOW confidence — RESOLVED: next-recaptcha-v3@1.5.3 installed and works with React 19 / Next.js 16 without peer dep issues.
+- [Phase 05-01]: Key prefix key_ba8f (first 8 chars of RETELL_API_KEY) used for value-leak check — confirmed absent from .next/static/ after production build
+- [Phase 05-01]: SEC-01 verified empirically: both string name and key value prefix absent from all client bundles; server bundle legitimately contains key reference
 
 ## Session Continuity
 
-Last session: 2026-02-21
-Stopped at: Completed 04-02-PLAN.md — DemoForm live on homepage, animated orb design, reCAPTCHA removed, user-approved. Next: Phase 5 (Verification).
+Last session: 2026-02-22
+Stopped at: Completed 05-01-PLAN.md — production build passes SEC-01 key-leak check, VERIFICATION.md created with Tests 2-5 templated. Next: Phase 5 Plan 02 (manual browser verification).
 Resume file: None

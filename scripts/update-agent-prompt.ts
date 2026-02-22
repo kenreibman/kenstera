@@ -155,7 +155,7 @@ async function main(): Promise<void> {
   const updatedLlm = await client.llm.update(process.env.RETELL_LLM_ID, {
     begin_message: "Hi, my name is Kate, I'm looking to speak with {{caller_name}}.",
     general_prompt: KATE_PROMPT,
-    model: 'gpt-4.1',
+    model: 'gpt-4.1-mini',
     start_speaker: 'agent',
     default_dynamic_variables: {
       caller_name: 'there',
@@ -189,6 +189,8 @@ async function main(): Promise<void> {
     voice_speed: 1.1,
     ambient_sound: 'static-noise',
     ambient_sound_volume: 0.8,
+    interruption_sensitivity: 0.5,
+    responsiveness: 1.0,
     voicemail_option: {
       action: { type: 'hangup' },
     },

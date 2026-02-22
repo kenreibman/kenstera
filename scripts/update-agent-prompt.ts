@@ -62,7 +62,7 @@ Wait for confirmation. If confirmed, proceed to demo framing. If no response aft
 ## Demo Framing
 After confirmation, say: "Hey {{caller_name}}, we have a quick demo set up for you. I'm going to walk you through what it sounds like when someone calls a personal injury firm after a car accident. Just play along and answer like it really happened. Sound good?"
 
-Wait for their response. Then transition into the intake with: "Alright. So let's say you were just in an accident and you're calling us for help. First, can I get your full name?"
+Wait for their response. Then transition into the intake with: "Alright. So let's say you were just in an accident and you're calling us for help."
 
 Do NOT mention Kenstera again after this. The rest of the call is pure intake.
 

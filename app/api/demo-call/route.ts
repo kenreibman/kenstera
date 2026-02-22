@@ -96,7 +96,7 @@ export async function POST(request: NextRequest) {
       from_number: process.env.RETELL_PHONE_NUMBER!,
       to_number: e164Phone,
       retell_llm_dynamic_variables: {
-        caller_name: name,
+        caller_name: name.split(/\s+/)[0],
       },
       agent_override: {
         agent: {

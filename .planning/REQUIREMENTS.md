@@ -7,9 +7,9 @@
 
 ### Form
 
-- [ ] **FORM-01**: User can enter name, phone number, and email in a demo form on the homepage
-- [ ] **FORM-02**: Phone number is validated as US E.164 format (`+1` prefix) before submission
-- [ ] **FORM-03**: Form is protected by reCAPTCHA v3 invisible verification
+- [x] **FORM-01**: User can enter name, phone number, and email in a demo form on the homepage
+- [x] **FORM-02**: Phone number is validated as US E.164 format (`+1` prefix) before submission
+- [x] **FORM-03**: Form is protected by reCAPTCHA v3 invisible verification
 
 ### Security
 
@@ -29,10 +29,10 @@
 
 ### UX
 
-- [ ] **UX-01**: Form displays a loading state (spinner/message) while the outbound call is being triggered
-- [ ] **UX-02**: Form transitions to a success state ("Your call is on its way") with a CTA linking to the sales booking page
-- [ ] **UX-03**: Distinct, user-friendly error messages display for rate limit hit (429), invalid phone number, and API failure
-- [ ] **UX-04**: Submit button is disabled after first click to prevent double submission
+- [x] **UX-01**: Form displays a loading state (spinner/message) while the outbound call is being triggered
+- [x] **UX-02**: Form transitions to a success state ("Your call is on its way") with a CTA linking to the sales booking page
+- [x] **UX-03**: Distinct, user-friendly error messages display for rate limit hit (429), invalid phone number, and API failure
+- [x] **UX-04**: Submit button is disabled after first click to prevent double submission
 
 ### Infrastructure
 
@@ -77,9 +77,9 @@
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| FORM-01 | Phase 4 | Pending |
-| FORM-02 | Phase 4 | Pending |
-| FORM-03 | Phase 4 | Pending |
+| FORM-01 | Phase 4 | Complete |
+| FORM-02 | Phase 4 | Complete |
+| FORM-03 | Phase 4 | Complete |
 | SEC-01 | Phase 2 | Complete |
 | SEC-02 | Phase 2 | Complete |
 | SEC-03 | Phase 2 | Complete |
@@ -90,10 +90,10 @@
 | AGNT-03 | Phase 3 | Complete |
 | AGNT-04 | Phase 3 | Complete |
 | AGNT-05 | Phase 3 | Complete |
-| UX-01 | Phase 4 | Pending |
-| UX-02 | Phase 4 | Pending |
-| UX-03 | Phase 4 | Pending |
-| UX-04 | Phase 4 | Pending |
+| UX-01 | Phase 4 | Complete |
+| UX-02 | Phase 4 | Complete |
+| UX-03 | Phase 4 | Complete |
+| UX-04 | Phase 4 | Complete |
 | INFR-01 | Phase 1 | Complete |
 | INFR-02 | Phase 1 | Complete |
 | INFR-03 | Phase 4 | Pending |

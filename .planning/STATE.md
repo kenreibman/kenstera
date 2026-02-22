@@ -5,16 +5,16 @@
 See: .planning/PROJECT.md (updated 2026-02-21)
 
 **Core value:** Prospective clients feel the AI intake experience on their own phone before buying
-**Current focus:** Phase 3 — Agent Prompt
+**Current focus:** Phase 4 — Form UI
 
 ## Current Position
 
-Phase: 3 of 5 (Agent Prompt)
-Plan: 2 of 2 in current phase (complete)
-Status: Phase 3 complete — Kate intake agent verified via real test calls, user approved. Ready for Phase 4 (Demo UI).
-Last activity: 2026-02-21 — Phase 3 Plan 02: real test calls completed, voice/prompt iterated, user approved
+Phase: 4 of 5 (Form UI)
+Plan: 1 of 2 in current phase (complete)
+Status: Phase 4 Plan 01 complete — DemoForm component and ReCaptchaProvider built. Ready for Plan 02 (homepage integration).
+Last activity: 2026-02-22 — Phase 4 Plan 01: DemoForm.tsx built with 4 form states, phone auto-format, reCAPTCHA v3
 
-Progress: [██████░░░░] 60%
+Progress: [███████░░░] 70%
 
 ## Performance Metrics
 
@@ -34,6 +34,8 @@ Progress: [██████░░░░] 60%
 **Recent Trend:**
 - Last 5 plans: 01-01 (~45 min), 02-01 (~2 min), 02-02 (~15 min), 03-01 (~4 min), 03-02 (~50 min)
 - Trend: Fast code plans; iterative voice QA plans take longer due to human test loop
+
+| 04-form-ui | 1 (so far) | ~3 min | ~3 min |
 
 *Updated after each plan completion*
 
@@ -67,6 +69,9 @@ Recent decisions affecting current work:
 - [Phase 03-02]: Kenstera pronunciation hint in prompt: "Ken-steh-rah" — prevents TTS mispronunciation
 - [Phase 03-02]: Em dashes banned from Kate prompt via explicit style rule — TTS engines produce audible artifacts on em dashes
 - [Phase 03-02]: Voice agent QA requires real test calls — Retell dashboard simulation does not equal live call audio quality
+- [Phase 04-form-ui]: ReCaptchaProvider wraps LayoutWrapper as server component leaf in Next.js App Router — valid pattern, no 'use client' needed on layout.tsx
+- [Phase 04-form-ui]: DemoForm button disabled only during formState === 'submitting' — re-enables on error so user can retry without page refresh (UX-04)
+- [Phase 04-form-ui]: executeRecaptcha called inside handleSubmit before fetch (not on mount) to prevent 2-minute token expiry
 
 ### Pending Todos
 
@@ -75,10 +80,10 @@ None.
 ### Blockers/Concerns
 
 - Phase 3 (Agent Prompt): Retell Conversation Flow as fallback if single-prompt two-path approach proves unreliable. Flag for plan-phase.
-- Phase 4 (Demo UI): reCAPTCHA v3 + React 19 compatibility is LOW confidence — validate at Phase 4 start.
+- Phase 4 (Demo UI): reCAPTCHA v3 + React 19 compatibility was LOW confidence — RESOLVED: next-recaptcha-v3@1.5.3 installed and works with React 19 / Next.js 16 without peer dep issues.
 
 ## Session Continuity
 
-Last session: 2026-02-21
-Stopped at: Completed 03-02-PLAN.md — Phase 3 Agent Prompt fully complete. Next: Phase 4 Demo UI.
+Last session: 2026-02-22
+Stopped at: Completed 04-01-PLAN.md — DemoForm component and ReCaptchaProvider built. Next: Phase 4 Plan 02 (homepage integration).
 Resume file: None

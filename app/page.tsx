@@ -11,24 +11,34 @@ import { FinalCTA } from "@/components/sections/FinalCTA";
 
 const faqs = [
   {
-    question: 'How long does setup take?',
-    answer: 'Most firms are live within 1-2 weeks. That includes configuring your intake scripts, integrating with your CRM and calendar, setting up routing rules, and testing. We handle the technical work. Your team just provides input on qualification criteria and preferences.'
+    question: "What is Kenstera?",
+    answer:
+      "Kenstera is an automation company that builds intake and lead qualification systems for law firms. We handle inbound calls and web inquiries 24/7 using conversational agents, so firms never miss a potential client — even after hours or on weekends.",
   },
   {
-    question: 'Does the AI give legal advice?',
-    answer: 'No. The AI is designed to gather information, qualify leads, and book consultations. It does not provide legal advice or opinions. All legal guidance is provided by your attorneys during scheduled consultations.'
+    question: "What services does Kenstera offer?",
+    answer:
+      "Kenstera offers three core services: automated intake and scheduling for capturing and qualifying leads around the clock, support automation for handling routine client inquiries, and custom development for integrations, websites, and bespoke automation solutions tailored to your firm.",
   },
   {
-    question: 'What CRM and practice management systems do you integrate with?',
-    answer: 'We integrate with Clio, Litify, Filevine, Salesforce, HubSpot, and most other legal CRMs. For calendar booking, we work with Calendly, Acuity, Microsoft Bookings, and Google Calendar. If you use something else, we can usually build a custom integration.'
+    question: "What industries does Kenstera work with?",
+    answer:
+      "Kenstera primarily works with law firms, especially personal injury practices. We also serve healthcare providers and real estate businesses that need automated intake and lead qualification.",
   },
   {
-    question: 'Can we customize the intake questions and qualification criteria?',
-    answer: 'Yes, completely. We work with you to build intake scripts specific to your case types: auto accidents, slip-and-fall, medical malpractice, and more. Qualification criteria, routing rules, and escalation triggers are all configured based on your firm\'s specific requirements.'
+    question: "How does Kenstera's intake system work?",
+    answer:
+      "When a potential client calls or submits a web inquiry, Kenstera's intake system handles the conversation in real time. It asks qualifying questions, gathers case details, and books a consultation directly on your calendar. Qualified leads are routed to the right attorney automatically.",
   },
   {
-    question: 'What happens if a caller wants to speak to a real person?',
-    answer: 'They can. You define when calls get transferred to live staff, whether that\'s on request, for specific case types, or based on qualification score. The system can also take a message and have your team call back within whatever timeframe you set.'
+    question: "How much does Kenstera cost?",
+    answer:
+      "Contact us at https://kenstera.com/pricing to book a free consultation, and we can discuss the right plan for your firm.",
+  },
+  {
+    question: "Where is Kenstera located?",
+    answer:
+      "Kenstera is a US-based company. Our solutions work for law firms and businesses nationwide, with no geographic restrictions on service availability.",
   },
 ];
 

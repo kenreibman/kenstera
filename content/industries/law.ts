@@ -142,6 +142,31 @@ export const lawContent: IndustryContent = {
       answer:
         "A working intake machine: 24/7 coverage (after-hours + overflow), lead capture + instant response, qualification + booking, follow-up + no-show reduction, and CRM integration + reporting so you see where cases leak.",
     },
+    {
+      question: "How long does setup take?",
+      answer:
+        "Most firms are live within 1-2 weeks. That includes configuring your intake scripts, integrating with your CRM and calendar, setting up routing rules, and testing. We handle the technical work. Your team just provides input on qualification criteria and preferences.",
+    },
+    {
+      question: "Does the system give legal advice?",
+      answer:
+        "No. The system is designed to gather information, qualify leads, and book consultations. It does not provide legal advice or opinions. All legal guidance is provided by your attorneys during scheduled consultations.",
+    },
+    {
+      question: "What CRM and practice management systems do you integrate with?",
+      answer:
+        "We integrate with Clio, Litify, Filevine, Salesforce, HubSpot, and most other legal CRMs. For calendar booking, we work with Calendly, Acuity, Microsoft Bookings, and Google Calendar. If you use something else, we can usually build a custom integration.",
+    },
+    {
+      question: "Can we customize the intake questions and qualification criteria?",
+      answer:
+        "Yes, completely. We work with you to build intake scripts specific to your case types: auto accidents, slip-and-fall, medical malpractice, and more. Qualification criteria, routing rules, and escalation triggers are all configured based on your firm's specific requirements.",
+    },
+    {
+      question: "What happens if a caller wants to speak to a real person?",
+      answer:
+        "They can. You define when calls get transferred to live staff, whether that's on request, for specific case types, or based on qualification score. The system can also take a message and have your team call back within whatever timeframe you set.",
+    },
   ],
   cta: {
     heading: "Stop losing cases to slow response times",

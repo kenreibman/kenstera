@@ -187,8 +187,8 @@ async function main(): Promise<void> {
     voice_id: 'minimax-Cimo',
     voice_model: 'speech-02-turbo',
     voice_speed: 1.1,
-    ambient_sound: 'static-noise',
-    ambient_sound_volume: 0.8,
+    ambient_sound: 'call-center',
+    ambient_sound_volume: 0.3,
     interruption_sensitivity: 0.5,
     responsiveness: 1.0,
     voicemail_option: {

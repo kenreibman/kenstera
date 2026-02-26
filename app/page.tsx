@@ -36,17 +36,61 @@ export default function Home() {
   const posts = getAllPosts();
   const blogPosts = posts.map(post => ({ slug: post.slug, title: post.title }));
 
+  const organizationSchema = {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    name: "Kenstera",
+    url: "https://kenstera.com",
+    logo: "https://kenstera.com/og-image.jpg",
+    description:
+      "AI-powered intake automation and lead qualification for service-based businesses.",
+    sameAs: [
+      "https://www.facebook.com/people/Kenstera/61586497872271/",
+      "https://www.instagram.com/kenstera.co/",
+    ],
+    contactPoint: {
+      "@type": "ContactPoint",
+      email: "info@kenstera.com",
+      contactType: "sales",
+    },
+  };
+
+  const faqSchema = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: faqs.map((faq) => ({
+      "@type": "Question",
+      name: faq.question,
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: faq.answer,
+      },
+    })),
+  };
+
   return (
-    <main className="">
-      <ShaderHero />
-      <IntakeCall />
-      <IntakeBooking />
-      <IntakeSetup />
-      <CRMIntegrations />
-      <DemoForm />
-      <CaseStudies />
-      <IndustriesFaqBlog faqs={faqs} blogPosts={blogPosts} />
-      <FinalCTA />
-    </main>
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(organizationSchema),
+        }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+      />
+      <main className="">
+        <ShaderHero />
+        <IntakeCall />
+        <IntakeBooking />
+        <IntakeSetup />
+        <CRMIntegrations />
+        <DemoForm />
+        <CaseStudies />
+        <IndustriesFaqBlog faqs={faqs} blogPosts={blogPosts} />
+        <FinalCTA />
+      </main>
+    </>
   );
 }

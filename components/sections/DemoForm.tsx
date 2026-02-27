@@ -97,7 +97,7 @@ export function DemoForm() {
   }, [name, phoneDisplay, email])
 
   return (
-    <section style={{ backgroundColor: '#00122e' }} className="py-20 md:py-28">
+    <section id="demo" style={{ backgroundColor: '#00122e' }} className="py-20 md:py-28">
       <div className="w-full max-w-7xl mx-auto px-5">
 
         {/* Top: Heading + Description */}

@@ -64,48 +64,57 @@ export function FinalCTA() {
           <div className="relative z-10 flex flex-col justify-between flex-1">
             {/* Top: Headline */}
             <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white leading-[1.1] max-w-2xl">
-              Built to scale with your firm.
+              Ready to stop losing leads?
             </h2>
 
-            {/* Bottom: Subtitle + Form */}
+            {/* Bottom: CTA + Newsletter */}
             <div className="mt-auto pt-16">
-              <p className="text-white/70 text-lg mb-6 max-w-md">
-                Subscribe to our newsletter for our product updates.
-              </p>
-
-              <form
-                onSubmit={handleSubmit}
-                className="flex gap-3 max-w-lg"
+              <a
+                href="/contact-sales"
+                className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-full bg-white text-gray-900 font-semibold text-sm hover:bg-white/90 transition-colors"
               >
-                <input
-                  type="email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  placeholder="Your email"
-                  required
-                  aria-label="Email address"
-                  className="flex-1 px-5 py-3 rounded-full bg-white text-gray-900 placeholder:text-gray-400 text-sm focus:outline-none focus:ring-2 focus:ring-white/30"
-                />
-                <button
-                  type="submit"
-                  disabled={submitting}
-                  className="inline-flex items-center justify-center px-5 py-2.5 sm:gap-2 sm:px-6 sm:py-3 rounded-full bg-white text-gray-900 font-medium text-sm hover:bg-white/90 transition-colors disabled:opacity-50"
+                Book a Call
+                <ArrowRight className="h-4 w-4" />
+              </a>
+
+              <div className="mt-10">
+                <p className="text-white/50 text-sm mb-3">
+                  Or subscribe for updates
+                </p>
+                <form
+                  onSubmit={handleSubmit}
+                  className="flex gap-3 max-w-lg"
                 >
-                  {submitted ? (
-                    <span className="sm:hidden">✓</span>
-                  ) : submitting ? (
-                    <span className="sm:hidden">...</span>
-                  ) : (
-                    <ArrowRight className="h-4 w-4 sm:order-last" />
-                  )}
-                  <span className="hidden sm:inline">
-                    {submitted ? "Subscribed!" : submitting ? "Subscribing..." : "Submit"}
-                  </span>
-                </button>
-              </form>
-              {error && (
-                <p className="text-red-300 text-sm mt-2">{error}</p>
-              )}
+                  <input
+                    type="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    placeholder="Your email"
+                    required
+                    aria-label="Email address"
+                    className="flex-1 px-5 py-3 rounded-full bg-white/10 text-white placeholder:text-white/40 text-sm focus:outline-none focus:ring-2 focus:ring-white/30 border border-white/10"
+                  />
+                  <button
+                    type="submit"
+                    disabled={submitting}
+                    className="inline-flex items-center justify-center px-5 py-2.5 sm:gap-2 sm:px-6 sm:py-3 rounded-full bg-white/10 text-white font-medium text-sm hover:bg-white/20 transition-colors disabled:opacity-50 border border-white/10"
+                  >
+                    {submitted ? (
+                      <span className="sm:hidden">✓</span>
+                    ) : submitting ? (
+                      <span className="sm:hidden">...</span>
+                    ) : (
+                      <ArrowRight className="h-4 w-4 sm:order-last" />
+                    )}
+                    <span className="hidden sm:inline">
+                      {submitted ? "Subscribed!" : submitting ? "Subscribing..." : "Submit"}
+                    </span>
+                  </button>
+                </form>
+                {error && (
+                  <p className="text-red-300 text-sm mt-2">{error}</p>
+                )}
+              </div>
             </div>
           </div>
         </div>

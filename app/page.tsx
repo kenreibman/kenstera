@@ -53,7 +53,7 @@ export default function Home() {
     url: "https://kenstera.com",
     logo: "https://kenstera.com/og-image.jpg",
     description:
-      "AI-powered intake automation and lead qualification for service-based businesses.",
+      "AI-powered intake automation and lead qualification for law firms.",
     sameAs: [
       "https://www.facebook.com/people/Kenstera/61586497872271/",
       "https://www.instagram.com/kenstera.co/",

@@ -113,7 +113,7 @@ export function IndustriesFaqBlog({
           {/* Blog Column */}
           <div>
             <h2 className="text-2xl font-medium text-gray-900 mb-8">
-              Latest Blogs
+              From the Blog
             </h2>
 
             <div className="space-y-0">

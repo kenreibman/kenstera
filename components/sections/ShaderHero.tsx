@@ -82,11 +82,11 @@ export function ShaderHero() {
                 strokeLinejoin="round"
               />
             </svg>
-            Accepting Firms for our Pilot Program
+            Accepting New Firms
           </div>
 
           <h1 className="text-balance font-semibold leading-[1.1] tracking-[-0.02em] text-4xl sm:text-5xl lg:text-6xl text-center text-gray-900">
-            After-Hours Conversion System for Law Firms.
+            Your Firm&apos;s Intake, Automated.
           </h1>
 
           <p className="mx-auto mt-6 max-w-2xl text-center text-balance text-lg leading-relaxed text-gray-600 sm:text-lg sm:leading-8">
@@ -95,12 +95,12 @@ export function ShaderHero() {
           </p>
 
           <div className="flex flex-row items-center justify-center gap-3 mt-10">
-            <Link
-              href="/contact-sales"
+            <a
+              href="#demo"
               className="group inline-flex items-center justify-center gap-2 px-6 py-3.5 bg-gray-900 text-white text-sm font-semibold rounded-full hover:bg-gray-800 transition-all shadow-lg shadow-gray-900/10 hover:shadow-xl hover:shadow-gray-900/20"
             >
-              Get Started
-            </Link>
+              Try the Live Demo
+            </a>
             <Link
               href="/contact-sales"
               className="inline-flex items-center justify-center px-6 py-3.5 bg-white text-gray-900 text-sm font-semibold rounded-full hover:bg-gray-50 transition-colors border border-gray-200"

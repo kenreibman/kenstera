@@ -1,357 +1,284 @@
 # Testing Patterns
 
-**Analysis Date:** 2026-02-21
+**Analysis Date:** 2026-03-05
 
 ## Test Framework
 
-**Status:** No test framework currently configured
-
-**Analysis:**
-- No `jest.config.*`, `vitest.config.*`, or test dependencies in `package.json`
-- No test files found in codebase (no `*.test.*` or `*.spec.*` files)
-- No testing libraries installed (`jest`, `vitest`, `@testing-library/*`)
+**Runner:**
+- Not configured. No test framework installed.
+- No `jest.config.*`, `vitest.config.*`, or test runner in `package.json` devDependencies
 - No test script in `package.json`
 
-**Recommendation for future implementation:**
-- For Next.js projects: Vitest or Jest with `@testing-library/react`
-- Config file location: Create `vitest.config.ts` or `jest.config.js` in project root
-- Test command to add: `"test": "vitest"` or `"test": "jest"`
+**Assertion Library:**
+- None installed
 
-## Testing Infrastructure Gaps
+**Run Commands:**
+```bash
+# Not yet available -- to be configured:
+# npm test              # Run all tests
+# npm run test:watch    # Watch mode
+# npm run test:coverage # Coverage
+```
 
-**Current State:**
-- Zero test coverage
-- No automated test execution pipeline
-- No assertion libraries
+## Test File Organization
 
-**What Should Be Tested (by priority):**
+**Location:**
+- No test files exist in the project (zero test coverage)
 
-1. **API Routes (Critical):**
-   - `/app/api/newsletter/route.ts` - Email subscription validation and Resend API integration
-   - `/app/api/pi-intake-audit/capture/route.ts` - Lead capture, validation, Redis storage, QStash scheduling
-   - `/app/api/pi-intake-audit/booked/route.ts` - Lead status updates
-   - `/app/api/pi-intake-audit/send-abandonment/route.ts` - Email sending logic
+**Recommended pattern: co-located tests**
 
-2. **Library Functions (High):**
-   - `lib/blog.ts` - Post fetching, slug validation, path traversal prevention
-   - `lib/case-studies.ts` - Case study loading, TOC generation, path security
-   - `lib/db/leads.ts` - Lead creation, status updates, Redis serialization
-   - `lib/email/send.ts` - Email HTML generation, escaping, error handling
+**Naming:**
+- Use `*.test.ts` for utility/lib tests
+- Use `*.test.tsx` for component tests
 
-3. **Components (Medium):**
-   - `app/pi-intake-audit/components/IntakeWizard.tsx` - Form state management, step navigation
-   - `app/pi-intake-audit/components/ContactForm.tsx` - Form validation, onChange handlers
-   - `components/blog/CodeBlock.tsx` - Clipboard copying, state management
-
-## Suggested Test Structure
-
-**Test File Organization:**
-- Co-located with source files: `lib/blog.ts` → `lib/blog.test.ts`
-- Separate test directories not currently used
-
-**Directory Pattern for New Tests:**
+**Structure:**
 ```
 lib/
-├── blog.ts
-├── blog.test.ts
-├── case-studies.ts
-├── case-studies.test.ts
-├── db/
-│   ├── leads.ts
-│   └── leads.test.ts
-└── email/
-    ├── send.ts
-    └── send.test.ts
-
+  blog.ts
+  blog.test.ts
+  db/
+    leads.ts
+    leads.test.ts
+    demo-leads.ts
+    demo-leads.test.ts
+  email/
+    send.ts
+    send.test.ts
+  recaptcha/
+    verify.ts
+    verify.test.ts
 app/api/
-├── newsletter/
-│   ├── route.ts
-│   └── route.test.ts
-└── pi-intake-audit/
-    ├── capture/
-    │   ├── route.ts
-    │   └── route.test.ts
-    └── send-abandonment/
-        ├── route.ts
-        └── route.test.ts
+  demo-call/
+    route.ts
+    route.test.ts
+    send-followup/
+      route.ts
+      route.test.ts
+  newsletter/
+    route.ts
+    route.test.ts
+  pi-intake-audit/
+    capture/
+      route.ts
+      route.test.ts
+    booked/
+      route.ts
+      route.test.ts
+    send-abandonment/
+      route.ts
+      route.test.ts
 ```
 
-## Test Type Recommendations
+## Test Structure
 
-**Unit Tests:**
-- **Scope:** Test individual functions in isolation with mocked dependencies
-- **Location:** `lib/*.test.ts` files
-- **Examples:**
-  - Test `formatDate()` with various date strings
-  - Test `getAllPosts()` with mock file system
-  - Test `generateLeadId()` produces unique IDs
-  - Test path traversal prevention in `getPostBySlug(slug.includes('..') === true)`
-
-**Integration Tests:**
-- **Scope:** Test API routes with mocked external services
-- **Location:** `app/api/*/route.test.ts` files
-- **Examples:**
-  - Test newsletter endpoint: validation → Resend API call → response
-  - Test lead capture: validation → Redis write → QStash scheduling
-  - Test email sending with mocked Resend client
-
-**No E2E Tests Currently:**
-- Not configured (no Playwright, Cypress, etc.)
-- Could be added later for user flows like intake wizard
-
-## Mocking Strategy
-
-**Framework:** Vitest or Jest (recommend Vitest for Next.js 15+)
-
-**What to Mock:**
-- External APIs: Resend, Upstash Redis, QStash
-- File system operations in `lib/blog.ts` and `lib/case-studies.ts`
-- Environment variables (per test case)
-
-**What NOT to Mock:**
-- Zod schema validation (test real validation behavior)
-- Date functions (use fixed dates in tests)
-- Utility functions like `cn()` (simple, test directly)
-- TypeScript types (no runtime overhead)
-
-**Mocking Examples (Vitest pattern):**
-
+**Recommended suite organization (Vitest):**
 ```typescript
-// Test API route with mocked Resend
 import { describe, it, expect, vi, beforeEach } from 'vitest'
-import { POST } from '@/app/api/newsletter/route'
-import { getResend } from '@/lib/email/send'
 
-vi.mock('@/lib/email/send', () => ({
-  getResend: vi.fn(),
-}))
-
-describe('POST /api/newsletter', () => {
+describe('moduleName', () => {
   beforeEach(() => {
     vi.clearAllMocks()
   })
 
-  it('should subscribe valid email to newsletter', async () => {
-    const mockResend = {
-      contacts: {
-        create: vi.fn().mockResolvedValue({ error: null }),
-      },
-    }
-    vi.mocked(getResend).mockReturnValue(mockResend as any)
+  describe('functionName', () => {
+    it('should handle the happy path', () => {
+      // Arrange -> Act -> Assert
+    })
 
-    const response = await POST(
-      new Request('http://localhost/api/newsletter', {
-        method: 'POST',
-        body: JSON.stringify({ email: 'test@example.com' }),
-      })
-    )
+    it('should return null for invalid input', () => {
+      // ...
+    })
 
-    const data = await response.json()
-    expect(data.success).toBe(true)
-    expect(mockResend.contacts.create).toHaveBeenCalledWith({
-      email: 'test@example.com',
-      audienceId: process.env.RESEND_AUDIENCE_ID,
-      unsubscribed: false,
+    it('should throw when env var is missing', () => {
+      // ...
     })
   })
-
-  it('should return 400 for invalid email', async () => {
-    const response = await POST(
-      new Request('http://localhost/api/newsletter', {
-        method: 'POST',
-        body: JSON.stringify({ email: 'not-an-email' }),
-      })
-    )
-
-    expect(response.status).toBe(400)
-    const data = await response.json()
-    expect(data.success).toBe(false)
-  })
 })
 ```
 
+**Patterns:**
+- Setup: `beforeEach` with `vi.clearAllMocks()` to reset between tests
+- Teardown: Use `afterEach` for env var cleanup if using `vi.stubEnv()`
+- Assertions: Standard `expect()` with `.toBe()`, `.toEqual()`, `.toBeNull()`, `.toThrow()`
+
+## Mocking
+
+**Framework:** Vitest recommended (best Next.js App Router compatibility)
+
+**Patterns:**
+
 ```typescript
-// Test library function with mocked file system
-import { describe, it, expect, vi } from 'vitest'
-import fs from 'fs'
-import { getAllPosts } from '@/lib/blog'
+// Mock an entire module
+vi.mock('@/lib/email/send', () => ({
+  getResend: vi.fn(),
+}))
 
-vi.mock('fs')
+// Mock with implementation
+vi.mock('@/lib/db/demo-leads', () => ({
+  createDemoLead: vi.fn().mockResolvedValue({
+    id: 'demo_test-uuid',
+    name: 'Test User',
+    email: 'test@example.com',
+    status: 'pending',
+    createdAt: '2026-03-05T00:00:00.000Z',
+    updatedAt: '2026-03-05T00:00:00.000Z',
+  }),
+  getDemoLead: vi.fn(),
+  updateDemoLeadStatus: vi.fn(),
+}))
 
-describe('lib/blog', () => {
-  it('should return empty array if blog directory does not exist', () => {
-    vi.mocked(fs.existsSync).mockReturnValue(false)
-
-    const posts = getAllPosts()
-
-    expect(posts).toEqual([])
-  })
-
-  it('should filter only .mdx files', () => {
-    const mockFiles = ['post-1.mdx', 'post-2.mdx', 'draft.txt', 'notes.md']
-    vi.mocked(fs.existsSync).mockReturnValue(true)
-    vi.mocked(fs.readdirSync).mockReturnValue(mockFiles as any)
-    vi.mocked(fs.readFileSync).mockReturnValue(
-      '---\ntitle: Test\ndate: 2026-02-21\n---\nContent'
-    )
-
-    const posts = getAllPosts()
-
-    expect(posts).toHaveLength(2)
-    expect(posts[0].slug).toBe('post-1')
-  })
-})
+// Mock environment variables
+vi.stubEnv('UPSTASH_REDIS_REST_URL', 'https://test.upstash.io')
+vi.stubEnv('UPSTASH_REDIS_REST_TOKEN', 'test-token')
 ```
 
-## Error Testing
+**What to Mock:**
+- External APIs: Resend (`lib/email/send.ts`), Upstash Redis (`lib/db/leads.ts`, `lib/db/demo-leads.ts`), QStash (`@upstash/qstash`), Retell SDK (`lib/retell/client.ts`)
+- File system operations in `lib/blog.ts` and `lib/case-studies.ts` (mock `fs`)
+- Environment variables via `vi.stubEnv()`
+- `crypto.randomUUID()` for deterministic IDs
 
-**Pattern:** Test both success and error paths
+**What NOT to Mock:**
+- Zod schema validation (test real validation behavior)
+- `libphonenumber-js` phone parsing (test with real library)
+- Utility functions like `cn()`, `escapeHtml()`, `formatDate()` (simple pure functions, test directly)
+- TypeScript types (no runtime impact)
 
+## Fixtures and Factories
+
+**Test Data:**
 ```typescript
-// Test error handling in API route
-it('should return 500 when Resend API fails', async () => {
-  const mockResend = {
-    contacts: {
-      create: vi.fn().mockResolvedValue({
-        error: { message: 'API Error' },
-      }),
-    },
-  }
-  vi.mocked(getResend).mockReturnValue(mockResend as any)
+// lib/__fixtures__/test-data.ts
 
-  const response = await POST(
-    new Request('http://localhost/api/newsletter', {
-      method: 'POST',
-      body: JSON.stringify({ email: 'test@example.com' }),
-    })
-  )
-
-  expect(response.status).toBe(500)
-  const data = await response.json()
-  expect(data.success).toBe(false)
-})
-```
-
-## Environment Variables in Tests
-
-**Pattern:** Set per-test via `vi.stubEnv()` (Vitest)
-
-```typescript
-import { describe, it, expect, vi } from 'vitest'
-
-describe('API with env vars', () => {
-  it('should throw when env var missing', () => {
-    vi.stubEnv('RESEND_API_KEY', '')
-
-    expect(() => {
-      getResend()
-    }).toThrow('Missing RESEND_API_KEY environment variable')
-  })
-
-  it('should initialize client when env var present', () => {
-    vi.stubEnv('RESEND_API_KEY', 'test-key')
-
-    const client = getResend()
-
-    expect(client).toBeDefined()
-  })
-})
-```
-
-## Fixtures and Test Data
-
-**Pattern:** Create fixture files for reusable test data
-
-**Location:** `lib/__fixtures__/` or `lib/__tests__/fixtures.ts`
-
-```typescript
-// lib/__fixtures__/leads.ts
 export const mockLead = {
   id: 'lead_12345',
-  email: 'test@example.com',
-  fullName: 'John Doe',
-  website: 'https://example.com',
+  email: 'test@lawfirm.com',
+  fullName: 'Jane Attorney',
+  website: 'https://lawfirm.com',
   role: 'owner-partner',
   inboundLeads: '50-150',
   status: 'pending' as const,
-  createdAt: new Date('2026-02-21T10:00:00Z').toISOString(),
-  updatedAt: new Date('2026-02-21T10:00:00Z').toISOString(),
+  createdAt: '2026-03-05T10:00:00.000Z',
+  updatedAt: '2026-03-05T10:00:00.000Z',
+}
+
+export const mockDemoLead = {
+  id: 'demo_12345',
+  name: 'John Smith',
+  email: 'john@example.com',
+  status: 'pending' as const,
+  createdAt: '2026-03-05T10:00:00.000Z',
+  updatedAt: '2026-03-05T10:00:00.000Z',
 }
 
 export const mockBlogPost = {
   slug: 'test-post',
   title: 'Test Post',
   description: 'A test blog post',
-  date: '2026-02-21',
-  author: 'Test Author',
+  date: '2026-03-01',
+  author: 'Kenstera',
   tags: ['test'],
-  keywords: ['test'],
-  content: '# Test\nThis is test content',
+  keywords: ['testing'],
+  content: '# Test\nThis is test content.',
   readingTime: '1 min read',
 }
 ```
 
-## Coverage Goals
+**Location:**
+- Place fixtures in `lib/__fixtures__/` for shared test data
+- Inline simple test data in individual test files when not reused
 
-**Current:** 0% (no tests implemented)
+## Coverage
+
+**Requirements:** None enforced (0% current coverage)
 
 **Recommended Targets:**
-- API routes: 90%+ (critical path)
-- Library utilities: 85%+
-- Components: 60-70% (lower priority, UI changes frequently)
-- Overall: 70%+ for production-ready state
+- API routes: 90%+ (critical business logic and security)
+- `lib/db/` modules: 85%+ (data integrity)
+- `lib/email/send.ts`: 85%+ (escaping, error handling)
+- `lib/blog.ts`: 90%+ (path traversal prevention is security-critical)
+- Components: 50-60% (UI changes frequently)
+- Overall: 70%+
 
 **View Coverage:**
 ```bash
-# To be added after test setup
-# npm run test:coverage
-# vitest --coverage
+# After setup:
+npx vitest --coverage
 ```
 
-## Validation Testing
+## Test Types
 
-**Zod Schema Testing:**
-- Test valid data passes validation
-- Test invalid data fails with expected error
-- Test edge cases (empty strings, boundary values)
+**Unit Tests:**
+- Scope: Individual functions in `lib/` modules
+- Priority files to test:
+  - `lib/blog.ts` - `getAllPosts()`, `getPostBySlug()`, `getAllSlugs()`, `formatDate()`, path traversal prevention
+  - `lib/db/leads.ts` - `createLead()`, `getLead()`, `updateLeadStatus()`
+  - `lib/db/demo-leads.ts` - `createDemoLead()`, `getDemoLead()`, `updateDemoLeadStatus()`
+  - `lib/email/send.ts` - `escapeHtml()`, `sendAbandonmentEmail()`, `sendDemoFollowUpEmail()`
+  - `lib/recaptcha/verify.ts` - `verifyRecaptchaToken()`
+  - `lib/rate-limit/demo-call.ts` - lazy Proxy initialization
 
+**Integration Tests:**
+- Scope: API route handlers with mocked external services
+- Priority routes:
+  - `app/api/demo-call/route.ts` - Zod validation, phone parsing, rate limiting, Retell call creation, QStash scheduling
+  - `app/api/demo-call/send-followup/route.ts` - lead lookup, email sending, status update
+  - `app/api/newsletter/route.ts` - email validation, Resend contact creation, duplicate handling
+  - `app/api/pi-intake-audit/capture/route.ts` - lead capture flow
+  - `app/api/pi-intake-audit/send-abandonment/route.ts` - abandonment email flow
+
+**E2E Tests:**
+- Not configured (no Playwright, Cypress)
+- Lower priority given the site is primarily marketing/lead-gen
+
+## Common Patterns
+
+**Async Testing:**
 ```typescript
-import { describe, it, expect } from 'vitest'
-import { z } from 'zod'
+it('should create a demo lead and return success', async () => {
+  const mockCreate = vi.fn().mockResolvedValue({ id: 'demo_123', status: 'pending' })
+  vi.mocked(createDemoLead).mockImplementation(mockCreate)
 
-const newsletterSchema = z.object({
-  email: z.string().email('Invalid email address'),
-})
-
-describe('newsletterSchema', () => {
-  it('should validate correct email', () => {
-    const result = newsletterSchema.safeParse({ email: 'test@example.com' })
-    expect(result.success).toBe(true)
+  const request = new NextRequest('http://localhost/api/demo-call', {
+    method: 'POST',
+    body: JSON.stringify({ phone: '(555) 123-4567', name: 'Test', email: 'test@example.com' }),
   })
 
-  it('should reject invalid email', () => {
-    const result = newsletterSchema.safeParse({ email: 'not-an-email' })
-    expect(result.success).toBe(false)
-    expect(result.error?.flatten().fieldErrors.email).toBeDefined()
-  })
+  const response = await POST(request)
+  const data = await response.json()
 
-  it('should reject missing email', () => {
-    const result = newsletterSchema.safeParse({})
-    expect(result.success).toBe(false)
-  })
+  expect(response.status).toBe(200)
+  expect(data.success).toBe(true)
 })
 ```
 
-## Security Testing
-
-**Priority Areas:**
-- Path traversal in file operations (`lib/blog.ts`, `lib/case-studies.ts`)
-- Input validation for all API routes
-- HTML escaping in email templates (`lib/email/send.ts`)
-
+**Error Testing:**
 ```typescript
-// Test path traversal prevention
-describe('blog path traversal prevention', () => {
+it('should return 429 when rate limited', async () => {
+  vi.mocked(ipRatelimit.limit).mockResolvedValue({
+    success: false,
+    reset: Date.now() + 600_000,
+    limit: 1,
+    remaining: 0,
+  })
+
+  const request = new NextRequest('http://localhost/api/demo-call', {
+    method: 'POST',
+    body: JSON.stringify({ phone: '(555) 123-4567', name: 'Test', email: 'test@example.com' }),
+  })
+
+  const response = await POST(request)
+  expect(response.status).toBe(429)
+
+  const data = await response.json()
+  expect(data.success).toBe(false)
+  expect(data.retryAfter).toBeDefined()
+})
+```
+
+**Security Testing:**
+```typescript
+describe('path traversal prevention', () => {
   it('should reject slug with ../', () => {
     const post = getPostBySlug('../../../etc/passwd')
     expect(post).toBeNull()
@@ -361,29 +288,110 @@ describe('blog path traversal prevention', () => {
     const post = getPostBySlug('..\\..\\..\\etc\\passwd')
     expect(post).toBeNull()
   })
+
+  it('should reject slug with forward slash', () => {
+    const post = getPostBySlug('path/to/file')
+    expect(post).toBeNull()
+  })
 })
 
-// Test HTML escaping in emails
-describe('email HTML escaping', () => {
-  it('should escape HTML in lead name', () => {
-    const html = generateEmailHtml({
-      fullName: '<script>alert("xss")</script>',
-    })
-    expect(html).not.toContain('<script>')
-    expect(html).toContain('&lt;script&gt;')
+describe('HTML escaping', () => {
+  it('should escape angle brackets in user input', () => {
+    // Test escapeHtml() in lib/email/send.ts
+    expect(escapeHtml('<script>alert("xss")</script>')).toBe(
+      '&lt;script&gt;alert(&quot;xss&quot;)&lt;/script&gt;'
+    )
   })
 })
 ```
 
-## Next Steps for Implementation
+**Validation Testing:**
+```typescript
+describe('demo-call bodySchema', () => {
+  it('should accept valid input', () => {
+    const result = bodySchema.safeParse({
+      phone: '(555) 123-4567',
+      name: 'John',
+      email: 'john@example.com',
+    })
+    expect(result.success).toBe(true)
+  })
 
-1. Install test dependencies: `npm install -D vitest @testing-library/react @testing-library/jest-dom`
-2. Create `vitest.config.ts` configuration file
-3. Add test script to `package.json`: `"test": "vitest"`
-4. Create `.test.ts` files for critical API routes first
-5. Gradually add component and utility tests
-6. Set up coverage reporting
+  it('should reject empty phone', () => {
+    const result = bodySchema.safeParse({
+      phone: '',
+      name: 'John',
+      email: 'john@example.com',
+    })
+    expect(result.success).toBe(false)
+  })
+
+  it('should reject invalid email', () => {
+    const result = bodySchema.safeParse({
+      phone: '5551234567',
+      name: 'John',
+      email: 'not-email',
+    })
+    expect(result.success).toBe(false)
+  })
+})
+```
+
+**Environment Variable Testing:**
+```typescript
+describe('singleton clients with missing env vars', () => {
+  it('should throw when Redis env vars are missing', () => {
+    vi.stubEnv('UPSTASH_REDIS_REST_URL', '')
+    vi.stubEnv('UPSTASH_REDIS_REST_TOKEN', '')
+
+    expect(() => getRedis()).toThrow('Missing UPSTASH_REDIS_REST_URL or UPSTASH_REDIS_REST_TOKEN')
+  })
+})
+```
+
+## Setup Steps
+
+To add testing to this project:
+
+1. Install dependencies:
+```bash
+npm install -D vitest @testing-library/react @testing-library/jest-dom jsdom
+```
+
+2. Create `vitest.config.ts`:
+```typescript
+import { defineConfig } from 'vitest/config'
+import path from 'path'
+
+export default defineConfig({
+  test: {
+    globals: true,
+    environment: 'jsdom', // for component tests; use 'node' for API/lib tests
+    setupFiles: ['./vitest.setup.ts'],
+  },
+  resolve: {
+    alias: {
+      '@': path.resolve(__dirname, '.'),
+    },
+  },
+})
+```
+
+3. Add scripts to `package.json`:
+```json
+{
+  "scripts": {
+    "test": "vitest",
+    "test:coverage": "vitest --coverage"
+  }
+}
+```
+
+4. Start with highest-priority test files:
+   - `lib/blog.test.ts` (path traversal security)
+   - `app/api/demo-call/route.test.ts` (core business flow)
+   - `lib/email/send.test.ts` (HTML escaping, error handling)
 
 ---
 
-*Testing analysis: 2026-02-21*
+*Testing analysis: 2026-03-05*

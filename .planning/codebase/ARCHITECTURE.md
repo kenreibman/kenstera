@@ -1,253 +1,175 @@
 # Architecture
 
-**Analysis Date:** 2026-02-21
+**Analysis Date:** 2026-03-05
 
 ## Pattern Overview
 
-**Overall:** Next.js 16 full-stack web application with filesystem-based content management and serverless backend integrations.
+**Overall:** Next.js 16 App Router with Static Site Generation (SSG) + Serverless API Routes
 
 **Key Characteristics:**
-- App Router architecture with both SSG and server-rendered pages
-- Content-driven design: blog posts, case studies, industries, and services all built from MDX files
-- Hybrid frontend/backend: React components for UI + serverless API routes for business logic
-- Third-party integrations: Upstash Redis for lead persistence, QStash for scheduled tasks, Resend for email, Cal.com for scheduling
-- Dynamic routing: slug-based content pages generated statically at build time
-- Layered component system: reusable UI components, section components, and page-specific layouts
-
----
+- Content-driven marketing site with statically generated pages at build time
+- API routes handle lead capture, demo calls, and email automation (serverless functions)
+- Content stored as MDX files (blog, case studies) and TypeScript data modules (industries, services)
+- No traditional database; Upstash Redis used as key-value store for transient lead data
+- Delayed job processing via Upstash QStash (scheduled email follow-ups)
+- Client components used sparingly; most pages are React Server Components
 
 ## Layers
 
-**Presentation Layer (UI/Components):**
-- Purpose: Render user-facing interfaces for browsing content, filling forms, and viewing structured information
-- Location: `components/` directory containing reusable components, section components, and form logic
-- Contains: React components (TSX), UI primitives, navigation, footers, carousels, CTAs, form handlers
-- Depends on: Content layer (via lib utilities), Shadcn UI components, Framer Motion, Radix UI
-- Used by: Page routes in `app/` directory
+**Presentation Layer (Pages):**
+- Purpose: Renders pages using Next.js App Router conventions
+- Location: `app/`
+- Contains: Page components (`page.tsx`), layouts (`layout.tsx`), error boundaries (`error.tsx`), not-found pages
+- Depends on: Components layer, Content layer, Lib layer
+- Used by: End users via browser
 
-**Content/Data Layer:**
-- Purpose: Parse and serve MDX-based content files with metadata (frontmatter), generate reading times, table of contents, and provide type-safe interfaces
-- Location: `lib/` directory with utilities (`blog.ts`, `case-studies.ts`, `industry-content.ts`, `service-content.ts`) and content files in `content/`
-- Contains: Content readers with file-system operations, frontmatter parsing via gray-matter, reading-time calculations, TypeScript interfaces, static content objects
-- Depends on: Node.js file system, gray-matter, reading-time libraries
-- Used by: Page routes for SSG/SSR, components for content display
+**Component Layer:**
+- Purpose: Reusable UI components organized by domain
+- Location: `components/`
+- Contains: Section components, blog components, industry components, UI primitives
+- Depends on: `lib/utils.ts` (cn helper), Radix UI, Framer Motion, Lucide icons
+- Used by: Pages in `app/`
 
-**Database/Persistence Layer:**
-- Purpose: Manage lead records with CRUD operations, status tracking, and TTL-based expiration
-- Location: `lib/db/leads.ts`
-- Contains: Lead model interface, Upstash Redis singleton, CRUD functions (create, read, update), key generation
-- Depends on: Upstash Redis REST API
-- Used by: Intake audit API routes and abandonment email logic
+**Content Layer:**
+- Purpose: Static content authored as MDX or TypeScript data objects
+- Location: `content/`
+- Contains: Blog posts (MDX), case studies (MDX), industry data (TS), service data (TS)
+- Depends on: Nothing
+- Used by: Lib layer content readers, then Pages
 
-**API Layer (Serverless Routes):**
-- Purpose: Handle form submissions, webhook callbacks, scheduled tasks, and side effects (email, database updates)
-- Location: `app/api/` with routes for newsletter signup, intake audit capture, booking confirmation, abandonment email scheduling
-- Contains: POST/GET handlers with Zod validation, error handling, external service calls
-- Depends on: Resend (email), Upstash QStash (task scheduling), Upstash Redis (persistence), NextResponse
-- Used by: Frontend forms and external webhooks (Cal.com)
+**Library Layer:**
+- Purpose: Business logic, data access, and external service clients
+- Location: `lib/`
+- Contains: Content readers, database clients, email senders, rate limiters, Retell client, reCAPTCHA verifier
+- Depends on: External SDKs (Upstash, Resend, Retell), content files
+- Used by: API routes, page components (server-side only)
 
-**Email/Notification Layer:**
-- Purpose: Send transactional emails with templated HTML and plain-text fallbacks
-- Location: `lib/email/send.ts`
-- Contains: Resend client singleton, abandonment email template with personalization and escaped HTML
-- Depends on: Resend email service
-- Used by: QStash-triggered abandonment email route
-
-**Page Router/Layout Layer:**
-- Purpose: Define route structure, metadata, static generation strategies, and page composition
-- Location: Root `app/layout.tsx`, `app/page.tsx`, and nested routes under `app/blog/`, `app/case-studies/`, `app/industries/`, `app/services/`, `app/pricing/`, etc.
-- Contains: Route definitions, metadata generation, SSG params generation, page composition via section components
-- Depends on: Content layer for data fetching, components for rendering
-- Used by: Next.js router to serve HTTP responses
-
----
+**API Layer:**
+- Purpose: Serverless endpoints for lead capture, demo calls, email automation, newsletter
+- Location: `app/api/`
+- Contains: Route handlers (`route.ts`)
+- Depends on: Lib layer (db, email, rate-limit, retell, recaptcha)
+- Used by: Client-side form submissions, QStash webhooks
 
 ## Data Flow
 
-**Blog Post Rendering:**
+**Blog/Case Study Content Flow:**
 
-1. User navigates to `/blog` or `/blog/[slug]`
-2. Page route calls `getAllPosts()` or `getPostBySlug()` from `lib/blog.ts`
-3. Library reads `.mdx` files from `content/blog/`, parses frontmatter, extracts content, calculates reading time
-4. Page component receives typed `BlogPost` or `BlogPostMeta` objects
-5. MDXRemote component renders MDX content with custom components from `components/blog/MDXComponents.ts`
-6. Metadata hook generates OG tags, JSON-LD structured data, and SEO meta tags
+1. Author creates `.mdx` file in `content/blog/` or `content/case-studies/`
+2. At build time, `lib/blog.ts` or `lib/case-studies.ts` reads files via `fs`, parses frontmatter with `gray-matter`
+3. Page component (`app/blog/[slug]/page.tsx`) calls content reader, passes to `MDXRemote` for rendering
+4. `generateStaticParams()` pre-renders all slugs at build time (full SSG)
 
-**Case Studies with Table of Contents:**
+**Industry/Service Content Flow:**
 
-1. Similar to blog posts, but with additional TOC extraction from H2 headings in `lib/case-studies.ts`
-2. Page extracts heading IDs for anchor links, client photo, pull quotes, stats
-3. CaseStudySidebar component displays TOC and metadata sidebar on desktop (sticky)
-4. Mobile view collapses sidebar and shows breadcrumb navigation
+1. Content defined as TypeScript objects in `content/industries/*.ts` or `content/services/*.ts`
+2. Registry in `lib/industry-content.ts` or `lib/service-content.ts` maps slugs to content objects
+3. Dynamic route pages (`app/industries/[slug]/page.tsx`, `app/services/[slug]/page.tsx`) look up content by slug
+4. `dynamicParams = false` + `generateStaticParams()` ensures fully static output
 
-**Intake Audit Lead Capture:**
+**Lead Capture Flow (PI Intake Audit):**
 
-1. User submits form on `/pi-intake-audit` page with email, name, website, role, inbound leads count
-2. Form POSTs to `/api/pi-intake-audit/capture` endpoint
-3. Route validates input with Zod schema, creates Lead record in Upstash Redis
-4. Route schedules abandonment email via QStash (15-minute delay)
-5. Frontend receives success response, stores leadId in session/localStorage for booking tracking
-6. If user books via Cal.com callback, `/api/pi-intake-audit/booked` updates lead status to "booked"
-7. QStash job fires at 15-minute mark, checks if status is still "pending"
-8. If pending, sends abandonment email via Resend with personalized booking link
+1. User fills intake wizard on `/pi-intake-audit` page
+2. Client POSTs to `app/api/pi-intake-audit/capture/route.ts`
+3. API validates with Zod, stores lead in Upstash Redis via `lib/db/leads.ts`
+4. API schedules abandonment email via QStash (15-min delay)
+5. If user books, client POSTs to `app/api/pi-intake-audit/booked/route.ts` to mark status as `booked`
+6. When QStash fires, `app/api/pi-intake-audit/send-abandonment/route.ts` checks lead status; skips if booked, sends email via Resend if still pending
 
-**Newsletter Subscription:**
+**Demo Call Flow:**
 
-1. User submits email in footer or CTA components
-2. POSTs to `/api/newsletter`
-3. Route validates email, calls Resend to add contact to audience
-4. Returns success, handles duplicate email gracefully
+1. User submits phone/name/email on homepage demo form
+2. Client POSTs to `app/api/demo-call/route.ts`
+3. API validates phone (libphonenumber-js), checks IP + phone rate limits (Upstash), triggers Retell outbound call
+4. API stores demo lead in Redis, schedules follow-up email via QStash (15-min delay)
+5. `app/api/demo-call/send-followup/route.ts` handles delayed email send via Resend
 
-**Static Generation:**
+**Newsletter Subscription Flow:**
 
-- `generateStaticParams()` in blog and case study routes generates all slug routes at build time
-- `getAllSlugs()` and `getAllCaseStudySlugs()` scan filesystem during build
-- Pages are pre-rendered as static HTML with ISR (Incremental Static Regeneration) for content updates
+1. User submits email via blog newsletter CTA
+2. Client POSTs to `app/api/newsletter/route.ts`
+3. API adds contact to Resend audience
 
 **State Management:**
-
-- No client-side state management library (React Context for layout visibility via `LayoutWrapper`)
-- Form state managed locally with React hooks
-- Lead ID persisted in browser session for booking confirmation tracking
-- Lead records stored in Redis with 30-day TTL
-
----
+- No client-side global state management (no Redux, Zustand, etc.)
+- Server-side state is transient lead data in Upstash Redis with 30-day TTL
+- Page state handled locally via React component state in client components
+- `LayoutWrapper` uses `usePathname()` to conditionally render nav/footer
 
 ## Key Abstractions
 
-**BlogPost / BlogPostMeta:**
-- Purpose: Type-safe blog content with frontmatter metadata and rendered content
-- Examples: `lib/blog.ts` interfaces and `getPostBySlug()`, `getAllPosts()` functions
-- Pattern: Filesystem-based content with gray-matter parsing, lazy content rendering with MDXRemote
+**Content Registries:**
+- Purpose: Map URL slugs to structured content objects for industry and service pages
+- Examples: `lib/industry-content.ts`, `lib/service-content.ts`
+- Pattern: TypeScript Record keyed by slug, with `getXContent(slug)` and `getAllXSlugs()` helpers. Both industry and service pages share the same `IndustryContent` interface and reuse the same `components/industries/` component set.
 
-**CaseStudy:**
-- Purpose: Extended blog-like structure with client testimonials, stats, video embeds, sidebar metadata, and auto-generated TOC
-- Examples: `lib/case-studies.ts` types and content loading
-- Pattern: Derived TOC from markdown headings, client-side sidebar navigation for desktop
+**MDX Content Readers:**
+- Purpose: Read MDX files from disk, parse frontmatter, compute reading time
+- Examples: `lib/blog.ts`, `lib/case-studies.ts`
+- Pattern: File-system based readers using `gray-matter` + `reading-time`. Each exposes `getAll*()`, `get*BySlug()`, and `getAll*Slugs()` functions. Path traversal prevention included.
 
-**Lead:**
-- Purpose: Intake audit form submission record with lifecycle tracking (pending → booked → email_sent)
-- Examples: `lib/db/leads.ts` interface and CRUD functions
-- Pattern: Redis-backed single-instance singleton, time-limited storage, status-based business logic
+**Lazy Singleton Clients:**
+- Purpose: Defer SDK initialization until first use so modules can be imported during build without env vars
+- Examples: `lib/db/leads.ts` (Redis), `lib/email/send.ts` (Resend), `lib/rate-limit/demo-call.ts` (Ratelimit via Proxy), API route files (QStash Client)
+- Pattern: Module-scoped `let client: T | null = null` with `getClient()` factory function. Rate limiter uses a `Proxy` for extra laziness.
 
-**Section Component:**
-- Purpose: Reusable page section (hero, features, CTA, testimonials, pricing cards, carousel)
-- Examples: `ShaderHero`, `IntakeCall`, `CaseStudies`, `FAQ`, `FinalCTA` in `components/sections/`
-- Pattern: Stateless or minimally stateful React components with hardcoded or prop-driven content, often paired with Framer Motion animations
-
-**Content Registry:**
-- Purpose: Centralized mapping of slugs to typed content objects for industries and services
-- Examples: `lib/industry-content.ts` and `lib/service-content.ts` with `industryRegistry`, `serviceRegistry`
-- Pattern: Import all content modules, export registry dict and helpers for `getContent()` and `getAllSlugs()`
-
-**Layout Wrapper:**
-- Purpose: Conditional rendering of navigation and footer based on route, hiding layout on ad landing pages
-- Examples: `components/LayoutWrapper.tsx` with `HIDDEN_LAYOUT_ROUTES` array
-- Pattern: Client component using `usePathname()` to detect routes dynamically
-
----
+**Lead Data Models:**
+- Purpose: Represent transient lead records stored in Redis
+- Examples: `lib/db/leads.ts` (`Lead` type with status `pending | booked | email_sent`), `lib/db/demo-leads.ts` (`DemoLead` type with status `pending | email_sent`)
+- Pattern: CRUD functions operating on Redis keys with `crypto.randomUUID()` IDs and 30-day expiry
 
 ## Entry Points
 
-**Root HTML Page:**
-- Location: `app/page.tsx`
-- Triggers: HTTP GET `/`
-- Responsibilities: Compose homepage from section components (hero, integrations, case studies, FAQ, CTA), call `getAllPosts()` for blog previews
-
 **Root Layout:**
 - Location: `app/layout.tsx`
-- Triggers: All routes
-- Responsibilities: Set global metadata, fonts (Inter), analytics (Vercel, Facebook Pixel), theme color, wrap children in LayoutWrapper for conditional nav/footer
+- Triggers: Every page render
+- Responsibilities: Sets Inter font, global metadata/OG tags, wraps children with `LayoutWrapper`, injects Vercel Analytics, Speed Insights, and Meta Pixel
 
-**Blog List:**
-- Location: `app/blog/page.tsx`
-- Triggers: HTTP GET `/blog`
-- Responsibilities: Fetch all posts, render grid of BlogCard components with filtering/sorting by date
+**Layout Wrapper:**
+- Location: `components/LayoutWrapper.tsx`
+- Triggers: Every page render (client component)
+- Responsibilities: Conditionally shows/hides `MainNavigation` and `Footer` based on pathname. Landing pages listed in `HIDDEN_LAYOUT_ROUTES` array get no nav/footer.
 
-**Blog Detail:**
-- Location: `app/blog/[slug]/page.tsx`
-- Triggers: HTTP GET `/blog/{slug}`
-- Responsibilities: Load post by slug, render title/metadata header, MDX content via MDXRemote, author card, TOC sidebar, newsletter CTA, generate static params for SSG
+**Homepage:**
+- Location: `app/page.tsx`
+- Triggers: Root URL `/`
+- Responsibilities: Composes ShaderHero, IntakeCall, IntakeBooking, IntakeSetup, CRMIntegrations, DemoForm, CaseStudies, IndustriesFaqBlog, FinalCTA. Injects Organization + FAQ structured data (JSON-LD).
 
-**Case Studies Detail:**
-- Location: `app/case-studies/[slug]/page.tsx`
-- Triggers: HTTP GET `/case-studies/{slug}`
-- Responsibilities: Load case study with TOC, render hero with stats/pull quote, two-column layout (sidebar + content), video embed, FinalCTA
-
-**Intake Audit Form Page:**
-- Location: `app/pi-intake-audit/page.tsx`
-- Triggers: HTTP GET `/pi-intake-audit`
-- Responsibilities: Render multi-step form UI, POST to `/api/pi-intake-audit/capture`, handle lead creation and abandonment scheduling
-
-**API: Newsletter Signup:**
-- Location: `app/api/newsletter/route.ts`
-- Triggers: POST `/api/newsletter`
-- Responsibilities: Validate email with Zod, add to Resend audience, handle duplicate contact gracefully
-
-**API: Intake Capture:**
-- Location: `app/api/pi-intake-audit/capture/route.ts`
-- Triggers: POST `/api/pi-intake-audit/capture`
-- Responsibilities: Validate form data, create Lead in Redis, schedule QStash abandonment email task, return leadId
-
-**API: Booking Confirmation:**
-- Location: `app/api/pi-intake-audit/booked/route.ts`
-- Triggers: POST `/api/pi-intake-audit/booked` (webhook from Cal.com)
-- Responsibilities: Receive leadId from external webhook, update lead status to "booked", prevent abandonment email
-
-**API: Abandonment Email:**
-- Location: `app/api/pi-intake-audit/send-abandonment/route.ts`
-- Triggers: HTTP POST from QStash (scheduled 15 minutes after capture)
-- Responsibilities: Retrieve lead from Redis, verify status is "pending", send abandonment email via Resend, update status to "email_sent"
-
----
+**API Routes:**
+- `app/api/demo-call/route.ts`: Triggers outbound Retell demo calls with rate limiting
+- `app/api/demo-call/send-followup/route.ts`: QStash webhook for demo follow-up emails
+- `app/api/pi-intake-audit/capture/route.ts`: Captures intake audit leads
+- `app/api/pi-intake-audit/booked/route.ts`: Marks leads as booked
+- `app/api/pi-intake-audit/send-abandonment/route.ts`: QStash webhook for abandonment emails
+- `app/api/newsletter/route.ts`: Newsletter subscription via Resend audiences
 
 ## Error Handling
 
-**Strategy:** Try-catch with JSON error responses, validation at API boundary with Zod, optional chaining for null-safe navigation.
+**Strategy:** Zod validation at API boundaries, try-catch with structured error responses, Next.js error boundaries for pages
 
 **Patterns:**
-
-- **API Validation:** Zod `safeParse()` with detailed field-level error responses (`error.flatten().fieldErrors`)
-- **Missing Config:** Console errors logged, JSON responses with 500 status codes
-- **Database Failures:** Catch Redis errors, log with context (leadId, timestamp), return 500 with generic message
-- **Email Failures:** Log detailed Resend error, return `{ success: false, error: message }`, gracefully handle duplicate contact "already exists" as success
-- **Not Found:** Blog/case study routes call `notFound()` from Next.js, triggers 404 page
-- **Null Safety:** MDXRemote renders conditionally, components destructure with defaults (data.title || "Untitled")
-
----
+- All API routes wrap handler logic in try-catch, return `{ success: false, error: string }` with appropriate HTTP status codes
+- Request body parsing is double-wrapped: outer try-catch for `request.json()` parse errors, then Zod schema validation with `safeParse`
+- Content readers return `null` for missing slugs; page components call `notFound()` to trigger 404
+- Path traversal prevention in blog and case study readers via string checks + `path.resolve` comparison
+- QStash webhook endpoints verify signatures via `@upstash/qstash` `Receiver` before processing
+- Global error boundary at `app/error.tsx`; route-level error boundary at `app/blog/[slug]/error.tsx`
+- Non-critical failures (e.g., follow-up email scheduling) are caught and logged but do not fail the primary operation
 
 ## Cross-Cutting Concerns
 
-**Logging:**
-- Console-based with context prefixes: `[Newsletter]`, `[Email]`, `[Intake Audit]`, `[Intake Audit]`
-- Includes timestamp, operation name, IDs, error details for traceability
+**Logging:** `console.log` / `console.error` with structured prefix tags: `[Demo Call]`, `[Intake Audit]`, `[Abandonment]`, `[Demo Follow-up]`, `[Email]`, `[Newsletter]`. Includes contextual data (leadId, timestamp, IP).
 
-**Validation:**
-- Zod schemas at API routes for all external input (newsletter email, intake form, webhook leadId)
-- Path traversal protection in blog/case-studies slugs: reject `..`, `/`, `\`
-- HTML escaping in email templates to prevent injection
+**Validation:** Zod schemas at every API route boundary. Phone validation via `libphonenumber-js` (US numbers only). reCAPTCHA verification available via `lib/recaptcha/verify.ts`. HTML escaping in email templates via `escapeHtml()` in `lib/email/send.ts`.
 
-**Authentication:**
-- None required for public pages
-- QStash uses QSTASH_TOKEN environment variable for task scheduling auth
-- Resend uses RESEND_API_KEY for email sending auth
-- Redis uses UPSTASH_REDIS_REST_URL and UPSTASH_REDIS_REST_TOKEN
+**Authentication:** No user authentication. API protection via rate limiting (Upstash Ratelimit sliding window: 1 request per IP and 1 per phone per 10 minutes on demo-call). QStash signature verification on webhook endpoints using `Receiver.verify()`.
 
-**Performance Optimization:**
-- Static generation (SSG) for blog posts and case studies via `generateStaticParams()`
-- Lazy loading of MDXRemote components with Suspense boundaries
-- Image optimization via Next.js Image component with `fill` layout and responsive sizes
-- Carousel lazy loading for projects
-- CSS-in-JS with Tailwind for minimal bundle impact
+**Security Headers:** Configured in `next.config.ts`: X-Content-Type-Options (nosniff), X-Frame-Options (DENY), Referrer-Policy (strict-origin-when-cross-origin), Permissions-Policy (camera/microphone/geolocation disabled), HSTS (2-year max-age with preload), X-DNS-Prefetch-Control (on). `poweredByHeader: false`.
 
-**SEO:**
-- Open Graph and Twitter Card metadata on every page
-- JSON-LD structured data (Article schema) on blog and case study pages
-- Canonical URLs in metadata
-- Keywords and descriptions from frontmatter
-- Reading time displayed for long-form content
-- Semantic HTML structure with proper heading hierarchy
+**SEO:** Per-page metadata exports via Next.js `generateMetadata()`, JSON-LD structured data (Organization, FAQPage, Article schemas), Open Graph + Twitter card tags, canonical URLs via `metadataBase`.
+
+**Analytics:** Vercel Analytics (`@vercel/analytics`), Vercel Speed Insights (`@vercel/speed-insights`), Meta/Facebook Pixel via inline script in root layout.
 
 ---
 
-*Architecture analysis: 2026-02-21*
+*Architecture analysis: 2026-03-05*

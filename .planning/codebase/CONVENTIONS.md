@@ -1,277 +1,274 @@
 # Coding Conventions
 
-**Analysis Date:** 2026-02-21
+**Analysis Date:** 2026-03-05
 
 ## Naming Patterns
 
 **Files:**
-- Components: PascalCase (e.g., `BlogCard.tsx`, `IntakeWizard.tsx`, `ContactForm.tsx`)
-- Library/utility files: camelCase (e.g., `blog.ts`, `leads.ts`, `send.ts`, `utils.ts`)
-- API routes: kebab-case (e.g., `/api/pi-intake-audit/capture/route.ts`, `/api/newsletter/route.ts`)
-- Directories: kebab-case (e.g., `components/`, `pi-intake-audit/`, `case-studies/`)
+- React components: PascalCase (e.g., `DemoForm.tsx`, `MainNavigation.tsx`, `BlogCard.tsx`, `IntakeWizard.tsx`)
+- Utility/library modules: kebab-case for multi-word (e.g., `demo-leads.ts`, `rate-limit/demo-call.ts`, `industry-content.ts`, `case-studies.ts`)
+- Single-word lib files: lowercase (e.g., `blog.ts`, `utils.ts`)
+- API routes: kebab-case directories following Next.js conventions (`/api/demo-call/send-followup/route.ts`, `/api/pi-intake-audit/capture/route.ts`)
+- Next.js special files: `page.tsx`, `layout.tsx`, `route.ts`, `error.tsx`, `not-found.tsx`, `loading.tsx`
+- Barrel files: `index.ts` for re-exports in component groups
 
 **Functions:**
-- Component functions: PascalCase (e.g., `BlogCard`, `IntakeWizard`, `ProgressIndicator`)
-- Utility/helper functions: camelCase (e.g., `getAllPosts()`, `getPostBySlug()`, `formatDate()`, `generateLeadId()`)
-- Exported types/interfaces: PascalCase (e.g., `BlogPost`, `FormData`, `CaseStudy`, `LeadStatus`)
+- Use camelCase for all functions: `getAllPosts()`, `getPostBySlug()`, `createDemoLead()`, `formatDate()`
+- React components use PascalCase: `DemoForm`, `MainNavigation`, `LayoutWrapper`
+- Prefix getter/factory functions with `get`: `getRedis()`, `getResend()`, `getQStash()`, `getClientIp()`
+- Prefix generator functions with `generate`: `generateDemoLeadId()`, `generateLeadId()`
+- Prefix boolean-returning helpers descriptively: `verifyRecaptchaToken()` returns `number | null`
 
 **Variables:**
-- Component state: camelCase (e.g., `formData`, `currentStep`, `leadId`, `direction`)
-- Constants: camelCase or UPPER_SNAKE_CASE for module-level constants (e.g., `BLOG_DIR`, `ABANDONMENT_DELAY_SECONDS`)
-- Configuration objects: camelCase (e.g., `leadOptions`, `roleOptions`, `calloutConfig`)
+- Use camelCase: `phoneDisplay`, `formState`, `fieldErrors`, `globalError`
+- Constants use UPPER_SNAKE_CASE: `MAX_CALL_DURATION_MS`, `FOLLOWUP_DELAY_SECONDS`, `BLOG_DIR`, `HIDDEN_LAYOUT_ROUTES`
+- Ref variables use `Ref` suffix: `lastScrollYRef`, `prevDigitsRef`, `isSubmitting` (ref used as mutex)
 
-**Types:**
-- Interfaces: PascalCase, prefixed with descriptive name (e.g., `BlogPost`, `BlogPostMeta`, `ContactFormProps`, `CalloutProps`)
-- Type unions: PascalCase (e.g., `LeadStatus`, `CalloutType`)
-- Generic props types: Suffix with `Props` (e.g., `BlogCardProps`, `ContactFormProps`, `CalloutProps`)
+**Types/Interfaces:**
+- PascalCase for all types and interfaces: `BlogPost`, `BlogPostMeta`, `DemoLead`, `LeadStatus`, `IndustryContent`
+- Use `interface` for object shapes: `interface BlogPost { ... }`
+- Use `type` for unions and aliases: `type FormState = 'idle' | 'submitting' | 'success' | 'error'`
+- Use `type` for status unions: `type DemoLeadStatus = 'pending' | 'email_sent'`
+- Suffix component props with descriptive inline types or separate `Props` interfaces
+- Export types alongside their related functions in the same module
 
 ## Code Style
 
 **Formatting:**
-- ESLint + Next.js config (no Prettier configured separately)
-- Config: `eslint.config.mjs` uses `eslint-config-next/core-web-vitals` and `eslint-config-next/typescript`
-- Trailing semicolons: used consistently
-- Quotes: double quotes for JSX attributes, single quotes for string literals
-- Line length: no hard limit observed, varies by context (50-100+ characters)
+- No dedicated formatter config (no Prettier config file)
+- ESLint handles formatting via `eslint-config-next`
+- 2-space indentation throughout
+- Single quotes in `.ts` files, double quotes in `.tsx` JSX attributes (mixed in practice -- some `.ts` files also use single quotes for imports)
+- Trailing commas used in multi-line structures
+- Semicolons: generally present but occasionally omitted in some files
 
 **Linting:**
-- Framework: ESLint v9 with Next.js-specific rules
-- Config file: `eslint.config.mjs` (flat config format)
-- Rules enforced: Next.js Core Web Vitals and TypeScript best practices
-- Run command: `npm run lint` (eslint with default Next.js rules)
+- ESLint 9 flat config at `eslint.config.mjs`
+- Uses `eslint-config-next/core-web-vitals` and `eslint-config-next/typescript`
+- No custom rules added beyond Next.js defaults
+- Run with: `npm run lint`
 
-**Example formatting observed:**
-```typescript
-// From lib/blog.ts
-export interface BlogPost {
-  slug: string;
-  title: string;
-  description: string;
-  date: string;
-  updated?: string;
-  author: string;
-}
-
-export function getAllPosts(): BlogPostMeta[] {
-  if (!fs.existsSync(BLOG_DIR)) {
-    return [];
-  }
-  // ...
-}
-```
+**TypeScript:**
+- Strict mode enabled in `tsconfig.json`
+- Target: ES2022
+- Path alias: `@/*` maps to project root (`"./*"`)
+- Always use `@/` imports for project files (e.g., `@/lib/blog`, `@/components/sections/Hero`)
+- Separate `tsconfig.scripts.json` for scripts directory (excluded from main tsconfig)
 
 ## Import Organization
 
 **Order:**
 1. Node.js built-in modules (`fs`, `path`, `crypto`)
-2. Third-party dependencies (`react`, `next`, UI libraries)
-3. Local absolute imports with `@/` alias
-4. Local relative imports (not used; `@/` is preferred)
+2. React/Next.js framework imports (`react`, `next/...`, `next/font/google`)
+3. Third-party libraries (`zod`, `framer-motion`, `libphonenumber-js`, `lucide-react`)
+4. Internal imports using `@/` alias (`@/lib/...`, `@/components/...`)
+5. Relative imports (used within same directory, e.g., `./globals.css`)
 
 **Path Aliases:**
-- `@/*` → root directory (configured in `tsconfig.json`)
-- All internal imports use `@/` prefix: `@/lib/blog`, `@/components/blog`, `@/lib/db/leads`
+- `@/*` -> project root (configured in `tsconfig.json` and `components.json`)
+- Always prefer `@/` over relative paths for cross-directory imports
+- shadcn/ui aliases: `@/components/ui`, `@/lib/utils`, `@/hooks`
 
-**Example from `app/newsletter/route.ts`:**
+**Example:**
 ```typescript
 import { NextRequest, NextResponse } from 'next/server'
 import { z } from 'zod'
-import { getResend } from '@/lib/email/send'
+import { parsePhoneNumberFromString } from 'libphonenumber-js'
+import { Client } from '@upstash/qstash'
+import { ipRatelimit, phoneRatelimit } from '@/lib/rate-limit/demo-call'
+import { retell } from '@/lib/retell/client'
+import { createDemoLead } from '@/lib/db/demo-leads'
+```
+
+## Component Patterns
+
+**Server vs Client Components:**
+- Default to Server Components (no directive needed)
+- Add `'use client'` only when using hooks, event handlers, or browser APIs
+- Client components: `LayoutWrapper.tsx`, `MainNavigation.tsx`, `DemoForm.tsx`, `TableOfContents.tsx`
+- Server components: page files, layout files (except where interactivity is needed)
+
+**Component Export Style:**
+- Use named exports for all components: `export function DemoForm() { ... }`
+- Use `export default` only for Next.js pages/layouts: `export default function Home() { ... }`
+- Barrel files re-export named exports: `export { TableOfContents } from "./TableOfContents"`
+
+**Props:**
+- Define prop types inline or as interfaces within the same file
+- Use destructuring in function parameters
+- Example: `function MobileNavItem({ item, isExpanded, onToggle, onClose }: { ... })`
+
+**Styling:**
+- Tailwind CSS v4 with `@tailwindcss/postcss` plugin
+- Use `cn()` utility from `@/lib/utils` for conditional class merging (clsx + tailwind-merge)
+- shadcn/ui components in `components/ui/` (new-york style, RSC-compatible): `button.tsx`, `carousel.tsx`, `sheet.tsx`
+- CSS variables for theme tokens defined in `app/globals.css` using oklch color space
+- Responsive prefixes: `sm:`, `md:`, `lg:`, `xl:` for breakpoints
+- Inline styles used sparingly for animations and dynamic values (e.g., CSS keyframes in `DemoForm.tsx`)
+- Motion/animation via Framer Motion with `AnimatePresence` for transitions
+
+**Common Tailwind patterns:**
+```typescript
+// Group hover patterns
+className="group block"
+className="transition-transform duration-500 group-hover:scale-105"
+
+// Conditional classes with cn()
+className={cn("h-1 w-12 rounded-full", i < currentStep ? 'bg-blue-950' : 'bg-gray-200')}
+
+// Responsive layout
+className="grid grid-cols-1 lg:grid-cols-[1fr_1.2fr] gap-4"
 ```
 
 ## Error Handling
 
-**Patterns:**
-- **API routes:** Wrap in try-catch, return NextResponse with appropriate status codes
-  - 400 for invalid input (JSON parsing or validation errors)
-  - 500 for server errors
-  - Returns `{ success: boolean, error?: string }` JSON response
-- **Library functions:** Throw Error with descriptive messages for missing environment variables
-  - Example: `throw new Error('Missing UPSTASH_REDIS_REST_URL or UPSTASH_REDIS_REST_TOKEN environment variables')`
-- **Client-side:** Silent error handling where appropriate (e.g., clipboard copy failures)
-  - Example in `CodeBlock.tsx`: `catch { // silently ignore clipboard errors }`
-- **Validation:** Use Zod schemas with `safeParse()` for non-throwing validation
-  - Example: `const parsed = newsletterSchema.safeParse(data)`
-  - Check with `if (!parsed.success)` and return detailed error info
+**API Routes:**
+- Wrap entire handler in try/catch returning `{ success: false, error: string }` with appropriate HTTP status
+- Parse JSON body in inner try/catch to return 400 for malformed requests
+- Use Zod `safeParse()` for input validation -- never throw on validation failure
+- Return user-friendly error messages, not raw error details
+- Log errors with prefixed tags: `console.error('[Demo Call] Unexpected error:', error)`
+- Non-critical failures (like email scheduling) are caught separately and logged without failing the main operation
+- Rate limit responses include `retryAfter` field
 
-**Example from `app/api/newsletter/route.ts`:**
+**API Route Pattern (follow this exactly for new routes):**
 ```typescript
 export async function POST(request: NextRequest) {
   try {
+    // 1. Parse JSON body
     let data: unknown
     try {
       data = await request.json()
     } catch {
-      return NextResponse.json(
-        { success: false, error: 'Invalid JSON body' },
-        { status: 400 }
-      )
+      return NextResponse.json({ success: false, error: 'Invalid JSON body' }, { status: 400 })
     }
 
-    const parsed = newsletterSchema.safeParse(data)
+    // 2. Validate with Zod
+    const parsed = schema.safeParse(data)
     if (!parsed.success) {
-      return NextResponse.json(
-        { success: false, error: 'Please enter a valid email address' },
-        { status: 400 }
-      )
+      return NextResponse.json({ success: false, error: 'Missing required fields.' }, { status: 400 })
     }
-    // ...
+
+    // 3-N. Business logic with numbered steps
+
+    return NextResponse.json({ success: true })
   } catch (error) {
-    console.error('[Newsletter] Unexpected error:', error)
-    return NextResponse.json(
-      { success: false, error: 'Something went wrong' },
-      { status: 500 }
-    )
+    console.error('[Tag] Unexpected error:', error)
+    return NextResponse.json({ success: false, error: 'Something went wrong.' }, { status: 500 })
   }
 }
 ```
 
+**Client Components:**
+- Use React error boundaries via Next.js `error.tsx` files
+- Form submissions use state machine pattern: `type FormState = 'idle' | 'submitting' | 'success' | 'error'`
+- Field-level errors stored in `Record<string, string>` and global errors in separate state
+- Use `useRef` as submission mutex to prevent double-submit: `isSubmitting.current`
+- Network errors caught with generic fallback message
+
+**Data Fetching (lib modules):**
+- Return `null` for not-found cases (e.g., `getPostBySlug` returns `BlogPost | null`)
+- Return empty arrays for empty collections (e.g., `getAllPosts` returns `[]` if directory missing)
+- Throw on missing environment variables (fail fast on misconfiguration)
+
 ## Logging
 
-**Framework:** Node.js `console` object (no dedicated logging library)
+**Framework:** `console.log` / `console.error` (no structured logging library)
 
 **Patterns:**
-- Prefix log messages with module context in brackets: `[Newsletter]`, `[Email]`, `[Intake Audit]`
-- Use appropriate log level: `console.log()` for info, `console.error()` for errors
-- Include structured data in production logs: timestamps, IDs, relevant context
-- Example: `console.log('[Newsletter] New subscriber:', parsed.data.email)`
-- Silent failures for non-critical operations (e.g., missing NEXT_PUBLIC_BASE_URL logs error but continues)
+- Prefix all logs with bracketed domain tag: `[Demo Call]`, `[Email]`, `[Newsletter]`, `[Intake Audit]`
+- Use `JSON.stringify` for structured data in consent/audit logs
+- Log both success and failure paths
+- Include relevant identifiers (leadId, email, IP) but avoid logging full secrets
 
-**Example from `lib/email/send.ts`:**
+**Examples:**
 ```typescript
+console.log('[Demo Call] Consent logged:', JSON.stringify({ timestamp, ip, phone }))
+console.log('[Demo Call] Call triggered:', { ip: clientIp, phone: e164Phone })
 console.error('[Email] Failed to send abandonment email:', error)
-console.log('[Email] Abandonment email sent to lead:', lead.id)
+console.log('[Newsletter] New subscriber:', parsed.data.email)
 ```
 
 ## Comments
 
 **When to Comment:**
-- Security-related code: path traversal prevention, HTML escaping
-- Non-obvious logic: e.g., "Prevent path traversal" before security checks
-- Business logic explanations: e.g., "Resend returns an error if the contact already exists"
-- Fire-and-forget patterns: e.g., "Navigate IMMEDIATELY for responsive UX" / "Capture lead data in background"
+- Security-critical decisions get inline comments explaining the "why" (see `lib/retell/client.ts` server-only guard, `lib/blog.ts` path traversal guard)
+- API route steps are numbered with comments: `// 1. Parse JSON body`, `// 2. Validate schema with Zod`
+- Architecture decisions documented inline: `// CRITICAL: Do NOT set max_call_duration_ms on the agent object` in `app/api/demo-call/route.ts`
+- Rate limit configurations get descriptive comments
+- Lazy initialization patterns get comments explaining why deferred: `// Lazy Ratelimit factory` in `lib/rate-limit/demo-call.ts`
+- Commented-out code is left in place (e.g., video section in `components/sections/Hero.tsx`)
 
 **JSDoc/TSDoc:**
-- Not widely used in this codebase
-- Type annotations via TypeScript interfaces are preferred for documentation
-- Example of detailed inline comments:
-  ```typescript
-  // Prevent path traversal
-  if (slug.includes("..") || slug.includes("/") || slug.includes("\\")) {
-    return null;
-  }
-  ```
+- Not used. No JSDoc comments detected in the codebase.
+- Type annotations via TypeScript interfaces serve as the primary documentation.
 
 ## Function Design
 
-**Size:**
-- Utility functions: concise, 10-50 lines typical
-- Components: 50-200 lines for single components (larger components broken into sub-components)
-- API route handlers: 30-80 lines after accounting for error handling
+**Size:** Functions are generally focused and under 50 lines. API route handlers are longer (up to 160 lines for `app/api/demo-call/route.ts`) but are structured with numbered steps.
 
-**Parameters:**
-- Props passed as single object: `({ post }: BlogCardProps)`
-- Destructure in function signature when possible
-- Optional parameters use `?:` syntax in types
-- Data objects passed to async functions: use Zod schemas for validation before processing
+**Parameters:** Prefer object parameters for functions with multiple inputs: `createDemoLead({ name, email })`. Simple getters take primitives: `getPostBySlug(slug: string)`. Use `Omit<>` for create functions that auto-generate fields: `createLead(data: Omit<Lead, 'id' | 'status' | 'createdAt' | 'updatedAt'>)`.
 
-**Return Values:**
-- Null for "not found" cases: `getPostBySlug()` returns `BlogPost | null`
-- Objects for multiple return values: `{ success: boolean, error?: string }`
-- Never use empty arrays or objects as falsy sentinels (explicit null preferred)
-
-**Example pattern from `lib/blog.ts`:**
-```typescript
-export function getPostBySlug(slug: string): BlogPost | null {
-  // Early returns for validation
-  if (slug.includes("..") || slug.includes("/") || slug.includes("\\")) {
-    return null;
-  }
-
-  // Check file existence before reading
-  if (!fs.existsSync(filePath)) {
-    return null;
-  }
-
-  // Parse and return data structure
-  return {
-    slug,
-    title: data.title || "Untitled",
-    // ...
-  };
-}
-```
+**Return Values:** API routes return `NextResponse.json()`. Utility functions return typed values or null. Email functions return `{ success: boolean; error?: string }`.
 
 ## Module Design
 
 **Exports:**
-- Prefer named exports: `export function getAllPosts()`, `export interface BlogPost`
-- Mix of types and functions exported from utility modules
-- Default exports used only for Next.js page/layout components
+- Named exports for everything except Next.js page defaults
+- One primary export per file in `lib/` modules
+- Multiple exports allowed when closely related (e.g., `createDemoLead`, `getDemoLead`, `updateDemoLeadStatus` from `lib/db/demo-leads.ts`)
 
 **Barrel Files:**
-- Used selectively: `components/blog/index.ts`, `app/booking-confirmed/components/index.ts`
-- Simplifies imports: `import { FeaturedPosts } from '@/components/blog'` instead of full path
-- Pattern: explicit named exports in barrel file
+- Used for component groups: `components/blog/index.ts`, `components/industries/index.ts`, `app/booking-confirmed/components/index.ts`
+- Not used for `lib/` or `app/` directories
+- Pattern: explicit named re-exports only
 
-**Example barrel from `components/booking-confirmed/index.ts`:**
+**Singleton Pattern (use this for all external service clients):**
+- Module-scoped `let client: Client | null = null` with `getClient()` factory function
+- Used for: Redis (`lib/db/leads.ts`, `lib/db/demo-leads.ts`), Resend (`lib/email/send.ts`), QStash (`app/api/demo-call/route.ts`)
+- Retell uses eager singleton with env-var guard at module load (`lib/retell/client.ts`)
+- Rate limiters use Proxy-based lazy pattern to defer Redis connection until first `.limit()` call (`lib/rate-limit/demo-call.ts`)
+
+**Example singleton pattern:**
 ```typescript
-export { ConfirmationHero } from './ConfirmationHero'
-export { FeaturedPosts } from './FeaturedPosts'
-export { NextSteps } from './NextSteps'
-```
+let redis: Redis | null = null
 
-## Tailwind CSS Patterns
-
-**Usage:**
-- Utility-first approach with semantic class combinations
-- CSS variables for theme tokens: `--bg`, `--surface`, `--text`, `--foreground`, `--muted-foreground`, `--border`, `--accent`
-- Dynamic color variations used with opacity modifiers: `bg-white/50`, `text-black/80`
-- Responsive prefixes: `sm:`, `md:` for breakpoints
-
-**Common patterns:**
-```typescript
-// From components/blog/BlogCard.tsx
-className="group block"
-className="aspect-[16/10] overflow-hidden rounded-xl bg-muted mb-4"
-className="text-xl sm:text-2xl font-semibold text-foreground"
-className="transition-transform duration-500 group-hover:scale-105"
-```
-
-**Utility function usage:**
-- `cn()` utility from `@/lib/utils` for conditional class merging
-- Uses `clsx` for class composition and `tailwind-merge` for conflict resolution
-- Example: `className={cn("h-1 w-12 rounded-full", i < currentStep ? 'bg-blue-950' : 'bg-gray-200')}`
-
-## Component Patterns
-
-**Client Components:**
-- Marked with `'use client'` directive when using hooks (React 18+)
-- State management: React hooks (`useState`, `useEffect`)
-- Props interface defined above component
-- Motion/animation: Framer Motion with typed variants
-
-**Server Components:**
-- Default (implicit) for data fetching and static rendering
-- Use `async` for server-side operations
-- Metadata exported via `export const metadata` in pages
-
-**Example client component pattern:**
-```typescript
-'use client'
-
-import { useState } from 'react'
-
-interface MyComponentProps {
-  prop: string
-}
-
-export function MyComponent({ prop }: MyComponentProps) {
-  const [state, setState] = useState('')
-  // ...
+function getRedis(): Redis {
+  if (!redis) {
+    const url = process.env.UPSTASH_REDIS_REST_URL
+    const token = process.env.UPSTASH_REDIS_REST_TOKEN
+    if (!url || !token) {
+      throw new Error('Missing UPSTASH_REDIS_REST_URL or UPSTASH_REDIS_REST_TOKEN environment variables')
+    }
+    redis = new Redis({ url, token })
+  }
+  return redis
 }
 ```
+
+## Validation
+
+**Schema validation:** Zod for all API input validation
+- Define schemas at module level as `const bodySchema = z.object({ ... })`
+- Use `safeParse()` (never `parse()`) to avoid throwing
+- Phone validation uses `libphonenumber-js` after Zod passes
+- Client-side validation mirrors server-side checks but is simpler
+
+**Security:**
+- Path traversal prevention in `lib/blog.ts` (checks for `..`, `/`, `\` and resolves path against base directory)
+- HTML escaping via custom `escapeHtml()` function in `lib/email/send.ts`
+- Rate limiting via Upstash sliding window (IP + phone number, 1 per 10 min)
+- reCAPTCHA v3 integration available at `lib/recaptcha/verify.ts`
+- Security headers set in `next.config.ts`: HSTS, X-Frame-Options DENY, X-Content-Type-Options nosniff, Referrer-Policy, Permissions-Policy
+- Server-only modules guarded with env-var checks at module load: `lib/retell/client.ts`
+
+## SEO & Metadata
+
+**Pattern:** Use Next.js `generateMetadata()` for dynamic pages, `export const metadata` for static pages.
+- Include OpenGraph and Twitter card metadata
+- JSON-LD structured data added via `<script type="application/ld+json">` in page components
+- Canonical URLs set via `metadataBase` in root layout
 
 ---
 
-*Convention analysis: 2026-02-21*
+*Convention analysis: 2026-03-05*

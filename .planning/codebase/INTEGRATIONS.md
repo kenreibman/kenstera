@@ -1,183 +1,243 @@
 # External Integrations
 
-**Analysis Date:** 2026-02-21
+**Analysis Date:** 2026-03-05
 
 ## APIs & External Services
 
-**Email & Newsletter:**
-- Resend - Email delivery service
-  - SDK/Client: `resend` 6.9.1
-  - Auth: `RESEND_API_KEY` environment variable
-  - Endpoints used:
-    - `resend.contacts.create()` - Add email to audience (newsletter subscription)
-    - `resend.emails.send()` - Send transactional emails (abandonment emails)
-  - Implementation: `lib/email/send.ts`
-  - Audience/List: `RESEND_AUDIENCE_ID` (required for newsletter signup)
-  - Sender config: `FROM_EMAIL`, `FROM_NAME` environment variables
+**AI Voice Calls (Retell AI):**
+- Purpose: Outbound AI demo phone calls to prospective clients
+- SDK: `retell-sdk` ^5.2.0
+- Client singleton: `lib/retell/client.ts` (server-only; throws if imported client-side)
+- Auth: `RETELL_API_KEY` env var
+- Usage: `app/api/demo-call/route.ts` creates outbound phone calls via `retell.call.createPhoneCall()`
+- Resources provisioned via `scripts/setup-retell.ts`:
+  - LLM (model: `gpt-4.1`, name: `kenstera-intake-llm`)
+  - Voice Agent (voice: `minimax-Cimo`, name: `kenstera-intake-agent`)
+  - NYC phone number (area codes tried: 212, 646, 917, 347, 929)
+- Agent prompt update script: `scripts/update-agent-prompt.ts`
+- Per-call config: `max_call_duration_ms: 120_000` (2 minutes) set via `agent_override` at call level, not on agent definition
+- Dynamic variables: `caller_name` passed as first name from form input
+- Config vars: `RETELL_API_KEY`, `RETELL_LLM_ID`, `RETELL_AGENT_ID`, `RETELL_PHONE_NUMBER`
 
-**Calendar & Booking:**
-- Cal.com - Appointment scheduling platform
-  - SDK/Client: `@calcom/embed-react` 1.5.3
-  - Integration type: Embedded iframe calendar
-  - Cal link: `kenstera/intake-15-minutes`
-  - Implementation: `app/pi-intake-audit/components/CalendarEmbed.tsx`
-  - Event handling:
-    - `__iframeReady` - Calendar loaded
-    - `bookingSuccessful` - Booking confirmed (triggers lead status update)
-  - Preload support enabled for performance
-  - UI configuration: Month view, event details hidden
+**Transactional Email (Resend):**
+- Purpose: Abandonment emails, demo follow-up pitch emails, newsletter subscriber management
+- SDK: `resend` ^6.9.1
+- Client: `lib/email/send.ts` - Lazy singleton via `getResend()`
+- Auth: `RESEND_API_KEY` env var
+- Functions:
+  - `sendAbandonmentEmail(lead)` - Re-engagement email to intake audit leads who didn't book; links to `cal.com/kenstera/intake-15-minutes`
+  - `sendDemoFollowUpEmail(lead)` - Pitch email sent 15 min after demo call; links to `cal.com/kenstera/30min`
+- Newsletter: `app/api/newsletter/route.ts` uses `resend.contacts.create()` to add subscribers to audience
+- Config vars: `RESEND_API_KEY`, `RESEND_AUDIENCE_ID`, `FROM_EMAIL` (optional), `FROM_NAME` (optional)
 
-**Task Scheduling & Message Queue:**
-- Upstash QStash - Serverless task queue
-  - SDK/Client: `@upstash/qstash` 2.9.0
-  - Auth: `QSTASH_TOKEN` environment variable
-  - Signature verification keys:
-    - `QSTASH_CURRENT_SIGNING_KEY` - Active signing key
-    - `QSTASH_NEXT_SIGNING_KEY` - Key rotation support
-  - Use cases:
-    - Scheduled email delivery (abandonment emails after 15-minute delay)
-    - Delayed task execution for lead nurturing
-  - Implementation files:
-    - `app/api/pi-intake-audit/capture/route.ts` - Schedule tasks
-    - `app/api/pi-intake-audit/send-abandonment/route.ts` - Receive & verify signed tasks
-  - Callback URL: `{NEXT_PUBLIC_BASE_URL}/api/pi-intake-audit/send-abandonment`
+**Job Scheduling (Upstash QStash):**
+- Purpose: Delayed email delivery (15-minute delay for abandonment and follow-up emails)
+- SDK: `@upstash/qstash` ^2.9.0
+- Publisher: `Client` class used in:
+  - `app/api/demo-call/route.ts` - Schedules follow-up email after demo call
+  - `app/api/pi-intake-audit/capture/route.ts` - Schedules abandonment email after lead capture
+- Receiver: `Receiver` class for signature verification in:
+  - `app/api/demo-call/send-followup/route.ts`
+  - `app/api/pi-intake-audit/send-abandonment/route.ts`
+- Auth: `QSTASH_TOKEN` (publishing), `QSTASH_CURRENT_SIGNING_KEY` + `QSTASH_NEXT_SIGNING_KEY` (verification)
+- Pattern: `publishJSON()` with `delay: 900` seconds to internal API routes; receiver verifies `upstash-signature` header before processing
 
-**Analytics & Monitoring:**
-- Vercel Analytics - Web Vitals tracking
-  - SDK: `@vercel/analytics` 1.6.1
-  - Implementation: `app/layout.tsx`
-  - Automatically tracks Core Web Vitals
+**Scheduling / Calendar (Cal.com):**
+- Purpose: Embedded appointment booking for intake audit calls and sales calls
+- SDK: `@calcom/embed-react` ^1.5.3
+- Client component: `app/pi-intake-audit/components/CalendarEmbed.tsx`
+- Cal links used:
+  - `kenstera/intake-15-minutes` - Intake audit booking (embedded in wizard)
+  - `kenstera/30min` - Sales call booking (linked in follow-up emails)
+- Prefills: name, email, notes (website, role, leads/mo from form data)
+- UI config: month view layout, event details hidden
+- Events: Listens for `bookingSuccessful` to mark lead as booked via `POST /api/pi-intake-audit/booked`
+- Preload: `cal('preload', { calLink })` called on mount for performance
 
-- Vercel Speed Insights - Performance monitoring
-  - SDK: `@vercel/speed-insights` 1.3.1
-  - Implementation: `app/layout.tsx`
-  - Tracks page load performance
+**Bot Protection (Google reCAPTCHA v3):**
+- Purpose: Score-based bot detection on form submissions
+- Implementation: `lib/recaptcha/verify.ts` - Direct HTTP call to `https://www.google.com/recaptcha/api/siteverify`
+- Auth: `RECAPTCHA_SECRET_KEY` env var
+- Returns: Score 0.0-1.0 (higher = more likely human), or `null` on verification failure
+- No SDK dependency; uses native `fetch`
+
+**Advertising (Meta Pixel):**
+- Purpose: Facebook/Meta advertising conversion tracking
+- Implementation: Inline `<Script>` tag in `app/layout.tsx`
+- Pixel ID: `1431516435037638` (hardcoded)
+- Strategy: `afterInteractive`
 
 ## Data Storage
 
-**Databases:**
-- Upstash Redis (REST API via HTTP)
-  - Connection: REST HTTP endpoints
-  - Client: `@upstash/redis` 1.36.2
-  - Auth: `UPSTASH_REDIS_REST_URL`, `UPSTASH_REDIS_REST_TOKEN`
-  - Implementation: `lib/db/leads.ts`
-  - Data stored:
-    - Lead records (email, name, website, role, inbound leads count, status)
-    - Key pattern: `intake-audit:lead:{leadId}`
-  - TTL: 30 days (auto-expiration)
-  - Lead status values: `'pending'` | `'booked'` | `'email_sent'`
+**Primary Database (Upstash Redis via REST):**
+- SDK: `@upstash/redis` ^1.36.2
+- Connection: `UPSTASH_REDIS_REST_URL` + `UPSTASH_REDIS_REST_TOKEN`
+- Client: Lazy singleton pattern in each module (not shared across modules)
+- Data models:
+  - **Lead** (`lib/db/leads.ts`): Intake audit leads
+    - Key pattern: `intake-audit:lead:{id}` (id format: `lead_{uuid}`)
+    - Fields: id, email, fullName, website, role, inboundLeads, status, createdAt, updatedAt
+    - Statuses: `pending` | `booked` | `email_sent`
+    - TTL: 30 days (`ex: 2592000`)
+  - **DemoLead** (`lib/db/demo-leads.ts`): Demo call leads
+    - Key pattern: `demo-call:lead:{id}` (id format: `demo_{uuid}`)
+    - Fields: id, name, email, status, createdAt, updatedAt
+    - Statuses: `pending` | `email_sent`
+    - TTL: 30 days
+- Stored as JSON strings via `JSON.stringify()`/`JSON.parse()`
+
+**Content Storage:**
+- MDX files on filesystem: `content/blog/*.mdx`, `content/case-studies/*.mdx`
+- TypeScript content modules: `content/industries/*.ts`, `content/services/*.ts`
+- Parsed at build/request time via `gray-matter` and `next-mdx-remote`
+- Blog utilities: `lib/blog.ts` (getAllPosts, getPostBySlug, getAllSlugs)
+- Case study utilities: `lib/case-studies.ts`
 
 **File Storage:**
-- Local filesystem only
-  - MDX/Markdown content stored in repo
-  - Images and assets in `/public` directory
-  - No S3 or cloud storage integration
+- Local filesystem / Vercel static assets only
+- Images: `public/images/`
+- Video: `public/video/`
+- Logo: `public/logo-main.svg`
+- OG image: `public/og-image.jpg`
 
 **Caching:**
-- None detected beyond Redis TTL for lead data
-- Vercel Edge Cache (implicit with Vercel hosting)
+- No dedicated cache layer; Upstash Redis used for data + rate limiting
+- Vercel Edge Cache implicit with static/ISR pages
+
+## Rate Limiting
+
+**Demo Call Rate Limiting (`lib/rate-limit/demo-call.ts`):**
+- SDK: `@upstash/ratelimit` ^2.0.8 with `@upstash/redis`
+- Strategy: Sliding window, 1 request per 10 minutes
+- Two independent limiters:
+  - `ipRatelimit` - Per IP address (prefix: `demo-call:ip`)
+  - `phoneRatelimit` - Per phone number (prefix: `demo-call:phone`)
+- Uses lazy Proxy pattern to defer Redis connection until first `.limit()` call (avoids build-time env var requirement)
 
 ## Authentication & Identity
 
 **Auth Provider:**
-- Custom implementation (no third-party auth provider)
-- Uses unsigned form submission with validation
-- QStash webhook verification via HMAC signatures
-  - Signature verification: `Receiver.verify()` with current + next signing keys
-  - Implementation: `app/api/pi-intake-audit/send-abandonment/route.ts`
+- None - No user authentication system
+- API routes are public with rate limiting and reCAPTCHA as protection
+- QStash webhook endpoints verified via HMAC signature (`Receiver.verify()`)
 
 ## Monitoring & Observability
 
+**Analytics:**
+- Vercel Analytics (`@vercel/analytics/next`) - Page views and web vitals (`app/layout.tsx`)
+- Vercel Speed Insights (`@vercel/speed-insights/next`) - Performance monitoring (`app/layout.tsx`)
+- Meta Pixel - Advertising conversion tracking (`app/layout.tsx`)
+
 **Error Tracking:**
-- None detected (would benefit from Sentry/similar)
-- Console logging only (`console.error`, `console.log`)
-- Contextual prefixes used: `[Newsletter]`, `[Intake Audit]`, `[Abandonment]`, `[Email]`
+- None detected (no Sentry, Datadog, Bugsnag, etc.)
 
 **Logs:**
-- Server-side console logs in Node.js runtime
-- Structured log prefixes for filtering by feature area
-- Log levels: info (console.log), error (console.error)
-- No external log aggregation (Vercel logs available via dashboard)
+- `console.log` / `console.error` with structured prefixes:
+  - `[Demo Call]`, `[Demo Follow-up]`, `[Email]`, `[Abandonment]`, `[Newsletter]`, `[Intake Audit]`
+- Vercel runtime logs (implicit from deployment platform)
 
 ## CI/CD & Deployment
 
 **Hosting:**
-- Vercel - Serverless platform (inferred from config)
-  - Native Next.js 16 support
-  - Environment variables managed via Vercel dashboard
-  - Automatic deployments from Git
+- Vercel (inferred from Vercel-specific packages and Next.js conventions)
+- Domain: `kenstera.com`
 
 **CI Pipeline:**
-- GitHub (presumed - standard for Vercel deployments)
-- Vercel Builds (automatic via Git integration)
-- ESLint runs on local machine before commit (developer responsibility)
+- No CI configuration files detected (no `.github/workflows/`, no `vercel.json`)
+- Likely using Vercel's git-based auto-deploy
+
+## Security Headers
+
+Configured in `next.config.ts` for all routes (`/(.*)`):
+- `X-Content-Type-Options: nosniff`
+- `X-Frame-Options: DENY`
+- `Referrer-Policy: strict-origin-when-cross-origin`
+- `Permissions-Policy: camera=(), microphone=(), geolocation=()`
+- `X-DNS-Prefetch-Control: on`
+- `Strict-Transport-Security: max-age=63072000; includeSubDomains; preload`
+- `poweredByHeader: false` (removes X-Powered-By)
 
 ## Environment Configuration
 
-**Required env vars for production:**
+**Required env vars:**
+- `RETELL_API_KEY` - Retell AI API key
+- `RETELL_PHONE_NUMBER` - Provisioned Retell phone number (E.164)
+- `RETELL_LLM_ID` - Retell LLM resource ID
+- `RETELL_AGENT_ID` - Retell agent resource ID
 - `RESEND_API_KEY` - Resend email API key
-- `RESEND_AUDIENCE_ID` - Audience ID for newsletter
-- `UPSTASH_REDIS_REST_URL` - Redis HTTP endpoint
-- `UPSTASH_REDIS_REST_TOKEN` - Redis authentication token
-- `QSTASH_TOKEN` - QStash API token
-- `QSTASH_CURRENT_SIGNING_KEY` - QStash signature verification (primary)
-- `QSTASH_NEXT_SIGNING_KEY` - QStash signature verification (rotation)
-- `NEXT_PUBLIC_BASE_URL` - Public application URL (used in callbacks)
+- `RESEND_AUDIENCE_ID` - Resend newsletter audience ID
+- `UPSTASH_REDIS_REST_URL` - Upstash Redis REST endpoint
+- `UPSTASH_REDIS_REST_TOKEN` - Upstash Redis REST token
+- `QSTASH_TOKEN` - QStash publish token
+- `QSTASH_CURRENT_SIGNING_KEY` - QStash signature verification (current)
+- `QSTASH_NEXT_SIGNING_KEY` - QStash signature verification (next rotation)
+- `RECAPTCHA_SECRET_KEY` - Google reCAPTCHA v3 secret
+- `NEXT_PUBLIC_BASE_URL` - Public base URL (used for QStash callback URLs)
 
 **Optional env vars:**
-- `FROM_EMAIL` - Email sender address (defaults to `notifications@yourdomain.com`)
-- `FROM_NAME` - Email sender name (defaults to `Kenstera`)
+- `FROM_EMAIL` - Sender email (defaults to `notifications@yourdomain.com`)
+- `FROM_NAME` - Sender name (defaults to `Kenstera`)
 
 **Secrets location:**
-- Vercel Environment Variables dashboard (production)
-- `.env.local` (development - not committed)
-- No example `.env.example` file found
+- `.env.local` (local development, git-ignored)
+- Vercel environment variables (production)
+- No `.env.example` file present
 
 ## Webhooks & Callbacks
 
-**Incoming Webhooks:**
-- QStash scheduled task callback
-  - Endpoint: `POST /api/pi-intake-audit/send-abandonment`
-  - Signature header: `upstash-signature`
-  - Verification: HMAC with current/next signing keys
-  - Payload: `{ leadId: string }`
+**Incoming (QStash-triggered, signature-verified):**
+- `POST /api/pi-intake-audit/send-abandonment` - Delayed callback to send abandonment email; checks lead status is `pending` before sending
+- `POST /api/demo-call/send-followup` - Delayed callback to send demo follow-up pitch email; checks lead status is `pending` before sending
 
-**Outgoing Webhooks:**
-- Cal.com booking confirmation (iframe event)
-  - Event: `bookingSuccessful`
-  - Action: Updates lead status to `'booked'`
-  - API endpoint called: `POST /api/pi-intake-audit/booked`
+**Incoming (Client-triggered, public):**
+- `POST /api/demo-call` - Validates phone (US only), rate-limits by IP + phone, creates Retell outbound call, stores DemoLead, schedules follow-up via QStash
+- `POST /api/pi-intake-audit/capture` - Validates lead data with Zod, stores Lead in Redis, schedules abandonment email via QStash
+- `POST /api/pi-intake-audit/booked` - Marks lead as `booked` (prevents abandonment email from being sent)
+- `POST /api/newsletter` - Validates email, adds contact to Resend audience
 
-**Other External Calls:**
-- Cal.com embed preload (`cal.preload()`)
-- Resend email sending (HTTP POST via SDK)
-- QStash task publishing (HTTP POST via SDK)
+**Outgoing:**
+- Retell API: Outbound phone calls via `retell.call.createPhoneCall()`
+- Resend API: Transactional emails via `resend.emails.send()` and contact creation via `resend.contacts.create()`
+- QStash API: Delayed job publishing via `client.publishJSON()`
+- Google reCAPTCHA: Token verification via `siteverify` endpoint
 
-## Integration Flow Diagram
+## Integration Flow Diagrams
 
 ```
-Lead Intake Process:
-├─ Form submission → /api/pi-intake-audit/capture
-│  ├─ Validate with Zod
-│  ├─ Store lead in Upstash Redis
-│  └─ Schedule abandonment email via QStash (15 min delay)
-│
-├─ Calendar booking (Cal.com iframe)
-│  ├─ Embed React component mounts calendar
-│  ├─ Listen for bookingSuccessful event
-│  └─ Call /api/pi-intake-audit/booked to update status
-│
-├─ Scheduled abandonment email (QStash callback)
-│  ├─ Verify QStash HMAC signature
-│  ├─ Check lead status (skip if already booked)
-│  └─ Send via Resend email API
-│
-└─ Newsletter signup
-   ├─ Form submission → /api/newsletter
-   ├─ Validate email
-   └─ Add to Resend audience
+Demo Call Flow:
+  Client form → POST /api/demo-call
+  ├─ Validate phone (libphonenumber-js, US only)
+  ├─ Rate limit check (IP + phone, 1/10min each)
+  ├─ Create Retell outbound call (2-min max duration)
+  ├─ Store DemoLead in Redis (status: pending)
+  └─ Schedule follow-up email via QStash (15-min delay)
+      └─ QStash → POST /api/demo-call/send-followup
+         ├─ Verify QStash signature
+         ├─ Check DemoLead status (skip if not pending)
+         ├─ Send pitch email via Resend
+         └─ Update status to email_sent
+
+Intake Audit Flow:
+  Client wizard → POST /api/pi-intake-audit/capture
+  ├─ Validate with Zod
+  ├─ Store Lead in Redis (status: pending)
+  └─ Schedule abandonment email via QStash (15-min delay)
+      └─ QStash → POST /api/pi-intake-audit/send-abandonment
+         ├─ Verify QStash signature
+         ├─ Check Lead status (skip if booked or email_sent)
+         ├─ Send abandonment email via Resend
+         └─ Update status to email_sent
+
+  Cal.com embed (bookingSuccessful event)
+  └─ POST /api/pi-intake-audit/booked
+     └─ Update Lead status to booked (prevents abandonment email)
+
+Newsletter Flow:
+  Client form → POST /api/newsletter
+  ├─ Validate email with Zod
+  └─ Add contact to Resend audience
 ```
 
 ---
 
-*Integration audit: 2026-02-21*
+*Integration audit: 2026-03-05*

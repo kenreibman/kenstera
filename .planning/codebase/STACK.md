@@ -1,173 +1,144 @@
 # Technology Stack
 
-**Analysis Date:** 2026-02-21
+**Analysis Date:** 2026-03-05
 
 ## Languages
 
 **Primary:**
-- TypeScript 5 - All source code (`.ts`, `.tsx` files)
-- JavaScript (JSX/TSX) - React components and configuration
+- TypeScript 5.x - All application code (`app/`, `lib/`, `components/`, `scripts/`)
 
 **Secondary:**
-- HTML5 - Semantic markup via Next.js components
-- CSS3 - Tailwind CSS for styling
+- MDX - Blog and case study content (`content/blog/*.mdx`, `content/case-studies/*.mdx`)
+- CSS (Tailwind v4) - Styling via `app/globals.css` and utility classes
 
 ## Runtime
 
 **Environment:**
-- Node.js (version not pinned - inferred as LTS compatible)
+- Node.js (version not pinned; no `.nvmrc` or `.node-version` detected)
+- Target: ES2022 (`tsconfig.json` compilerOptions.target)
 
 **Package Manager:**
 - npm
-- Lockfile: `package-lock.json` present
+- Lockfile: `package-lock.json` (present)
 
 ## Frameworks
 
 **Core:**
 - Next.js 16.1.3 - Full-stack React framework with App Router
   - Config: `next.config.ts`
-  - Turbopack enabled for dev builds
-  - Image optimization with AVIF/WebP format support
+  - Uses Turbopack for dev (`next dev --turbopack`)
+  - React Server Components enabled (shadcn `components.json` has `"rsc": true`)
+- React 19.2.0 / React DOM 19.2.0
 
-**Frontend:**
-- React 19.2.0 - UI library
-- React DOM 19.2.0 - DOM rendering
+**UI / Component Library:**
+- shadcn/ui (New York style) - Component primitives
+  - Config: `components.json`
+  - Base color: neutral
+  - CSS variables enabled
+  - Icon library: lucide-react
+- Radix UI primitives: `@radix-ui/react-dialog` ^1.1.15, `@radix-ui/react-navigation-menu` ^1.2.14, `@radix-ui/react-slot` ^1.2.4
 
 **Styling:**
-- Tailwind CSS 4 - Utility-first CSS framework
-  - PostCSS integration: `postcss.config.mjs`
-  - TailwindCSS v4 PostCSS plugin
-  - Custom animations via `tw-animate-css` 1.4.0
-
-**UI Components:**
-- Radix UI - Headless component library
-  - `@radix-ui/react-dialog` 1.1.15
-  - `@radix-ui/react-navigation-menu` 1.2.14
-  - `@radix-ui/react-slot` 1.2.4
-- Lucide React 0.556.0 - Icon library (tree-shakeable with optimization)
-- Class Variance Authority 0.7.1 - Component variant library (className utilities)
-- clsx 2.1.1 - Conditional className management
-- tailwind-merge 3.4.0 - Smart Tailwind class merging
+- Tailwind CSS v4 - Utility-first CSS
+  - PostCSS plugin: `@tailwindcss/postcss` (config: `postcss.config.mjs`)
+  - Animations: `tw-animate-css` ^1.4.0
+  - Merge utility: `tailwind-merge` ^3.4.0
+  - Class composition: `clsx` ^2.1.1, `class-variance-authority` ^0.7.1
 
 **Animation:**
-- Framer Motion 12.23.25 - Motion library for React (optimized via next.config)
-- Embla Carousel React 8.6.0 - Carousel/slider component
+- Framer Motion ^12.23.25 - React animation library
+- `@paper-design/shaders-react` ^0.0.71 - WebGL shader effects
 
-**Markdown & Content:**
-- next-mdx-remote 6.0.0 - MDX rendering in Next.js
-- remark-gfm 4.0.1 - GitHub-flavored Markdown plugin
-- gray-matter 4.0.3 - YAML frontmatter parsing
-- reading-time 1.5.0 - Estimated reading time calculation
+**Build/Dev:**
+- Turbopack - Dev server bundler (via `next dev --turbopack`)
+- ESLint 9 with flat config (`eslint.config.mjs`)
+  - Extends: `eslint-config-next` (core-web-vitals + typescript)
+- tsx ^4.21.0 - TypeScript execution for provisioning scripts
 
 ## Key Dependencies
 
-**Critical:**
-- Zod 4.3.6 - Runtime type validation and schema parsing
-  - Used in all API routes for request validation
-  - Files: `app/api/newsletter/route.ts`, `app/api/pi-intake-audit/capture/route.ts`, `app/api/pi-intake-audit/booked/route.ts`
+**Critical (application logic):**
+- `retell-sdk` ^5.2.0 - AI voice agent for outbound demo calls
+- `resend` ^6.9.1 - Transactional email (abandonment + follow-up emails, newsletter)
+- `@upstash/redis` ^1.36.2 - Serverless Redis for lead storage
+- `@upstash/qstash` ^2.9.0 - Delayed job scheduling (email follow-ups at 15-min delay)
+- `@upstash/ratelimit` ^2.0.8 - Rate limiting on demo call API route
+- `@calcom/embed-react` ^1.5.3 - Embedded scheduling calendar
+- `zod` ^4.3.6 - Runtime schema validation for all API route inputs
 
-**Infrastructure & APIs:**
-- @upstash/redis 1.36.2 - Redis client (REST API)
-  - Lead data storage with 30-day TTL expiration
-  - File: `lib/db/leads.ts`
-  - Requires: `UPSTASH_REDIS_REST_URL`, `UPSTASH_REDIS_REST_TOKEN`
-
-- @upstash/qstash 2.9.0 - Serverless task queue
-  - Scheduled abandonment email delivery
-  - Files: `app/api/pi-intake-audit/capture/route.ts`, `app/api/pi-intake-audit/send-abandonment/route.ts`
-  - Requires: `QSTASH_TOKEN`, `QSTASH_CURRENT_SIGNING_KEY`, `QSTASH_NEXT_SIGNING_KEY`
-
-- Resend 6.9.1 - Email delivery service
-  - Newsletter subscription and abandonment email sending
-  - Files: `lib/email/send.ts`, `app/api/newsletter/route.ts`
-  - Requires: `RESEND_API_KEY`, `RESEND_AUDIENCE_ID`
-  - Optional: `FROM_EMAIL`, `FROM_NAME`
-
-- @calcom/embed-react 1.5.3 - Cal.com calendar embedding
-  - Booking calendar integration
-  - File: `app/pi-intake-audit/components/CalendarEmbed.tsx`
-  - Cal link: `kenstera/intake-15-minutes`
-
-**Monitoring & Analytics:**
-- @vercel/analytics 1.6.1 - Web Vitals tracking
-  - Integrated in: `app/layout.tsx`
-
-- @vercel/speed-insights 1.3.1 - Performance monitoring
-  - Integrated in: `app/layout.tsx`
+**Content:**
+- `gray-matter` ^4.0.3 - MDX frontmatter parsing
+- `next-mdx-remote` ^6.0.0 - Server-side MDX rendering
+- `remark-gfm` ^4.0.1 - GitHub Flavored Markdown support
+- `reading-time` ^1.5.0 - Reading time estimation
 
 **Utilities:**
-- @paper-design/shaders-react 0.0.71 - Shader-based visual effects (optional)
+- `libphonenumber-js` ^1.12.37 - US phone number validation and E.164 formatting
+- `lucide-react` ^0.556.0 - Icon library (tree-shakeable, optimized in next.config)
+- `embla-carousel-react` ^8.6.0 - Carousel/slider component
+
+**Observability:**
+- `@vercel/analytics` ^1.6.1 - Page view and web vitals tracking
+- `@vercel/speed-insights` ^1.3.1 - Performance monitoring
 
 ## Configuration
 
 **Environment:**
-- Environment variables required (no `.env` files checked in):
-  - `RESEND_API_KEY` - Email API authentication
-  - `RESEND_AUDIENCE_ID` - Newsletter audience ID
-  - `UPSTASH_REDIS_REST_URL` - Redis endpoint
-  - `UPSTASH_REDIS_REST_TOKEN` - Redis authentication
-  - `QSTASH_TOKEN` - Task queue API token
-  - `QSTASH_CURRENT_SIGNING_KEY` - QStash signature verification (current)
-  - `QSTASH_NEXT_SIGNING_KEY` - QStash signature verification (next rotation)
-  - `NEXT_PUBLIC_BASE_URL` - Application base URL (public, for API callbacks)
-  - `FROM_EMAIL` - Email sender address (defaults to notifications@yourdomain.com)
-  - `FROM_NAME` - Email sender name (defaults to Kenstera)
+- `.env.local` file present (not committed)
+- Required env vars (inferred from code):
+  - `RETELL_API_KEY` - Retell AI authentication
+  - `RETELL_PHONE_NUMBER` - Outbound call number (E.164 format)
+  - `RETELL_LLM_ID` - Retell LLM resource ID
+  - `RETELL_AGENT_ID` - Retell agent resource ID
+  - `RESEND_API_KEY` - Resend email service
+  - `RESEND_AUDIENCE_ID` - Resend newsletter audience
+  - `UPSTASH_REDIS_REST_URL` - Upstash Redis connection
+  - `UPSTASH_REDIS_REST_TOKEN` - Upstash Redis auth
+  - `QSTASH_TOKEN` - QStash publish token
+  - `QSTASH_CURRENT_SIGNING_KEY` - QStash webhook verification
+  - `QSTASH_NEXT_SIGNING_KEY` - QStash webhook verification (rotation)
+  - `RECAPTCHA_SECRET_KEY` - Google reCAPTCHA v3 server key
+  - `NEXT_PUBLIC_BASE_URL` - Public base URL for QStash callback targets
+- Optional env vars:
+  - `FROM_EMAIL` - Sender email address (defaults to `notifications@yourdomain.com`)
+  - `FROM_NAME` - Sender display name (defaults to `Kenstera`)
 
-**Build Configuration:**
-- `tsconfig.json` - TypeScript compilation settings
-  - Target: ES2022
-  - Strict mode enabled
-  - Module resolution: bundler
-  - Path alias: `@/*` maps to project root
-  - JSX: react-jsx (automatic runtime)
-  - Incremental builds enabled
+**TypeScript:**
+- `tsconfig.json` - Main app config (strict mode, bundler resolution, `@/*` path alias)
+- `tsconfig.scripts.json` - Scripts config (CommonJS module, node16 resolution, includes `scripts/**/*.ts`)
 
-- `next.config.ts` - Next.js configuration
-  - Removed powered-by header for security
-  - Image formats: AVIF, WebP
-  - Package import optimization: lucide-react, framer-motion
-  - Security headers configured (see `next.config.ts`)
-  - HSTS enabled with 2-year max-age
-  - CSP-adjacent headers: X-Frame-Options DENY, X-Content-Type-Options nosniff
+**Build:**
+- `next.config.ts` - Security headers (HSTS, X-Frame-Options DENY, nosniff, strict referrer, permissions-policy), AVIF/WebP image optimization, package import optimization for lucide-react and framer-motion, `poweredByHeader: false`
+- `postcss.config.mjs` - Tailwind CSS PostCSS plugin
 
-**Linting & Code Quality:**
-- ESLint 9 with eslint-config-next 16.1.3
-  - Config: `eslint.config.mjs` (flat config format)
-  - Web Vitals rules enabled
-  - TypeScript support enabled
-  - Excludes: .next, out, build, next-env.d.ts
-  - Run via: `npm run lint`
+**Linting:**
+- `eslint.config.mjs` - ESLint 9 flat config extending Next.js core-web-vitals and TypeScript rules
+- Ignores: `.next/`, `out/`, `build/`, `next-env.d.ts`
 
-**Styling Configuration:**
-- Tailwind CSS 4 with PostCSS integration
-  - Config: `postcss.config.mjs`
-  - Uses @tailwindcss/postcss plugin
+## Scripts
+
+```bash
+npm run dev              # next dev --turbopack
+npm run build            # next build
+npm run start            # next start
+npm run lint             # eslint
+npm run setup:retell     # npx tsx --tsconfig tsconfig.scripts.json scripts/setup-retell.ts
+```
 
 ## Platform Requirements
 
 **Development:**
-- Node.js (version number not pinned in repo - LTS recommended)
-- npm package manager
-- TypeScript 5 knowledge for source modifications
+- Node.js with npm
+- `.env.local` with all required env vars populated
 
 **Production:**
-- Deployment target: Vercel (native Next.js support)
-- External service dependencies:
-  - Upstash Redis (serverless Redis)
-  - Upstash QStash (serverless task queue)
-  - Resend (email service)
-  - Cal.com (booking calendar)
-  - Vercel Analytics & Speed Insights
+- Vercel (inferred from `@vercel/analytics`, `@vercel/speed-insights`, serverless API routes)
+- Domain: `kenstera.com` (hardcoded in `app/layout.tsx` metadataBase)
 
-## Development & Build Scripts
+## Fonts
 
-```bash
-npm run dev              # Run development server with Turbopack
-npm run build            # Production build
-npm start                # Start production server
-npm run lint             # Run ESLint checks
-```
+- Inter (Google Fonts) - loaded via `next/font/google` with `display: "swap"`, CSS variable `--font-inter`
 
 ---
 
-*Stack analysis: 2026-02-21*
+*Stack analysis: 2026-03-05*

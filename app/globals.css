@@ -41,6 +41,21 @@
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
   --radius-xl: calc(var(--radius) + 4px);
+
+  /* Landing-page fonts (used only under `.landing-root`). Generate the
+     `font-serif` and `font-dirtyline` utilities. `--font-sans` stays Inter
+     globally and is remapped to Manrope inside `.landing-root` below. */
+  --font-serif: var(--font-instrument-serif), ui-serif, Georgia, Cambria,
+    "Times New Roman", Times, serif;
+  --font-dirtyline: var(--font-dirtyline-src), sans-serif;
+
+  --animate-marquee: marquee 20s linear infinite;
+
+  @keyframes marquee {
+    100% {
+      transform: translateX(-50%);
+    }
+  }
 }
 
 :root {
@@ -137,4 +152,60 @@
 }
 .scrollbar-hide::-webkit-scrollbar {
   display: none;
+}
+
+/* ==========================================================================
+   Immersive landing page ("/") — scoped so it never leaks into the rest of
+   the site. The `.landing-active` class is toggled on <html> only while the
+   landing (or a /work/* page) is mounted; `.landing-root` wraps the content.
+   ========================================================================== */
+
+/* Remap the sans font to Manrope for the landing only. `font-sans` utilities
+   inside the landing resolve this scoped value; everywhere else stays Inter. */
+.landing-root {
+  --font-sans: var(--font-manrope), ui-sans-serif, system-ui, sans-serif,
+    "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+}
+
+/* Dark canvas + native vertical section snapping, active only on the landing.
+   `scroll-snap-stop: always` on the markers means a hard flick advances one
+   section at a time instead of flying past the whole page. */
+html.landing-active,
+html.landing-active body {
+  background-color: #000;
+}
+
+html.landing-active {
+  scroll-snap-type: y mandatory;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html.landing-active {
+    scroll-snap-type: y proximity;
+  }
+}
+
+/* Zero-footprint snap points positioned down the 700vh scroll container.
+   Their top offsets (in app/page.tsx) mark where each panel is fully in view. */
+.snap-target {
+  position: absolute;
+  left: 0;
+  width: 1px;
+  height: 1px;
+  pointer-events: none;
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+}
+
+/* Solid fallback when backdrop-filter is unsupported. */
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .glass-panel {
+    background-color: rgba(0, 0, 0, 0.75) !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-marquee {
+    animation: none;
+  }
 }

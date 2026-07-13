@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
-import { Inter } from "next/font/google";
+import { Inter, Manrope, Instrument_Serif } from "next/font/google";
+import localFont from "next/font/local";
 import Script from "next/script";
 import "./globals.css";
 import { LayoutWrapper } from "@/components/LayoutWrapper";
@@ -10,6 +11,29 @@ const inter = Inter({
   subsets: ["latin"],
   display: "swap",
   variable: "--font-inter",
+});
+
+// Fonts used by the immersive landing page ("/"). Scoped to the landing via the
+// `.landing-root` selector in globals.css, so the rest of the site keeps Inter.
+const manrope = Manrope({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+  variable: "--font-manrope",
+  display: "swap",
+});
+
+const instrumentSerif = Instrument_Serif({
+  subsets: ["latin"],
+  weight: "400",
+  style: ["normal", "italic"],
+  variable: "--font-instrument-serif",
+  display: "swap",
+});
+
+const dirtyline = localFont({
+  src: "./fonts/Dirtyline-36daysoftype-2022.woff2",
+  variable: "--font-dirtyline-src",
+  display: "swap",
 });
 
 export const viewport: Viewport = {
@@ -61,8 +85,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head>
+        <link rel="preconnect" href="https://stream.mux.com" />
+      </head>
       <body
-        className={`${inter.variable} font-sans antialiased`}
+        className={`${inter.variable} ${manrope.variable} ${instrumentSerif.variable} ${dirtyline.variable} font-sans antialiased`}
       >
         <LayoutWrapper>
           {children}

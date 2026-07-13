@@ -1,106 +1,88 @@
-import { ShaderHero } from "@/components/sections/ShaderHero";
-import { IntakeCall } from "@/components/sections/IntakeCall";
-import { IntakeBooking } from "@/components/sections/IntakeBooking";
-import { IntakeSetup } from "@/components/sections/IntakeSetup";
-import { CRMIntegrations } from "@/components/sections/CRMIntegrations";
-import { DemoForm } from "@/components/sections/DemoForm";
-import { CaseStudies } from "@/components/sections/CaseStudies";
-import { IndustriesFaqBlog } from "@/components/industries";
-import { getAllPosts } from "@/lib/blog";
-import { FinalCTA } from "@/components/sections/FinalCTA";
+import type { Metadata } from "next";
+import HeroBackground from "@/components/landing/HeroBackground";
+import ScrollFloat from "@/components/landing/ScrollFloat";
+import Showcase from "@/components/landing/Showcase";
+import LandingNav from "@/components/landing/LandingNav";
+import LandingActive from "@/components/landing/LandingActive";
 
-const faqs = [
-  {
-    question: "What is Kenstera?",
-    answer:
-      "Kenstera is an automation company that builds intake and lead qualification systems for law firms. We handle inbound calls and web inquiries 24/7 using conversational agents, so firms never miss a potential client — even after hours or on weekends.",
+export const metadata: Metadata = {
+  title: {
+    absolute: "Kenstera — Rapid Growth For Business",
   },
-  {
-    question: "What services does Kenstera offer?",
-    answer:
-      "Kenstera offers three core services: automated intake and scheduling for capturing and qualifying leads around the clock, support automation for handling routine client inquiries, and custom development for integrations, websites, and bespoke automation solutions tailored to your firm.",
+  description:
+    "Kenstera builds high-converting websites, workflow automations, and marketing systems that drive rapid, predictable growth for your business.",
+  alternates: {
+    canonical: "https://kenstera.com",
   },
-  {
-    question: "What industries does Kenstera work with?",
-    answer:
-      "Kenstera primarily works with law firms, especially personal injury practices. We also serve healthcare providers and real estate businesses that need automated intake and lead qualification.",
+  openGraph: {
+    title: "Kenstera — Rapid Growth For Business",
+    description:
+      "Kenstera builds high-converting websites, workflow automations, and marketing systems that drive rapid, predictable growth for your business.",
+    url: "https://kenstera.com",
+    siteName: "Kenstera",
+    type: "website",
   },
-  {
-    question: "How does Kenstera's intake system work?",
-    answer:
-      "When a potential client calls or submits a web inquiry, Kenstera's intake system handles the conversation in real time. It asks qualifying questions, gathers case details, and books a consultation directly on your calendar. Qualified leads are routed to the right attorney automatically.",
+  twitter: {
+    card: "summary_large_image",
+    title: "Kenstera — Rapid Growth For Business",
+    description:
+      "Kenstera builds high-converting websites, workflow automations, and marketing systems that drive rapid, predictable growth for your business.",
   },
-  {
-    question: "How much does Kenstera cost?",
-    answer:
-      "Contact us at https://kenstera.com/pricing to book a free consultation, and we can discuss the right plan for your firm.",
-  },
-  {
-    question: "Where is Kenstera located?",
-    answer:
-      "Kenstera is a US-based company. Our solutions work for law firms and businesses nationwide, with no geographic restrictions on service availability.",
-  },
-];
+};
+
+// Structured data describing the business for search engines.
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "ProfessionalService",
+  name: "Kenstera",
+  description:
+    "Kenstera builds high-converting websites, workflow automations, and marketing systems that drive rapid, predictable growth for your business.",
+  url: "https://kenstera.com",
+  slogan: "Rapid Growth For Business",
+  areaServed: "Worldwide",
+  serviceType: [
+    "Custom Websites",
+    "Review Funnel",
+    "Missed Call Text Back",
+    "Marketing Campaigns",
+    "Local SEO",
+  ],
+};
+
+// CSS scroll-snap markers, in `vh` down the 700vh container. Each marks where a
+// beat is fully in view: hero(0), About, Testimonials, Services, Work, Contact.
+// Values = panel resting-fraction × 600vh (the scrollable range = 700vh − 100vh
+// viewport). Keep in sync with the panel timing in Showcase.tsx.
+const SNAP_OFFSETS_VH = [0, 126, 240, 345, 453, 600];
 
 export default function Home() {
-  const posts = getAllPosts();
-  const blogPosts = posts.map(post => ({ slug: post.slug, title: post.title }));
-
-  const organizationSchema = {
-    "@context": "https://schema.org",
-    "@type": "Organization",
-    name: "Kenstera",
-    url: "https://kenstera.com",
-    logo: "https://kenstera.com/og-image.jpg",
-    description:
-      "AI-powered intake automation and lead qualification for law firms.",
-    sameAs: [
-      "https://www.facebook.com/people/Kenstera/61586497872271/",
-      "https://www.instagram.com/kenstera.co/",
-    ],
-    contactPoint: {
-      "@type": "ContactPoint",
-      email: "info@kenstera.com",
-      contactType: "sales",
-    },
-  };
-
-  const faqSchema = {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    mainEntity: faqs.map((faq) => ({
-      "@type": "Question",
-      name: faq.question,
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: faq.answer,
-      },
-    })),
-  };
-
   return (
     <>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify(organizationSchema),
-        }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
-      />
-      <main className="">
-        <ShaderHero />
-        <IntakeCall />
-        <IntakeBooking />
-        <IntakeSetup />
-        <CRMIntegrations />
-        <DemoForm />
-        <CaseStudies />
-        <IndustriesFaqBlog faqs={faqs} blogPosts={blogPosts} />
-        <FinalCTA />
-      </main>
+      {/* Scopes the dark theme + vertical scroll-snap to this route only. */}
+      <LandingActive />
+      <div className="landing-root">
+        <LandingNav />
+        <HeroBackground
+          src="https://stream.mux.com/43NlHXsaMrmyzWamMk87m01fNyxSTekAD669BBAPBNm00.m3u8"
+          poster="/hero-poster.jpg"
+        />
+        <div id="scroll-root" style={{ position: "relative", height: "700vh" }}>
+          {SNAP_OFFSETS_VH.map((vh) => (
+            <div
+              key={vh}
+              className="snap-target"
+              style={{ top: `${vh}vh` }}
+              aria-hidden="true"
+            />
+          ))}
+          <ScrollFloat>{`Rapid Growth\nFor Business`}</ScrollFloat>
+          <Showcase />
+        </div>
+      </div>
     </>
   );
 }

@@ -3,6 +3,7 @@ import { getAllCaseStudies } from "@/lib/case-studies";
 import { CaseStudyCard } from "@/components/case-studies/CaseStudyCard";
 import { Testimonials } from "@/components/sections/Testimonials";
 import { FinalCTA } from "@/components/sections/FinalCTA";
+import { OG_IMAGE } from "@/lib/seo";
 
 export const metadata: Metadata = {
   title: "Case Studies | Kenstera",
@@ -13,6 +14,7 @@ export const metadata: Metadata = {
     description:
       "See how law firms use Kenstera's AI intake to capture more leads, reduce missed calls, and sign more cases.",
     type: "website",
+    images: [...OG_IMAGE],
   },
 };
 

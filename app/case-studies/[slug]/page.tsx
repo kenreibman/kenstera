@@ -13,6 +13,7 @@ import {
 import { mdxComponents } from "@/components/blog/MDXComponents";
 import { CaseStudySidebar } from "@/components/case-studies/CaseStudySidebar";
 import { FinalCTA } from "@/components/sections/FinalCTA";
+import { OG_IMAGE, OG_IMAGE_URL } from "@/lib/seo";
 
 interface PageProps {
   params: Promise<{ slug: string }>;
@@ -47,13 +48,13 @@ export async function generateMetadata({
       publishedTime: study.date,
       modifiedTime: study.updated,
       authors: [study.author],
-      images: study.heroImage ? [study.heroImage] : [],
+      images: study.heroImage ? [study.heroImage] : [...OG_IMAGE],
     },
     twitter: {
       card: "summary_large_image",
       title: study.title,
       description: study.description,
-      images: study.heroImage ? [study.heroImage] : [],
+      images: study.heroImage ? [study.heroImage] : [OG_IMAGE_URL],
     },
   };
 }

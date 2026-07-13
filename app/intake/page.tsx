@@ -9,6 +9,7 @@ import { IndustriesFaqBlog } from "@/components/industries";
 import { getAllPosts } from "@/lib/blog";
 import { FinalCTA } from "@/components/sections/FinalCTA";
 import type { Metadata } from "next";
+import { OG_IMAGE } from "@/lib/seo";
 
 export const metadata: Metadata = {
   title: "Intake Services for Law Firms",
@@ -24,6 +25,7 @@ export const metadata: Metadata = {
     url: "https://kenstera.com/intake",
     siteName: "Kenstera",
     type: "website",
+    images: [...OG_IMAGE],
   },
 };
 

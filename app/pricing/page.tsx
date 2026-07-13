@@ -3,6 +3,7 @@ import Link from "next/link";
 import { PricingCards } from "./components/PricingCards";
 import { PricingFAQ } from "./components/PricingFAQ";
 import { PricingCTA } from "./components/PricingCTA";
+import { OG_IMAGE } from "@/lib/seo";
 
 export const metadata: Metadata = {
   title: "Pricing | Kenstera",
@@ -12,6 +13,7 @@ export const metadata: Metadata = {
     title: "Pricing | Kenstera",
     description:
       "Competitive pricing for your business needs. Choose from Scale, Business, or Partner plans.",
+    images: [...OG_IMAGE],
   },
 };
 

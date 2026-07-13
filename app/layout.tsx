@@ -6,6 +6,7 @@ import "./globals.css";
 import { LayoutWrapper } from "@/components/LayoutWrapper";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next"
+import { OG_IMAGE, OG_IMAGE_URL } from "@/lib/seo";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -60,21 +61,14 @@ export const metadata: Metadata = {
     siteName: "Kenstera",
     locale: "en_US",
     type: "website",
-    images: [
-      {
-        url: "/og-image.jpg",
-        width: 1456,
-        height: 816,
-        alt: "Kenstera",
-      },
-    ],
+    images: [...OG_IMAGE],
   },
   twitter: {
     card: "summary_large_image",
     title: "Kenstera",
     description:
       "Kenstera accelerates your businesses with automated marketing, lead generation, customer support, and more.",
-    images: ["/og-image.jpg"],
+    images: [OG_IMAGE_URL],
   },
 };
 

@@ -4,6 +4,7 @@ import ScrollFloat from "@/components/landing/ScrollFloat";
 import Showcase from "@/components/landing/Showcase";
 import LandingNav from "@/components/landing/LandingNav";
 import LandingActive from "@/components/landing/LandingActive";
+import { OG_IMAGE, OG_IMAGE_URL } from "@/lib/seo";
 
 export const metadata: Metadata = {
   title: {
@@ -21,12 +22,16 @@ export const metadata: Metadata = {
     url: "https://kenstera.com",
     siteName: "Kenstera",
     type: "website",
+    // Next shallow-merges metadata, so openGraph.images is NOT inherited from
+    // the root layout when a page defines its own openGraph. Set it explicitly.
+    images: [...OG_IMAGE],
   },
   twitter: {
     card: "summary_large_image",
     title: "Kenstera — Rapid Growth For Business",
     description:
       "Kenstera builds high-converting websites, workflow automations, and marketing systems that drive rapid, predictable growth for your business.",
+    images: [OG_IMAGE_URL],
   },
 };
 

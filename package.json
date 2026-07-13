@@ -7,7 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "setup:retell": "npx tsx --tsconfig tsconfig.scripts.json scripts/setup-retell.ts"
+    "setup:retell": "npx tsx --tsconfig tsconfig.scripts.json scripts/setup-retell.ts",
+    "gen:og": "npx tsx --tsconfig tsconfig.scripts.json scripts/generate-og.tsx"
   },
   "dependencies": {
     "@calcom/embed-react": "^1.5.3",

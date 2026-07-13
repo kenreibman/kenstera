@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { OG_IMAGE } from "@/lib/seo";
 
 export const metadata: Metadata = {
   title: "Industries | Kenstera",
@@ -8,6 +9,7 @@ export const metadata: Metadata = {
     title: "Industries | Kenstera",
     description:
       "Kenstera provides AI-powered lead engagement solutions for law firms, healthcare, and real estate businesses.",
+    images: [...OG_IMAGE],
   },
 };
 

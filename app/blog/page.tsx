@@ -1,6 +1,7 @@
 import { Metadata } from "next";
 import { getAllPosts } from "@/lib/blog";
 import { BlogCard } from "@/components/blog";
+import { OG_IMAGE } from "@/lib/seo";
 
 export const metadata: Metadata = {
   title: "Blog | Kenstera",
@@ -11,6 +12,7 @@ export const metadata: Metadata = {
     description:
       "Insights on AI, automation, and digital transformation for modern businesses.",
     type: "website",
+    images: [...OG_IMAGE],
   },
 };
 

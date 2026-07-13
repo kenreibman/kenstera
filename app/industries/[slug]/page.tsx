@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import { IndustriesHero, IndustriesUseCases, IndustriesVoiceAgents, IndustriesMultimodal, IndustriesWorkflows, IndustriesCustomizable, IndustriesIntegrations, IndustriesGettingStarted, IndustriesFaqBlog, IndustriesCta } from "@/components/industries";
 import { getAllPosts } from "@/lib/blog";
 import { getIndustryContent, getAllIndustrySlugs } from "@/lib/industry-content";
+import { OG_IMAGE } from "@/lib/seo";
 
 interface IndustryPageProps {
   params: Promise<{ slug: string }>;
@@ -29,6 +30,7 @@ export async function generateMetadata({ params }: IndustryPageProps): Promise<M
     openGraph: {
       title: `${content.name} Solutions | Kenstera`,
       description: content.hero.description,
+      images: [...OG_IMAGE],
     },
   };
 }

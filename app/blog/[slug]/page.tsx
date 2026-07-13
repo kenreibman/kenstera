@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import remarkGfm from "remark-gfm";
 import { getPostBySlug, getAllSlugs, formatDate } from "@/lib/blog";
+import { OG_IMAGE, OG_IMAGE_URL } from "@/lib/seo";
 import {
   TableOfContents,
   AuthorCard,
@@ -46,13 +47,13 @@ export async function generateMetadata({
       publishedTime: post.date,
       modifiedTime: post.updated,
       authors: [post.author],
-      images: post.heroImage ? [post.heroImage] : [],
+      images: post.heroImage ? [post.heroImage] : [...OG_IMAGE],
     },
     twitter: {
       card: "summary_large_image",
       title: post.title,
       description: post.description,
-      images: post.heroImage ? [post.heroImage] : [],
+      images: post.heroImage ? [post.heroImage] : [OG_IMAGE_URL],
     },
   };
 }

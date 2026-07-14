@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { Play } from "lucide-react";
+import { Play, Plus } from "lucide-react";
 import VideoLightbox from "./VideoLightbox";
 
 gsap.registerPlugin(ScrollTrigger);
@@ -92,6 +92,33 @@ const WORK_GRADIENTS = [
   "from-rose-900/50 to-black",
 ];
 
+const FAQS = [
+  {
+    q: "How fast can you launch a new website or system?",
+    a: "Most website builds go live in 2–4 weeks, depending on page count and how ready your content is. Automations and lead-capture systems are usually running within a week — we start with the highest-impact piece, like missed-call text-back, so you see results before the whole system is finished.",
+  },
+  {
+    q: "Do I need to be technical to work with you?",
+    a: "Not at all. We handle the build, the integrations, and the ongoing maintenance. You get a system that runs quietly in the background and a simple dashboard to see what's happening. If you can check email, you can run what we set up.",
+  },
+  {
+    q: "What does this actually cost?",
+    a: "It depends on scope, but we price in clear plans rather than surprise invoices — see the Pricing page for the tiers. Most clients start with one system, prove the ROI, then expand. There's no long lock-in contract.",
+  },
+  {
+    q: "Will this work with the tools I already use?",
+    a: "Almost certainly. We integrate with the CRMs, calendars, and phone systems most businesses already run. If you're on something custom, we'll build the connection rather than force you to switch platforms.",
+  },
+  {
+    q: "How do you measure whether it's working?",
+    a: "Every system ships with tracking tied to outcomes you care about — leads captured, calls recovered, appointments booked, revenue attributed. We review the numbers with you and adjust. If a channel isn't paying off, we cut it.",
+  },
+  {
+    q: "What if I already have a website?",
+    a: "We can work with what you have or rebuild it. Often the fastest win is layering automation and lead capture onto your current site first, then redesigning once the pipeline is proven — so you never lose your existing traffic or SEO along the way.",
+  },
+];
+
 const PANEL_CLASS =
   "glass-panel w-full max-w-[1250px] h-[900px] max-h-[85svh] flex flex-col justify-between rounded-3xl relative overflow-hidden border border-white/10 bg-black/40 backdrop-blur-[24px] md:bg-black/[0.16] md:backdrop-blur-[160px] pointer-events-auto";
 
@@ -105,6 +132,7 @@ export default function Showcase() {
     src: string;
     title: string;
   } | null>(null);
+  const [openFaq, setOpenFaq] = useState<number | null>(0);
 
   useEffect(() => {
     // Global scroll config lives here because Showcase mounts on every device
@@ -113,15 +141,17 @@ export default function Showcase() {
 
     const container = document.getElementById("scroll-root");
     const wraps = wrapRefs.current.filter(Boolean) as HTMLDivElement[];
-    if (!container || wraps.length !== 5) return;
+    if (!container || wraps.length !== 6) return;
 
     const ctx = gsap.context(() => {
       gsap.set(wraps, { yPercent: 100, opacity: 0 });
 
       // One master timeline scrubbed across the whole page. Position numbers
-      // are on a 0–100 scale that equals scroll-%. Panels overlap so each
-      // slides up as the previous slides out. Order: About, Testimonials,
-      // Services, Work, Contact. Contact holds to the bottom.
+      // are timeline units (total duration 118); scroll-% maps across the whole
+      // timeline. Panels overlap so each slides up as the previous slides out.
+      // Order: About, Testimonials, Services, Work, FAQ, Contact. Contact holds
+      // to the bottom. Keep the resting points in sync with SNAP_OFFSETS_VH in
+      // app/page.tsx (offset = restingPos / 118 × scrollableRange).
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: container,
@@ -142,8 +172,10 @@ export default function Showcase() {
         .to(wraps[2], { yPercent: -100, opacity: 0, ease: "power2.in", duration: 10 }, 60)
         .to(wraps[3], { yPercent: 0, opacity: 1, ease: "power2.out", duration: 10 }, 63)
         .to(wraps[3], { yPercent: -100, opacity: 0, ease: "power2.in", duration: 10 }, 78)
-        .to(wraps[4], { yPercent: 0, opacity: 1, ease: "power2.out", duration: 11 }, 81)
-        .to({}, { duration: 8 }, 92);
+        .to(wraps[4], { yPercent: 0, opacity: 1, ease: "power2.out", duration: 10 }, 81)
+        .to(wraps[4], { yPercent: -100, opacity: 0, ease: "power2.in", duration: 10 }, 96)
+        .to(wraps[5], { yPercent: 0, opacity: 1, ease: "power2.out", duration: 11 }, 99)
+        .to({}, { duration: 8 }, 110);
     }, container);
 
     const mm = gsap.matchMedia();
@@ -364,10 +396,73 @@ export default function Showcase() {
         </div>
       </div>
 
-      {/* Panel 5 — Contact */}
+      {/* Panel 5 — FAQ (accordion keeps this text-heavy section compact) */}
       <div ref={setWrap(4)} className={WRAP_CLASS} style={{ perspective: "1000px" }}>
         <div
           ref={setPanel(4)}
+          className={PANEL_CLASS}
+          style={{ transformStyle: "preserve-3d", willChange: "transform" }}
+        >
+          <div className="flex-1 flex flex-col w-full min-h-0 px-6 md:px-12 pt-10 md:pt-14 pb-8 md:pb-10">
+            <div className="text-center shrink-0 mb-8 md:mb-10">
+              <p className="font-serif italic text-white/70 text-base md:text-lg mb-4 md:mb-6">
+                Questions, answered
+              </p>
+              <h2 className="font-serif text-white text-4xl md:text-5xl lg:text-6xl leading-[1.05] tracking-tight">
+                Frequently <span className="italic">asked</span>
+              </h2>
+            </div>
+            {/* Only the questions show by default; answers expand on demand, so
+                the panel stays bounded regardless of answer length. The list
+                scrolls internally as a safety net if content ever overflows. */}
+            <div className="w-full max-w-[820px] mx-auto flex-1 min-h-0 overflow-y-auto overscroll-y-contain pr-1">
+              <ul className="flex flex-col gap-3">
+                {FAQS.map((f, i) => {
+                  const isOpen = openFaq === i;
+                  return (
+                    <li
+                      key={f.q}
+                      className="rounded-2xl border border-white/10 bg-white/[0.03] overflow-hidden"
+                    >
+                      <button
+                        onClick={() => setOpenFaq(isOpen ? null : i)}
+                        aria-expanded={isOpen}
+                        className="group w-full flex items-center justify-between gap-4 text-left px-5 md:px-6 py-4 md:py-5"
+                      >
+                        <span className="font-serif text-white text-lg md:text-2xl leading-snug">
+                          {f.q}
+                        </span>
+                        <Plus
+                          size={20}
+                          className={`shrink-0 text-white/60 group-hover:text-white transition-all duration-300 ${
+                            isOpen ? "rotate-45 text-white" : ""
+                          }`}
+                        />
+                      </button>
+                      <div
+                        className={`grid transition-[grid-template-rows] duration-300 ease-out ${
+                          isOpen ? "grid-rows-[1fr]" : "grid-rows-[0fr]"
+                        }`}
+                      >
+                        <div className="overflow-hidden">
+                          <p className="font-sans text-white/60 text-sm md:text-base leading-relaxed px-5 md:px-6 pb-5 md:pb-6">
+                            {f.a}
+                          </p>
+                        </div>
+                      </div>
+                    </li>
+                  );
+                })}
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Panel 6 — Contact */}
+      <div ref={setWrap(5)} className={WRAP_CLASS} style={{ perspective: "1000px" }}>
+        <div
+          ref={setPanel(5)}
           className={PANEL_CLASS}
           style={{ transformStyle: "preserve-3d", willChange: "transform" }}
         >
@@ -378,12 +473,20 @@ export default function Showcase() {
             <h2 className="font-serif text-white text-3xl sm:text-4xl md:text-6xl lg:text-[88px] leading-[1.1] tracking-tight w-full max-w-[900px] mx-auto mb-8 md:mb-10">
               Let&rsquo;s grow your <span className="italic">business</span>
             </h2>
-            <a
-              href="mailto:info@kenstera.com"
-              className="inline-block font-sans font-semibold uppercase tracking-widest text-sm text-black bg-white rounded-full px-8 py-4 hover:bg-white/80 transition-colors"
-            >
-              info@kenstera.com
-            </a>
+            <div className="flex flex-col items-center gap-5">
+              <Link
+                href="/contact-sales"
+                className="inline-block font-sans font-semibold uppercase tracking-widest text-sm text-black bg-white rounded-full px-8 py-4 hover:bg-white/80 transition-colors"
+              >
+                Contact us
+              </Link>
+              <a
+                href="mailto:info@kenstera.com"
+                className="font-sans text-sm text-white/55 hover:text-white transition-colors"
+              >
+                or email info@kenstera.com
+              </a>
+            </div>
           </div>
         </div>
       </div>

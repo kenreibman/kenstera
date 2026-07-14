@@ -54,11 +54,12 @@ const jsonLd = {
   ],
 };
 
-// CSS scroll-snap markers, in `vh` down the 700vh container. Each marks where a
-// beat is fully in view: hero(0), About, Testimonials, Services, Work, Contact.
-// Values = panel resting-fraction × 600vh (the scrollable range = 700vh − 100vh
-// viewport). Keep in sync with the panel timing in Showcase.tsx.
-const SNAP_OFFSETS_VH = [0, 126, 240, 345, 453, 600];
+// CSS scroll-snap markers, in `vh` down the 820vh container. Each marks where a
+// beat is fully in view: hero(0), About, Testimonials, Services, Work, FAQ,
+// Contact. Values = panel resting-position ÷ 118 (timeline total) × 720vh (the
+// scrollable range = 820vh − 100vh viewport). Keep in sync with the panel timing
+// in Showcase.tsx.
+const SNAP_OFFSETS_VH = [0, 128, 244, 351, 461, 570, 720];
 
 export default function Home() {
   return (
@@ -75,7 +76,7 @@ export default function Home() {
           src="https://stream.mux.com/43NlHXsaMrmyzWamMk87m01fNyxSTekAD669BBAPBNm00.m3u8"
           poster="/hero-poster.jpg"
         />
-        <div id="scroll-root" style={{ position: "relative", height: "700vh" }}>
+        <div id="scroll-root" style={{ position: "relative", height: "820vh" }}>
           {SNAP_OFFSETS_VH.map((vh) => (
             <div
               key={vh}

@@ -167,26 +167,29 @@
     "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
 }
 
-/* Dark canvas + native vertical section snapping, active only on the landing.
-   `scroll-snap-stop: always` on the markers means a hard flick advances one
-   section at a time instead of flying past the whole page. */
+/* Dark canvas + gentle vertical section snapping, active only on the landing.
+   `proximity` (not `mandatory`) means the scroll only settles onto a panel when
+   you come to rest near one — free-scrolling and flicking through several
+   sections at once is never blocked. Deliberately no `scroll-snap-stop`, which
+   would trap a gesture at each panel and make a section feel like page's end. */
 html.landing-active,
 html.landing-active body {
   background-color: #000;
 }
 
 html.landing-active {
-  scroll-snap-type: y mandatory;
+  scroll-snap-type: y proximity;
 }
 
 @media (prefers-reduced-motion: reduce) {
   html.landing-active {
-    scroll-snap-type: y proximity;
+    scroll-snap-type: none;
   }
 }
 
-/* Zero-footprint snap points positioned down the 700vh scroll container.
-   Their top offsets (in app/page.tsx) mark where each panel is fully in view. */
+/* Zero-footprint snap points positioned down the 820vh scroll container.
+   Their top offsets (in app/page.tsx) mark where each panel is fully in view.
+   With proximity snapping these act as soft resting points, not hard stops. */
 .snap-target {
   position: absolute;
   left: 0;
@@ -194,7 +197,6 @@ html.landing-active {
   height: 1px;
   pointer-events: none;
   scroll-snap-align: start;
-  scroll-snap-stop: always;
 }
 
 /* Solid fallback when backdrop-filter is unsupported. */

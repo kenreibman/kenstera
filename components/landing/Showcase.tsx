@@ -92,30 +92,45 @@ const WORK_GRADIENTS = [
   "from-rose-900/50 to-black",
 ];
 
-const FAQS = [
+const FAQS: {
+  q: string;
+  a: string;
+  bullets?: string[];
+  aOutro?: string;
+}[] = [
   {
-    q: "How fast can you launch a new website or system?",
-    a: "Most website builds go live in 2–4 weeks, depending on page count and how ready your content is. Automations and lead-capture systems are usually running within a week — we start with the highest-impact piece, like missed-call text-back, so you see results before the whole system is finished.",
+    q: "When am I going to start seeing results?",
+    a: "This will completely depend on what else you're doing for advertising, how long you've been in business, the quality of your work, and of course that you commit to using our system. If you think you're going to close your eyes and pay us $397 a month to solve all your problems, we're probably not the right fit for you. We cannot stress this enough — you have to be doing multiple forms of advertising. Kenstera is meant to provide you a simple, yet extremely effective foundational marketing system to help grow and expand your business. We're here to build your online business foundation, not perform miracles.",
   },
   {
-    q: "Do I need to be technical to work with you?",
-    a: "Not at all. We handle the build, the integrations, and the ongoing maintenance. You get a system that runs quietly in the background and a simple dashboard to see what's happening. If you can check email, you can run what we set up.",
+    q: "Can you explain how you help me grow my business?",
+    a: "Do you believe that…",
+    bullets: [
+      "having more 5-star reviews will attract more customers?",
+      "being able to be found online and having a professional website that actually works will help you convert more leads into paying customers?",
+      "instantly following up with incoming leads will make you look more professional and reduce the chances of missing high-quality leads, leading to more business?",
+      "making the most of every customer you work with by putting them into automated re-marketing campaigns will make them more likely to work with you again?",
+      "using automation and AI could free you from repeating the same basic tasks in your business, giving you more time for other things?",
+      "having these systems in place is important to grow your business?",
+    ],
+    aOutro:
+      "If you believe any of those things can grow your business, that's exactly what we can help you with.",
   },
   {
-    q: "What does this actually cost?",
-    a: "It depends on scope, but we price in clear plans rather than surprise invoices — see the Pricing page for the tiers. Most clients start with one system, prove the ROI, then expand. There's no long lock-in contract.",
+    q: "Why is your pricing so cheap?",
+    a: "Our only interest is keeping you for 10+ years. We believe the best way to do that is to be priced affordably. We believe if we don't overcharge and provide you with excellent service, you'll never have a reason to leave.",
   },
   {
-    q: "Will this work with the tools I already use?",
-    a: "Almost certainly. We integrate with the CRMs, calendars, and phone systems most businesses already run. If you're on something custom, we'll build the connection rather than force you to switch platforms.",
+    q: "Do I have to commit or sign a contract?",
+    a: "Of course not. We would be sad to see you go, but you can cancel anytime.",
   },
   {
-    q: "How do you measure whether it's working?",
-    a: "Every system ships with tracking tied to outcomes you care about — leads captured, calls recovered, appointments booked, revenue attributed. We review the numbers with you and adjust. If a channel isn't paying off, we cut it.",
+    q: "Can people find my website on Google?",
+    a: "We make sure every website made by Kenstera is set up with the best SEO practices. This includes keyword research, adding alt tags, meta tags, and header titles, securing an SSL certificate, optimizing for high site performance scores, and providing regular updates. Your Google ranking will depend on how long your site's been live, local competition, and factors like your Google My Business reviews. We also offer blogging to boost your content. While we don't handle off-page backlinks beyond your social media, our ongoing updates keep your site in great shape — unlike some developers who set up your site and then forget about it.",
   },
   {
-    q: "What if I already have a website?",
-    a: "We can work with what you have or rebuild it. Often the fastest win is layering automation and lead capture onto your current site first, then redesigning once the pipeline is proven — so you never lose your existing traffic or SEO along the way.",
+    q: "Why should I spend on a website when word of mouth is already pulling in business?",
+    a: "We might be a bit biased, but here's the deal: it's not just a website, it's the whole package. If each of your customers brings in about $500 a year, getting just 2–4 new customers from your website will pay off. We know you'll see great value from your site. It will help you attract new customers, make it easier for existing customers to refer you, allow you to run ads if you want, and attract bigger clients who value professionalism.",
   },
 ];
 
@@ -445,9 +460,17 @@ export default function Showcase() {
                         }`}
                       >
                         <div className="overflow-hidden">
-                          <p className="font-sans text-white/60 text-sm md:text-base leading-relaxed px-5 md:px-6 pb-5 md:pb-6">
-                            {f.a}
-                          </p>
+                          <div className="px-5 md:px-6 pb-5 md:pb-6 font-sans text-white/60 text-sm md:text-base leading-relaxed">
+                            <p>{f.a}</p>
+                            {f.bullets && (
+                              <ul className="mt-3 flex flex-col gap-2 list-disc pl-5 marker:text-white/30">
+                                {f.bullets.map((b) => (
+                                  <li key={b}>{b}</li>
+                                ))}
+                              </ul>
+                            )}
+                            {f.aOutro && <p className="mt-3">{f.aOutro}</p>}
+                          </div>
                         </div>
                       </div>
                     </li>

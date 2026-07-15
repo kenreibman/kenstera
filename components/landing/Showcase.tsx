@@ -172,7 +172,10 @@ export default function Showcase() {
           trigger: container,
           start: "top top",
           end: "bottom bottom",
-          scrub: 1,
+          // Low scrub so panels track the scroll closely instead of easing in
+          // over a full second (which read as "stiff/laggy", especially on
+          // mobile momentum scrolling).
+          scrub: 0.4,
           // Section snapping is handled natively by CSS scroll-snap (see the
           // `.snap-target` markers in app/page.tsx), so we don't set GSAP snap
           // here — that avoids double-snapping and doesn't hijack touch.

@@ -181,13 +181,18 @@ html.landing-active {
   scroll-snap-type: none;
 }
 
-/* Desktop pointers only: gentle `proximity` settle onto a panel when you come
-   to rest near one — never a hard lock, small movements stay free. No
-   `scroll-snap-stop`, which would trap a gesture and make a section feel like
-   the end of the page. */
+/* Desktop pointers only: firm one-section-per-gesture snap. `mandatory` pairs
+   with `scroll-snap-stop: always` on the markers (below) so even a hard flick
+   advances exactly one panel instead of flying past the whole page. Mobile/touch
+   keeps the free scroll above — a discrete swipe doesn't need a lock, and the
+   lock is what forces the multi-swipe struggle there. */
 @media (min-width: 769px) and (hover: hover) {
   html.landing-active {
-    scroll-snap-type: y proximity;
+    scroll-snap-type: y mandatory;
+  }
+
+  .snap-target {
+    scroll-snap-stop: always;
   }
 }
 
@@ -201,7 +206,8 @@ html.landing-active {
 
 /* Zero-footprint snap points positioned down the 820vh scroll container.
    Their top offsets (in app/page.tsx) mark where each panel is fully in view.
-   With proximity snapping these act as soft resting points, not hard stops. */
+   `scroll-snap-stop: always` is added only on desktop (above); on touch the
+   container has no snap-type, so these markers are inert. */
 .snap-target {
   position: absolute;
   left: 0;

@@ -204,7 +204,7 @@ html.landing-active {
   }
 }
 
-/* Zero-footprint snap points positioned down the 1255vh scroll container.
+/* Zero-footprint snap points positioned down the 820vh scroll container.
    Their top offsets (in app/page.tsx) mark where each panel is fully in view.
    `scroll-snap-stop: always` is added only on desktop (above); on touch the
    container has no snap-type, so these markers are inert. */

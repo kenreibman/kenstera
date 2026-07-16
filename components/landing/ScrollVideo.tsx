@@ -31,8 +31,8 @@ export default function ScrollVideo({
 
     ScrollTrigger.config({ ignoreMobileResize: true });
     // NOTE: we deliberately do NOT use ScrollTrigger.normalizeScroll here. It
-    // hijacks touch globally, which broke horizontal swiping of the Latest Work
-    // card row on mobile. The "one flick flies past everything"
+    // hijacks touch globally, which broke horizontal swiping of the Services /
+    // Latest Work card rows on mobile. The "one flick flies past everything"
     // problem is solved natively instead via CSS scroll-snap + scroll-snap-stop
     // (see globals.css `.snap-target` and the markers in app/page.tsx).
 

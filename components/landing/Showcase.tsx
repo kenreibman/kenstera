@@ -4,8 +4,8 @@ import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { Plus } from "lucide-react";
-import type Hls from "hls.js";
+import { Play, Plus } from "lucide-react";
+import VideoLightbox from "./VideoLightbox";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -38,7 +38,7 @@ const TESTIMONIALS = [
   },
 ];
 
-// PLACEHOLDER videos — all point at the demo stream so each service slide is
+// PLACEHOLDER videos — all point at the demo stream so the card interaction is
 // demonstrable. Replace each `video` with the real "me explaining this service"
 // clip (an .m3u8 HLS URL, or a plain .mp4). Titles/descriptions are placeholder too.
 const PLACEHOLDER_VIDEO =
@@ -140,83 +140,14 @@ const PANEL_CLASS =
 const WRAP_CLASS =
   "fixed inset-0 z-20 flex items-center justify-center p-3 md:p-6 pointer-events-none will-change-transform";
 
-// One big autoplaying (muted, looping) video per service slide. Because every
-// panel is position:fixed and overlapping, visibility can't be observed with an
-// IntersectionObserver — the parent computes which service slide is on screen
-// and passes `active`. The HLS stream is lazy-loaded the first time a slide goes
-// active, so only the visible slide ever downloads/decodes (one stream at a
-// time), and it pauses when scrolled away.
-function ServiceVideo({ src, active }: { src: string; active: boolean }) {
-  const videoRef = useRef<HTMLVideoElement>(null);
-  const hlsRef = useRef<Hls | null>(null);
-  const loadedRef = useRef(false);
-
-  useEffect(() => {
-    const video = videoRef.current;
-    if (!video) return;
-    let disposed = false;
-
-    const ensureLoaded = async () => {
-      if (loadedRef.current) return;
-      loadedRef.current = true;
-      // Safari plays HLS natively; everyone else gets hls.js on demand.
-      if (video.canPlayType("application/vnd.apple.mpegurl")) {
-        video.src = src;
-        return;
-      }
-      const { default: HlsLib } = await import("hls.js");
-      if (disposed) return;
-      if (!HlsLib.isSupported()) {
-        video.src = src;
-        return;
-      }
-      // capLevelToPlayerSize: these sit in a card, so no need for the full
-      // 1080p rendition the full-screen hero forces.
-      const hls = new HlsLib({ capLevelToPlayerSize: true, startPosition: 0 });
-      hlsRef.current = hls;
-      hls.loadSource(src);
-      hls.attachMedia(video);
-    };
-
-    if (active) {
-      ensureLoaded().then(() => {
-        if (!disposed) video.play().catch(() => {});
-      });
-    } else {
-      video.pause();
-    }
-
-    return () => {
-      disposed = true;
-    };
-  }, [active, src]);
-
-  // Tear down hls.js only when the slide unmounts, not on every pause, so a
-  // returning viewer resumes instantly.
-  useEffect(() => () => hlsRef.current?.destroy(), []);
-
-  return (
-    <video
-      ref={videoRef}
-      className="absolute inset-0 h-full w-full object-cover"
-      muted
-      loop
-      playsInline
-      preload="none"
-      crossOrigin="anonymous"
-    />
-  );
-}
-
 export default function Showcase() {
   const wrapRefs = useRef<(HTMLDivElement | null)[]>([]);
   const panelRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const [openVideo, setOpenVideo] = useState<{
+    src: string;
+    title: string;
+  } | null>(null);
   const [openFaq, setOpenFaq] = useState<number | null>(0);
-  // Which service slide (0-4) is currently on screen, or -1 for none. Drives
-  // which ServiceVideo autoplays. A ref mirrors it so the scroll handler can
-  // read the current value without re-subscribing.
-  const [activeService, setActiveService] = useState(-1);
-  const activeServiceRef = useRef(-1);
 
   useEffect(() => {
     // Global scroll config lives here because Showcase mounts on every device
@@ -225,22 +156,17 @@ export default function Showcase() {
 
     const container = document.getElementById("scroll-root");
     const wraps = wrapRefs.current.filter(Boolean) as HTMLDivElement[];
-    if (!container || wraps.length !== 10) return;
-
-    // Panel order (wrap index): About(0), Testimonials(1), Service 1-5(2-6),
-    // Work(7), FAQ(8), Contact(9). Service slides are the range below.
-    const SERVICE_FIRST = 2;
-    const SERVICE_COUNT = 5;
+    if (!container || wraps.length !== 6) return;
 
     const ctx = gsap.context(() => {
       gsap.set(wraps, { yPercent: 100, opacity: 0 });
 
-      // One master timeline scrubbed across the whole page. Position numbers are
-      // timeline units (total duration 189); scroll-% maps across the whole
+      // One master timeline scrubbed across the whole page. Position numbers
+      // are timeline units (total duration 118); scroll-% maps across the whole
       // timeline. Panels overlap so each slides up as the previous slides out.
-      // Panels 0-8 share the same rhythm (in over 10 units, hold, out 15 later);
-      // Contact(9) holds to the bottom. Keep the resting points in sync with
-      // SNAP_OFFSETS_VH in app/page.tsx (offset = restingPos / 189 × range).
+      // Order: About, Testimonials, Services, Work, FAQ, Contact. Contact holds
+      // to the bottom. Keep the resting points in sync with SNAP_OFFSETS_VH in
+      // app/page.tsx (offset = restingPos / 118 × scrollableRange).
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: container,
@@ -253,37 +179,21 @@ export default function Showcase() {
           // Section snapping is handled natively by CSS scroll-snap (see the
           // `.snap-target` markers in app/page.tsx), so we don't set GSAP snap
           // here — that avoids double-snapping and doesn't hijack touch.
-          onUpdate: () => {
-            // Play only the service slide that's most visible right now. Read
-            // the live (scrubbed) opacity of each service wrap and pick the
-            // clear winner; -1 when no service panel is on screen.
-            let best = -1;
-            let bestOp = 0.5;
-            for (let i = 0; i < SERVICE_COUNT; i++) {
-              const w = wrapRefs.current[SERVICE_FIRST + i];
-              if (!w) continue;
-              const op = Number(gsap.getProperty(w, "opacity"));
-              if (op > bestOp) {
-                bestOp = op;
-                best = i;
-              }
-            }
-            if (best !== activeServiceRef.current) {
-              activeServiceRef.current = best;
-              setActiveService(best);
-            }
-          },
         },
       });
 
-      // Panels 0-8: in at 8 + 18*k, out 15 units later. Contact(9) at 170, held.
-      for (let k = 0; k <= 8; k++) {
-        const inAt = 8 + 18 * k;
-        tl.to(wraps[k], { yPercent: 0, opacity: 1, ease: "power2.out", duration: 10 }, inAt)
-          .to(wraps[k], { yPercent: -100, opacity: 0, ease: "power2.in", duration: 10 }, inAt + 15);
-      }
-      tl.to(wraps[9], { yPercent: 0, opacity: 1, ease: "power2.out", duration: 11 }, 170)
-        .to({}, { duration: 8 }, 181);
+      tl.to(wraps[0], { yPercent: 0, opacity: 1, ease: "power2.out", duration: 10 }, 8)
+        .to(wraps[0], { yPercent: -100, opacity: 0, ease: "power2.in", duration: 10 }, 24)
+        .to(wraps[1], { yPercent: 0, opacity: 1, ease: "power2.out", duration: 10 }, 27)
+        .to(wraps[1], { yPercent: -100, opacity: 0, ease: "power2.in", duration: 10 }, 42)
+        .to(wraps[2], { yPercent: 0, opacity: 1, ease: "power2.out", duration: 10 }, 45)
+        .to(wraps[2], { yPercent: -100, opacity: 0, ease: "power2.in", duration: 10 }, 60)
+        .to(wraps[3], { yPercent: 0, opacity: 1, ease: "power2.out", duration: 10 }, 63)
+        .to(wraps[3], { yPercent: -100, opacity: 0, ease: "power2.in", duration: 10 }, 78)
+        .to(wraps[4], { yPercent: 0, opacity: 1, ease: "power2.out", duration: 10 }, 81)
+        .to(wraps[4], { yPercent: -100, opacity: 0, ease: "power2.in", duration: 10 }, 96)
+        .to(wraps[5], { yPercent: 0, opacity: 1, ease: "power2.out", duration: 11 }, 99)
+        .to({}, { duration: 8 }, 110);
     }, container);
 
     const mm = gsap.matchMedia();
@@ -400,48 +310,63 @@ export default function Showcase() {
         </div>
       </div>
 
-      {/* Panels 3-7 — Services, one full slide with a big autoplaying video
-          each (vertical, so nothing hides in a horizontal scroll row). */}
-      {SERVICES.map((s, i) => (
+      {/* Panel 3 — Services (video cards) */}
+      <div ref={setWrap(2)} className={WRAP_CLASS} style={{ perspective: "1000px" }}>
         <div
-          key={s.title}
-          ref={setWrap(2 + i)}
-          className={WRAP_CLASS}
-          style={{ perspective: "1000px" }}
+          ref={setPanel(2)}
+          className={PANEL_CLASS}
+          style={{ transformStyle: "preserve-3d", willChange: "transform" }}
         >
-          <div
-            ref={setPanel(2 + i)}
-            className={PANEL_CLASS}
-            style={{ transformStyle: "preserve-3d", willChange: "transform" }}
-          >
-            <div className="flex-1 flex flex-col md:flex-row items-center gap-6 md:gap-12 px-6 md:px-12 py-8 md:py-0">
-              {/* Copy — below the video on mobile, left of it on desktop. */}
-              <div className="w-full md:w-[38%] text-center md:text-left order-2 md:order-1">
-                <p className="font-serif italic text-white/70 text-base md:text-lg mb-3 md:mb-5">
-                  What We Do · {String(i + 1).padStart(2, "0")} / {String(SERVICES.length).padStart(2, "0")}
-                </p>
-                <h2 className="font-serif text-white text-3xl sm:text-4xl md:text-5xl lg:text-[64px] leading-[1.05] tracking-tight mb-4 md:mb-6">
-                  {s.title}
-                </h2>
-                <p className="font-sans text-white/60 text-sm md:text-lg leading-relaxed max-w-md mx-auto md:mx-0">
-                  {s.description}
-                </p>
-              </div>
-              {/* Big video. */}
-              <div className="w-full md:w-[62%] order-1 md:order-2">
-                <div className="relative aspect-video w-full rounded-2xl overflow-hidden border border-white/10 bg-gradient-to-br from-white/10 to-white/[0.02]">
-                  <ServiceVideo src={s.video} active={activeService === i} />
-                </div>
-              </div>
+          <div className="flex-1 flex flex-col items-center justify-center w-full min-h-0">
+            <div className="text-center px-6 md:px-12">
+              <p className="font-serif italic text-white/70 text-base md:text-lg mb-4 md:mb-6">
+                What We Do
+              </p>
+              <h2 className="font-serif text-white text-4xl md:text-6xl lg:text-[80px] leading-[1.1] tracking-tight mb-8 md:mb-12">
+                Services
+              </h2>
+            </div>
+            {/* Horizontal scroll-snap row so 5 video cards fit any height. */}
+            <div className="w-full overflow-x-auto overflow-y-hidden overscroll-x-contain pb-4">
+              <ul className="flex items-stretch gap-4 md:gap-6 px-6 md:px-12 w-max mx-auto snap-x snap-mandatory">
+                {SERVICES.map((s) => (
+                  <li
+                    key={s.title}
+                    className="snap-start w-[260px] md:w-[300px] shrink-0 flex"
+                  >
+                    <button
+                      onClick={() =>
+                        setOpenVideo({ src: s.video, title: s.title })
+                      }
+                      className="group text-left w-full h-full flex flex-col rounded-2xl border border-white/10 bg-white/[0.03] overflow-hidden hover:border-white/25 transition-colors"
+                      aria-label={`Play video: ${s.title}`}
+                    >
+                      <div className="relative aspect-video shrink-0 bg-gradient-to-br from-white/10 to-white/[0.02] flex items-center justify-center">
+                        <span className="flex h-14 w-14 items-center justify-center rounded-full bg-white/90 text-black group-hover:scale-110 transition-transform">
+                          <Play size={22} className="ml-1" fill="currentColor" />
+                        </span>
+                      </div>
+                      <div className="p-4 md:p-5 flex-1">
+                        <h3 className="font-sans font-semibold text-white text-base md:text-lg mb-1.5">
+                          {s.title}
+                        </h3>
+                        <p className="font-sans text-white/55 text-sm leading-relaxed">
+                          {s.description}
+                        </p>
+                      </div>
+                    </button>
+                  </li>
+                ))}
+              </ul>
             </div>
           </div>
         </div>
-      ))}
+      </div>
 
-      {/* Panel 8 — Latest Work */}
-      <div ref={setWrap(7)} className={WRAP_CLASS} style={{ perspective: "1000px" }}>
+      {/* Panel 4 — Latest Work */}
+      <div ref={setWrap(3)} className={WRAP_CLASS} style={{ perspective: "1000px" }}>
         <div
-          ref={setPanel(7)}
+          ref={setPanel(3)}
           className={PANEL_CLASS}
           style={{ transformStyle: "preserve-3d", willChange: "transform" }}
         >
@@ -489,10 +414,10 @@ export default function Showcase() {
         </div>
       </div>
 
-      {/* Panel 9 — FAQ (accordion keeps this text-heavy section compact) */}
-      <div ref={setWrap(8)} className={WRAP_CLASS} style={{ perspective: "1000px" }}>
+      {/* Panel 5 — FAQ (accordion keeps this text-heavy section compact) */}
+      <div ref={setWrap(4)} className={WRAP_CLASS} style={{ perspective: "1000px" }}>
         <div
-          ref={setPanel(8)}
+          ref={setPanel(4)}
           className={PANEL_CLASS}
           style={{ transformStyle: "preserve-3d", willChange: "transform" }}
         >
@@ -560,10 +485,10 @@ export default function Showcase() {
         </div>
       </div>
 
-      {/* Panel 10 — Contact */}
-      <div ref={setWrap(9)} className={WRAP_CLASS} style={{ perspective: "1000px" }}>
+      {/* Panel 6 — Contact */}
+      <div ref={setWrap(5)} className={WRAP_CLASS} style={{ perspective: "1000px" }}>
         <div
-          ref={setPanel(9)}
+          ref={setPanel(5)}
           className={PANEL_CLASS}
           style={{ transformStyle: "preserve-3d", willChange: "transform" }}
         >
@@ -591,6 +516,14 @@ export default function Showcase() {
           </div>
         </div>
       </div>
+
+      {openVideo && (
+        <VideoLightbox
+          src={openVideo.src}
+          title={openVideo.title}
+          onClose={() => setOpenVideo(null)}
+        />
+      )}
     </>
   );
 }

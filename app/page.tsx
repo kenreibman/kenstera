@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import HeroBackground from "@/components/landing/HeroBackground";
+import HeroImage from "@/components/landing/HeroImage";
 import ScrollFloat from "@/components/landing/ScrollFloat";
 import Showcase from "@/components/landing/Showcase";
 import LandingNav from "@/components/landing/LandingNav";
@@ -72,10 +72,8 @@ export default function Home() {
       <LandingActive />
       <div className="landing-root">
         <LandingNav />
-        <HeroBackground
-          src="https://stream.mux.com/43NlHXsaMrmyzWamMk87m01fNyxSTekAD669BBAPBNm00.m3u8"
-          poster="/hero-poster.jpg"
-        />
+        {/* Static image hero on all devices — no scrubbing video / hls.js. */}
+        <HeroImage poster="/hero-poster.jpg" />
         <div id="scroll-root" style={{ position: "relative", height: "820vh" }}>
           {SNAP_OFFSETS_VH.map((vh) => (
             <div

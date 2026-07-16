@@ -150,8 +150,7 @@ export default function Showcase() {
   const [openFaq, setOpenFaq] = useState<number | null>(0);
 
   useEffect(() => {
-    // Global scroll config lives here because Showcase mounts on every device
-    // (ScrollVideo, which used to set this, no longer mounts on mobile).
+    // Global scroll config for the landing's ScrollTriggers.
     ScrollTrigger.config({ ignoreMobileResize: true });
 
     const container = document.getElementById("scroll-root");

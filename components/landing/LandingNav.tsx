@@ -10,8 +10,6 @@ import { Menu, X } from "lucide-react";
 // rest of the site, so the landing stays cinematic while remaining navigable.
 const LINKS = [
   { label: "Law Firms", href: "/intake" },
-  { label: "Blog", href: "/blog" },
-  { label: "Pricing", href: "/pricing" },
 ];
 
 export default function LandingNav() {

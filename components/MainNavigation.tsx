@@ -63,9 +63,7 @@ const navItems = [
     hasDropdown: true,
     dropdown: servicesDropdown
   },
-  { href: "/blog", label: "Blog" },
   { href: "/case-studies", label: "Case Studies" },
-  { href: "/pricing", label: "Pricing" },
 ];
 
 // Dropdown component

@@ -16,6 +16,11 @@ const servicesDropdown = {
           href: "/services/intake-and-scheduling"
         },
         {
+          title: "Intake for Law Firms",
+          description: "Automated intake built for legal practices",
+          href: "/intake"
+        },
+        {
           title: "Custom Development",
           description: "Website, Software, Integrations & More.",
           href: "/services/custom-development"

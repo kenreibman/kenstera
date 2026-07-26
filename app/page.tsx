@@ -1,9 +1,14 @@
 import type { Metadata } from "next";
-import HeroImage from "@/components/landing/HeroImage";
-import ScrollFloat from "@/components/landing/ScrollFloat";
-import Showcase from "@/components/landing/Showcase";
-import LandingNav from "@/components/landing/LandingNav";
-import LandingActive from "@/components/landing/LandingActive";
+import {
+  HomeHero,
+  HomeAbout,
+  HomeServices,
+  HomeWork,
+  HomeTestimonials,
+  HomeFaq,
+  HomeCta,
+  HOME_FAQS,
+} from "@/components/home";
 import { OG_IMAGE, OG_IMAGE_URL } from "@/lib/seo";
 
 export const metadata: Metadata = {
@@ -54,12 +59,21 @@ const jsonLd = {
   ],
 };
 
-// CSS scroll-snap markers, in `vh` down the 820vh container. Each marks where a
-// beat is fully in view: hero(0), About, Testimonials, Services, Work, FAQ,
-// Contact. Values = panel resting-position ÷ 118 (timeline total) × 720vh (the
-// scrollable range = 820vh − 100vh viewport). Keep in sync with the panel timing
-// in Showcase.tsx.
-const SNAP_OFFSETS_VH = [0, 128, 244, 351, 461, 570, 720];
+// The on-page FAQ, mirrored as structured data so it can win rich results.
+const faqJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: HOME_FAQS.map((faq) => ({
+    "@type": "Question",
+    name: faq.question,
+    acceptedAnswer: {
+      "@type": "Answer",
+      text: [faq.answer, ...(faq.bullets ?? []), faq.outro]
+        .filter(Boolean)
+        .join(" "),
+    },
+  })),
+};
 
 export default function Home() {
   return (
@@ -68,25 +82,19 @@ export default function Home() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
-      {/* Scopes the dark theme + vertical scroll-snap to this route only. */}
-      <LandingActive />
-      <div className="landing-root">
-        <LandingNav />
-        {/* Static image hero on all devices — no scrubbing video / hls.js. */}
-        <HeroImage poster="/hero-poster.jpg" />
-        <div id="scroll-root" style={{ position: "relative", height: "820vh" }}>
-          {SNAP_OFFSETS_VH.map((vh) => (
-            <div
-              key={vh}
-              className="snap-target"
-              style={{ top: `${vh}vh` }}
-              aria-hidden="true"
-            />
-          ))}
-          <ScrollFloat>{`Rapid Growth\nFor Business`}</ScrollFloat>
-          <Showcase />
-        </div>
-      </div>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
+      />
+      <main className="bg-white">
+        <HomeHero />
+        <HomeAbout />
+        <HomeServices />
+        <HomeWork />
+        <HomeTestimonials />
+        <HomeFaq />
+        <HomeCta />
+      </main>
     </>
   );
 }

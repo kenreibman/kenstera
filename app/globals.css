@@ -42,20 +42,11 @@
   --radius-lg: var(--radius);
   --radius-xl: calc(var(--radius) + 4px);
 
-  /* Landing-page fonts (used only under `.landing-root`). Generate the
-     `font-serif` and `font-dirtyline` utilities. `--font-sans` stays Inter
-     globally and is remapped to Manrope inside `.landing-root` below. */
+  /* Fonts for the dark `.landing-root` routes (/work/*). Generates the
+     `font-serif` utility. `--font-sans` stays Inter globally and is remapped
+     to Manrope inside `.landing-root` below. */
   --font-serif: var(--font-instrument-serif), ui-serif, Georgia, Cambria,
     "Times New Roman", Times, serif;
-  --font-dirtyline: var(--font-dirtyline-src), sans-serif;
-
-  --animate-marquee: marquee 20s linear infinite;
-
-  @keyframes marquee {
-    100% {
-      transform: translateX(-50%);
-    }
-  }
 }
 
 :root {
@@ -155,77 +146,20 @@
 }
 
 /* ==========================================================================
-   Immersive landing page ("/") — scoped so it never leaks into the rest of
-   the site. The `.landing-active` class is toggled on <html> only while the
-   landing (or a /work/* page) is mounted; `.landing-root` wraps the content.
+   Dark case-study routes (/work/*) — scoped so they never leak into the rest
+   of the site. `.landing-active` is toggled on <html> only while such a page
+   is mounted; `.landing-root` wraps the content.
    ========================================================================== */
 
-/* Remap the sans font to Manrope for the landing only. `font-sans` utilities
-   inside the landing resolve this scoped value; everywhere else stays Inter. */
+/* Remap the sans font to Manrope for these routes only. `font-sans` utilities
+   inside them resolve this scoped value; everywhere else stays Inter. */
 .landing-root {
   --font-sans: var(--font-manrope), ui-sans-serif, system-ui, sans-serif,
     "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
 }
 
-/* Dark canvas + gentle vertical section snapping, active only on the landing. */
+/* Dark canvas behind the page, so overscroll doesn't flash white. */
 html.landing-active,
 html.landing-active body {
   background-color: #000;
-}
-
-/* Free scroll by default. On mobile/touch the panels sit ~120vh apart, so any
-   snapping fights swipe momentum: a normal-length swipe doesn't reach the next
-   point and gets pulled back, forcing several swipes to advance. So touch gets
-   a plain, unimpeded scroll. */
-html.landing-active {
-  scroll-snap-type: none;
-}
-
-/* Desktop pointers only: firm one-section-per-gesture snap. `mandatory` pairs
-   with `scroll-snap-stop: always` on the markers (below) so even a hard flick
-   advances exactly one panel instead of flying past the whole page. Mobile/touch
-   keeps the free scroll above — a discrete swipe doesn't need a lock, and the
-   lock is what forces the multi-swipe struggle there. */
-@media (min-width: 769px) and (hover: hover) {
-  html.landing-active {
-    scroll-snap-type: y mandatory;
-  }
-
-  .snap-target {
-    scroll-snap-stop: always;
-  }
-}
-
-/* Reduced-motion (any device): no snap-driven scroll animation at all. Placed
-   last so it overrides the desktop rule above. */
-@media (prefers-reduced-motion: reduce) {
-  html.landing-active {
-    scroll-snap-type: none;
-  }
-}
-
-/* Zero-footprint snap points positioned down the 820vh scroll container.
-   Their top offsets (in app/page.tsx) mark where each panel is fully in view.
-   `scroll-snap-stop: always` is added only on desktop (above); on touch the
-   container has no snap-type, so these markers are inert. */
-.snap-target {
-  position: absolute;
-  left: 0;
-  width: 1px;
-  height: 1px;
-  pointer-events: none;
-  scroll-snap-align: start;
-}
-
-/* Solid fallback when backdrop-filter is unsupported. */
-@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
-  .glass-panel {
-    background-color: rgba(0, 0, 0, 0.75) !important;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .animate-marquee {
-    animation: none;
-  }
 }

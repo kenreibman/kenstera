@@ -31,13 +31,16 @@ export async function POST(request: NextRequest) {
 
     const body = await request.text()
 
-    const isValid = await getReceiver().verify({
-      signature,
-      body,
-      url: request.url,
-    })
-
-    if (!isValid) {
+    // verify() throws on an invalid signature rather than returning false —
+    // without this catch a forged request would surface as a 500 from the
+    // outer handler instead of a 401.
+    try {
+      await getReceiver().verify({
+        signature,
+        body,
+        url: request.url,
+      })
+    } catch {
       console.error('[Demo Follow-up] Invalid QStash signature')
       return NextResponse.json(
         { success: false, error: 'Invalid signature' },

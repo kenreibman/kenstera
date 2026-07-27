@@ -1,6 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { z } from 'zod'
 import { getResend } from '@/lib/email/send'
+import { newsletterRatelimit } from '@/lib/rate-limit/public-forms'
+import { getClientIp } from '@/lib/request-ip'
 
 const newsletterSchema = z.object({
   email: z.string().email('Invalid email address'),
@@ -23,6 +25,14 @@ export async function POST(request: NextRequest) {
       return NextResponse.json(
         { success: false, error: 'Please enter a valid email address' },
         { status: 400 }
+      )
+    }
+
+    const ipResult = await newsletterRatelimit.limit(getClientIp(request))
+    if (!ipResult.success) {
+      return NextResponse.json(
+        { success: false, error: 'Too many requests. Please try again later.' },
+        { status: 429 }
       )
     }
 

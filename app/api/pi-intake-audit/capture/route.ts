@@ -1,6 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { Client } from '@upstash/qstash'
 import { createLead } from '@/lib/db/leads'
+import { captureRatelimit } from '@/lib/rate-limit/public-forms'
+import { getClientIp } from '@/lib/request-ip'
 import { z } from 'zod'
 
 const captureSchema = z.object({
@@ -43,6 +45,14 @@ export async function POST(request: NextRequest) {
       return NextResponse.json(
         { success: false, error: 'Validation failed', details: parsed.error.flatten().fieldErrors },
         { status: 400 }
+      )
+    }
+
+    const ipResult = await captureRatelimit.limit(getClientIp(request))
+    if (!ipResult.success) {
+      return NextResponse.json(
+        { success: false, error: 'Too many requests. Please try again later.' },
+        { status: 429 }
       )
     }
 

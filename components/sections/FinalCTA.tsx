@@ -1,42 +1,11 @@
 "use client"
 
-import { useState } from "react"
 import { ArrowRight } from "lucide-react"
+import { useNewsletterSignup } from "@/components/newsletter/useNewsletterSignup"
 
 export function FinalCTA() {
-  const [email, setEmail] = useState("")
-  const [submitted, setSubmitted] = useState(false)
-  const [submitting, setSubmitting] = useState(false)
-  const [error, setError] = useState("")
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
-    setSubmitting(true)
-    setError("")
-
-    try {
-      const res = await fetch("/api/newsletter", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email }),
-      })
-
-      const data = await res.json()
-
-      if (!res.ok) {
-        setError(data.error || "Something went wrong")
-        return
-      }
-
-      setEmail("")
-      setSubmitted(true)
-      setTimeout(() => setSubmitted(false), 3000)
-    } catch {
-      setError("Something went wrong. Please try again.")
-    } finally {
-      setSubmitting(false)
-    }
-  }
+  const { email, setEmail, submitted, submitting, error, handleSubmit } =
+    useNewsletterSignup()
 
   return (
     <section className="relative py-20">
@@ -112,8 +81,11 @@ export function FinalCTA() {
                   </button>
                 </form>
                 {error && (
-                  <p className="text-red-300 text-sm mt-2">{error}</p>
+                  <p role="alert" className="text-red-300 text-sm mt-2">{error}</p>
                 )}
+                <p aria-live="polite" className="sr-only">
+                  {submitted ? "Subscribed to the newsletter." : ""}
+                </p>
               </div>
             </div>
           </div>

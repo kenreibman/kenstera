@@ -126,7 +126,13 @@ export function CalendarEmbed({ formData, leadId, waitForLeadId, onBack, onCompl
   // When key changes, React remounts Cal with the new prefilled config
   // Single Cal component - always rendered, visibility controlled by CSS wrapper in parent
   return (
-    <div className={isVisible ? '' : 'fixed -left-[9999px] opacity-0 pointer-events-none'} aria-hidden={!isVisible}>
+    // `inert` removes the off-screen Cal iframe from the tab order as well as
+    // the accessibility tree — aria-hidden alone left it keyboard-focusable,
+    // which both traps focus off-screen and violates the aria-hidden contract.
+    <div
+      className={isVisible ? '' : 'fixed -left-[9999px] opacity-0 pointer-events-none'}
+      inert={!isVisible}
+    >
       {/* Header - only shown when visible */}
       {isVisible && (
         <div className="mb-6">

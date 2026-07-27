@@ -1,6 +1,6 @@
 'use client'
 
-import { useRef, useState } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { ContactForm } from './ContactForm'
 import { CalendarEmbed } from './CalendarEmbed'
@@ -124,17 +124,43 @@ export function IntakeWizard() {
     })
   }
 
-  const handleBack = () => {
+  const handleBack = useCallback(() => {
     setDirection(-1)
     setStep((prev) => Math.max(1, prev - 1))
-  }
+  }, [])
+
+  // Steps 2 and 3 are full-screen overlays: lock the page scroll behind them,
+  // let Escape step back, and move focus into the panel so keyboard and
+  // screen-reader users don't land in the covered page content.
+  const overlayRef = useRef<HTMLDivElement>(null)
+  useEffect(() => {
+    if (step === 1) return
+    const previousOverflow = document.body.style.overflow
+    document.body.style.overflow = 'hidden'
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') handleBack()
+    }
+    window.addEventListener('keydown', onKeyDown)
+    overlayRef.current?.focus()
+    return () => {
+      document.body.style.overflow = previousOverflow
+      window.removeEventListener('keydown', onKeyDown)
+    }
+  }, [step, handleBack])
 
   // Single unified return - CalendarEmbed is ALWAYS mounted, hidden until step 3
   return (
     <>
       {/* SINGLE Cal.com embed - always mounted from page load, hidden until step 3 */}
       {/* This ensures the iframe loads immediately and persists across all step transitions */}
-      <div className={step === 3 ? 'fixed inset-0 z-50 bg-white overflow-y-auto' : ''}>
+      <div
+        ref={step === 3 ? overlayRef : undefined}
+        role={step === 3 ? 'dialog' : undefined}
+        aria-modal={step === 3 ? true : undefined}
+        aria-label={step === 3 ? 'Pick a time for your audit call' : undefined}
+        tabIndex={step === 3 ? -1 : undefined}
+        className={step === 3 ? 'fixed inset-0 z-50 bg-white overflow-y-auto' : ''}
+      >
         <div className={step === 3 ? 'min-h-full flex items-center justify-center py-8 px-5' : ''}>
           <div className={step === 3 ? 'max-w-md w-full' : ''}>
             <CalendarEmbed
@@ -211,11 +237,15 @@ export function IntakeWizard() {
       {/* Step 2: Fullscreen overlay for contact form */}
       {step === 2 && (
         <motion.div
+          ref={overlayRef}
+          role="dialog"
+          aria-modal="true"
+          aria-label="Your contact details"
+          tabIndex={-1}
           className="fixed inset-0 z-50 bg-white overflow-y-auto"
           variants={overlayVariants}
           initial="hidden"
           animate="visible"
-          exit="exit"
           transition={{ duration: 0.3 }}
         >
           <div className="min-h-full flex items-center justify-center py-8 px-5">

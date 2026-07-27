@@ -74,7 +74,10 @@ const navItems = [
 // Dropdown component
 function NavDropdown({ dropdown }: { dropdown: typeof servicesDropdown }) {
   return (
-    <div className="absolute top-full left-0 pt-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
+    // focus-within keeps the menu open while keyboard focus moves through its
+    // links — without it, `invisible` removes them from the tab order entirely
+    // and the dropdown (the only nav path to /intake) is mouse-only.
+    <div className="absolute top-full left-0 pt-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible group-focus-within:opacity-100 group-focus-within:visible transition-all duration-200">
       <div className="bg-white rounded-xl shadow-lg border border-gray-200 p-6 min-w-[600px]">
         {/* Columns */}
         <div className="flex gap-12">
@@ -234,6 +237,25 @@ export function MainNavigation() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, [mobileMenuOpen]);
 
+  // Escape closes the mobile menu, and the page behind it must not scroll —
+  // otherwise closing the menu strands the user somewhere else on the page.
+  useEffect(() => {
+    if (!mobileMenuOpen) return;
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        setMobileMenuOpen(false);
+        setExpandedItem(null);
+      }
+    };
+    window.addEventListener("keydown", onKeyDown);
+    return () => {
+      document.body.style.overflow = previousOverflow;
+      window.removeEventListener("keydown", onKeyDown);
+    };
+  }, [mobileMenuOpen]);
+
   const toggleExpanded = (href: string) => {
     setExpandedItem(expandedItem === href ? null : href);
   };
@@ -321,7 +343,12 @@ export function MainNavigation() {
             onClick={closeMobileMenu}
           />
           {/* Menu Panel - Full height */}
-          <div className="fixed top-14 left-0 right-0 bottom-0 bg-white md:hidden z-50 flex flex-col overflow-hidden">
+          <div
+            role="dialog"
+            aria-modal="true"
+            aria-label="Site navigation"
+            className="fixed top-14 left-0 right-0 bottom-0 bg-white md:hidden z-50 flex flex-col overflow-hidden"
+          >
             <nav className="flex flex-col py-4 flex-1 overflow-y-auto">
               {navItems.map((item) => (
                 <MobileNavItem

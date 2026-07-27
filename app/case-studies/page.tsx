@@ -6,7 +6,7 @@ import { FinalCTA } from "@/components/sections/FinalCTA";
 import { OG_IMAGE } from "@/lib/seo";
 
 export const metadata: Metadata = {
-  title: "Case Studies | Kenstera",
+  title: "Case Studies",
   description:
     "See how law firms use Kenstera's AI intake to capture more leads, reduce missed calls, and sign more cases — with real results and real numbers.",
   openGraph: {

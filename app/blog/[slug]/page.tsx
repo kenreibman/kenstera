@@ -31,12 +31,13 @@ export async function generateMetadata({
 
   if (!post) {
     return {
-      title: "Post Not Found | Kenstera",
+      title: "Post Not Found",
     };
   }
 
   return {
-    title: `${post.title} | Kenstera Blog`,
+    // The root layout's title.template appends "| Kenstera".
+    title: post.title,
     description: post.description,
     keywords: post.keywords,
     authors: [{ name: post.author }],

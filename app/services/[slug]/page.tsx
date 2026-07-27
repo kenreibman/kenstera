@@ -25,7 +25,8 @@ export async function generateMetadata({ params }: ServicePageProps): Promise<Me
   }
 
   return {
-    title: `${content.name} | Kenstera`,
+    // The services layout's title.template appends "| Kenstera".
+    title: content.name,
     description: content.hero.description,
     openGraph: {
       title: `${content.name} | Kenstera`,

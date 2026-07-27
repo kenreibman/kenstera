@@ -92,7 +92,13 @@ export function getAllCaseStudies(): CaseStudyMeta[] {
         readingTime: readingTime(content).text,
       };
     })
-    .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+    .sort((a, b) => {
+      // Missing dates parse to NaN, which poisons the comparator — pin them to 0
+      // so they sort last deterministically instead of scrambling the order.
+      const ta = new Date(a.date).getTime() || 0;
+      const tb = new Date(b.date).getTime() || 0;
+      return tb - ta;
+    });
 
   return studies;
 }

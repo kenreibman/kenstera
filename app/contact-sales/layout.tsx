@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Contact Sales | Kenstera',
+  title: 'Contact Sales',
   description: 'Book a call with our team to discuss AI-powered intake for your law firm.',
 }
 

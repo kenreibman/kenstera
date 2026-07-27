@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Booking Confirmed | Kenstera',
+  title: 'Booking Confirmed',
   description: 'Your consultation has been scheduled. We look forward to speaking with you.',
   robots: {
     index: false,

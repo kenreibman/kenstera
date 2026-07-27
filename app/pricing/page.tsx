@@ -6,7 +6,7 @@ import { PricingCTA } from "./components/PricingCTA";
 import { OG_IMAGE, jsonLdString } from "@/lib/seo";
 
 export const metadata: Metadata = {
-  title: "Pricing | Kenstera",
+  title: "Pricing",
   description:
     "Competitive pricing for your business needs. Choose from Scale, Business, or Partner plans.",
   openGraph: {

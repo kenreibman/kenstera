@@ -4,7 +4,7 @@ import { BlogCard } from "@/components/blog";
 import { OG_IMAGE } from "@/lib/seo";
 
 export const metadata: Metadata = {
-  title: "Blog | Kenstera",
+  title: "Blog",
   description:
     "Insights on AI, automation, and digital transformation for modern businesses. Learn how to grow faster and smarter.",
   openGraph: {

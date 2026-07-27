@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Free Intake Leak Audit | Kenstera',
+  title: 'Free Intake Leak Audit',
   description: 'Stop wasting money on shared leads that never convert. Get a free intake leak audit for your personal injury firm.',
 }
 

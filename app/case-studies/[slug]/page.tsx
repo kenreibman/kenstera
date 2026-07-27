@@ -32,12 +32,13 @@ export async function generateMetadata({
 
   if (!study) {
     return {
-      title: "Case Study Not Found | Kenstera",
+      title: "Case Study Not Found",
     };
   }
 
   return {
-    title: `${study.title} | Kenstera`,
+    // The root layout's title.template appends "| Kenstera".
+    title: study.title,
     description: study.description,
     keywords: study.keywords,
     authors: [{ name: study.author }],

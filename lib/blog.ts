@@ -58,7 +58,13 @@ export function getAllPosts(): BlogPostMeta[] {
         readingTime: readingTime(content).text,
       };
     })
-    .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+    .sort((a, b) => {
+      // Missing dates parse to NaN, which poisons the comparator — pin them to 0
+      // so they sort last deterministically instead of scrambling the order.
+      const ta = new Date(a.date).getTime() || 0;
+      const tb = new Date(b.date).getTime() || 0;
+      return tb - ta;
+    });
 
   return posts;
 }
@@ -111,9 +117,13 @@ export function getAllSlugs(): string[] {
 
 export function formatDate(dateString: string): string {
   const date = new Date(dateString);
+  if (Number.isNaN(date.getTime())) return dateString;
+  // Date-only frontmatter parses as UTC midnight; without an explicit UTC
+  // timezone the formatted text renders one day early on hosts west of UTC.
   return date.toLocaleDateString("en-US", {
     year: "numeric",
     month: "long",
     day: "numeric",
+    timeZone: "UTC",
   });
 }

@@ -6,6 +6,14 @@ import { getAllIndustrySlugs } from "@/lib/industry-content";
 
 const BASE_URL = "https://kenstera.com";
 
+// A content file with a missing/malformed date must not take down the whole
+// sitemap: new Date("") is Invalid, and Next's serializer throws on it.
+function safeDate(value?: string): Date | undefined {
+  if (!value) return undefined;
+  const d = new Date(value);
+  return Number.isNaN(d.getTime()) ? undefined : d;
+}
+
 export default function sitemap(): MetadataRoute.Sitemap {
   // Static pages
   const staticPages: MetadataRoute.Sitemap = [
@@ -52,6 +60,16 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.8,
     },
     {
+      url: `${BASE_URL}/contact-sales`,
+      changeFrequency: "monthly",
+      priority: 0.6,
+    },
+    {
+      url: `${BASE_URL}/pi-intake-audit`,
+      changeFrequency: "monthly",
+      priority: 0.6,
+    },
+    {
       url: `${BASE_URL}/privacy`,
       changeFrequency: "yearly",
       priority: 0.2,
@@ -72,7 +90,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const posts = getAllPosts();
   const blogPages: MetadataRoute.Sitemap = posts.map((post) => ({
     url: `${BASE_URL}/blog/${post.slug}`,
-    lastModified: new Date(post.updated || post.date),
+    lastModified: safeDate(post.updated || post.date),
     changeFrequency: "monthly",
     priority: 0.7,
   }));
@@ -81,7 +99,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const caseStudies = getAllCaseStudies();
   const caseStudyPages: MetadataRoute.Sitemap = caseStudies.map((study) => ({
     url: `${BASE_URL}/case-studies/${study.slug}`,
-    lastModified: new Date(study.updated || study.date),
+    lastModified: safeDate(study.updated || study.date),
     changeFrequency: "monthly",
     priority: 0.7,
   }));

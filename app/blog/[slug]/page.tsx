@@ -4,7 +4,7 @@ import { notFound } from "next/navigation";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import remarkGfm from "remark-gfm";
 import { getPostBySlug, getAllSlugs, formatDate } from "@/lib/blog";
-import { OG_IMAGE, OG_IMAGE_URL } from "@/lib/seo";
+import { OG_IMAGE, OG_IMAGE_URL, OG_IMAGE_ABSOLUTE_URL, SITE_URL, jsonLdString } from "@/lib/seo";
 import {
   TableOfContents,
   AuthorCard,
@@ -69,6 +69,7 @@ export default async function BlogPostPage({ params }: PageProps) {
     notFound();
   }
 
+  const pageUrl = `${SITE_URL}/blog/${slug}`;
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "Article",
@@ -78,16 +79,23 @@ export default async function BlogPostPage({ params }: PageProps) {
       "@type": "Organization",
       name: post.author,
     },
+    publisher: {
+      "@type": "Organization",
+      name: "Kenstera",
+      url: SITE_URL,
+    },
     datePublished: post.date,
     dateModified: post.updated || post.date,
-    image: post.heroImage,
+    image: post.heroImage || OG_IMAGE_ABSOLUTE_URL,
+    url: pageUrl,
+    mainEntityOfPage: pageUrl,
   };
 
   return (
     <>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        dangerouslySetInnerHTML={{ __html: jsonLdString(jsonLd) }}
       />
       <main className="bg-background min-h-screen">
         {/* Header */}

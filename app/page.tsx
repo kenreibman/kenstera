@@ -9,7 +9,7 @@ import {
   HomeCta,
   HOME_FAQS,
 } from "@/components/home";
-import { OG_IMAGE, OG_IMAGE_URL } from "@/lib/seo";
+import { OG_IMAGE, OG_IMAGE_URL, jsonLdString } from "@/lib/seo";
 
 export const metadata: Metadata = {
   title: {
@@ -80,11 +80,11 @@ export default function Home() {
     <>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        dangerouslySetInnerHTML={{ __html: jsonLdString(jsonLd) }}
       />
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
+        dangerouslySetInnerHTML={{ __html: jsonLdString(faqJsonLd) }}
       />
       <main className="bg-white">
         <HomeHero />

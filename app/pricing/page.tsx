@@ -3,7 +3,7 @@ import Link from "next/link";
 import { PricingCards } from "./components/PricingCards";
 import { PricingFAQ } from "./components/PricingFAQ";
 import { PricingCTA } from "./components/PricingCTA";
-import { OG_IMAGE } from "@/lib/seo";
+import { OG_IMAGE, jsonLdString } from "@/lib/seo";
 
 export const metadata: Metadata = {
   title: "Pricing | Kenstera",
@@ -68,7 +68,7 @@ export default function PricingPage() {
     <>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+        dangerouslySetInnerHTML={{ __html: jsonLdString(faqSchema) }}
       />
       <main className="min-h-screen bg-neutral-50">
         <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 sm:py-24 lg:px-8">

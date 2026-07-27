@@ -13,7 +13,7 @@ import {
 import { mdxComponents } from "@/components/blog/MDXComponents";
 import { CaseStudySidebar } from "@/components/case-studies/CaseStudySidebar";
 import { FinalCTA } from "@/components/sections/FinalCTA";
-import { OG_IMAGE, OG_IMAGE_URL } from "@/lib/seo";
+import { OG_IMAGE, OG_IMAGE_URL, OG_IMAGE_ABSOLUTE_URL, SITE_URL, jsonLdString } from "@/lib/seo";
 
 interface PageProps {
   params: Promise<{ slug: string }>;
@@ -70,6 +70,7 @@ export default async function CaseStudyDetailPage({ params }: PageProps) {
     notFound();
   }
 
+  const pageUrl = `${SITE_URL}/case-studies/${slug}`;
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "Article",
@@ -79,16 +80,23 @@ export default async function CaseStudyDetailPage({ params }: PageProps) {
       "@type": "Organization",
       name: study.author,
     },
+    publisher: {
+      "@type": "Organization",
+      name: "Kenstera",
+      url: SITE_URL,
+    },
     datePublished: study.date,
     dateModified: study.updated || study.date,
-    image: study.heroImage,
+    image: study.heroImage || OG_IMAGE_ABSOLUTE_URL,
+    url: pageUrl,
+    mainEntityOfPage: pageUrl,
   };
 
   return (
     <>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        dangerouslySetInnerHTML={{ __html: jsonLdString(jsonLd) }}
       />
       <main className="bg-background min-h-screen">
         {/* Hero Section */}

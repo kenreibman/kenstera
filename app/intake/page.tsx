@@ -9,7 +9,7 @@ import { IndustriesFaqBlog } from "@/components/industries";
 import { getAllPosts } from "@/lib/blog";
 import { FinalCTA } from "@/components/sections/FinalCTA";
 import type { Metadata } from "next";
-import { OG_IMAGE } from "@/lib/seo";
+import { OG_IMAGE, jsonLdString } from "@/lib/seo";
 
 export const metadata: Metadata = {
   title: "Intake Services for Law Firms",
@@ -103,12 +103,12 @@ export default function IntakePage() {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
-          __html: JSON.stringify(organizationSchema),
+          __html: jsonLdString(organizationSchema),
         }}
       />
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+        dangerouslySetInnerHTML={{ __html: jsonLdString(faqSchema) }}
       />
       <main className="">
         <ShaderHero />

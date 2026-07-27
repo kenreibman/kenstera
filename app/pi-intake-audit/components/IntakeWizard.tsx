@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { ContactForm } from './ContactForm'
 import { CalendarEmbed } from './CalendarEmbed'
@@ -19,6 +19,31 @@ const leadOptions = [
   { value: '150-300', label: '150–300 Leads' },
   { value: '300+', label: '300+ Leads' },
 ]
+
+// Persist the lead even through transient network failures — a lost capture
+// means a booked call with no lead record and a spurious abandonment email.
+async function captureLead(data: FormData): Promise<string | null> {
+  for (let attempt = 1; attempt <= 3; attempt++) {
+    try {
+      const res = await fetch('/api/pi-intake-audit/capture', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data),
+      })
+      if (res.ok) {
+        const result = await res.json()
+        if (result.success && result.leadId) return result.leadId
+      }
+      // Client errors (validation, rate limit) won't improve on retry
+      if (res.status >= 400 && res.status < 500) return null
+    } catch {
+      // Network error — fall through to retry
+    }
+    if (attempt < 3) await new Promise((r) => setTimeout(r, 1000 * attempt))
+  }
+  console.error('Failed to capture lead after 3 attempts')
+  return null
+}
 
 const slideVariants = {
   enter: (direction: number) => ({
@@ -66,6 +91,7 @@ export function IntakeWizard() {
   const [step, setStep] = useState(1)
   const [direction, setDirection] = useState(1)
   const [leadId, setLeadId] = useState<string | null>(null)
+  const capturePromiseRef = useRef<Promise<string | null> | null>(null)
   const [formData, setFormData] = useState<FormData>({
     fullName: '',
     email: '',
@@ -88,19 +114,14 @@ export function IntakeWizard() {
     setDirection(1)
     setStep(3)
 
-    // Capture lead data in background (fire and forget)
-    fetch('/api/pi-intake-audit/capture', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(updatedFormData),
+    // Capture lead data in background. The promise is kept in a ref so the
+    // booking-success handler can await it — a fast booker must not race past
+    // a still-in-flight capture and orphan the booking from its lead record.
+    const capture = captureLead(updatedFormData)
+    capturePromiseRef.current = capture
+    capture.then((id) => {
+      if (id) setLeadId(id)
     })
-      .then((res) => res.json())
-      .then((result) => {
-        if (result.success && result.leadId) {
-          setLeadId(result.leadId)
-        }
-      })
-      .catch((error) => console.error('Failed to capture lead:', error))
   }
 
   const handleBack = () => {
@@ -116,7 +137,13 @@ export function IntakeWizard() {
       <div className={step === 3 ? 'fixed inset-0 z-50 bg-white overflow-y-auto' : ''}>
         <div className={step === 3 ? 'min-h-full flex items-center justify-center py-8 px-5' : ''}>
           <div className={step === 3 ? 'max-w-md w-full' : ''}>
-            <CalendarEmbed formData={formData} leadId={leadId} onBack={handleBack} isVisible={step === 3} />
+            <CalendarEmbed
+              formData={formData}
+              leadId={leadId}
+              waitForLeadId={() => capturePromiseRef.current ?? Promise.resolve(null)}
+              onBack={handleBack}
+              isVisible={step === 3}
+            />
           </div>
         </div>
       </div>

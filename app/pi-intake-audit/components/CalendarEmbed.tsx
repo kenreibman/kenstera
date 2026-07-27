@@ -8,6 +8,8 @@ import { FormData } from './IntakeWizard'
 interface CalendarEmbedProps {
   formData: FormData
   leadId?: string | null
+  /** Resolves once the in-flight lead capture settles; null if capture failed. */
+  waitForLeadId?: () => Promise<string | null>
   onBack: () => void
   onComplete?: () => void
   isVisible?: boolean
@@ -28,10 +30,11 @@ function ProgressIndicator({ currentStep, totalSteps }: { currentStep: number; t
   )
 }
 
-export function CalendarEmbed({ formData, leadId, onBack, onComplete, isVisible = true }: CalendarEmbedProps) {
+export function CalendarEmbed({ formData, leadId, waitForLeadId, onBack, onComplete, isVisible = true }: CalendarEmbedProps) {
   const CAL_NAMESPACE = 'pi-intake-audit'
   const CAL_LINK = 'kenstera/intake-15-minutes'
   const latestLeadId = useRef<string | null | undefined>(leadId)
+  const latestWaitForLeadId = useRef<CalendarEmbedProps['waitForLeadId']>(waitForLeadId)
   const latestOnComplete = useRef<CalendarEmbedProps['onComplete']>(onComplete)
 
   useEffect(() => {
@@ -39,21 +42,40 @@ export function CalendarEmbed({ formData, leadId, onBack, onComplete, isVisible 
   }, [leadId])
 
   useEffect(() => {
+    latestWaitForLeadId.current = waitForLeadId
+  }, [waitForLeadId])
+
+  useEffect(() => {
     latestOnComplete.current = onComplete
   }, [onComplete])
 
   const markAsBooked = useCallback(async (id: string | null | undefined) => {
+    // A fast booker can confirm before the capture response lands — wait for
+    // the in-flight capture instead of silently leaving the lead 'pending'
+    // (which would trigger the abandonment email despite the booking).
+    if (!id && latestWaitForLeadId.current) {
+      try {
+        id = await latestWaitForLeadId.current()
+      } catch {
+        id = null
+      }
+    }
     if (!id) return
 
-    try {
-      await fetch('/api/pi-intake-audit/booked', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ leadId: id }),
-      })
-    } catch (error) {
-      console.error('Failed to mark lead as booked:', error)
+    for (let attempt = 1; attempt <= 3; attempt++) {
+      try {
+        const res = await fetch('/api/pi-intake-audit/booked', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ leadId: id }),
+        })
+        if (res.ok) return
+      } catch {
+        // Network error — fall through to retry
+      }
+      if (attempt < 3) await new Promise((r) => setTimeout(r, 1000 * attempt))
     }
+    console.error('Failed to mark lead as booked after 3 attempts:', id)
   }, [])
 
   // Initial setup - configure UI and event listeners on mount

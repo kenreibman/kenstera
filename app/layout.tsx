@@ -43,8 +43,10 @@ export const metadata: Metadata = {
     template: "%s | Kenstera",
   },
   description: "Kenstera accelerates your businesses with automated marketing, lead generation, customer support, and more.",
-    alternates: {
-    canonical: "https://kenstera.com",
+  // Relative canonical: resolves against metadataBase + the current route's
+  // pathname, so every page canonicalizes to itself unless it overrides this.
+  alternates: {
+    canonical: "./",
   },
   openGraph: {
     title: "Kenstera",

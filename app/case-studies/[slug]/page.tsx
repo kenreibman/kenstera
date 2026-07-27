@@ -41,6 +41,9 @@ export async function generateMetadata({
     description: study.description,
     keywords: study.keywords,
     authors: [{ name: study.author }],
+    alternates: {
+      canonical: study.canonical || `/case-studies/${slug}`,
+    },
     openGraph: {
       title: study.title,
       description: study.description,

@@ -56,7 +56,7 @@ export async function POST(request: NextRequest) {
     if (error) {
       // Resend returns an error if the contact already exists — treat as success
       if (error.message?.toLowerCase().includes('already exists')) {
-        console.log('[Newsletter] Contact already exists:', parsed.data.email)
+        console.log('[Newsletter] Contact already exists')
         return NextResponse.json({ success: true })
       }
 
@@ -67,7 +67,7 @@ export async function POST(request: NextRequest) {
       )
     }
 
-    console.log('[Newsletter] New subscriber:', parsed.data.email)
+    console.log('[Newsletter] New subscriber added')
     return NextResponse.json({ success: true })
   } catch (error) {
     console.error('[Newsletter] Unexpected error:', error)

@@ -148,7 +148,8 @@ export async function POST(request: NextRequest) {
       },
     })
 
-    console.log('[Demo Call] Call triggered:', { ip: clientIp, phone: e164Phone })
+    // The consent log above already records ip + phone (SEC-05); don't repeat PII.
+    console.log('[Demo Call] Call triggered')
 
     // 8. Store demo lead and schedule follow-up email
     try {

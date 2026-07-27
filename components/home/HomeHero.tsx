@@ -75,19 +75,10 @@ export function HomeHero() {
 
       <div className="relative z-10 w-full max-w-7xl mx-auto px-5 pt-24 pb-28 lg:pt-32 lg:pb-36">
         <div className="mx-auto max-w-4xl text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, ease: "easeOut" }}
-            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/60 backdrop-blur-sm border border-gray-200/60 text-xs font-medium text-gray-700 mb-8"
-          >
-            Websites · Automations · Marketing Systems
-          </motion.div>
-
           <motion.h1
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.1, ease: "easeOut" }}
+            transition={{ duration: 0.6, ease: "easeOut" }}
             className="text-balance font-bold leading-[1.05] tracking-[-0.02em] text-[clamp(40px,7vw,72px)] text-gray-900"
           >
             Rapid Growth
@@ -98,7 +89,7 @@ export function HomeHero() {
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}
+            transition={{ duration: 0.6, delay: 0.1, ease: "easeOut" }}
             className="mx-auto mt-6 max-w-2xl text-balance text-lg leading-relaxed text-gray-600"
           >
             Kenstera builds high-converting websites, workflow automations, and
@@ -109,7 +100,7 @@ export function HomeHero() {
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.3, ease: "easeOut" }}
+            transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}
             className="mt-10 flex flex-row items-center justify-center gap-3"
           >
             <Link

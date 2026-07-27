@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { AsYouType } from 'libphonenumber-js'
 import Link from 'next/link'
 import { Loader2, CheckCircle } from 'lucide-react'
+import { getRecaptchaToken } from '@/lib/recaptcha/client'
 
 
 type FormState = 'idle' | 'submitting' | 'success' | 'error'
@@ -67,10 +68,19 @@ export function DemoForm() {
     }
 
     try {
+      // Null when reCAPTCHA isn't configured; the server enforces presence
+      // only once RECAPTCHA_SECRET_KEY is set.
+      const recaptchaToken = await getRecaptchaToken('demo_call')
+
       const res = await fetch('/api/demo-call', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ name: name.trim(), phone: phoneDisplay, email: email.trim() }),
+        body: JSON.stringify({
+          name: name.trim(),
+          phone: phoneDisplay,
+          email: email.trim(),
+          ...(recaptchaToken ? { recaptchaToken } : {}),
+        }),
       })
 
       const data = await res.json()

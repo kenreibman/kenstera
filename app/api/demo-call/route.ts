@@ -4,6 +4,7 @@ import { parsePhoneNumberFromString } from 'libphonenumber-js'
 import { Client } from '@upstash/qstash'
 import { ipRatelimit, phoneRatelimit } from '@/lib/rate-limit/demo-call'
 import { getClientIp } from '@/lib/request-ip'
+import { verifyRecaptchaToken } from '@/lib/recaptcha/verify'
 import { retell } from '@/lib/retell/client'
 import { createDemoLead } from '@/lib/db/demo-leads'
 
@@ -14,7 +15,10 @@ const bodySchema = z.object({
   phone: z.string().min(1),
   name: z.string().min(1).max(100),
   email: z.string().email(),
+  recaptchaToken: z.string().optional(),
 })
+
+const RECAPTCHA_MIN_SCORE = 0.5
 
 let qstash: Client | null = null
 
@@ -42,7 +46,7 @@ export async function POST(request: NextRequest) {
       )
     }
 
-    // 2. Validate schema with Zod (phone + recaptchaToken required)
+    // 2. Validate schema with Zod
     const parsed = bodySchema.safeParse(data)
     if (!parsed.success) {
       return NextResponse.json(
@@ -51,8 +55,19 @@ export async function POST(request: NextRequest) {
       )
     }
 
-    const { phone, name, email } = parsed.data
+    const { phone, name, email, recaptchaToken } = parsed.data
     const clientIp = getClientIp(request)
+
+    // Fail fast on misconfiguration — before consuming the visitor's
+    // once-per-10-minutes rate-limit token on a call that cannot be placed.
+    const fromNumber = process.env.RETELL_PHONE_NUMBER
+    if (!fromNumber) {
+      console.error('[Demo Call] Missing RETELL_PHONE_NUMBER environment variable')
+      return NextResponse.json(
+        { success: false, error: 'Demo calls are temporarily unavailable.' },
+        { status: 503 }
+      )
+    }
 
     // 3. Validate phone number as real US number (libphonenumber-js)
     const parsedPhone = parsePhoneNumberFromString(phone, 'US')
@@ -63,6 +78,24 @@ export async function POST(request: NextRequest) {
       )
     }
     const e164Phone = parsedPhone.format('E.164')
+
+    // 3b. Verify reCAPTCHA v3 when configured (SEC-03). Runs before the rate
+    // limits so a rejected bot doesn't burn a legitimate visitor's IP quota.
+    // Skips gracefully until RECAPTCHA_SECRET_KEY is set in the environment.
+    if (process.env.RECAPTCHA_SECRET_KEY) {
+      const score = recaptchaToken
+        ? await verifyRecaptchaToken(recaptchaToken, clientIp, 'demo_call')
+        : null
+      if (score === null || score < RECAPTCHA_MIN_SCORE) {
+        console.warn('[Demo Call] reCAPTCHA rejected:', { ip: clientIp, score })
+        return NextResponse.json(
+          { success: false, error: 'Verification failed. Please refresh the page and try again.' },
+          { status: 400 }
+        )
+      }
+    } else {
+      console.warn('[Demo Call] RECAPTCHA_SECRET_KEY not set — skipping bot verification')
+    }
 
     // 4. Check IP rate limit (Upstash sliding window, 1 per 10 min)
     const ipResult = await ipRatelimit.limit(clientIp)
@@ -103,7 +136,7 @@ export async function POST(request: NextRequest) {
     // CRITICAL: Do NOT set max_call_duration_ms on the agent object — always use agent_override at the
     // per-call level to avoid agent version mismatch (per STATE.md decision from Phase 1).
     await retell.call.createPhoneCall({
-      from_number: process.env.RETELL_PHONE_NUMBER!,
+      from_number: fromNumber,
       to_number: e164Phone,
       retell_llm_dynamic_variables: {
         caller_name: name.split(/\s+/)[0],

@@ -9,7 +9,8 @@ interface RecaptchaResponse {
 
 export async function verifyRecaptchaToken(
   token: string,
-  remoteip?: string
+  remoteip?: string,
+  expectedAction?: string
 ): Promise<number | null> {
   const secret = process.env.RECAPTCHA_SECRET_KEY
   if (!secret) throw new Error('Missing RECAPTCHA_SECRET_KEY')
@@ -25,5 +26,7 @@ export async function verifyRecaptchaToken(
 
   const data = (await res.json()) as RecaptchaResponse
   if (!data.success) return null
+  // A token minted for a different action is replayed, not fresh — reject it.
+  if (expectedAction && data.action !== expectedAction) return null
   return data.score  // 0.0-1.0; higher = more likely human
 }

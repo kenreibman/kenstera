@@ -185,6 +185,7 @@ export default async function CaseStudyDetailPage({ params }: PageProps) {
               <CaseStudySidebar
                 sidebarMeta={study.sidebarMeta}
                 toc={study.toc}
+                url={pageUrl}
               />
             </div>
 

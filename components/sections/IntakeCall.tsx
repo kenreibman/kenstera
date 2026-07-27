@@ -37,7 +37,7 @@ export function IntakeCall() {
           {/* Left side - Headline + Accordion */}
           <div>
             <h2 className="text-[clamp(32px,5vw,48px)] font-bold leading-[1.1] tracking-tight text-gray-900 mb-12">
-              Never lose a case because the phone wasn't answered
+              Never lose a case because the phone wasn&apos;t answered
             </h2>
 
             {/* Accordion */}
@@ -107,7 +107,7 @@ export function IntakeCall() {
                   {/* AI message */}
                   <div className="flex justify-start">
                     <div className="bg-gray-200/80 text-gray-900 px-4 py-3 rounded-2xl rounded-bl-sm max-w-[220px]">
-                      <p className="text-[14px] leading-relaxed">I'm sorry to hear that. What was the type of accident you were involved in?</p>
+                      <p className="text-[14px] leading-relaxed">I&apos;m sorry to hear that. What was the type of accident you were involved in?</p>
                     </div>
                   </div>
 
@@ -121,7 +121,7 @@ export function IntakeCall() {
                   {/* AI message */}
                   <div className="flex justify-start">
                     <div className="bg-gray-200/80 text-gray-900 px-4 py-3 rounded-2xl rounded-bl-sm max-w-[220px]">
-                      <p className="text-[14px] leading-relaxed">What's your name and phone number so our attorneys can contact you?</p>
+                      <p className="text-[14px] leading-relaxed">What&apos;s your name and phone number so our attorneys can contact you?</p>
                     </div>
                   </div>
 

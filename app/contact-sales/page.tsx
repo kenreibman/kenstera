@@ -2,6 +2,7 @@
 
 import Cal, { getCalApi } from "@calcom/embed-react"
 import { useEffect } from "react"
+import Link from "next/link"
 import { Zap, ShieldCheck, HeadphonesIcon, Star } from 'lucide-react'
 
 export default function ContactPage() {
@@ -76,9 +77,9 @@ export default function ContactPage() {
               </span>
             </div>
 
-            <a href="/" className="mt-8 inline-block text-sm text-white/40 hover:text-white/60 transition-colors">
+            <Link href="/" className="mt-8 inline-block text-sm text-white/40 hover:text-white/60 transition-colors">
               &larr; Back to home
-            </a>
+            </Link>
           </div>
         </div>
 

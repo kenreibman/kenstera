@@ -2,26 +2,36 @@
 
 import Link from "next/link";
 import dynamic from "next/dynamic";
-import { useEffect, useState } from "react";
+import { useSyncExternalStore } from "react";
 
 const MeshGradient = dynamic(
   () => import("@paper-design/shaders-react").then((mod) => mod.MeshGradient),
   { ssr: false }
 );
 
-function useWebGLSupported() {
-  const [supported, setSupported] = useState(false);
-  useEffect(() => {
+// Cached so getSnapshot returns a stable value (useSyncExternalStore requires
+// it) and the probe canvas is only created once.
+let webglSupported: boolean | null = null;
+function detectWebGL(): boolean {
+  if (webglSupported === null) {
     try {
       const canvas = document.createElement("canvas");
-      const gl =
-        canvas.getContext("webgl") || canvas.getContext("experimental-webgl");
-      setSupported(!!gl);
+      webglSupported = !!(
+        canvas.getContext("webgl") || canvas.getContext("experimental-webgl")
+      );
     } catch {
-      setSupported(false);
+      webglSupported = false;
     }
-  }, []);
-  return supported;
+  }
+  return webglSupported;
+}
+
+const emptySubscribe = () => () => {};
+
+// Server snapshot is false → SSR renders the CSS fallback, and the client
+// upgrades to the shader at hydration without a cascading effect render.
+function useWebGLSupported() {
+  return useSyncExternalStore(emptySubscribe, detectWebGL, () => false);
 }
 
 export function ShaderHero() {

@@ -114,7 +114,7 @@ export function IntakeBooking() {
                     {/* User message */}
                     <div className="flex justify-end">
                       <div className="bg-gray-100 text-gray-900 px-4 py-3 rounded-2xl rounded-br-sm max-w-[240px]">
-                        <p className="text-[14px] leading-relaxed">I'd like to schedule a consultation about my case.</p>
+                        <p className="text-[14px] leading-relaxed">I&apos;d like to schedule a consultation about my case.</p>
                       </div>
                     </div>
 
@@ -135,7 +135,7 @@ export function IntakeBooking() {
                     {/* AI message */}
                     <div className="flex justify-start">
                       <div className="bg-gray-200/80 text-gray-900 px-4 py-3 rounded-2xl rounded-bl-sm max-w-[220px]">
-                        <p className="text-[14px] leading-relaxed">Perfect. I've scheduled your free consultation for 10 AM tomorrow.</p>
+                        <p className="text-[14px] leading-relaxed">Perfect. I&apos;ve scheduled your free consultation for 10 AM tomorrow.</p>
                       </div>
                     </div>
 

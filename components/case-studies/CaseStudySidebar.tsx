@@ -8,15 +8,13 @@ import type { TocItem, CaseStudySidebarMeta } from "@/lib/case-studies";
 interface CaseStudySidebarProps {
   sidebarMeta: CaseStudySidebarMeta;
   toc: TocItem[];
+  /** Canonical page URL, passed from the server component so the share links
+   * are correct in the first paint instead of empty until an effect runs. */
+  url: string;
 }
 
-export function CaseStudySidebar({ sidebarMeta, toc }: CaseStudySidebarProps) {
+export function CaseStudySidebar({ sidebarMeta, toc, url: currentUrl }: CaseStudySidebarProps) {
   const [activeId, setActiveId] = useState<string>("");
-  const [currentUrl, setCurrentUrl] = useState<string>("");
-
-  useEffect(() => {
-    setCurrentUrl(window.location.href);
-  }, []);
 
   useEffect(() => {
     const headings = toc

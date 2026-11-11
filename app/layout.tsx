@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Fraunces, Hanken_Grotesk, DM_Mono } from "next/font/google";
+import { Inter } from "next/font/google";
 import Script from "next/script";
 import "./globals.css";
 import { Nav } from "@/components/site/Nav";
@@ -8,25 +8,12 @@ import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { OG_IMAGE, OG_IMAGE_URL, SITE_DESCRIPTION } from "@/lib/seo";
 
-const fraunces = Fraunces({
-  subsets: ["latin"],
-  style: ["normal", "italic"],
-  axes: ["SOFT", "WONK", "opsz"],
-  display: "swap",
-  variable: "--font-fraunces",
-});
-
-const hanken = Hanken_Grotesk({
+// System fonts lead the stack (San Francisco on Apple devices); Inter covers
+// everything else.
+const inter = Inter({
   subsets: ["latin"],
   display: "swap",
-  variable: "--font-hanken",
-});
-
-const dmMono = DM_Mono({
-  subsets: ["latin"],
-  weight: ["400", "500"],
-  display: "swap",
-  variable: "--font-dm-mono",
+  variable: "--font-inter",
 });
 
 export const viewport: Viewport = {
@@ -68,7 +55,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${fraunces.variable} ${hanken.variable} ${dmMono.variable}`}>
+    <html lang="en" className={inter.variable}>
       <body className="antialiased">
         <a
           href="#main"

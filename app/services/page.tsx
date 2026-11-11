@@ -4,7 +4,6 @@ import { Anatomy } from "@/components/home/Anatomy";
 import { Faq } from "@/components/home/Faq";
 import { FinalCta } from "@/components/home/FinalCta";
 import { Method } from "@/components/home/Method";
-import { Arrow, Leaf } from "@/components/brand/Leaf";
 import { BOOKING_HREF, SYSTEMS } from "@/content/site";
 import { OG_IMAGE } from "@/lib/seo";
 
@@ -20,69 +19,52 @@ export const metadata: Metadata = {
 export default function ServicesPage() {
   return (
     <main id="main" className="relative z-[1]">
-      <section className="relative overflow-hidden pb-20 pt-36 md:pb-28 md:pt-48">
-        <Leaf veins className="pointer-events-none absolute -right-24 top-10 w-[520px] max-w-[70vw] rotate-[18deg] text-moss/70" />
-        <div className="wrap relative">
-          <p className="label fade-up mb-6 flex items-center gap-3 text-lime">
-            <span className="inline-block h-px w-8 bg-lime" />
-            Services
-          </p>
-          <h1 className="display max-w-[12ch] text-[clamp(3rem,10vw,8.5rem)]">
-            <span className="line-mask"><span>Everything a business</span></span>
-            <span className="line-mask"><span style={{ ["--d" as string]: "0.12s" }}>needs to <em className="text-lime">grow.</em></span></span>
-          </h1>
-          <p className="fade-up mt-8 max-w-xl text-lg leading-relaxed text-paper/85" style={{ ["--d" as string]: "0.4s" }}>
-            Four systems, designed to work as one. Take the whole plant or start
-            with the part that&apos;s hurting most.
-          </p>
-          <nav aria-label="Systems" className="fade-up mt-10 flex flex-wrap gap-2.5" style={{ ["--d" as string]: "0.55s" }}>
-            {SYSTEMS.map((s, i) => (
-              <a key={s.id} href={`#${s.id}`} className="chip">
-                <span className="font-mono text-xs text-lime">0{i + 1}</span>
-                {s.part}
-              </a>
-            ))}
-          </nav>
-        </div>
+      <section className="wrap pb-24 pt-[clamp(128px,20vh,210px)] text-center">
+        <h1 className="display h1 fade-up mx-auto max-w-[13ch]">
+          Everything a business needs to <em className="text-lime">grow.</em>
+        </h1>
+        <p className="lede fade-up mx-auto mt-6 max-w-[38ch] text-paper/80" style={{ ["--d" as string]: "0.12s" }}>
+          Four systems, designed to work as one. Take them all, or start with
+          the part that hurts most.
+        </p>
       </section>
 
-      <div className="on-paper rounded-t-[28px] md:rounded-t-[48px]">
-        {SYSTEMS.map((s, i) => (
-          <section key={s.id} id={s.id} className="scroll-mt-24">
-            <div className="wrap">
-              <div className={`grid gap-10 py-20 md:grid-cols-12 md:gap-16 md:py-28 ${i > 0 ? "rule" : ""}`}>
-                <div className="reveal md:col-span-4">
-                  <Anatomy active={s.id} className="mx-auto h-auto w-[70%] max-w-[300px] md:w-full" />
+      <div className="on-paper">
+        <div className="section">
+          <div className="wrap space-y-4 md:space-y-5">
+            {SYSTEMS.map((s) => (
+              <section key={s.id} id={s.id} className="tile reveal scroll-mt-20 p-8 sm:p-12 lg:p-16">
+                <div className="flex items-start justify-between gap-8">
+                  <div>
+                    <p className="text-[15px] font-medium text-leaf">{s.part}</p>
+                    <h2 className="display h2 mt-2 max-w-[14ch]">{s.title}</h2>
+                  </div>
+                  <Anatomy active={s.id} className="h-28 w-auto flex-none text-bark max-sm:hidden lg:h-40" />
                 </div>
-                <div className="md:col-span-8">
-                  <p className="label reveal mb-5 flex items-center gap-3 text-clay">
-                    <span>0{i + 1}</span>
-                    <span className="h-px w-6 bg-clay" />
-                    <span>{s.part} <span className="normal-case tracking-normal text-stone">({s.latin})</span></span>
-                  </p>
-                  <h2 className="display reveal text-[clamp(2.2rem,5.4vw,4.6rem)]">{s.title}</h2>
-                  <p className="reveal mt-5 max-w-2xl text-lg leading-relaxed text-stone">{s.summary}</p>
-                  <dl className="mt-10">
-                    {s.items.map((it) => (
-                      <div key={it.name} className="reveal rule grid gap-2 py-6 sm:grid-cols-3 sm:gap-8">
-                        <dt className="display text-2xl">{it.name}</dt>
-                        <dd className="text-[17px] leading-relaxed text-stone sm:col-span-2">{it.detail}</dd>
-                      </div>
-                    ))}
-                  </dl>
-                  <Link href={BOOKING_HREF} className="btn btn-ink reveal mt-6">
-                    Talk about {s.part.toLowerCase()} <Arrow />
-                  </Link>
-                </div>
-              </div>
-            </div>
-          </section>
-        ))}
+                <p className="lede mt-5 max-w-[52ch] text-stone">{s.summary}</p>
+
+                <dl className="mt-12 grid gap-x-10 gap-y-9 md:grid-cols-3">
+                  {s.items.map((it) => (
+                    <div key={it.name}>
+                      <dt className="text-[21px] font-semibold leading-tight tracking-[-0.02em]">{it.name}</dt>
+                      <dd className="mt-2.5 text-[16px] leading-relaxed text-stone">{it.detail}</dd>
+                    </div>
+                  ))}
+                </dl>
+              </section>
+            ))}
+            <p className="pt-8 text-center">
+              <Link href={BOOKING_HREF} className="btn btn-ink">
+                Book a call
+              </Link>
+            </p>
+          </div>
+        </div>
         <Method />
         <Faq />
       </div>
 
-      <FinalCta scene={false} />
+      <FinalCta />
     </main>
   );
 }

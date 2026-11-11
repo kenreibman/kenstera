@@ -2,8 +2,7 @@
 
 import Link from "next/link";
 import { useMemo, useState } from "react";
-import { Arrow, Leaf } from "@/components/brand/Leaf";
-import { BOOKING_HREF, LEAKS, SYSTEMS } from "@/content/site";
+import { BOOKING_HREF, LEAKS } from "@/content/site";
 
 const usd = new Intl.NumberFormat("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 });
 const num = new Intl.NumberFormat("en-US");
@@ -18,8 +17,8 @@ function Slider({
   return (
     <div>
       <div className="mb-1 flex items-baseline justify-between gap-4">
-        <label htmlFor={id} className="text-[15px] text-paper/80">{label}</label>
-        <output htmlFor={id} className="font-mono text-[15px] text-lime">{format(value)}</output>
+        <label htmlFor={id} className="text-[15px] text-paper/75">{label}</label>
+        <output htmlFor={id} className="text-[15px] font-medium text-paper">{format(value)}</output>
       </div>
       <input
         id={id}
@@ -37,7 +36,7 @@ function Slider({
 }
 
 export function Planner() {
-  const [picked, setPicked] = useState<string[]>(["missed-calls", "few-reviews"]);
+  const [picked, setPicked] = useState<string[]>(["missed-calls"]);
   const [hours, setHours] = useState(12);
   const [rate, setRate] = useState(40);
   const [share, setShare] = useState(40);
@@ -50,119 +49,66 @@ export function Planner() {
   const valueBack = hoursBack * rate;
 
   return (
-    <section id="planner" className="relative scroll-mt-0 bg-ink-2 py-24 text-paper md:py-36">
-      <div className="wrap">
-        <header className="reveal mb-14 grid gap-6 md:mb-20 md:grid-cols-12">
-          <p className="label text-sage md:col-span-3">Garden planner</p>
-          <div className="md:col-span-9">
-            <h2 className="display text-[clamp(2.4rem,6.6vw,5.6rem)]">
-              Where does your business <em className="text-lime">leak?</em>
-            </h2>
-            <p className="mt-6 max-w-2xl text-lg leading-relaxed text-sage">
-              Pick what sounds familiar. We&apos;ll sketch the workflow that
-              closes each gap, the same way we would on a first call.
-            </p>
-          </div>
+    <section id="planner" className="section relative scroll-mt-10 bg-ink-2 text-paper">
+      <div className="wrap max-w-[860px]">
+        <header className="reveal mb-12 text-center">
+          <h2 className="display h2">Where does your business leak?</h2>
+          <p className="lede mx-auto mt-5 max-w-[40ch] text-sage">
+            Pick what sounds familiar. See how we&apos;d fix it.
+          </p>
         </header>
 
-        <div className="grid gap-12 lg:grid-cols-12 lg:gap-16">
-          <div className="max-lg:contents lg:col-span-5">
-            <div role="group" aria-label="Common problems" className="flex flex-wrap gap-2.5 max-lg:order-1">
-              {LEAKS.map((l) => (
-                <button
-                  key={l.id}
-                  type="button"
-                  className="chip"
-                  aria-pressed={picked.includes(l.id)}
-                  onClick={() => toggle(l.id)}
-                >
-                  <span className="dot" />
-                  {l.label}
-                </button>
-              ))}
+        <div role="group" aria-label="Common problems" className="flex flex-wrap justify-center gap-2.5">
+          {LEAKS.map((l) => (
+            <button key={l.id} type="button" className="chip" aria-pressed={picked.includes(l.id)} onClick={() => toggle(l.id)}>
+              {l.label}
+            </button>
+          ))}
+        </div>
+
+        <ul className="mt-10 space-y-4" aria-live="polite">
+          {chosen.map((l) => (
+            <li key={l.id} className="step-in rounded-[28px] bg-white/[0.06] p-7 sm:p-9">
+              <h3 className="h3">{l.label}</h3>
+              <ol className="mt-5 flex flex-col gap-x-3 gap-y-2 text-[17px] text-paper/80 sm:flex-row sm:flex-wrap sm:items-center">
+                {l.steps.map((step, i) => (
+                  <li key={step} className="step-in flex items-center gap-3" style={{ ["--d" as string]: `${i * 0.08}s` }}>
+                    {i > 0 && <span className="text-lime max-sm:hidden" aria-hidden="true">→</span>}
+                    <span className={i === l.steps.length - 1 ? "font-medium text-lime" : ""}>{step}</span>
+                  </li>
+                ))}
+              </ol>
+            </li>
+          ))}
+        </ul>
+
+        {/* The visitor's own numbers. Nothing implied. */}
+        <div className="mt-4 rounded-[28px] bg-white/[0.06] p-7 sm:p-9">
+          <h3 className="h3">What is the busywork costing you?</h3>
+          <div className="mt-7 grid gap-8 md:grid-cols-2 md:gap-12">
+            <div className="space-y-5">
+              <Slider id="pl-hours" label="Hours a week on repetitive tasks" value={hours} min={1} max={60} step={1} onChange={setHours} format={(v) => `${v} h`} />
+              <Slider id="pl-rate" label="Cost of an hour of that time" value={rate} min={15} max={150} step={5} onChange={setRate} format={(v) => usd.format(v)} />
+              <Slider id="pl-share" label="Share you think could be automated" value={share} min={10} max={80} step={5} onChange={setShare} format={(v) => `${v}%`} />
             </div>
-
-            {/* Honest maths: the visitor's own numbers, nothing implied. */}
-            <div className="rounded-3xl border border-paper/12 bg-ink/60 p-6 max-lg:order-3 sm:p-8 lg:mt-12">
-              <p className="label mb-6 text-sage">Your numbers, not ours</p>
-              <div className="space-y-5">
-                <Slider id="pl-hours" label="Hours a week on repetitive tasks" value={hours} min={1} max={60} step={1} onChange={setHours} format={(v) => `${v} h`} />
-                <Slider id="pl-rate" label="What an hour of that time costs" value={rate} min={15} max={150} step={5} onChange={setRate} format={(v) => usd.format(v)} />
-                <Slider id="pl-share" label="Share you think could be automated" value={share} min={10} max={80} step={5} onChange={setShare} format={(v) => `${v}%`} />
+            <div className="flex flex-col justify-center gap-6" aria-live="polite">
+              <div>
+                <p className="display text-[clamp(2.75rem,6vw,4.5rem)] text-lime">{num.format(hoursBack)}</p>
+                <p className="mt-1 text-[15px] text-sage">hours back a year</p>
               </div>
-              <div className="rule-dark mt-7 grid grid-cols-2 gap-4 pt-6" aria-live="polite">
-                <div>
-                  <p className="display text-4xl text-lime sm:text-5xl">{num.format(hoursBack)}</p>
-                  <p className="mt-1 text-sm text-sage">hours back a year</p>
-                </div>
-                <div>
-                  <p className="display text-4xl text-lime sm:text-5xl">{usd.format(valueBack)}</p>
-                  <p className="mt-1 text-sm text-sage">of time, by your own estimate</p>
-                </div>
+              <div>
+                <p className="display text-[clamp(2.75rem,6vw,4.5rem)] text-lime">{usd.format(valueBack)}</p>
+                <p className="mt-1 text-[15px] text-sage">of time, by your own estimate</p>
               </div>
-            </div>
-          </div>
-
-          <div className="max-lg:order-2 lg:col-span-7">
-            <div className="relative lg:min-h-[420px] pl-7 sm:pl-10">
-              {/* the vine */}
-              <div className="absolute bottom-0 left-2 top-2 w-px bg-gradient-to-b from-lime via-lime/50 to-transparent sm:left-3" aria-hidden="true" />
-
-              {chosen.length === 0 && (
-                <p className="display pt-6 text-3xl text-paper/50">
-                  Nothing leaking? Lucky you. Pick one anyway.
-                </p>
-              )}
-
-              <ul className="space-y-10">
-                {chosen.map((l) => {
-                  const sys = SYSTEMS.find((s) => s.id === l.system)!;
-                  return (
-                    <li key={l.id} className="relative">
-                      <Leaf className="branch-step absolute -left-[34px] top-0 h-5 w-5 -rotate-[70deg] text-lime sm:-left-[42px]" />
-                      <p className="label branch-step mb-4 text-sage">
-                        {l.label} <span className="text-lime">→ {sys.part}</span>
-                      </p>
-                      <ol className="flex flex-col gap-2.5 sm:flex-row sm:flex-wrap sm:items-center sm:gap-y-3">
-                        {l.steps.map((step, i) => (
-                          <li key={step} className="flex items-center gap-2.5">
-                            {i > 0 && (
-                              <span
-                                className="branch-twig hidden h-px w-6 bg-lime/60 sm:block"
-                                style={{ ["--d" as string]: `${i * 0.12}s` }}
-                                aria-hidden="true"
-                              />
-                            )}
-                            <span
-                              className={`branch-step rounded-2xl border px-4 py-2.5 text-[15px] leading-snug ${
-                                i === l.steps.length - 1
-                                  ? "border-lime bg-lime/10 text-lime"
-                                  : "border-paper/15 bg-paper/[0.04] text-paper"
-                              }`}
-                              style={{ ["--d" as string]: `${i * 0.12 + 0.05}s` }}
-                            >
-                              <span className="mr-2 font-mono text-xs opacity-60">{i + 1}</span>
-                              {step}
-                            </span>
-                          </li>
-                        ))}
-                      </ol>
-                    </li>
-                  );
-                })}
-              </ul>
-
-              {chosen.length > 0 && (
-                <div className="mt-12 flex flex-wrap items-center gap-4">
-                  <Link href={BOOKING_HREF} className="btn btn-lime">
-                    Talk through {chosen.length === 1 ? "this one" : `these ${chosen.length}`} <Arrow />
-                  </Link>
-                  <p className="text-sm text-sage">15 minutes. No deck.</p>
-                </div>
-              )}
             </div>
           </div>
         </div>
+
+        <p className="mt-10 text-center">
+          <Link href={BOOKING_HREF} className="btn btn-lime">
+            Talk it through
+          </Link>
+        </p>
       </div>
     </section>
   );

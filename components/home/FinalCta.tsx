@@ -1,37 +1,28 @@
 import Link from "next/link";
-import { Arrow } from "@/components/brand/Leaf";
 import { BOOKING_HREF, CONTACT_EMAIL } from "@/content/site";
+import { Plant } from "./Plant";
 
-// The plant returns: this section is a window back onto the 3D scene, now seen
-// from beneath the canopy with the light on.
-export function FinalCta({ scene = true }: { scene?: boolean }) {
+// The plant returns beneath the closing invitation.
+export function FinalCta() {
   return (
-    <section
-      {...(scene ? { "data-scene-window": true, "data-scene-cta": true } : {})}
-      className={`relative flex min-h-[92svh] items-center overflow-hidden py-28 ${scene ? "" : "bg-ink-2"}`}
-    >
-      <div
-        className="pointer-events-none absolute inset-0"
-        style={{ background: "radial-gradient(70% 60% at 50% 55%, rgba(6,18,12,0.72), rgba(6,18,12,0.2) 75%)" }}
-        aria-hidden="true"
-      />
-      <div className="wrap relative text-center">
-        <p className="label reveal mb-8 text-lime">Planting season is always now</p>
-        <h2 className="display reveal mx-auto max-w-[11ch] text-[clamp(3rem,10.5vw,9.5rem)] text-paper">
-          Ready to <em className="text-lime">grow?</em>
-        </h2>
-        <p className="reveal mx-auto mt-8 max-w-xl text-lg leading-relaxed text-paper/85">
-          Fifteen minutes. You tell us where the business leaks; we tell you
-          honestly whether we can fix it.
+    <section className="relative overflow-hidden bg-ink pt-[clamp(96px,14vw,180px)]">
+      <div className="wrap relative z-[1] text-center">
+        <h2 className="display h1 reveal mx-auto max-w-[12ch] text-paper">Ready to grow?</h2>
+        <p className="lede reveal mx-auto mt-6 max-w-[36ch] text-paper/80">
+          Fifteen minutes. Tell us where the business leaks, and we&apos;ll
+          tell you honestly whether we can fix it.
         </p>
-        <div className="reveal mt-10 flex flex-wrap items-center justify-center gap-3">
+        <div className="reveal mt-8 flex flex-wrap items-center justify-center gap-x-7 gap-y-2">
           <Link href={BOOKING_HREF} className="btn btn-lime">
-            Book a 15-minute call <Arrow />
+            Book a call
           </Link>
-          <a href={`mailto:${CONTACT_EMAIL}`} className="btn btn-ghost">
-            {CONTACT_EMAIL}
+          <a href={`mailto:${CONTACT_EMAIL}`} className="link text-lime">
+            Email us
           </a>
         </div>
+      </div>
+      <div className="mt-2 flex justify-center">
+        <Plant className="h-auto w-[120%] max-w-none md:h-[min(58svh,640px)] md:w-auto" />
       </div>
     </section>
   );

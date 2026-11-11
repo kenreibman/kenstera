@@ -1,6 +1,5 @@
 import Link from "next/link";
 import Script from "next/script";
-import { Leaf } from "@/components/brand/Leaf";
 import { CONTACT_EMAIL } from "@/content/site";
 
 const NEXT = [
@@ -11,41 +10,30 @@ const NEXT = [
 
 export default function BookingConfirmedPage() {
   return (
-    <main id="main" className="relative z-[1] overflow-hidden pb-24 pt-36 md:pt-48">
+    <main id="main" className="relative z-[1] pb-28 pt-[clamp(128px,20vh,210px)]">
       <Script
         id="meta-pixel-schedule"
         strategy="afterInteractive"
         dangerouslySetInnerHTML={{ __html: `fbq('track', 'PageView'); fbq('track', 'Schedule');` }}
       />
-      <Leaf veins className="pointer-events-none absolute -right-24 top-16 w-[480px] max-w-[70vw] rotate-[16deg] text-moss/70" />
-      <div className="wrap relative">
-        <p className="label fade-up mb-6 flex items-center gap-3 text-lime">
-          <span className="inline-block h-px w-8 bg-lime" />
-          Booking confirmed
-        </p>
-        <h1 className="display max-w-[11ch] text-[clamp(3rem,9vw,7.5rem)]">
-          <span className="line-mask"><span>Seed <em className="text-lime">planted.</em></span></span>
-        </h1>
-        <p className="fade-up mt-8 max-w-xl text-lg leading-relaxed text-paper/85" style={{ ["--d" as string]: "0.3s" }}>
+      <div className="wrap text-center">
+        <h1 className="display h1 fade-up">You&apos;re booked.</h1>
+        <p className="lede fade-up mx-auto mt-5 max-w-[36ch] text-paper/80" style={{ ["--d" as string]: "0.12s" }}>
           Your call is on the calendar. We&apos;re looking forward to it.
         </p>
 
-        <ol className="mt-16 grid gap-8 md:grid-cols-3">
+        <ul className="mt-16 grid gap-4 text-left md:grid-cols-3 md:gap-5">
           {NEXT.map((n, i) => (
-            <li key={n.title} className="fade-up rule-dark pt-6" style={{ ["--d" as string]: `${0.4 + i * 0.1}s` }}>
-              <p className="label text-lime">0{i + 1}</p>
-              <h2 className="display mt-3 text-3xl">{n.title}</h2>
-              <p className="mt-3 leading-relaxed text-sage">{n.body}</p>
+            <li key={n.title} className="fade-up rounded-[28px] bg-white/[0.06] p-8" style={{ ["--d" as string]: `${0.24 + i * 0.08}s` }}>
+              <h2 className="text-[21px] font-semibold tracking-[-0.02em]">{n.title}</h2>
+              <p className="mt-2.5 leading-relaxed text-sage">{n.body}</p>
             </li>
           ))}
-        </ol>
+        </ul>
 
-        <div className="mt-16 flex flex-wrap items-center gap-4">
-          <Link href="/" className="btn btn-ghost">Back to home</Link>
-          <p className="text-sage">
-            Questions first?{" "}
-            <a href={`mailto:${CONTACT_EMAIL}`} className="nav-link text-paper">{CONTACT_EMAIL}</a>
-          </p>
+        <div className="mt-12 flex flex-wrap items-center justify-center gap-x-7 gap-y-2">
+          <Link href="/" className="link text-lime">Back to home</Link>
+          <a href={`mailto:${CONTACT_EMAIL}`} className="link text-lime">Email us</a>
         </div>
       </div>
     </main>

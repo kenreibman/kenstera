@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
-import { SceneMount } from "@/components/scene/SceneMount";
 import { Hero } from "@/components/home/Hero";
-import { Manifesto } from "@/components/home/Manifesto";
+import { Story } from "@/components/home/Story";
 import { Systems } from "@/components/home/Systems";
 import { Planner } from "@/components/home/Planner";
 import { Proof } from "@/components/home/Proof";
@@ -44,10 +43,9 @@ export default function Home() {
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLdString(jsonLd) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLdString(faqJsonLd) }} />
-      <SceneMount />
       <main id="main" className="relative z-[1]">
         <Hero />
-        <Manifesto />
+        <Story />
         <Systems />
         <Planner />
         <Proof />

@@ -14,14 +14,11 @@ export default function Error({
   }, [error]);
 
   return (
-    <main id="main" className="relative z-[1] grid min-h-[92svh] place-items-center px-6 pt-24 text-center">
+    <main id="main" className="relative z-[1] grid min-h-[86svh] place-items-center px-6 pt-20 text-center">
       <div>
-        <p className="label mb-6 text-lime">Something wilted</p>
-        <h1 className="display text-[clamp(2.6rem,8vw,6rem)]">
-          That didn&apos;t <em className="text-lime">take.</em>
-        </h1>
-        <p className="mx-auto mt-5 max-w-md text-sage">An unexpected error occurred. Try again.</p>
-        <button type="button" onClick={reset} className="btn btn-lime mt-9">
+        <h1 className="display h1">Something went wrong.</h1>
+        <p className="lede mx-auto mt-5 max-w-[32ch] text-sage">An unexpected error occurred. Try again.</p>
+        <button type="button" onClick={reset} className="btn btn-lime mt-8">
           Try again
         </button>
       </div>

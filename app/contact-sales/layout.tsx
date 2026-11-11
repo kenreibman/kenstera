@@ -1,14 +1,11 @@
-import type { Metadata } from 'next'
+import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: 'Contact Sales',
-  description: 'Book a call with our team to discuss AI-powered intake for your law firm.',
-}
+  title: "Book a call",
+  description:
+    "Book a 15-minute call with Kenstera. Tell us where your business leaks and we'll tell you honestly whether we can fix it.",
+};
 
-export default function ContactSalesLayout({
-  children,
-}: {
-  children: React.ReactNode
-}) {
-  return children
+export default function ContactSalesLayout({ children }: { children: React.ReactNode }) {
+  return children;
 }

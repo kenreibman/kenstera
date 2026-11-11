@@ -1,57 +1,53 @@
 import type { Metadata, Viewport } from "next";
-import { Inter, Manrope, Instrument_Serif } from "next/font/google";
+import { Fraunces, Hanken_Grotesk, DM_Mono } from "next/font/google";
 import Script from "next/script";
 import "./globals.css";
-import { LayoutWrapper } from "@/components/LayoutWrapper";
+import { Nav } from "@/components/site/Nav";
+import { Footer } from "@/components/site/Footer";
 import { Analytics } from "@vercel/analytics/next";
-import { SpeedInsights } from "@vercel/speed-insights/next"
-import { OG_IMAGE, OG_IMAGE_URL } from "@/lib/seo";
+import { SpeedInsights } from "@vercel/speed-insights/next";
+import { OG_IMAGE, OG_IMAGE_URL, SITE_DESCRIPTION } from "@/lib/seo";
 
-const inter = Inter({
+const fraunces = Fraunces({
   subsets: ["latin"],
-  display: "swap",
-  variable: "--font-inter",
-});
-
-// Fonts used by the dark case-study routes (/work/*). Scoped via the
-// `.landing-root` selector in globals.css, so the rest of the site keeps Inter.
-const manrope = Manrope({
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
-  variable: "--font-manrope",
-  display: "swap",
-});
-
-const instrumentSerif = Instrument_Serif({
-  subsets: ["latin"],
-  weight: "400",
   style: ["normal", "italic"],
-  variable: "--font-instrument-serif",
+  axes: ["SOFT", "WONK", "opsz"],
   display: "swap",
+  variable: "--font-fraunces",
+});
+
+const hanken = Hanken_Grotesk({
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-hanken",
+});
+
+const dmMono = DM_Mono({
+  subsets: ["latin"],
+  weight: ["400", "500"],
+  display: "swap",
+  variable: "--font-dm-mono",
 });
 
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
-  themeColor: "#ffffff",
+  themeColor: "#06120c",
 };
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://kenstera.com"),
   title: {
-    default: "Kenstera",
+    default: "Kenstera — Make your business thrive",
     template: "%s | Kenstera",
   },
-  description: "Kenstera accelerates your businesses with automated marketing, lead generation, customer support, and more.",
+  description: SITE_DESCRIPTION,
   // Relative canonical: resolves against metadataBase + the current route's
   // pathname, so every page canonicalizes to itself unless it overrides this.
-  alternates: {
-    canonical: "./",
-  },
+  alternates: { canonical: "./" },
   openGraph: {
-    title: "Kenstera",
-    description:
-      "Kenstera accelerates your businesses with automated marketing, lead generation, customer support, and more.",
+    title: "Kenstera — Make your business thrive",
+    description: SITE_DESCRIPTION,
     url: "https://kenstera.com",
     siteName: "Kenstera",
     locale: "en_US",
@@ -60,9 +56,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Kenstera",
-    description:
-      "Kenstera accelerates your businesses with automated marketing, lead generation, customer support, and more.",
+    title: "Kenstera — Make your business thrive",
+    description: SITE_DESCRIPTION,
     images: [OG_IMAGE_URL],
   },
 };
@@ -73,18 +68,21 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <head>
-        <link rel="preconnect" href="https://stream.mux.com" />
-      </head>
-      <body
-        className={`${inter.variable} ${manrope.variable} ${instrumentSerif.variable} font-sans antialiased`}
-      >
-        <LayoutWrapper>
+    <html lang="en" className={`${fraunces.variable} ${hanken.variable} ${dmMono.variable}`}>
+      <body className="antialiased">
+        <a
+          href="#main"
+          className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded-full focus:bg-lime focus:px-5 focus:py-3 focus:text-ink"
+        >
+          Skip to content
+        </a>
+        <Nav />
+        <div className="site">
           {children}
-        </LayoutWrapper>
+          <Footer />
+        </div>
         <Analytics />
-        <SpeedInsights/>
+        <SpeedInsights />
         <Script
           id="meta-pixel"
           strategy="afterInteractive"

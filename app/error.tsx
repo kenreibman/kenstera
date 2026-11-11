@@ -14,20 +14,17 @@ export default function Error({
   }, [error]);
 
   return (
-    <main className="flex min-h-[60vh] flex-col items-center justify-center px-4 text-center">
-      <h1 className="text-4xl font-bold tracking-tight text-gray-900">
-        Something went wrong
-      </h1>
-      <p className="mt-4 text-lg text-gray-600">
-        An unexpected error occurred. Please try again.
-      </p>
-      <button
-        type="button"
-        onClick={reset}
-        className="mt-8 inline-flex items-center rounded-lg bg-gray-900 px-6 py-3 text-sm font-medium text-white transition-colors hover:bg-gray-800"
-      >
-        Try again
-      </button>
+    <main id="main" className="relative z-[1] grid min-h-[92svh] place-items-center px-6 pt-24 text-center">
+      <div>
+        <p className="label mb-6 text-lime">Something wilted</p>
+        <h1 className="display text-[clamp(2.6rem,8vw,6rem)]">
+          That didn&apos;t <em className="text-lime">take.</em>
+        </h1>
+        <p className="mx-auto mt-5 max-w-md text-sage">An unexpected error occurred. Try again.</p>
+        <button type="button" onClick={reset} className="btn btn-lime mt-9">
+          Try again
+        </button>
+      </div>
     </main>
   );
 }

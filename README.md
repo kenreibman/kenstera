@@ -1,36 +1,44 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Kenstera
 
-## Getting Started
-
-First, run the development server:
+Marketing site for Kenstera, a B2B business automation studio. Next.js 16 (App Router), React 19, Tailwind 4.
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
+npm run dev      # http://localhost:3000
+npm run build
+npm run gen:og   # regenerate public/og-image.jpg
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Where things live
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+| Path | What |
+| --- | --- |
+| `content/site.ts` | All site copy: systems, planner workflows, method, FAQ, and the featured client. |
+| `components/scene/` | The 3D plant. Raw WebGL2, no 3D library. `shaders.ts` draws the leaves, `LeafScene.tsx` runs the camera. |
+| `components/home/` | Homepage sections. |
+| `components/brand/Leaf.tsx` | The leaf mark and wordmark. |
+| `app/globals.css` | Design tokens and the scroll-driven animations. |
+| `next.config.ts` | Redirects from the retired routes of the previous site. |
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Adding a client quote
 
-## Learn More
+Open `content/site.ts` and fill in `FEATURED_CLIENT` with the client's own words:
 
-To learn more about Next.js, take a look at the following resources:
+```ts
+export const FEATURED_CLIENT = {
+  name: "TheTickSuit",
+  quote: "Their exact words here.",
+  person: "First Last",
+  role: "Founder",
+};
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+While `quote` is empty the Proof section shows the client's name only. It never renders a placeholder quote.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## The 3D scene
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- Renders only while a `[data-scene-window]` section is on screen.
+- Scroll drives the camera through a hole in the hero leaf; progress is exposed to CSS as `--flight`.
+- Resolution adapts to the device, and it steps down if frames run slow.
+- Visitors who prefer reduced motion get a single still frame and a static layout.
+- Without WebGL2, a CSS and SVG fallback is shown instead.

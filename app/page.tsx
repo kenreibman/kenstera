@@ -1,99 +1,59 @@
 import type { Metadata } from "next";
-import {
-  HomeHero,
-  HomeAbout,
-  HomeServices,
-  HomeWork,
-  HomeTestimonials,
-  HomeFaq,
-  HomeCta,
-  HOME_FAQS,
-} from "@/components/home";
-import { OG_IMAGE, OG_IMAGE_URL, jsonLdString } from "@/lib/seo";
+import { SceneMount } from "@/components/scene/SceneMount";
+import { Hero } from "@/components/home/Hero";
+import { Manifesto } from "@/components/home/Manifesto";
+import { Systems } from "@/components/home/Systems";
+import { Planner } from "@/components/home/Planner";
+import { Proof } from "@/components/home/Proof";
+import { Method } from "@/components/home/Method";
+import { Faq } from "@/components/home/Faq";
+import { FinalCta } from "@/components/home/FinalCta";
+import { FAQS, SYSTEMS } from "@/content/site";
+import { SITE_DESCRIPTION, jsonLdString } from "@/lib/seo";
 
 export const metadata: Metadata = {
-  title: {
-    absolute: "Kenstera — Rapid Growth For Business",
-  },
-  description:
-    "Kenstera builds high-converting websites, workflow automations, and marketing systems that drive rapid, predictable growth for your business.",
-  alternates: {
-    canonical: "https://kenstera.com",
-  },
-  openGraph: {
-    title: "Kenstera — Rapid Growth For Business",
-    description:
-      "Kenstera builds high-converting websites, workflow automations, and marketing systems that drive rapid, predictable growth for your business.",
-    url: "https://kenstera.com",
-    siteName: "Kenstera",
-    type: "website",
-    // Next shallow-merges metadata, so openGraph.images is NOT inherited from
-    // the root layout when a page defines its own openGraph. Set it explicitly.
-    images: [...OG_IMAGE],
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "Kenstera — Rapid Growth For Business",
-    description:
-      "Kenstera builds high-converting websites, workflow automations, and marketing systems that drive rapid, predictable growth for your business.",
-    images: [OG_IMAGE_URL],
-  },
+  title: { absolute: "Kenstera — Make your business thrive" },
+  description: SITE_DESCRIPTION,
+  alternates: { canonical: "https://kenstera.com" },
 };
 
-// Structured data describing the business for search engines.
 const jsonLd = {
   "@context": "https://schema.org",
   "@type": "ProfessionalService",
   name: "Kenstera",
-  description:
-    "Kenstera builds high-converting websites, workflow automations, and marketing systems that drive rapid, predictable growth for your business.",
+  description: SITE_DESCRIPTION,
   url: "https://kenstera.com",
-  slogan: "Rapid Growth For Business",
+  email: "info@kenstera.com",
+  slogan: "Make your business thrive",
   areaServed: "Worldwide",
-  serviceType: [
-    "Custom Websites",
-    "Review Funnel",
-    "Missed Call Text Back",
-    "Marketing Campaigns",
-    "Local SEO",
-  ],
+  serviceType: SYSTEMS.flatMap((s) => s.items.map((i) => i.name)),
 };
 
-// The on-page FAQ, mirrored as structured data so it can win rich results.
 const faqJsonLd = {
   "@context": "https://schema.org",
   "@type": "FAQPage",
-  mainEntity: HOME_FAQS.map((faq) => ({
+  mainEntity: FAQS.map((faq) => ({
     "@type": "Question",
     name: faq.question,
-    acceptedAnswer: {
-      "@type": "Answer",
-      text: [faq.answer, ...(faq.bullets ?? []), faq.outro]
-        .filter(Boolean)
-        .join(" "),
-    },
+    acceptedAnswer: { "@type": "Answer", text: faq.answer },
   })),
 };
 
 export default function Home() {
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: jsonLdString(jsonLd) }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: jsonLdString(faqJsonLd) }}
-      />
-      <main className="bg-white">
-        <HomeHero />
-        <HomeAbout />
-        <HomeServices />
-        <HomeWork />
-        <HomeTestimonials />
-        <HomeFaq />
-        <HomeCta />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLdString(jsonLd) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLdString(faqJsonLd) }} />
+      <SceneMount />
+      <main id="main" className="relative z-[1]">
+        <Hero />
+        <Manifesto />
+        <Systems />
+        <Planner />
+        <Proof />
+        <Method />
+        <Faq />
+        <FinalCta />
       </main>
     </>
   );

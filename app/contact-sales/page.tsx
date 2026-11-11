@@ -1,9 +1,15 @@
-'use client'
+"use client";
 
-import Cal, { getCalApi } from "@calcom/embed-react"
-import { useEffect } from "react"
-import Link from "next/link"
-import { Zap, ShieldCheck, HeadphonesIcon, Star } from 'lucide-react'
+import Cal, { getCalApi } from "@calcom/embed-react";
+import { useEffect } from "react";
+import { Leaf } from "@/components/brand/Leaf";
+import { CONTACT_EMAIL } from "@/content/site";
+
+const EXPECT = [
+  "We ask how your business actually runs, and where it leaks.",
+  "You get a straight answer on whether we can help.",
+  "If we can: a timeline and a quote before any work begins.",
+];
 
 export default function ContactPage() {
   useEffect(() => {
@@ -12,112 +18,49 @@ export default function ContactPage() {
       cal("on", {
         action: "__iframeReady",
         callback: () => {
-          cal("ui", {
-            hideEventTypeDetails: true,
-            theme: "light",
-            layout: "month_view"
-          });
-        }
+          cal("ui", { hideEventTypeDetails: true, theme: "light", layout: "month_view" });
+        },
       });
     })();
   }, []);
 
-  const benefits = [
-    {
-      icon: Zap,
-      text: "Custom implementation for your firm's workflow"
-    },
-    {
-      icon: ShieldCheck,
-      text: "Enterprise-grade security including SOC II, GDPR and HIPAA compliance"
-    },
-    {
-      icon: HeadphonesIcon,
-      text: "Dedicated support and ongoing optimization"
-    }
-  ]
-
   return (
-    <main className="lg:h-screen flex flex-col lg:flex-row">
-      {/* Left side - Dark */}
-      <div className="flex h-full w-full lg:w-1/2 bg-black text-white p-8 md:p-12 lg:p-16 flex-col relative order-1 lg:order-1">
-        {/* Logo */}
-        <div className="mb-12">
-          <span className="text-xl font-bold">Kenstera</span>
-        </div>
-
-        {/* Content */}
-        <div className="flex-1">
-          <h1 className="text-[clamp(32px,5vw,48px)] font-bold leading-[1.1] tracking-tight mb-8">
-            Contact Us
+    <main id="main" className="relative z-[1] overflow-hidden pb-20 pt-32 md:pt-40">
+      <Leaf veins className="pointer-events-none absolute -left-28 top-24 w-[460px] max-w-[70vw] -rotate-[22deg] text-moss/60" />
+      <div className="wrap relative grid gap-12 lg:grid-cols-12 lg:gap-16">
+        <div className="lg:col-span-5">
+          <p className="label fade-up mb-6 flex items-center gap-3 text-lime">
+            <span className="inline-block h-px w-8 bg-lime" />
+            Book a call
+          </p>
+          <h1 className="display text-[clamp(3rem,8vw,6.5rem)]">
+            <span className="line-mask"><span>Fifteen minutes.</span></span>
+            <span className="line-mask"><span style={{ ["--d" as string]: "0.12s" }}><em className="text-lime">No deck.</em></span></span>
           </h1>
 
-          {/* Benefits */}
-          <div className="space-y-5 mb-16">
-            {benefits.map((benefit, index) => (
-              <div key={index} className="flex items-start gap-3">
-                <benefit.icon className="w-5 h-5 text-white/70 mt-0.5 flex-shrink-0" />
-                <span className="text-[15px] text-white/80 leading-relaxed">
-                  {benefit.text}
-                </span>
-              </div>
+          <ol className="fade-up mt-10 space-y-5" style={{ ["--d" as string]: "0.4s" }}>
+            {EXPECT.map((e, i) => (
+              <li key={e} className="flex gap-4 text-[17px] leading-relaxed text-paper/85">
+                <span className="label pt-1.5 text-lime">0{i + 1}</span>
+                {e}
+              </li>
             ))}
-          </div>
+          </ol>
 
-          {/* Reviews */}
-          <div className="mt-auto">
-            <div className="flex items-center gap-2">
-              <div className="flex">
-                {[...Array(5)].map((_, i) => (
-                  <Star key={i} className="w-4 h-4 text-muted fill-muted" />
-                ))}
-              </div>
-              <span className="text-sm text-white/60">
-                5.0 stars from our clients
-              </span>
-            </div>
-
-            <Link href="/" className="mt-8 inline-block text-sm text-white/40 hover:text-white/60 transition-colors">
-              &larr; Back to home
-            </Link>
-          </div>
-        </div>
-
-        {/* Decorative wave at bottom */}
-        <div className="absolute bottom-0 left-0 right-0 h-32 pointer-events-none">
-          <svg
-            viewBox="0 0 1200 120"
-            preserveAspectRatio="none"
-            className="absolute bottom-0 w-full h-full"
-          >
-            <path
-              d="M0,60 C300,120 600,0 900,60 C1050,90 1150,30 1200,60 L1200,120 L0,120 Z"
-              fill="rgba(255,255,255,0.03)"
-            />
-            <path
-              d="M0,80 C200,40 400,100 600,80 C800,60 1000,100 1200,80 L1200,120 L0,120 Z"
-              fill="rgba(255,255,255,0.02)"
-            />
-          </svg>
-        </div>
-      </div>
-
-      {/* Right side - White with Cal embed */}
-      <div className="w-full lg:w-1/2 bg-white p-8 md:p-12 lg:p-16 flex flex-col order-2 lg:order-2 overflow-auto">
-        <div className="mx-auto w-full flex-1">
-          <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-2">
-            Book a call
-          </h2>
-          <p className="text-gray-500 mb-8">
-            Pick a time that works for you
+          <p className="fade-up mt-10 text-sage" style={{ ["--d" as string]: "0.55s" }}>
+            Prefer email?{" "}
+            <a href={`mailto:${CONTACT_EMAIL}`} className="nav-link text-paper">
+              {CONTACT_EMAIL}
+            </a>
           </p>
+        </div>
 
-          {/* Cal.com embed */}
-          <div className="flex-1">
-              <Cal namespace="contact" calLink="kenstera/intake-15-minutes" />
+        <div className="lg:col-span-7">
+          <div className="fade-up min-h-[560px] overflow-hidden rounded-[28px] bg-paper p-3 sm:p-6" style={{ ["--d" as string]: "0.3s", colorScheme: "light" }}>
+            <Cal namespace="contact" calLink="kenstera/intake-15-minutes" style={{ width: "100%", minHeight: 520 }} />
           </div>
         </div>
       </div>
     </main>
-  )
+  );
 }

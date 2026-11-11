@@ -1,19 +1,19 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Privacy Policy | Kenstera",
+  title: "Privacy Policy",
   description:
     "Learn how Kenstera collects, uses, and protects your personal information.",
 };
 
 export default function PrivacyPage() {
   return (
-    <main className="min-h-screen bg-white">
+    <main id="main" className="on-paper relative z-[1] min-h-screen pt-20" style={{ colorScheme: "light" }}>
       <div className="mx-auto max-w-4xl px-5 py-16 sm:py-24">
         <h1 className="text-3xl font-semibold tracking-tight text-neutral-900 sm:text-4xl">
           Privacy Policy
         </h1>
-        <p className="mt-3 text-sm text-gray-400">Last updated: February 11, 2026</p>
+        <p className="mt-3 text-sm text-stone">Last updated: February 11, 2026</p>
 
         <div className="mt-12 space-y-10 text-[15px] leading-relaxed text-neutral-700">
           {/* Introduction */}

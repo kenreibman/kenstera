@@ -1,7 +1,9 @@
+import { Leaf } from "@/components/brand/Leaf";
+
 export default function Loading() {
   return (
-    <main className="flex min-h-[60vh] items-center justify-center">
-      <div className="h-8 w-8 animate-spin rounded-full border-4 border-gray-200 border-t-gray-900" />
+    <main className="relative z-[1] grid min-h-[92svh] place-items-center" aria-busy="true" aria-label="Loading">
+      <Leaf className="h-10 w-10 animate-pulse text-lime" />
     </main>
   );
 }

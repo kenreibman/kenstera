@@ -26,6 +26,8 @@ ap.add_argument("--h", type=int, default=900)
 ap.add_argument("--samples", type=int, default=96)
 ap.add_argument("--tex", type=int, default=2048)
 ap.add_argument("--cam", default="hero", choices=["hero", "portrait", "close"])
+ap.add_argument("--seq", default="", help="directory for a scroll frame sequence")
+ap.add_argument("--frames", type=int, default=90)
 args = ap.parse_args(argv)
 
 N_VEINS = 6.0
@@ -451,7 +453,46 @@ except TypeError:
     pass
 scene.render.film_transparent = True
 scene.render.image_settings.color_mode = "RGBA"
-scene.render.filepath = args.out
+if not args.seq:
+    scene.render.filepath = args.out
+    bpy.ops.render.render(write_still=True)
+    print("Wrote", scene.render.filepath)
+else:
+    # ----------------------------------------------------------------------
+    # Scroll sequence: wide on the whole plant, a slow arc, then in close on
+    # the hero leaf as the backlight comes up through its holes.
+    # ----------------------------------------------------------------------
+    bpy.context.view_layer.update()
+    hero = bpy.data.objects["Leaf0"]
+    leaf_c = hero.matrix_world @ Vector((0.0, 0.42, 0.0))
+    leaf_n = (hero.matrix_world.to_3x3() @ Vector((0, 0, 1))).normalized()
+    tall = args.h > args.w
+    start_pos = Vector((0.0, -10.5, 3.0)) if tall else Vector((0.0, -15.0, 3.2))
+    start_look = Vector((0.0, 0.0, 4.0)) if tall else Vector((0.0, 0.0, 3.5))
+    end_pos = leaf_c + leaf_n * (3.3 if tall else 2.5)
+    end_look = leaf_c
+    key = bpy.data.objects["Key"].data
+    rim = bpy.data.objects["Rim"].data
+    cam_data.dof.use_dof = True
 
-bpy.ops.render.render(write_still=True)
-print("Wrote", scene.render.filepath)
+    def ease(x):
+        x = min(1.0, max(0.0, x))
+        return x * x * (3 - 2 * x)
+
+    os.makedirs(args.seq, exist_ok=True)
+    for f in range(args.frames):
+        t = f / max(1, args.frames - 1)
+        s = ease(t)
+        arc = math.sin(math.pi * s)
+        pos = start_pos.lerp(end_pos, s) + Vector((2.6 * arc, 0.0, 0.5 * arc))
+        look = start_look.lerp(end_look, ease(t * 1.15))
+        cam.location = pos
+        cam.rotation_euler = (look - pos).to_track_quat("-Z", "Y").to_euler()
+        cam_data.dof.focus_distance = (Vector((0, -0.55, 2.0)).lerp(leaf_c, s) - pos).length
+        cam_data.dof.aperture_fstop = 8.0 + (2.4 - 8.0) * s
+        key.energy = 1000 + (520 - 1000) * s
+        rim.energy = 900 + (3400 - 900) * ease((t - 0.35) / 0.65)
+        scene.render.filepath = os.path.join(args.seq, f"{f:03d}.png")
+        bpy.ops.render.render(write_still=True)
+        print("frame", f, flush=True)
+    print("Wrote sequence", args.seq)

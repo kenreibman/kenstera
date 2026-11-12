@@ -228,52 +228,67 @@ p { text-wrap: pretty; }
 
 .on-paper a { text-underline-offset: 3px; }
 
-/* ---------- Hero ---------------------------------------------------------- */
-
-.hero {
-  background:
-    radial-gradient(55% 45% at 50% 78%, rgba(60, 130, 80, 0.22), transparent 72%),
-    #06120c;
-}
-@keyframes plant-rise {
-  from { opacity: 0; transform: translateY(40px) scale(0.97); }
-  to { opacity: 1; transform: none; }
-}
-@media (prefers-reduced-motion: no-preference) {
-  .plant-rise { animation: plant-rise 1.4s cubic-bezier(0.16, 1, 0.3, 1) 0.2s both; }
-}
-
-/* ---------- Story: words light up as you scroll --------------------------- */
-
-.story-stage { padding-block: clamp(96px, 14vw, 180px); }
-
-@supports (animation-timeline: view()) {
-  @media (prefers-reduced-motion: no-preference) {
-    .story { height: 220vh; view-timeline-name: --story; }
-    .story-stage {
-      position: sticky;
-      top: 0;
-      height: 100vh;
-      height: 100svh;
-      padding-block: 0;
-      display: grid;
-      place-items: center;
-    }
-    @keyframes word-on { from { opacity: 0.2; } to { opacity: 1; } }
-    .story-word {
-      animation: word-on linear both;
-      animation-timeline: --story;
-      animation-range:
-        contain calc(6% + var(--i) / var(--n) * 80%)
-        contain calc(12% + var(--i) / var(--n) * 80%);
-    }
-  }
-}
-
 /* Feather the render's edges so its soft floor shadow never shows a hard border. */
 .plant-img {
   -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 10%, #000 90%, transparent 100%), linear-gradient(0deg, transparent 0, #000 16%);
   mask-image: linear-gradient(90deg, transparent 0, #000 10%, #000 90%, transparent 100%), linear-gradient(0deg, transparent 0, #000 16%);
   -webkit-mask-composite: source-in;
   mask-composite: intersect;
+}
+
+/* ---------- Journey: hero + story as one scroll-scrubbed shot ------------- */
+
+.journey { --p: 0; }
+.journey-stage { position: relative; overflow: hidden; }
+.journey-plant { position: absolute; inset: 0; will-change: transform; }
+.journey-poster,
+.journey-canvas { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.journey-canvas { display: none; }
+.journey-shade { display: none; }
+.journey-hero { position: relative; padding-top: clamp(96px, 13vh, 150px); min-height: 100svh; }
+.journey-hero::before {
+  /* keeps the headline readable where leaves pass behind it */
+  content: "";
+  position: absolute;
+  inset: 0 -50vw auto;
+  height: 62%;
+  z-index: -1;
+  background: linear-gradient(180deg, #06120c 30%, rgba(6, 18, 12, 0.7) 68%, transparent);
+}
+.journey-lines {
+  position: relative;
+  display: grid;
+  gap: clamp(28px, 5vw, 56px);
+  padding-block: clamp(80px, 12vw, 160px);
+  background: #06120c;
+}
+
+.journey[data-live] { height: 440vh; }
+.journey[data-live] .journey-stage { position: sticky; top: 0; height: 100vh; height: 100svh; }
+.journey[data-live] .journey-canvas { display: block; }
+.journey[data-live] .journey-hero {
+  min-height: 0;
+  opacity: clamp(0, calc(1 - var(--p) * 9), 1);
+  transform: translateY(calc(var(--p) * -160px));
+}
+.journey[data-live] .journey-shade {
+  display: block;
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(60% 50% at 50% 50%, rgba(6, 18, 12, 0.82), rgba(6, 18, 12, 0.3) 85%);
+  opacity: clamp(0, calc((var(--p) - 0.24) * 5), 0.9);
+}
+.journey[data-live] .journey-lines {
+  position: absolute;
+  inset: 0;
+  padding: 0;
+  gap: 0;
+  place-items: center;
+  background: none;
+  pointer-events: none;
+}
+.journey[data-live] .journey-line {
+  grid-area: 1 / 1;
+  opacity: clamp(0, min(calc((var(--p) - var(--a)) * 14), calc((var(--b) - var(--p)) * 14)), 1);
+  transform: translateY(calc((var(--p) - (var(--a) + min(var(--b), 1)) / 2) * -120px));
 }

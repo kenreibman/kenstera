@@ -21,7 +21,7 @@ const pricingFaqs = [
   {
     question: "What's included in each plan?",
     answer:
-      "Each plan builds on the previous tier. Scale includes standard TTS voices and basic analytics. Business adds low-latency voices, advanced NLU, multi-channel support, and CRM integration. Partner includes everything plus custom terms, HIPAA compliance, SSO, and priority support.",
+      "Each plan builds on the previous tier. Scale includes standard TTS voices and basic analytics. Business adds low-latency voices, advanced NLU, multi-channel support, and CRM integration. Partner includes everything plus custom terms, SSO, and priority support.",
   },
   {
     question: "Can I switch plans later?",
@@ -70,8 +70,8 @@ export default function PricingPage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: jsonLdString(faqSchema) }}
       />
-      <main className="min-h-screen bg-neutral-50">
-        <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 sm:py-24 lg:px-8">
+      <main className="min-h-screen bg-page">
+        <div className="mx-auto max-w-[1184px] px-5 py-14 sm:px-8 sm:py-20">
           {/* Header */}
           <div className="mb-12 sm:mb-16">
             <h1 className="text-3xl font-semibold tracking-tight text-neutral-900 sm:text-4xl lg:text-5xl">

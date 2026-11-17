@@ -12,7 +12,7 @@ const faqs: FAQItem[] = [
   {
     question: "What's included in each plan?",
     answer:
-      "Each plan builds on the previous tier. Scale includes standard TTS voices and basic analytics. Business adds low-latency voices, advanced NLU, multi-channel support, and CRM integration. Partner includes everything plus custom terms, HIPAA compliance, SSO, and priority support.",
+      "Each plan builds on the previous tier. Scale includes standard TTS voices and basic analytics. Business adds low-latency voices, advanced NLU, multi-channel support, and CRM integration. Partner includes everything plus custom terms, SSO, and priority support.",
   },
   {
     question: "Can I switch plans later?",

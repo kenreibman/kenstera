@@ -3,10 +3,7 @@ import { IntakeCall } from "@/components/sections/IntakeCall";
 import { IntakeBooking } from "@/components/sections/IntakeBooking";
 import { IntakeSetup } from "@/components/sections/IntakeSetup";
 import { CRMIntegrations } from "@/components/sections/CRMIntegrations";
-import { DemoForm } from "@/components/sections/DemoForm";
-import { CaseStudies } from "@/components/sections/CaseStudies";
 import { IndustriesFaqBlog } from "@/components/industries";
-import { getAllPosts } from "@/lib/blog";
 import { FinalCTA } from "@/components/sections/FinalCTA";
 import type { Metadata } from "next";
 import { OG_IMAGE, jsonLdString } from "@/lib/seo";
@@ -63,8 +60,6 @@ const faqs = [
 ];
 
 export default function IntakePage() {
-  const posts = getAllPosts();
-  const blogPosts = posts.map(post => ({ slug: post.slug, title: post.title }));
 
   const organizationSchema = {
     "@context": "https://schema.org",
@@ -116,9 +111,7 @@ export default function IntakePage() {
         <IntakeBooking />
         <IntakeSetup />
         <CRMIntegrations />
-        <DemoForm />
-        <CaseStudies />
-        <IndustriesFaqBlog faqs={faqs} blogPosts={blogPosts} />
+        <IndustriesFaqBlog faqs={faqs} />
         <FinalCTA />
       </main>
     </>

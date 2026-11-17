@@ -8,39 +8,31 @@ interface CaseStudyCardProps {
 
 export function CaseStudyCard({ study }: CaseStudyCardProps) {
   return (
-    <Link href={`/case-studies/${study.slug}`} className="group block">
+    <Link
+      href={`/case-studies/${study.slug}`}
+      className="group block rounded-2xl bg-surface p-2 transition-colors hover:bg-surface-2"
+    >
       <article>
-        {/* Image */}
-        <div className="aspect-[16/10] overflow-hidden rounded-xl bg-muted mb-4">
+        <div className="aspect-[16/10] overflow-hidden rounded-xl bg-surface-2">
           {study.heroImage ? (
             <Image
               src={study.heroImage}
               alt={study.title}
-              width={600}
-              height={375}
-              className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+              width={1440}
+              height={900}
+              sizes="(min-width: 768px) 560px, 100vw"
+              className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.02]"
             />
           ) : (
-            <div className="h-full w-full bg-gradient-to-br from-neutral-100 to-neutral-200" />
+            <div className="h-full w-full bg-surface-2" />
           )}
         </div>
 
-        {/* Category tag */}
-        {study.category && (
-          <span className="inline-block px-3 py-1 text-xs font-medium rounded-full border border-foreground/80 text-foreground mb-3 uppercase tracking-wide">
-            {study.category}
-          </span>
-        )}
-
-        {/* Title */}
-        <h2 className="text-xl sm:text-2xl font-semibold text-foreground mb-2 leading-tight group-hover:opacity-70 transition-opacity">
-          {study.title}
-        </h2>
-
-        {/* Description */}
-        <p className="text-sm text-muted-foreground line-clamp-2">
-          {study.description}
-        </p>
+        <div className="px-4 pb-5 pt-5">
+          {study.category && <p className="mb-2 text-[13px] text-subtle">{study.category}</p>}
+          <h2 className="text-[22px] leading-[1.25] text-black">{study.title}</h2>
+          <p className="mt-2 line-clamp-2 text-[15px] leading-[1.5] text-subtle">{study.description}</p>
+        </div>
       </article>
     </Link>
   );

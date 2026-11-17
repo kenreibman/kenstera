@@ -2,12 +2,11 @@ import Script from 'next/script'
 import {
   ConfirmationHero,
   NextSteps,
-  FeaturedPosts,
 } from './components'
 
 export default function BookingConfirmedPage() {
   return (
-    <main className="min-h-screen bg-white">
+    <main className="min-h-screen bg-page">
       <Script
         id="meta-pixel-schedule"
         strategy="afterInteractive"
@@ -17,7 +16,6 @@ export default function BookingConfirmedPage() {
       />
       <ConfirmationHero />
       <NextSteps />
-      <FeaturedPosts />
 
       {/* Footer with contact info */}
       <footer className="py-10 border-t border-gray-200">

@@ -12,7 +12,7 @@ import {
 } from "@/lib/case-studies";
 import { mdxComponents } from "@/components/blog/MDXComponents";
 import { CaseStudySidebar } from "@/components/case-studies/CaseStudySidebar";
-import { FinalCTA } from "@/components/sections/FinalCTA";
+import { HomeCta } from "@/components/home";
 import { OG_IMAGE, OG_IMAGE_URL, OG_IMAGE_ABSOLUTE_URL, SITE_URL, jsonLdString } from "@/lib/seo";
 
 interface PageProps {
@@ -99,30 +99,37 @@ export default async function CaseStudyDetailPage({ params }: PageProps) {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: jsonLdString(jsonLd) }}
       />
-      <main className="bg-background min-h-screen">
+      <main className="bg-page min-h-screen">
         {/* Hero Section */}
-        <section className="relative border-b border-border overflow-hidden">
-          {/* Decorative bloom */}
-          <div
-            className="absolute top-0 right-0 w-full h-full pointer-events-none"
-            aria-hidden="true"
-            style={{
-              background:
-                "radial-gradient(ellipse 70% 100% at 80% 50%, rgba(232,160,130,0.55) 0%, rgba(232,160,130,0.3) 30%, rgba(232,160,130,0.1) 50%, rgba(232,160,130,0.03) 65%, transparent 80%)",
-            }}
-          />
-          <div className="relative mx-auto max-w-6xl px-4 sm:px-6 pt-16 sm:pt-24 pb-16 sm:pb-24">
+        <section className="relative">
+          <div className="relative mx-auto max-w-[1184px] px-5 sm:px-8 pt-14 sm:pt-20 pb-12">
+            {study.category && <p className="mb-3 text-[15px] text-subtle">{study.category}</p>}
             {/* Title */}
-            <h1 className="text-3xl sm:text-4xl lg:text-[2.75rem] font-bold tracking-tight text-foreground mb-10 max-w-2xl leading-[1.15]">
+            <h1 className="text-[36px] sm:text-[48px] text-black mb-6 max-w-3xl leading-[1.1]">
               {study.title}
             </h1>
+            <p className="max-w-2xl text-[16px] leading-[1.5] text-black/80 mb-10">{study.description}</p>
+
+            {study.heroImage && (
+              <div className="mb-10 rounded-2xl bg-surface p-2 sm:p-3">
+                <Image
+                  src={study.heroImage}
+                  alt={study.title}
+                  width={1440}
+                  height={900}
+                  priority
+                  sizes="(min-width: 1184px) 1120px, 100vw"
+                  className="h-auto w-full rounded-xl ring-hairline"
+                />
+              </div>
+            )}
 
             {/* Stats Row */}
             {study.stats.length > 0 && (
               <div className="flex flex-wrap gap-6 sm:gap-16 mb-10">
                 {study.stats.map((stat, i) => (
                   <div key={i}>
-                    <div className="text-3xl sm:text-4xl font-bold text-foreground tracking-tight">
+                    <div className="text-3xl sm:text-4xl font-light text-black tracking-tight">
                       {stat.value}
                     </div>
                     <div className="text-sm text-muted-foreground mt-1">
@@ -167,7 +174,7 @@ export default async function CaseStudyDetailPage({ params }: PageProps) {
         </section>
 
         {/* Two-column Content Section */}
-        <div className="mx-auto max-w-6xl px-4 sm:px-6 py-10 sm:py-14">
+        <div className="mx-auto max-w-[1184px] px-5 sm:px-8 py-10 sm:py-14 border-t border-hairline">
           {/* Mobile back link */}
           <div className="lg:hidden mb-8">
             <Link
@@ -222,7 +229,7 @@ export default async function CaseStudyDetailPage({ params }: PageProps) {
           </div>
         </div>
 
-        <FinalCTA />
+        <HomeCta />
       </main>
     </>
   );

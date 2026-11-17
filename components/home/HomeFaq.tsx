@@ -1,100 +1,65 @@
 "use client";
 
 import { useState } from "react";
-import Link from "next/link";
-import { Plus, Minus } from "lucide-react";
-import { motion, AnimatePresence } from "framer-motion";
+import { Plus } from "lucide-react";
+import { Button, Section } from "@/components/el/ui";
 import { HOME_FAQS } from "./faqs";
 
 export function HomeFaq() {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
 
   return (
-    <section id="faq" className="relative py-20 md:py-28">
-      {/* Dotted line separator */}
-      <div className="absolute top-0 left-0 right-0 h-px bg-[repeating-linear-gradient(90deg,transparent,transparent_4px,#e5e7eb_4px,#e5e7eb_8px)]" />
+    <Section id="faq">
+      <div className="grid gap-10 md:grid-cols-2 md:gap-12">
+        <div className="md:sticky md:top-24 md:self-start">
+          <p className="mb-3 text-[15px] text-subtle">Questions, answered</p>
+          <h2 className="text-[32px] leading-[1.15] text-black sm:text-[40px]">Frequently asked questions</h2>
+          <Button href="/contact-sales" variant="secondary" className="mt-6">
+            Still have a question?
+          </Button>
+        </div>
 
-      <div className="w-full max-w-7xl mx-auto px-5">
-        {/* Label */}
-        <p className="text-sm font-medium text-gray-900 mb-16">
-          Questions, answered
-        </p>
-
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20">
-          {/* Left — sticky heading */}
-          <div className="lg:col-span-4 lg:sticky lg:top-24 self-start">
-            <h2 className="text-[clamp(32px,5vw,48px)] font-bold leading-[1.1] tracking-tight text-gray-900 mb-8">
-              Frequently asked
-            </h2>
-            <Link
-              href="/contact-sales"
-              className="inline-flex items-center justify-center px-5 py-2.5 border border-gray-200 text-gray-900 text-sm font-medium rounded-full hover:bg-gray-50 transition-colors"
-            >
-              Still have a question?
-            </Link>
-          </div>
-
-          {/* Right — accordion */}
-          <div className="lg:col-span-8">
-            {HOME_FAQS.map((faq, index) => {
-              const isOpen = openIndex === index;
-              return (
-                <div
-                  key={faq.question}
-                  className="border-t border-gray-200 last:border-b"
+        <div className="border-t border-hairline">
+          {HOME_FAQS.map((faq, index) => {
+            const isOpen = openIndex === index;
+            return (
+              <div key={faq.question} className="border-b border-hairline">
+                <button
+                  type="button"
+                  aria-expanded={isOpen}
+                  onClick={() => setOpenIndex(isOpen ? null : index)}
+                  className="flex w-full items-center justify-between gap-6 py-5 text-left"
                 >
-                  <button
-                    type="button"
-                    aria-expanded={isOpen}
-                    onClick={() => setOpenIndex(isOpen ? null : index)}
-                    className="w-full flex items-start justify-between gap-6 text-left py-6 group"
-                  >
-                    <h3
-                      className={`text-lg font-semibold transition-colors ${
-                        isOpen ? "text-gray-900" : "text-gray-400"
-                      } group-hover:text-gray-900`}
-                    >
-                      {faq.question}
-                    </h3>
-                    <span className="shrink-0 pt-1">
-                      {isOpen ? (
-                        <Minus className="w-5 h-5 text-gray-400" />
-                      ) : (
-                        <Plus className="w-5 h-5 text-gray-400" />
+                  <h3 className="text-[16px] font-normal text-black">{faq.question}</h3>
+                  <Plus
+                    className={`h-4 w-4 flex-none text-subtle transition-transform duration-300 ${isOpen ? "rotate-45" : ""}`}
+                  />
+                </button>
+                <div
+                  className={`grid transition-[grid-template-rows] duration-300 ease-out ${
+                    isOpen ? "grid-rows-[1fr]" : "grid-rows-[0fr]"
+                  }`}
+                >
+                  <div className="overflow-hidden">
+                    <div className="pb-6 pr-8 text-[15px] leading-[1.6] text-subtle">
+                      <p>{faq.answer}</p>
+                      {faq.bullets && (
+                        <ul className="mt-3 flex list-disc flex-col gap-1.5 pl-5">
+                          {faq.bullets.map((bullet) => (
+                            <li key={bullet}>{bullet}</li>
+                          ))}
+                        </ul>
                       )}
-                    </span>
-                  </button>
-
-                  <AnimatePresence initial={false}>
-                    {isOpen && (
-                      <motion.div
-                        initial={{ height: 0, opacity: 0 }}
-                        animate={{ height: "auto", opacity: 1 }}
-                        exit={{ height: 0, opacity: 0 }}
-                        transition={{ duration: 0.3, ease: "easeInOut" }}
-                        className="overflow-hidden"
-                      >
-                        <div className="pb-7 pr-8 text-[15px] leading-relaxed text-gray-600 max-w-2xl">
-                          <p>{faq.answer}</p>
-                          {faq.bullets && (
-                            <ul className="mt-4 flex flex-col gap-2 list-disc pl-5 marker:text-gray-300">
-                              {faq.bullets.map((bullet) => (
-                                <li key={bullet}>{bullet}</li>
-                              ))}
-                            </ul>
-                          )}
-                          {faq.outro && <p className="mt-4">{faq.outro}</p>}
-                        </div>
-                      </motion.div>
-                    )}
-                  </AnimatePresence>
+                      {faq.outro && <p className="mt-3">{faq.outro}</p>}
+                    </div>
+                  </div>
                 </div>
-              );
-            })}
-          </div>
+              </div>
+            );
+          })}
         </div>
       </div>
-    </section>
+    </Section>
   );
 }
 

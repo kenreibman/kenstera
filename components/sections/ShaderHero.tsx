@@ -105,15 +105,9 @@ export function ShaderHero() {
           </p>
 
           <div className="flex flex-row items-center justify-center gap-3 mt-10">
-            <a
-              href="#demo"
-              className="group inline-flex items-center justify-center gap-2 px-6 py-3.5 bg-gray-900 text-white text-sm font-semibold rounded-full hover:bg-gray-800 transition-all shadow-lg shadow-gray-900/10 hover:shadow-xl hover:shadow-gray-900/20"
-            >
-              Try the Live Demo
-            </a>
             <Link
               href="/contact-sales"
-              className="inline-flex items-center justify-center px-6 py-3.5 bg-white text-gray-900 text-sm font-semibold rounded-full hover:bg-gray-50 transition-colors border border-gray-200"
+              className="inline-flex items-center justify-center px-6 py-3.5 bg-gray-900 text-white text-sm font-semibold rounded-full hover:bg-gray-800 transition-colors"
             >
               Contact Sales
             </Link>

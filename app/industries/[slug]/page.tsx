@@ -1,7 +1,6 @@
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { IndustriesHero, IndustriesUseCases, IndustriesVoiceAgents, IndustriesMultimodal, IndustriesWorkflows, IndustriesCustomizable, IndustriesIntegrations, IndustriesGettingStarted, IndustriesFaqBlog, IndustriesCta } from "@/components/industries";
-import { getAllPosts } from "@/lib/blog";
 import { getIndustryContent, getAllIndustrySlugs } from "@/lib/industry-content";
 import { OG_IMAGE } from "@/lib/seo";
 
@@ -43,11 +42,9 @@ export default async function IndustryPage({ params }: IndustryPageProps) {
     notFound();
   }
 
-  const posts = getAllPosts();
-  const blogPosts = posts.map(post => ({ slug: post.slug, title: post.title }));
 
   return (
-    <main className="min-h-screen bg-white">
+    <main className="min-h-screen bg-page">
       <IndustriesHero
         headline={content.hero.headline}
         description={content.hero.description}
@@ -82,7 +79,6 @@ export default async function IndustryPage({ params }: IndustryPageProps) {
       />
       <IndustriesFaqBlog
         faqs={content.faqs}
-        blogPosts={blogPosts}
       />
       <IndustriesCta heading={content.cta.heading} />
     </main>

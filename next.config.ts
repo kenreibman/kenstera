@@ -20,6 +20,16 @@ const nextConfig: NextConfig = {
     optimizePackageImports: ["lucide-react", "framer-motion"],
   },
 
+  // Retired routes from the live site.
+  async redirects() {
+    return [
+      { source: "/work/:slug", destination: "/case-studies", permanent: true },
+      // The blog was retired; old post links land on the homepage.
+      { source: "/blog", destination: "/", permanent: true },
+      { source: "/blog/:slug", destination: "/", permanent: true },
+    ];
+  },
+
   async headers() {
     return [
       {

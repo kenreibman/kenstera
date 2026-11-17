@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ArrowUpRight } from "lucide-react";
+import { buttonClass } from "@/components/el/ui";
 
 export type PricingTier = {
   name: string;
@@ -61,7 +61,6 @@ export const tiers: PricingTier[] = [
     inheritFrom: "Business",
     features: [
       "Custom terms & assurance around DPA/SLAs",
-      "BAAs for HIPAA customers",
       "Custom SSO",
       "Quarterly roadmap planning",
       "Priority support",
@@ -69,93 +68,58 @@ export const tiers: PricingTier[] = [
   },
 ];
 
-function PricingCard({ tier }: { tier: PricingTier }) {
+function PricingCard({ tier, highlighted }: { tier: PricingTier; highlighted: boolean }) {
   const isCustom = tier.price === "Custom pricing";
 
   return (
-    <article className="group relative flex flex-col border border-neutral-200 bg-white transition-all duration-300 hover:border-neutral-300 hover:shadow-lg">
-      {/* Header with hover gradient */}
-      <div className="relative overflow-hidden px-6 pt-6 pb-4">
-        {/* Gradient overlay on hover */}
-        <div
-          className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-500 group-hover:opacity-100"
-          style={{
-            background:
-              "linear-gradient(135deg, #f5e6d3 0%, #e8d4c4 25%, #d4b896 50%, #c9a67a 75%, #b8956a 100%)",
-          }}
-        />
-        {/* Noise texture overlay */}
-        <div
-          className="pointer-events-none absolute inset-0 opacity-0 mix-blend-overlay transition-opacity duration-500 group-hover:opacity-30"
-          style={{
-            backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E")`,
-          }}
-        />
+    <article
+      className={`flex flex-col rounded-2xl p-2 ${highlighted ? "bg-surface-2" : "bg-surface"}`}
+    >
+      <div className="ring-hairline flex flex-1 flex-col rounded-xl bg-white p-6">
+        <h3 className="text-[16px] text-black">{tier.name}</h3>
+        <p className="mt-1 text-[14px] leading-[1.5] text-subtle">{tier.description}</p>
 
-        <h3 className="relative text-lg font-medium text-neutral-900">
-          {tier.name}
-        </h3>
-
-        <div className="relative mt-3 flex items-baseline gap-1">
-          <span
-            className={`font-semibold text-neutral-900 ${isCustom ? "text-xl" : "text-3xl"}`}
-          >
+        <div className="mt-6 flex items-baseline gap-1.5">
+          <span className={`font-display font-light tracking-[-0.02em] text-black ${isCustom ? "text-[28px]" : "text-[40px]"}`}>
             {tier.price}
           </span>
-          {tier.priceSuffix && (
-            <span className="text-sm text-neutral-500">{tier.priceSuffix}</span>
-          )}
+          {tier.priceSuffix && <span className="text-[14px] text-subtle">{tier.priceSuffix}</span>}
         </div>
-      </div>
 
-      {/* CTA Button */}
-      <div className="px-6 py-4">
-        <Link
-          href={tier.cta.href}
-          className="flex w-full items-center justify-center gap-2 rounded-full bg-neutral-900 px-4 py-2.5 text-sm font-medium text-white transition-colors hover:bg-neutral-800"
-        >
+        <Link href={tier.cta.href} className={`${buttonClass(highlighted ? "primary" : "secondary")} mt-6 w-full`}>
           {tier.cta.label}
         </Link>
-      </div>
 
-      {/* Features */}
-      <div className="flex-1 border-t border-neutral-100 px-6 py-4">
-        {tier.inheritFrom && (
-          <p className="mb-3 flex items-center gap-1 text-xs text-neutral-500">
-            Everything in {tier.inheritFrom}, plus
-            <ArrowUpRight className="h-3 w-3" />
+        <div className="mt-6 border-t border-hairline pt-5">
+          {tier.inheritFrom && (
+            <p className="mb-3 text-[13px] text-subtle">Everything in {tier.inheritFrom}, plus</p>
+          )}
+          <ul className="space-y-2.5">
+            {tier.features.map((feature) => (
+              <li key={feature} className="flex items-start gap-2.5 text-[14px] text-black/80">
+                <span className="mt-[7px] h-1.5 w-1.5 flex-none rounded-full bg-black/30" aria-hidden="true" />
+                {feature}
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        {tier.bottomLabel && (
+          <p className="mt-6 border-t border-hairline pt-4 text-[14px]">
+            <span className="text-black">{tier.bottomValue}</span>
+            <span className="ml-1 text-subtle">{tier.bottomLabel}</span>
           </p>
         )}
-
-        <ul className="space-y-2.5">
-          {tier.features.map((feature) => (
-            <li key={feature} className="flex items-start gap-2.5 text-sm">
-              <span className="text-neutral-600">{feature}</span>
-            </li>
-          ))}
-        </ul>
       </div>
-
-      {/* Bottom section */}
-      {tier.bottomLabel && (
-        <div className="border-t border-neutral-100 px-6 py-4">
-          <p className="text-sm">
-            <span className="font-medium text-neutral-900">
-              {tier.bottomValue}
-            </span>
-            <span className="ml-1 text-neutral-500">{tier.bottomLabel}</span>
-          </p>
-        </div>
-      )}
     </article>
   );
 }
 
 export function PricingCards() {
   return (
-    <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-      {tiers.map((tier) => (
-        <PricingCard key={tier.name} tier={tier} />
+    <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+      {tiers.map((tier, i) => (
+        <PricingCard key={tier.name} tier={tier} highlighted={i === 1} />
       ))}
     </div>
   );

@@ -1,4 +1,4 @@
-import Link from "next/link";
+import { Button, Section } from "@/components/el/ui";
 
 const defaultIntegrations = [
   "Pipedrive",
@@ -19,6 +19,7 @@ interface IndustriesIntegrationsProps {
   items?: string[];
 }
 
+/** Integration grid drawn with hairlines, like the elevenlabs.io logo wall. */
 export function IndustriesIntegrations({
   heading = "Integrate seamlessly with your tech stack and the tools you already use",
   description = "Connect agents to your CRM, support desk, calendar, payment system, or telephony provider. Whether it's Salesforce, Stripe, Zendesk, or Twilio, integrations work out of the box with minimal setup",
@@ -26,56 +27,32 @@ export function IndustriesIntegrations({
   items = defaultIntegrations,
 }: IndustriesIntegrationsProps) {
   return (
-    <section className="py-12 lg:py-16">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6">
-        {/* Dotted line */}
-        <div className="border-t-2 border-dotted border-gray-300 mb-4" />
-
-        {/* Section label */}
-        <p className="text-sm font-medium text-gray-900 mb-16">Integrations</p>
-
-        {/* Centered heading */}
-        <h2 className="text-2xl lg:text-4xl font-medium text-gray-900 text-center mb-6 max-w-3xl mx-auto">
-          {heading}
-        </h2>
-
-        {/* Description */}
-        <p className="text-gray-500 text-center max-w-2xl mx-auto mb-12">
-          {description}
-        </p>
-
-        {/* Logo grid - 3x3 */}
-        <div className="max-w-3xl mx-auto border border-gray-200 rounded-lg overflow-hidden mb-12">
-          <div className="grid grid-cols-3">
-            {items.map((name, index) => (
-              <div
-                key={name}
-                className={`flex items-center justify-center py-8 px-4 ${
-                  index % 3 !== 2 ? "border-r border-gray-200" : ""
-                } ${index < 6 ? "border-b border-gray-200" : ""}`}
-              >
-                <span className="text-gray-400 font-medium">{name}</span>
-              </div>
-            ))}
-          </div>
+    <Section>
+      <div className="grid gap-6 md:grid-cols-2 md:gap-12">
+        <div>
+          <p className="mb-3 text-[15px] text-subtle">Integrations</p>
+          <h2 className="text-[32px] leading-[1.15] text-black sm:text-[40px]">{heading}</h2>
         </div>
-
-        {/* Additional text */}
-        <p className="text-gray-900 text-center mb-8">
-          {additionalText}
-        </p>
-
-        {/* CTA Button */}
-        <div className="flex justify-center">
-          <Link
-            href="/contact-sales"
-            className="inline-flex items-center justify-center px-6 py-3 border border-gray-200 text-gray-900 text-sm font-medium rounded-full hover:bg-gray-50 transition-colors"
-          >
+        <div className="flex flex-col items-start justify-end gap-5">
+          <p className="max-w-[440px] text-[16px] leading-[1.5] text-black/80">{description}</p>
+          <Button href="/contact-sales" variant="secondary">
             Contact Us
-          </Link>
+          </Button>
         </div>
       </div>
-    </section>
+
+      <div className="mt-12 grid grid-cols-2 border-l border-t border-hairline sm:grid-cols-3">
+        {items.map((name) => (
+          <div
+            key={name}
+            className="flex h-24 items-center justify-center border-b border-r border-hairline text-[16px] text-black/60"
+          >
+            {name}
+          </div>
+        ))}
+      </div>
+      <p className="mt-6 text-[15px] text-subtle">{additionalText}</p>
+    </Section>
   );
 }
 

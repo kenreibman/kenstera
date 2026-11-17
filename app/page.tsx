@@ -1,10 +1,8 @@
 import type { Metadata } from "next";
 import {
   HomeHero,
-  HomeAbout,
   HomeServices,
   HomeWork,
-  HomeTestimonials,
   HomeFaq,
   HomeCta,
   HOME_FAQS,
@@ -86,12 +84,10 @@ export default function Home() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: jsonLdString(faqJsonLd) }}
       />
-      <main className="bg-white">
+      <main className="bg-page">
         <HomeHero />
-        <HomeAbout />
         <HomeServices />
         <HomeWork />
-        <HomeTestimonials />
         <HomeFaq />
         <HomeCta />
       </main>

@@ -1,10 +1,11 @@
 "use client";
 
 import Link from "next/link";
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import { Menu, X, ChevronDown, ChevronRight, Sparkles } from "lucide-react";
+import { buttonClass } from "@/components/el/ui";
 
-// Dropdown menu data
+// Dropdown menu data (unchanged from the live site)
 const servicesDropdown = {
   columns: [
     {
@@ -71,34 +72,30 @@ const navItems = [
   { href: "/case-studies", label: "Case Studies" },
 ];
 
-// Dropdown component
+function Wordmark() {
+  return <span className="text-[19px] font-semibold tracking-[-0.03em] text-black">Kenstera</span>;
+}
+
+// Desktop mega-menu panel, styled like the elevenlabs.io product menu.
 function NavDropdown({ dropdown }: { dropdown: typeof servicesDropdown }) {
   return (
     // focus-within keeps the menu open while keyboard focus moves through its
-    // links — without it, `invisible` removes them from the tab order entirely
-    // and the dropdown (the only nav path to /intake) is mouse-only.
-    <div className="absolute top-full left-0 pt-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible group-focus-within:opacity-100 group-focus-within:visible transition-all duration-200">
-      <div className="bg-white rounded-xl shadow-lg border border-gray-200 p-6 min-w-[600px]">
-        {/* Columns */}
-        <div className="flex gap-12">
-          {dropdown.columns.map((column, idx) => (
-            <div key={idx} className="flex-1">
-              <p className="text-xs font-medium text-gray-400 uppercase tracking-wide mb-4">
-                {column.title}
-              </p>
-              <div className="space-y-1">
-                {column.items.map((item, itemIdx) => (
+    // links; without it, `invisible` removes them from the tab order entirely.
+    <div className="invisible absolute -left-3 top-full pt-3 opacity-0 transition-all duration-200 group-hover:visible group-hover:opacity-100 group-focus-within:visible group-focus-within:opacity-100">
+      <div className="ring-hairline w-[640px] rounded-2xl bg-white p-2 shadow-[0_24px_48px_-16px_rgba(0,0,0,0.18)]">
+        <div className="grid grid-cols-2 gap-1">
+          {dropdown.columns.map((column) => (
+            <div key={column.title} className="p-3">
+              <p className="mb-2 px-3 text-[13px] text-subtle">{column.title}</p>
+              <div>
+                {column.items.map((item) => (
                   <Link
-                    key={itemIdx}
+                    key={item.href}
                     href={item.href}
-                    className="block px-3 py-2.5 -mx-3 rounded-lg hover:bg-gray-50 transition-colors"
+                    className="block rounded-xl px-3 py-2.5 transition-colors hover:bg-surface"
                   >
-                    <p className="text-[14px] font-medium text-gray-900">
-                      {item.title}
-                    </p>
-                    <p className="text-[13px] text-gray-500">
-                      {item.description}
-                    </p>
+                    <p className="text-[14px] text-black">{item.title}</p>
+                    <p className="text-[13px] text-subtle">{item.description}</p>
                   </Link>
                 ))}
               </div>
@@ -106,26 +103,17 @@ function NavDropdown({ dropdown }: { dropdown: typeof servicesDropdown }) {
           ))}
         </div>
 
-        {/* Featured */}
         {dropdown.featured && (
-          <div className="mt-6 pt-6 border-t border-gray-100">
-            <Link
-              href={dropdown.featured.href}
-              className="flex items-center gap-4 p-3 -mx-3 rounded-lg hover:bg-gray-50 transition-colors"
-            >
-              <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-sky-400 to-indigo-500 flex items-center justify-center">
-                <dropdown.featured.icon className="w-5 h-5 text-white" />
-              </div>
-              <div>
-                <p className="text-[14px] font-medium text-gray-900">
-                  {dropdown.featured.title}
-                </p>
-                <p className="text-[13px] text-gray-500">
-                  {dropdown.featured.description}
-                </p>
-              </div>
-            </Link>
-          </div>
+          <Link
+            href={dropdown.featured.href}
+            className="m-1 flex items-center gap-4 rounded-xl bg-surface p-4 transition-colors hover:bg-surface-2"
+          >
+            <span className="grad g-ember h-10 w-10 flex-none rounded-lg" aria-hidden="true" />
+            <span>
+              <span className="block text-[14px] text-black">{dropdown.featured.title}</span>
+              <span className="block text-[13px] text-subtle">{dropdown.featured.description}</span>
+            </span>
+          </Link>
         )}
       </div>
     </div>
@@ -146,29 +134,29 @@ function MobileNavItem({
 }) {
   if (item.hasDropdown && item.dropdown) {
     return (
-      <div>
+      <div className="border-b border-hairline">
         <button
+          type="button"
           onClick={onToggle}
-          className="flex items-center justify-between w-full px-6 py-3.5 text-[15px] text-gray-900 font-medium transition-colors hover:bg-gray-50"
+          aria-expanded={isExpanded}
+          className="flex w-full items-center justify-between py-4 text-[17px] text-black"
         >
           {item.label}
-          <ChevronRight
-            className={`w-4 h-4 text-gray-300 transition-transform duration-200 ${isExpanded ? 'rotate-90' : ''}`}
+          <ChevronDown
+            className={`h-4 w-4 text-subtle transition-transform duration-200 ${isExpanded ? "rotate-180" : ""}`}
           />
         </button>
         {isExpanded && (
-          <div className="py-2 space-y-1 px-6 bg-gray-50">
-            {item.dropdown.columns.map((column, colIdx) => (
-              <div key={colIdx} className="mb-2">
-                <p className="text-xs font-medium text-gray-400 uppercase tracking-wide mb-2">
-                  {column.title}
-                </p>
-                {column.items.map((subItem, subIdx) => (
+          <div className="pb-4">
+            {item.dropdown.columns.map((column) => (
+              <div key={column.title} className="mb-3">
+                <p className="mb-1 text-[13px] text-subtle">{column.title}</p>
+                {column.items.map((subItem) => (
                   <Link
-                    key={subIdx}
+                    key={subItem.href}
                     href={subItem.href}
                     onClick={onClose}
-                    className="block py-2 text-[14px] text-gray-600 hover:text-black transition-colors"
+                    className="block py-2 text-[15px] text-black/80 hover:text-black"
                   >
                     {subItem.title}
                   </Link>
@@ -179,9 +167,9 @@ function MobileNavItem({
               <Link
                 href={item.dropdown.featured.href}
                 onClick={onClose}
-                className="flex items-center gap-2 py-2 text-[14px] text-sky-600 font-medium hover:text-sky-700 transition-colors"
+                className="mt-1 flex items-center gap-3 rounded-xl bg-surface p-3 text-[14px] text-black"
               >
-                <item.dropdown.featured.icon className="w-4 h-4" />
+                <span className="grad g-ember h-7 w-7 flex-none rounded-md" aria-hidden="true" />
                 {item.dropdown.featured.title}
               </Link>
             )}
@@ -195,10 +183,10 @@ function MobileNavItem({
     <Link
       href={item.href}
       onClick={onClose}
-      className="flex items-center justify-between px-6 py-3.5 text-[15px] text-gray-900 font-medium transition-colors hover:bg-gray-50"
+      className="flex items-center justify-between border-b border-hairline py-4 text-[17px] text-black"
     >
       {item.label}
-      <ChevronRight className="w-4 h-4 text-gray-300" />
+      <ChevronRight className="h-4 w-4 text-subtle" />
     </Link>
   );
 }
@@ -206,39 +194,16 @@ function MobileNavItem({
 export function MainNavigation() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [expandedItem, setExpandedItem] = useState<string | null>(null);
-  const [isVisible, setIsVisible] = useState(true);
-  const lastScrollYRef = useRef(0);
+  const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
-    const handleScroll = () => {
-      const currentScrollY = window.scrollY;
+    const onScroll = () => setScrolled(window.scrollY > 4);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
-      // Don't hide nav if mobile menu is open
-      if (mobileMenuOpen) {
-        setIsVisible(true);
-        return;
-      }
-
-      // Show nav when at top of page
-      if (currentScrollY < 10) {
-        setIsVisible(true);
-      }
-      // Hide on scroll down, show on scroll up
-      else if (currentScrollY > lastScrollYRef.current && currentScrollY > 300) {
-        setIsVisible(false);
-      } else if (currentScrollY < lastScrollYRef.current) {
-        setIsVisible(true);
-      }
-
-      lastScrollYRef.current = currentScrollY;
-    };
-
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, [mobileMenuOpen]);
-
-  // Escape closes the mobile menu, and the page behind it must not scroll —
-  // otherwise closing the menu strands the user somewhere else on the page.
+  // Escape closes the mobile menu, and the page behind it must not scroll.
   useEffect(() => {
     if (!mobileMenuOpen) return;
     const previousOverflow = document.body.style.overflow;
@@ -256,10 +221,6 @@ export function MainNavigation() {
     };
   }, [mobileMenuOpen]);
 
-  const toggleExpanded = (href: string) => {
-    setExpandedItem(expandedItem === href ? null : href);
-  };
-
   const closeMobileMenu = () => {
     setMobileMenuOpen(false);
     setExpandedItem(null);
@@ -267,110 +228,87 @@ export function MainNavigation() {
 
   return (
     <>
-    <header
-      className={`main-navigation sticky top-0 z-50 bg-white border-b border-gray-100 transition-transform duration-300 ${
-        isVisible ? 'translate-y-0' : '-translate-y-full'
-      }`}
-    >
-      <div className="flex gap-8 mx-auto h-14 max-w-[1200px] items-center px-5">
-        {/* Logo */}
-        <Link href="/" className="flex items-center">
-          <span className="text-lg font-bold text-black">
-            Kenstera
-          </span>
-        </Link>
-
-        {/* Desktop Nav */}
-        <nav className="hidden items-center gap-1 md:flex">
-          {navItems.map((item) => (
-            <div key={item.href} className="relative group">
-              <Link
-                href={item.href}
-                className="flex items-center gap-1 px-3 py-2 text-[14px] text-gray-600 transition-colors hover:text-black rounded-lg hover:bg-gray-50"
-              >
-                {item.label}
-                {item.hasDropdown && (
-                  <ChevronDown className="w-3.5 h-3.5 text-gray-400 group-hover:text-gray-600 transition-transform group-hover:rotate-180" />
-                )}
-              </Link>
-              {item.hasDropdown && item.dropdown && (
-                <NavDropdown dropdown={item.dropdown} />
-              )}
-            </div>
-          ))}
-        </nav>
-
-        {/* Desktop Right - Auth */}
-        <div className="ml-auto hidden items-center gap-4 md:flex">
-          <Link
-            href="/contact-sales"
-            className="px-4 py-2 text-[14px] font-medium text-white bg-black rounded-full hover:bg-gray-800 transition-colors"
-          >
-            Contact Us
+      <header
+        className={`main-navigation sticky top-0 z-50 bg-page/90 backdrop-blur-md transition-shadow ${
+          scrolled ? "shadow-[0_1px_0_rgba(0,0,0,0.06)]" : ""
+        }`}
+      >
+        <div className="mx-auto flex h-16 max-w-[1180px] items-center gap-8 px-5 sm:px-8">
+          <Link href="/" className="flex items-center" aria-label="Kenstera home">
+            <Wordmark />
           </Link>
-        </div>
 
-        {/* Mobile Nav */}
-        <div className="ml-auto flex items-center gap-3 md:hidden">
-          <Link
-            href="/contact-sales"
-            className="px-4 py-1.5 text-[13px] font-medium text-white bg-black rounded-full hover:bg-gray-800 transition-colors"
-          >
-            Contact Us
-          </Link>
-          <button
-            onClick={() => mobileMenuOpen ? closeMobileMenu() : setMobileMenuOpen(true)}
-            className="flex h-9 w-9 items-center justify-center"
-            aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
-          >
-            {mobileMenuOpen ? (
-              <X className="h-5 w-5 text-black" />
-            ) : (
-              <Menu className="h-5 w-5 text-black" />
-            )}
-          </button>
-        </div>
-      </div>
+          {/* Desktop Nav */}
+          <nav aria-label="Primary" className="hidden items-center gap-1 md:flex">
+            {navItems.map((item) => (
+              <div key={item.href} className="group relative">
+                <Link
+                  href={item.href}
+                  className="flex items-center gap-1 rounded-full px-3 py-2 text-[14px] text-black transition-colors hover:bg-black/5"
+                >
+                  {item.label}
+                  {item.hasDropdown && (
+                    <ChevronDown className="h-3.5 w-3.5 text-subtle transition-transform group-hover:rotate-180" />
+                  )}
+                </Link>
+                {item.hasDropdown && item.dropdown && <NavDropdown dropdown={item.dropdown} />}
+              </div>
+            ))}
+          </nav>
 
+          {/* Desktop right */}
+          <div className="ml-auto hidden items-center gap-2 md:flex">
+            <Link href="/contact-sales" className={buttonClass("primary")}>
+              Contact Us
+            </Link>
+          </div>
+
+          {/* Mobile */}
+          <div className="ml-auto flex items-center gap-2 md:hidden">
+            <Link href="/contact-sales" className={buttonClass("primary")}>
+              Contact Us
+            </Link>
+            <button
+              type="button"
+              onClick={() => (mobileMenuOpen ? closeMobileMenu() : setMobileMenuOpen(true))}
+              className="flex h-10 w-10 items-center justify-center rounded-full hover:bg-black/5"
+              aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
+              aria-expanded={mobileMenuOpen}
+            >
+              {mobileMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+            </button>
+          </div>
+        </div>
       </header>
 
-      {/* Mobile Dropdown Menu - Outside header to avoid stacking issues */}
       {mobileMenuOpen && (
-        <>
-          {/* Backdrop */}
-          <div
-            className="fixed inset-0 bg-black/20 md:hidden z-40"
-            onClick={closeMobileMenu}
-          />
-          {/* Menu Panel - Full height */}
-          <div
-            role="dialog"
-            aria-modal="true"
-            aria-label="Site navigation"
-            className="fixed top-14 left-0 right-0 bottom-0 bg-white md:hidden z-50 flex flex-col overflow-hidden"
-          >
-            <nav className="flex flex-col py-4 flex-1 overflow-y-auto">
-              {navItems.map((item) => (
-                <MobileNavItem
-                  key={item.href}
-                  item={item}
-                  isExpanded={expandedItem === item.href}
-                  onToggle={() => toggleExpanded(item.href)}
-                  onClose={closeMobileMenu}
-                />
-              ))}
-            </nav>
-            <div className="px-6 py-6 border-t border-gray-100 flex gap-3 mt-auto">
-              <Link
-                href="/contact-sales"
-                onClick={closeMobileMenu}
-                className="flex-1 text-center px-4 py-3.5 text-[14px] font-medium text-white bg-black rounded-full hover:bg-gray-800 transition-colors"
-              >
-                Contact Us
-              </Link>
-            </div>
+        <div
+          role="dialog"
+          aria-modal="true"
+          aria-label="Site navigation"
+          className="fixed bottom-0 left-0 right-0 top-16 z-50 flex flex-col bg-page md:hidden"
+        >
+          <nav className="flex-1 overflow-y-auto px-5">
+            {navItems.map((item) => (
+              <MobileNavItem
+                key={item.href}
+                item={item}
+                isExpanded={expandedItem === item.href}
+                onToggle={() => setExpandedItem(expandedItem === item.href ? null : item.href)}
+                onClose={closeMobileMenu}
+              />
+            ))}
+          </nav>
+          <div className="border-t border-hairline p-5">
+            <Link
+              href="/contact-sales"
+              onClick={closeMobileMenu}
+              className={`${buttonClass("primary", "md")} w-full`}
+            >
+              Contact Us
+            </Link>
           </div>
-        </>
+        </div>
       )}
     </>
   );

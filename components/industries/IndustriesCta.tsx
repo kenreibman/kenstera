@@ -1,36 +1,24 @@
-import Link from "next/link";
+import { Button, Container } from "@/components/el/ui";
 
 interface IndustriesCtaProps {
   heading?: string;
 }
 
-export function IndustriesCta({
-  heading = "The most realistic voice AI platform",
-}: IndustriesCtaProps) {
+export function IndustriesCta({ heading = "The most realistic voice AI platform" }: IndustriesCtaProps) {
   return (
-    <section className="py-16 lg:py-24">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6">
-        {/* Dotted border top */}
-        <div className="border-t-2 border-dotted border-gray-300" />
-
-        <div className="flex flex-col md:flex-row md:items-center md:justify-between py-16 gap-8">
-          <h2 className="text-2xl lg:text-3xl font-medium text-gray-900">
-            {heading}
-          </h2>
-
-          <div className="flex items-center gap-3">
-            <Link
-              href="/contact-sales"
-              className="inline-flex items-center justify-center px-5 py-2.5 bg-gray-900 text-white text-sm font-medium rounded-full hover:bg-gray-800 transition-colors"
-            >
-              Contact Us
-            </Link>
+    <section className="border-t border-hairline">
+      <Container framed>
+        <div className="py-20 sm:py-28">
+          <div className="grad g-dusk flex min-h-[340px] flex-col justify-end rounded-2xl p-8 sm:p-12">
+            <h2 className="max-w-2xl text-[32px] leading-[1.15] text-white sm:text-[44px]">{heading}</h2>
+            <div className="mt-8">
+              <Button href="/contact-sales" variant="light">
+                Contact Us
+              </Button>
+            </div>
           </div>
         </div>
-
-        {/* Dotted border bottom */}
-        <div className="border-t-2 border-dotted border-gray-300" />
-      </div>
+      </Container>
     </section>
   );
 }

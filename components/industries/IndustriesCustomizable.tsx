@@ -1,8 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { Plus, Minus } from "lucide-react";
+import { Plus } from "lucide-react";
+import { Section } from "@/components/el/ui";
 import { Feature } from "@/lib/industry-content";
 
 const defaultFeatures: Feature[] = [
@@ -35,70 +35,39 @@ export function IndustriesCustomizable({
   const [activeIndex, setActiveIndex] = useState(0);
 
   return (
-    <section className="py-12 lg:py-16">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6">
-        {/* Dotted line */}
-        <div className="border-t-2 border-dotted border-gray-300 mb-4" />
+    <Section>
+      <p className="mb-3 text-[15px] text-subtle">Fully customizable</p>
+      <h2 className="max-w-3xl text-[32px] leading-[1.15] text-black sm:text-[40px]">{heading}</h2>
 
-        {/* Section label */}
-        <p className="text-sm font-medium text-gray-900 mb-12">Fully customizable</p>
-
-        {/* Centered heading */}
-        <h2 className="text-2xl lg:text-4xl font-medium text-gray-900 text-center mb-16">
-          {heading}
-        </h2>
-
-        {/* Accordion */}
-        <div className="space-y-0">
-          {features.map((feature, index) => (
-            <div key={index} className="border-b border-gray-200">
+      <div className="mt-12 border-t border-hairline">
+        {features.map((feature, index) => {
+          const open = activeIndex === index;
+          return (
+            <div key={feature.title} className="border-b border-hairline">
               <button
                 type="button"
-                aria-expanded={activeIndex === index}
-                onClick={() => setActiveIndex(activeIndex === index ? -1 : index)}
-                className="w-full py-6 flex items-center justify-between text-left"
+                aria-expanded={open}
+                onClick={() => setActiveIndex(open ? -1 : index)}
+                className="flex w-full items-center justify-between gap-6 py-5 text-left"
               >
-                <span
-                  className={`text-base lg:text-lg font-semibold transition-colors ${
-                    activeIndex === index ? "text-gray-900" : "text-gray-300"
-                  }`}
-                >
-                  {feature.title}
-                </span>
-                <span className="ml-4 flex-shrink-0">
-                  {activeIndex === index ? (
-                    <Minus className="w-5 h-5 text-gray-400" />
-                  ) : (
-                    <Plus className="w-5 h-5 text-gray-400" />
-                  )}
-                </span>
+                <span className={`text-[16px] ${open ? "text-black" : "text-black/50"}`}>{feature.title}</span>
+                <Plus className={`h-4 w-4 flex-none text-subtle transition-transform duration-300 ${open ? "rotate-45" : ""}`} />
               </button>
-              <AnimatePresence>
-                {activeIndex === index && (
-                  <motion.div
-                    initial={{ height: 0, opacity: 0 }}
-                    animate={{ height: "auto", opacity: 1 }}
-                    exit={{ height: 0, opacity: 0 }}
-                    transition={{ duration: 0.3, ease: "easeInOut" }}
-                    className="overflow-hidden"
-                  >
-                    <div className="pb-8 grid lg:grid-cols-2 gap-8 lg:gap-16">
-                      {/* Description */}
-                      <p className="text-gray-500 text-sm leading-relaxed max-w-lg">
-                        {feature.description}
-                      </p>
-                      {/* Gradient placeholder */}
-                      <div className="rounded-xl bg-gradient-to-br from-orange-100 via-amber-50 to-stone-100 min-h-[250px]" />
+              <div className={`grid transition-[grid-template-rows] duration-300 ease-out ${open ? "grid-rows-[1fr]" : "grid-rows-[0fr]"}`}>
+                <div className="overflow-hidden">
+                  <div className="grid gap-6 pb-6 lg:grid-cols-2 lg:gap-12">
+                    <p className="max-w-lg text-[15px] leading-[1.5] text-subtle">{feature.description}</p>
+                    <div className={`grad g-${["ember", "moss", "dusk"][index % 3]} min-h-[220px] rounded-2xl`} aria-hidden="true">
+                      
                     </div>
-                  </motion.div>
-                )}
-              </AnimatePresence>
+                  </div>
+                </div>
+              </div>
             </div>
-          ))}
-        </div>
-
+          );
+        })}
       </div>
-    </section>
+    </Section>
   );
 }
 

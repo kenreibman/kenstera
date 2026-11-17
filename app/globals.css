@@ -3,24 +3,25 @@
 
 @custom-variant dark (&:is(.dark *));
 
+/* ==========================================================================
+   Design system modeled on elevenlabs.io: off-white page inside a framed
+   column, warm-gray surfaces, grainy painted gradients behind product UI,
+   regular-weight display headlines over Inter, black/white pill buttons.
+   ========================================================================== */
+
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-inter);
-  --font-mono: var(--font-geist-mono);
-  --color-sidebar-ring: var(--sidebar-ring);
-  --color-sidebar-border: var(--sidebar-border);
-  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
-  --color-sidebar-accent: var(--sidebar-accent);
-  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
-  --color-sidebar-primary: var(--sidebar-primary);
-  --color-sidebar-foreground: var(--sidebar-foreground);
-  --color-sidebar: var(--sidebar);
-  --color-chart-5: var(--chart-5);
-  --color-chart-4: var(--chart-4);
-  --color-chart-3: var(--chart-3);
-  --color-chart-2: var(--chart-2);
-  --color-chart-1: var(--chart-1);
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: ui-monospace, "SFMono-Regular", monospace;
+
+  --color-page: #fdfcfc;
+  --color-surface: #f5f3f1;
+  --color-surface-2: #ebe8e4;
+  --color-ink: #000000;
+  --color-subtle: #777169;
+  --color-hairline: rgba(0, 0, 0, 0.08);
+
   --color-ring: var(--ring);
   --color-input: var(--input);
   --color-border: var(--border);
@@ -41,93 +42,62 @@
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
   --radius-xl: calc(var(--radius) + 4px);
-
-  /* Fonts for the dark `.landing-root` routes (/work/*). Generates the
-     `font-serif` utility. `--font-sans` stays Inter globally and is remapped
-     to Manrope inside `.landing-root` below. */
-  --font-serif: var(--font-instrument-serif), ui-serif, Georgia, Cambria,
-    "Times New Roman", Times, serif;
 }
 
 :root {
-  --radius: 0.625rem;
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.145 0 0);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.145 0 0);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.145 0 0);
-  --primary: oklch(0.205 0 0);
-  --primary-foreground: oklch(0.985 0 0);
-  --secondary: oklch(0.97 0 0);
-  --secondary-foreground: oklch(0.205 0 0);
-  --muted: oklch(0.97 0 0);
-  --muted-foreground: oklch(0.556 0 0);
-  --accent: oklch(0.97 0 0);
-  --accent-foreground: oklch(0.205 0 0);
-  --destructive: oklch(0.577 0.245 27.325);
-  --border: oklch(0.922 0 0);
-  --input: oklch(0.922 0 0);
-  --ring: oklch(0.708 0 0);
-  --chart-1: oklch(0.646 0.222 41.116);
-  --chart-2: oklch(0.6 0.118 184.704);
-  --chart-3: oklch(0.398 0.07 227.392);
-  --chart-4: oklch(0.828 0.189 84.429);
-  --chart-5: oklch(0.769 0.188 70.08);
-  --sidebar: oklch(0.985 0 0);
-  --sidebar-foreground: oklch(0.145 0 0);
-  --sidebar-primary: oklch(0.205 0 0);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.97 0 0);
-  --sidebar-accent-foreground: oklch(0.205 0 0);
-  --sidebar-border: oklch(0.922 0 0);
-  --sidebar-ring: oklch(0.708 0 0);
-}
-
-.dark {
-  --background: oklch(0.145 0 0);
-  --foreground: oklch(0.985 0 0);
-  --card: oklch(0.205 0 0);
-  --card-foreground: oklch(0.985 0 0);
-  --popover: oklch(0.205 0 0);
-  --popover-foreground: oklch(0.985 0 0);
-  --primary: oklch(0.922 0 0);
-  --primary-foreground: oklch(0.205 0 0);
-  --secondary: oklch(0.269 0 0);
-  --secondary-foreground: oklch(0.985 0 0);
-  --muted: oklch(0.269 0 0);
-  --muted-foreground: oklch(0.708 0 0);
-  --accent: oklch(0.269 0 0);
-  --accent-foreground: oklch(0.985 0 0);
-  --destructive: oklch(0.704 0.191 22.216);
-  --border: oklch(1 0 0 / 10%);
-  --input: oklch(1 0 0 / 15%);
-  --ring: oklch(0.556 0 0);
-  --chart-1: oklch(0.488 0.243 264.376);
-  --chart-2: oklch(0.696 0.17 162.48);
-  --chart-3: oklch(0.769 0.188 70.08);
-  --chart-4: oklch(0.627 0.265 303.9);
-  --chart-5: oklch(0.645 0.246 16.439);
-  --sidebar: oklch(0.205 0 0);
-  --sidebar-foreground: oklch(0.985 0 0);
-  --sidebar-primary: oklch(0.488 0.243 264.376);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.269 0 0);
-  --sidebar-accent-foreground: oklch(0.985 0 0);
-  --sidebar-border: oklch(1 0 0 / 10%);
-  --sidebar-ring: oklch(0.556 0 0);
+  --radius: 0.75rem;
+  --background: #fdfcfc;
+  --foreground: #000000;
+  --card: #ffffff;
+  --card-foreground: #000000;
+  --popover: #ffffff;
+  --popover-foreground: #000000;
+  --primary: #000000;
+  --primary-foreground: #ffffff;
+  --secondary: #f5f3f1;
+  --secondary-foreground: #000000;
+  --muted: #f5f3f1;
+  --muted-foreground: #777169;
+  --accent: #f5f3f1;
+  --accent-foreground: #000000;
+  --destructive: #d92d20;
+  --border: #e9e6e2;
+  --input: #e9e6e2;
+  --ring: #a8a29e;
 }
 
 @layer base {
   * {
     @apply border-border outline-ring/50;
   }
+  html,
   body {
-    @apply bg-background text-foreground;
+    background: var(--color-page);
+    color: var(--color-ink);
   }
-  h1, h2, h3, h4 {
-    @apply font-medium;
+  body {
+    font-size: 16px;
+    letter-spacing: 0.01em;
   }
+  h3,
+  h4 {
+    font-weight: 500;
+  }
+  p {
+    text-wrap: pretty;
+  }
+}
+
+/* Page titles and section headlines: Inter at regular weight with tight
+   tracking, the closest free match to ElevenLabs' Waldenburg. Unlayered and
+   !important so it also overrides older per-page weight utilities. */
+h1,
+h2,
+.font-display {
+  font-family: var(--font-inter), ui-sans-serif, system-ui, sans-serif !important;
+  font-weight: 400 !important;
+  letter-spacing: -0.012em;
+  text-wrap: balance;
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -136,7 +106,6 @@
   }
 }
 
-/* Hide scrollbar for horizontal scroll containers */
 .scrollbar-hide {
   -ms-overflow-style: none;
   scrollbar-width: none;
@@ -145,21 +114,75 @@
   display: none;
 }
 
-/* ==========================================================================
-   Dark case-study routes (/work/*) — scoped so they never leak into the rest
-   of the site. `.landing-active` is toggled on <html> only while such a page
-   is mounted; `.landing-root` wraps the content.
-   ========================================================================== */
+/* ---------- Primitives ---------------------------------------------------- */
 
-/* Remap the sans font to Manrope for these routes only. `font-sans` utilities
-   inside them resolve this scoped value; everywhere else stays Inter. */
-.landing-root {
-  --font-sans: var(--font-manrope), ui-sans-serif, system-ui, sans-serif,
-    "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+.ring-hairline {
+  box-shadow:
+    0 0 0 0.5px rgba(0, 0, 0, 0.125),
+    0 1px 2px rgba(0, 0, 0, 0.04);
 }
 
-/* Dark canvas behind the page, so overscroll doesn't flash white. */
-html.landing-active,
-html.landing-active body {
-  background-color: #000;
+/* The framed column: thin vertical rules at the edges of the content area. */
+@media (min-width: 1024px) {
+  .frame {
+    border-left: 1px solid var(--color-hairline);
+    border-right: 1px solid var(--color-hairline);
+  }
+}
+
+/* ---------- Grainy painted gradients ------------------------------------- */
+/* Large soft colour fields, blurred, with film grain on top: the backgrounds
+   ElevenLabs puts behind its product UI. Pick a palette with a g-* class. */
+
+.grad {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  background: var(--g-base);
+}
+.grad::before {
+  content: "";
+  position: absolute;
+  inset: -25%;
+  z-index: -2;
+  background:
+    radial-gradient(38% 42% at var(--g-p1, 18% 78%), var(--g1) 0%, transparent 70%),
+    radial-gradient(42% 46% at var(--g-p2, 72% 70%), var(--g2) 0%, transparent 72%),
+    radial-gradient(36% 40% at var(--g-p3, 82% 18%), var(--g3) 0%, transparent 70%),
+    radial-gradient(40% 44% at var(--g-p4, 30% 22%), var(--g4) 0%, transparent 72%);
+  filter: blur(36px) saturate(1.15);
+}
+.grad::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  opacity: 0.42;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* Warm red-orange, like the "All-in-one AI editor" card. */
+.g-ember { --g-base: #b8401f; --g1: #ff8a3d; --g2: #d6332a; --g3: #8e4bd6; --g4: #ffc07a; }
+/* Slate blue to indigo, like the "Omnichannel agents" card. */
+.g-dusk { --g-base: #2f3f66; --g1: #9fb8c8; --g2: #4252a8; --g3: #191444; --g4: #7f97c4; --g-p1: 20% 20%; --g-p2: 60% 55%; --g-p3: 85% 85%; --g-p4: 35% 75%; }
+/* Amber into deep brown, like the NVIDIA story card. */
+.g-dawn { --g-base: #b85f14; --g1: #f7a823; --g2: #c4571c; --g3: #3d1d0c; --g4: #ffd27a; --g-p1: 15% 20%; --g-p2: 55% 60%; --g-p3: 90% 90%; --g-p4: 40% 25%; }
+/* Sage and olive. */
+.g-moss { --g-base: #4b6b3c; --g1: #a8c67a; --g2: #2f4f2f; --g3: #d8cf8a; --g4: #6c8f5a; }
+/* Violet and rose. */
+.g-iris { --g-base: #4d3fb8; --g1: #c77de6; --g2: #3248b8; --g3: #f2a3c0; --g4: #1d2466; --g-p3: 80% 25%; --g-p4: 85% 85%; }
+
+/* Bottom fade so a white caption stays readable on any gradient or photo. */
+.caption-fade {
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.42) 0%, rgba(0, 0, 0, 0.18) 45%, transparent 100%);
+}
+
+@keyframes fade-in-up {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: none; }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .fade-in-up { animation: fade-in-up 0.5s cubic-bezier(0.16, 1, 0.3, 1) both; }
 }

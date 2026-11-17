@@ -3,7 +3,7 @@
 import Cal, { getCalApi } from "@calcom/embed-react"
 import { useEffect } from "react"
 import Link from "next/link"
-import { Zap, ShieldCheck, HeadphonesIcon, Star } from 'lucide-react'
+import { Zap, HeadphonesIcon } from 'lucide-react'
 
 export default function ContactPage() {
   useEffect(() => {
@@ -28,93 +28,51 @@ export default function ContactPage() {
       text: "Custom implementation for your firm's workflow"
     },
     {
-      icon: ShieldCheck,
-      text: "Enterprise-grade security including SOC II, GDPR and HIPAA compliance"
-    },
-    {
       icon: HeadphonesIcon,
       text: "Dedicated support and ongoing optimization"
     }
   ]
 
   return (
-    <main className="lg:h-screen flex flex-col lg:flex-row">
-      {/* Left side - Dark */}
-      <div className="flex h-full w-full lg:w-1/2 bg-black text-white p-8 md:p-12 lg:p-16 flex-col relative order-1 lg:order-1">
-        {/* Logo */}
-        <div className="mb-12">
-          <span className="text-xl font-bold">Kenstera</span>
-        </div>
-
-        {/* Content */}
-        <div className="flex-1">
-          <h1 className="text-[clamp(32px,5vw,48px)] font-bold leading-[1.1] tracking-tight mb-8">
-            Contact Us
-          </h1>
-
-          {/* Benefits */}
-          <div className="space-y-5 mb-16">
-            {benefits.map((benefit, index) => (
-              <div key={index} className="flex items-start gap-3">
-                <benefit.icon className="w-5 h-5 text-white/70 mt-0.5 flex-shrink-0" />
-                <span className="text-[15px] text-white/80 leading-relaxed">
-                  {benefit.text}
-                </span>
-              </div>
-            ))}
-          </div>
-
-          {/* Reviews */}
-          <div className="mt-auto">
-            <div className="flex items-center gap-2">
-              <div className="flex">
-                {[...Array(5)].map((_, i) => (
-                  <Star key={i} className="w-4 h-4 text-muted fill-muted" />
-                ))}
-              </div>
-              <span className="text-sm text-white/60">
-                5.0 stars from our clients
-              </span>
-            </div>
-
-            <Link href="/" className="mt-8 inline-block text-sm text-white/40 hover:text-white/60 transition-colors">
-              &larr; Back to home
-            </Link>
-          </div>
-        </div>
-
-        {/* Decorative wave at bottom */}
-        <div className="absolute bottom-0 left-0 right-0 h-32 pointer-events-none">
-          <svg
-            viewBox="0 0 1200 120"
-            preserveAspectRatio="none"
-            className="absolute bottom-0 w-full h-full"
-          >
-            <path
-              d="M0,60 C300,120 600,0 900,60 C1050,90 1150,30 1200,60 L1200,120 L0,120 Z"
-              fill="rgba(255,255,255,0.03)"
-            />
-            <path
-              d="M0,80 C200,40 400,100 600,80 C800,60 1000,100 1200,80 L1200,120 L0,120 Z"
-              fill="rgba(255,255,255,0.02)"
-            />
-          </svg>
-        </div>
+    <main className="min-h-screen bg-page">
+      <div className="mx-auto flex h-16 max-w-[1184px] items-center px-5 sm:px-8">
+        <Link href="/" className="text-[19px] font-semibold tracking-[-0.03em] text-black">
+          Kenstera
+        </Link>
       </div>
 
-      {/* Right side - White with Cal embed */}
-      <div className="w-full lg:w-1/2 bg-white p-8 md:p-12 lg:p-16 flex flex-col order-2 lg:order-2 overflow-auto">
-        <div className="mx-auto w-full flex-1">
-          <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-2">
-            Book a call
-          </h2>
-          <p className="text-gray-500 mb-8">
-            Pick a time that works for you
-          </p>
+      <div className="mx-auto grid max-w-[1184px] gap-10 px-5 pb-16 pt-8 sm:px-8 lg:grid-cols-12 lg:gap-12 lg:pt-14">
+        {/* Left */}
+        <div className="lg:col-span-5">
+          <p className="mb-3 text-[15px] text-subtle">Contact sales</p>
+          <h1 className="text-[40px] leading-[1.08] text-black sm:text-[52px]">Contact Us</h1>
 
-          {/* Cal.com embed */}
-          <div className="flex-1">
-              <Cal namespace="contact" calLink="kenstera/intake-15-minutes" />
+          <ul className="mt-10 space-y-3">
+            {benefits.map((benefit) => (
+              <li key={benefit.text} className="flex items-start gap-3 rounded-2xl bg-surface p-4">
+                <span className="ring-hairline flex h-8 w-8 flex-none items-center justify-center rounded-full bg-white">
+                  <benefit.icon className="h-4 w-4 text-black" />
+                </span>
+                <span className="pt-1 text-[15px] leading-[1.5] text-black/80">{benefit.text}</span>
+              </li>
+            ))}
+          </ul>
+
+          <Link href="/" className="mt-10 inline-block text-[14px] text-subtle transition-colors hover:text-black">
+            &larr; Back to home
+          </Link>
+        </div>
+
+        {/* Right: Cal.com embed */}
+        <div className="lg:col-span-7">
+          <div className="rounded-2xl bg-surface p-2">
+            <div className="ring-hairline rounded-xl bg-white p-6 sm:p-8">
+              <h2 className="text-[28px] leading-[1.2] text-black">Book a call</h2>
+              <p className="mt-1 text-[15px] text-subtle">Pick a time that works for you</p>
+              <div className="mt-6">
+                <Cal namespace="contact" calLink="kenstera/intake-15-minutes" />
+              </div>
+            </div>
           </div>
         </div>
       </div>

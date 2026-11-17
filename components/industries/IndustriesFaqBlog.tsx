@@ -1,9 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import Link from "next/link";
-import { Plus, Minus, ArrowUpRight } from "lucide-react";
-import { motion, AnimatePresence } from "framer-motion";
+import { Plus } from "lucide-react";
+import { Button, Section } from "@/components/el/ui";
 import { FAQ } from "@/lib/industry-content";
 
 const defaultFaqs: FAQ[] = [
@@ -34,113 +33,50 @@ const defaultFaqs: FAQ[] = [
   },
 ];
 
-interface BlogPost {
-  slug: string;
-  title: string;
-}
-
 interface IndustriesFaqBlogProps {
   faqs?: FAQ[];
-  blogPosts?: BlogPost[];
 }
 
-export function IndustriesFaqBlog({
-  faqs = defaultFaqs,
-  blogPosts = [],
-}: IndustriesFaqBlogProps) {
+/** FAQ section: heading on the left, accordion on the right. */
+export function IndustriesFaqBlog({ faqs = defaultFaqs }: IndustriesFaqBlogProps) {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
 
-  const toggleFaq = (index: number) => {
-    setOpenIndex(openIndex === index ? null : index);
-  };
-
-  // Take only the first 5 blog posts
-  const displayPosts = blogPosts.slice(0, 5);
-
   return (
-    <section className="py-16 lg:py-24">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6">
-        <div className="grid md:grid-cols-2 gap-12 lg:gap-20">
-          {/* FAQ Column */}
-          <div>
-            <h2 className="text-2xl font-medium text-gray-900 mb-8">
-              Frequently asked questions
-            </h2>
+    <Section>
+      <div className="grid gap-10 md:grid-cols-2 md:gap-12">
+        <div className="md:sticky md:top-24 md:self-start">
+          <p className="mb-3 text-[15px] text-subtle">Questions, answered</p>
+          <h2 className="text-[32px] leading-[1.15] text-black sm:text-[40px]">Frequently asked questions</h2>
+          <Button href="/contact-sales" variant="secondary" className="mt-6">
+            Contact Us
+          </Button>
+        </div>
 
-            <div className="space-y-0">
-              {faqs.map((faq, index) => (
-                <div key={index} className="border-b border-gray-200">
-                  <button
-                    type="button"
-                    aria-expanded={openIndex === index}
-                    onClick={() => toggleFaq(index)}
-                    className="flex items-center justify-between w-full py-4 text-left"
-                  >
-                    <p className="text-sm text-gray-900 pr-4">{faq.question}</p>
-                    {openIndex === index ? (
-                      <Minus className="w-4 h-4 text-gray-400 flex-shrink-0" />
-                    ) : (
-                      <Plus className="w-4 h-4 text-gray-400 flex-shrink-0" />
-                    )}
-                  </button>
-                  <AnimatePresence>
-                    {openIndex === index && (
-                      <motion.div
-                        initial={{ height: 0, opacity: 0 }}
-                        animate={{ height: "auto", opacity: 1 }}
-                        exit={{ height: 0, opacity: 0 }}
-                        transition={{ duration: 0.3, ease: "easeInOut" }}
-                        className="overflow-hidden"
-                      >
-                        <p className="text-sm text-gray-500 pb-4 leading-relaxed">
-                          {faq.answer}
-                        </p>
-                      </motion.div>
-                    )}
-                  </AnimatePresence>
-                </div>
-              ))}
-            </div>
-
-            <Link
-              href="/contact-sales"
-              className="inline-flex items-center justify-center px-5 py-2.5 mt-8 border border-gray-300 text-sm font-medium text-gray-900 rounded-full hover:bg-gray-50 transition-colors"
-            >
-              Contact Us
-            </Link>
-          </div>
-
-          {/* Blog Column */}
-          <div>
-            <h2 className="text-2xl font-medium text-gray-900 mb-8">
-              From the Blog
-            </h2>
-
-            <div className="space-y-0">
-              {displayPosts.map((post, index) => (
-                <Link
-                  key={index}
-                  href={`/blog/${post.slug}`}
-                  className="flex items-center justify-between py-4 border-b border-gray-200 group"
+        <div className="border-t border-hairline">
+          {faqs.map((faq, index) => {
+            const open = openIndex === index;
+            return (
+              <div key={faq.question} className="border-b border-hairline">
+                <button
+                  type="button"
+                  aria-expanded={open}
+                  onClick={() => setOpenIndex(open ? null : index)}
+                  className="flex w-full items-center justify-between gap-4 py-5 text-left"
                 >
-                  <p className="text-sm text-gray-900 pr-4 group-hover:text-gray-600 transition-colors">
-                    {post.title}
-                  </p>
-                  <ArrowUpRight className="w-4 h-4 text-gray-400 flex-shrink-0" />
-                </Link>
-              ))}
-            </div>
-
-            <Link
-              href="/blog"
-              className="inline-flex items-center justify-center px-5 py-2.5 mt-8 border border-gray-300 text-sm font-medium text-gray-900 rounded-full hover:bg-gray-50 transition-colors"
-            >
-              View Blog
-            </Link>
-          </div>
+                  <span className="text-[16px] text-black">{faq.question}</span>
+                  <Plus className={`h-4 w-4 flex-none text-subtle transition-transform duration-300 ${open ? "rotate-45" : ""}`} />
+                </button>
+                <div className={`grid transition-[grid-template-rows] duration-300 ease-out ${open ? "grid-rows-[1fr]" : "grid-rows-[0fr]"}`}>
+                  <div className="overflow-hidden">
+                    <p className="pb-5 pr-8 text-[15px] leading-[1.6] text-subtle">{faq.answer}</p>
+                  </div>
+                </div>
+              </div>
+            );
+          })}
         </div>
       </div>
-    </section>
+    </Section>
   );
 }
 

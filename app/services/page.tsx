@@ -1,14 +1,11 @@
 import { IndustriesHero, IndustriesUseCases, IndustriesVoiceAgents, IndustriesMultimodal, IndustriesWorkflows, IndustriesCustomizable, IndustriesIntegrations, IndustriesGettingStarted, IndustriesFaqBlog, IndustriesCta } from "@/components/industries";
-import { getAllPosts } from "@/lib/blog";
 import { defaultContent } from "@/content/services/default";
 
 export default function ServicesPage() {
-  const posts = getAllPosts();
-  const blogPosts = posts.map(post => ({ slug: post.slug, title: post.title }));
   const content = defaultContent;
 
   return (
-    <main className="min-h-screen bg-white">
+    <main className="min-h-screen bg-page">
       <IndustriesHero
         headline={content.hero.headline}
         description={content.hero.description}
@@ -43,7 +40,6 @@ export default function ServicesPage() {
       />
       <IndustriesFaqBlog
         faqs={content.faqs}
-        blogPosts={blogPosts}
       />
       <IndustriesCta heading={content.cta.heading} />
     </main>

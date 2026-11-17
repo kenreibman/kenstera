@@ -6,7 +6,7 @@ export const healthcareContent: IndustryContent = {
   hero: {
     headline: "AI Voice Agents\nfor Healthcare",
     description:
-      "Transform patient experiences with intelligent voice agents that handle scheduling, answer questions, and provide 24/7 support, all while maintaining HIPAA compliance.",
+      "Transform patient experiences with intelligent voice agents that handle scheduling, answer questions, and provide 24/7 support.",
   },
   useCases: [
     {
@@ -29,7 +29,7 @@ export const healthcareContent: IndustryContent = {
     },
   ],
   voiceAgents: {
-    label: "HIPAA-Compliant",
+    label: "Built for healthcare",
     heading: "Healthcare Voice Agents",
     description:
       "Kenstera Healthcare Agents understand medical terminology, maintain patient privacy, and integrate seamlessly with EHR systems. Reduce administrative burden while improving patient satisfaction scores.",
@@ -59,11 +59,6 @@ export const healthcareContent: IndustryContent = {
     heading:
       "Build compliant workflows with audit trails and role-based access controls",
     features: [
-      {
-        title: "HIPAA-compliant by design",
-        description:
-          "Built-in safeguards ensure PHI is protected. Automatic audit logging, encryption at rest and in transit, and BAA agreements available for enterprise customers.",
-      },
       {
         title: "Clinical escalation paths",
         description:
@@ -117,14 +112,9 @@ export const healthcareContent: IndustryContent = {
   gettingStarted: {
     heading: "Go live in weeks, not months",
     description:
-      "Our healthcare implementation team helps you configure agents, integrate with your systems, and train your staff, with full HIPAA compliance from day one.",
+      "Our healthcare implementation team helps you configure agents, integrate with your systems, and train your staff.",
   },
   faqs: [
-    {
-      question: "Is Kenstera HIPAA compliant?",
-      answer:
-        "Yes, Kenstera is fully HIPAA compliant. We provide Business Associate Agreements (BAA), encrypt all PHI at rest and in transit, maintain audit logs, and follow healthcare security best practices.",
-    },
     {
       question: "Can agents integrate with our EHR system?",
       answer:

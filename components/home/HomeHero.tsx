@@ -54,7 +54,7 @@ export function HomeHero() {
 
         <div
           ref={ref}
-          className="fade-in-up mb-20 rounded-2xl bg-surface p-1.5 ring-hairline sm:mb-28"
+          className="fade-in-up mb-20 hidden rounded-2xl bg-surface p-1.5 ring-hairline md:block sm:mb-28"
           style={{ animationDelay: "240ms" }}
         >
           <div role="tablist" aria-label="Services" className="scrollbar-hide flex gap-1 overflow-x-auto">

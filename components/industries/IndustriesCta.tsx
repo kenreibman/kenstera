@@ -12,7 +12,7 @@ export function IndustriesCta({ heading = "The most realistic voice AI platform"
           <div className="grad g-dusk flex min-h-[340px] flex-col justify-end rounded-2xl p-8 sm:p-12">
             <h2 className="max-w-2xl text-[32px] leading-[1.15] text-white sm:text-[44px]">{heading}</h2>
             <div className="mt-8">
-              <Button href="/contact-sales" variant="light">
+              <Button href="/contact" variant="light">
                 Contact Us
               </Button>
             </div>

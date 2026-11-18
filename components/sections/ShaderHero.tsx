@@ -106,7 +106,7 @@ export function ShaderHero() {
 
           <div className="flex flex-row items-center justify-center gap-3 mt-10">
             <Link
-              href="/contact-sales"
+              href="/contact"
               className="inline-flex items-center justify-center px-6 py-3.5 bg-gray-900 text-white text-sm font-semibold rounded-full hover:bg-gray-800 transition-colors"
             >
               Contact Sales

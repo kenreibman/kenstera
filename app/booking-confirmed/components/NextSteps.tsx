@@ -1,55 +1,47 @@
 import { Mail, Calendar, MessageSquare } from 'lucide-react'
+import { Reveal } from '@/components/el/motion'
 
 const steps = [
   {
     icon: Mail,
     title: 'Check your inbox',
-    description: 'You\'ll receive a calendar invite with the meeting link. Add it to your calendar so you don\'t miss it.',
+    description: "You'll receive a calendar invite with the meeting link. Add it to your calendar so you don't miss it.",
   },
   {
     icon: Calendar,
     title: 'Prepare (optional)',
-    description: 'Think about your current intake process: what\'s working, what\'s not. We\'ll discuss it on the call.',
+    description: "Think about how your business handles calls, leads and reviews today: what's working, what's not. We'll talk it through.",
   },
   {
     icon: MessageSquare,
     title: 'Join the call',
-    description: 'We\'ll review your intake flow, show you a live demo, and give you an honest assessment of fit.',
+    description: "We'll learn how your business runs and give you an honest read on whether we can help.",
   },
 ]
 
 export default function NextSteps() {
   return (
-    <section className="relative py-16">
-      <div className="w-full max-w-7xl mx-auto px-5">
-        <div className="max-w-[800px] mx-auto">
-          <p className="text-[13px] font-semibold tracking-wide uppercase text-red-600 mb-3 text-center">
-            What happens next
-          </p>
-          <h2 className="text-[clamp(24px,4vw,32px)] font-bold leading-[1.2] mb-10 text-gray-900 text-center">
-            Here&apos;s what to expect
-          </h2>
+    <section className="px-5 py-16 sm:px-8 sm:py-24">
+      <div className="mx-auto max-w-[1180px]">
+        <Reveal>
+          <p className="mb-3 text-[16px] text-subtle">What happens next</p>
+          <h2 className="text-[32px] leading-[1.15] text-black sm:text-[40px]">Here&apos;s what to expect</h2>
+        </Reveal>
 
-          <div className="grid gap-6 sm:grid-cols-3">
-            {steps.map((step, index) => (
-              <div
-                key={index}
-                className="bg-gray-50 border border-gray-200 rounded-xl p-6 text-center"
-              >
-                <div className="flex justify-center mb-4">
-                  <div className="w-12 h-12 rounded-full bg-white border border-gray-200 flex items-center justify-center">
-                    <step.icon className="w-5 h-5 text-gray-700" />
-                  </div>
+        <div className="mt-10 grid gap-3 sm:grid-cols-3">
+          {steps.map((step, index) => (
+            <Reveal key={step.title} delay={index * 90}>
+              <div className="flex h-full min-h-[240px] flex-col justify-between rounded-2xl bg-surface p-6 sm:p-7">
+                <span className="ring-hairline flex h-10 w-10 items-center justify-center rounded-lg bg-white/70">
+                  <step.icon className="h-[18px] w-[18px]" strokeWidth={1.6} />
+                </span>
+                <div>
+                  <h3 className="text-[19px] font-normal leading-[1.25] text-black">{step.title}</h3>
+                  <p className="mt-2 text-[15px] leading-[1.5] text-subtle">{step.description}</p>
                 </div>
-                <h3 className="text-base font-semibold text-gray-900 mb-2">
-                  {step.title}
-                </h3>
-                <p className="text-sm text-gray-500 leading-relaxed">
-                  {step.description}
-                </p>
               </div>
-            ))}
-          </div>
+            </Reveal>
+          ))}
         </div>
       </div>
     </section>

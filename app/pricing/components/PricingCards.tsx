@@ -24,7 +24,7 @@ export const tiers: PricingTier[] = [
     description: "For starter businesses looking to automate lead engagement.",
     cta: {
       label: "Choose Scale",
-      href: "/contact-sales",
+      href: "/contact",
     },
     features: [
       "Standard TTS voices",
@@ -39,7 +39,7 @@ export const tiers: PricingTier[] = [
     description: "For businesses with high volume leads and advanced needs.",
     cta: {
       label: "Choose Business",
-      href: "/contact-sales",
+      href: "/contact",
     },
     inheritFrom: "Scale",
     features: [
@@ -56,7 +56,7 @@ export const tiers: PricingTier[] = [
     description: "Ongoing marketing, hosting, maintenance and more.",
     cta: {
       label: "Contact us",
-      href: "/contact-sales",
+      href: "/contact",
     },
     inheritFrom: "Business",
     features: [

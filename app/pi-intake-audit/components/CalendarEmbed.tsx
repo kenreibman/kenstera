@@ -32,7 +32,7 @@ function ProgressIndicator({ currentStep, totalSteps }: { currentStep: number; t
 
 export function CalendarEmbed({ formData, leadId, waitForLeadId, onBack, onComplete, isVisible = true }: CalendarEmbedProps) {
   const CAL_NAMESPACE = 'pi-intake-audit'
-  const CAL_LINK = 'kenstera/intake-15-minutes'
+  const CAL_LINK = 'kenstera/meet-with-kenstera'
   const latestLeadId = useRef<string | null | undefined>(leadId)
   const latestWaitForLeadId = useRef<CalendarEmbedProps['waitForLeadId']>(waitForLeadId)
   const latestOnComplete = useRef<CalendarEmbedProps['onComplete']>(onComplete)

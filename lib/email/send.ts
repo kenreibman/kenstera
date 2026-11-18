@@ -24,7 +24,7 @@ function escapeHtml(str: string): string {
 }
 
 export async function sendAbandonmentEmail(lead: Lead): Promise<{ success: boolean; error?: string }> {
-  const bookingUrl = new URL('https://cal.com/kenstera/intake-15-minutes')
+  const bookingUrl = new URL('https://cal.com/kenstera/meet-with-kenstera')
   bookingUrl.searchParams.set('name', lead.fullName)
   bookingUrl.searchParams.set('email', lead.email)
   const fromEmail = process.env.FROM_EMAIL || 'notifications@yourdomain.com'

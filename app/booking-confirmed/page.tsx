@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import Script from 'next/script'
 import {
   ConfirmationHero,
@@ -14,21 +15,30 @@ export default function BookingConfirmedPage() {
           __html: `fbq('track', 'PageView'); fbq('track', 'Schedule');`,
         }}
       />
+
+      <div className="px-5 sm:px-8">
+        <div className="mx-auto flex h-16 max-w-[1180px] items-center">
+          <Link href="/" className="text-[19px] font-semibold tracking-[-0.03em] text-black">
+            Kenstera
+          </Link>
+        </div>
+      </div>
+
       <ConfirmationHero />
       <NextSteps />
 
-      {/* Footer with contact info */}
-      <footer className="py-10 border-t border-gray-200">
-        <div className="w-full max-w-7xl mx-auto px-5 text-center">
-          <p className="text-sm text-gray-500 mb-2">
-            Questions before your call?
-          </p>
+      <footer className="border-t border-hairline py-12">
+        <div className="mx-auto flex max-w-[1180px] flex-col items-center gap-2 px-5 text-center sm:px-8">
+          <p className="text-[15px] text-subtle">Questions before your call?</p>
           <a
-            href="mailto:info@kenstera.com"
-            className="text-sm font-medium text-red-600 hover:text-red-700 transition-colors"
+            href="mailto:contact@kenstera.com"
+            className="text-[16px] text-black underline underline-offset-4"
           >
-            info@kenstera.com
+            contact@kenstera.com
           </a>
+          <Link href="/" className="mt-4 text-[14px] text-subtle transition-colors hover:text-black">
+            &larr; Back to home
+          </Link>
         </div>
       </footer>
     </main>

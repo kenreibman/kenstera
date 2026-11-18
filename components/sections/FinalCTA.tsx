@@ -17,7 +17,7 @@ export function FinalCTA() {
               Ready to stop losing leads?
             </h2>
             <div className="mt-8">
-              <Button href="/contact-sales" variant="light">Book a Call</Button>
+              <Button href="/contact" variant="light">Book a Call</Button>
             </div>
 
             <div className="mt-10 max-w-md">

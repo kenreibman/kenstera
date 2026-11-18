@@ -8,7 +8,7 @@ export function PricingCTA() {
           Ready to accelerate your business?
         </h2>
         <Link
-          href="/contact-sales"
+          href="/contact"
           className="shrink-0 rounded-full bg-neutral-900 px-6 py-3 text-sm font-medium text-white transition-colors hover:bg-neutral-800"
         >
           Contact Us

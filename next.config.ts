@@ -24,6 +24,7 @@ const nextConfig: NextConfig = {
   async redirects() {
     return [
       { source: "/work/:slug", destination: "/case-studies", permanent: true },
+      { source: "/contact-sales", destination: "/contact", permanent: true },
       // The blog was retired; old post links land on the homepage.
       { source: "/blog", destination: "/", permanent: true },
       { source: "/blog/:slug", destination: "/", permanent: true },

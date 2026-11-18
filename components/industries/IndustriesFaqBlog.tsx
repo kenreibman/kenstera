@@ -47,7 +47,7 @@ export function IndustriesFaqBlog({ faqs = defaultFaqs }: IndustriesFaqBlogProps
         <div className="md:sticky md:top-24 md:self-start">
           <p className="mb-3 text-[15px] text-subtle">Questions, answered</p>
           <h2 className="text-[32px] leading-[1.15] text-black sm:text-[40px]">Frequently asked questions</h2>
-          <Button href="/contact-sales" variant="secondary" className="mt-6">
+          <Button href="/contact" variant="secondary" className="mt-6">
             Contact Us
           </Button>
         </div>

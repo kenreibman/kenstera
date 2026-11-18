@@ -3,7 +3,7 @@
 import Cal, { getCalApi } from "@calcom/embed-react"
 import { useEffect } from "react"
 import Link from "next/link"
-import { Zap, HeadphonesIcon } from 'lucide-react'
+import { Zap, HeadphonesIcon, Mail } from 'lucide-react'
 
 export default function ContactPage() {
   useEffect(() => {
@@ -25,7 +25,7 @@ export default function ContactPage() {
   const benefits = [
     {
       icon: Zap,
-      text: "Custom implementation for your firm's workflow"
+      text: "Custom implementation for your business's workflow"
     },
     {
       icon: HeadphonesIcon,
@@ -44,7 +44,7 @@ export default function ContactPage() {
       <div className="mx-auto grid max-w-[1184px] gap-10 px-5 pb-16 pt-8 sm:px-8 lg:grid-cols-12 lg:gap-12 lg:pt-14">
         {/* Left */}
         <div className="lg:col-span-5">
-          <p className="mb-3 text-[15px] text-subtle">Contact sales</p>
+          <p className="mb-3 text-[15px] text-subtle">Get in touch</p>
           <h1 className="text-[40px] leading-[1.08] text-black sm:text-[52px]">Contact Us</h1>
 
           <ul className="mt-10 space-y-3">
@@ -58,6 +58,18 @@ export default function ContactPage() {
             ))}
           </ul>
 
+          <div className="mt-3 flex items-start gap-3 rounded-2xl bg-surface p-4">
+            <span className="ring-hairline flex h-8 w-8 flex-none items-center justify-center rounded-full bg-white">
+              <Mail className="h-4 w-4 text-black" />
+            </span>
+            <span className="pt-1 text-[15px] leading-[1.5] text-black/80">
+              Prefer email?{" "}
+              <a href="mailto:contact@kenstera.com" className="text-black underline underline-offset-4">
+                contact@kenstera.com
+              </a>
+            </span>
+          </div>
+
           <Link href="/" className="mt-10 inline-block text-[14px] text-subtle transition-colors hover:text-black">
             &larr; Back to home
           </Link>
@@ -70,7 +82,7 @@ export default function ContactPage() {
               <h2 className="text-[28px] leading-[1.2] text-black">Book a call</h2>
               <p className="mt-1 text-[15px] text-subtle">Pick a time that works for you</p>
               <div className="mt-6">
-                <Cal namespace="contact" calLink="kenstera/intake-15-minutes" />
+                <Cal namespace="contact" calLink="kenstera/meet-with-kenstera" />
               </div>
             </div>
           </div>

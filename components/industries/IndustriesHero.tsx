@@ -26,8 +26,8 @@ export function IndustriesHero({
           <div className="md:pb-2">
             <p className="max-w-[440px] text-[16px] leading-[1.5] text-black/80">{description}</p>
             <div className="mt-6 flex flex-wrap gap-2">
-              <Button href="/contact-sales">Contact Us</Button>
-              <Button href="/contact-sales" variant="secondary">
+              <Button href="/contact">Contact Us</Button>
+              <Button href="/contact" variant="secondary">
                 Learn More
               </Button>
             </div>

@@ -65,7 +65,7 @@ export function CRMIntegrations() {
             {/* Footer row */}
             <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
               <Link
-                href="/contact-sales"
+                href="/contact"
                 className="inline-flex items-center gap-2 text-gray-900 font-medium hover:gap-3 transition-all"
               >
                 Book a Demo

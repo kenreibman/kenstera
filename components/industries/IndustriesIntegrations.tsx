@@ -35,7 +35,7 @@ export function IndustriesIntegrations({
         </div>
         <div className="flex flex-col items-start justify-end gap-5">
           <p className="max-w-[440px] text-[16px] leading-[1.5] text-black/80">{description}</p>
-          <Button href="/contact-sales" variant="secondary">
+          <Button href="/contact" variant="secondary">
             Contact Us
           </Button>
         </div>

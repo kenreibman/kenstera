@@ -23,7 +23,7 @@ export function IndustriesGettingStarted({
             </p>
           </div>
           <div className="flex flex-wrap gap-2">
-            <Button href="/contact-sales">Contact Us</Button>
+            <Button href="/contact">Contact Us</Button>
             <Button href="/pricing" variant="secondary">
               View Pricing
             </Button>
@@ -39,8 +39,8 @@ export function IndustriesGettingStarted({
             </p>
           </div>
           <div className="flex flex-wrap gap-2">
-            <Button href="/contact-sales">Contact Us</Button>
-            <Button href="/contact-sales" variant="secondary">
+            <Button href="/contact">Contact Us</Button>
+            <Button href="/contact" variant="secondary">
               Learn more
             </Button>
           </div>

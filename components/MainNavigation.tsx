@@ -37,6 +37,11 @@ const servicesDropdown = {
       title: "Industries",
       items: [
         {
+          title: "HVAC",
+          description: "Missed calls and Google reviews",
+          href: "/hvac"
+        },
+        {
           title: "Law Firms",
           description: "PI, family law, criminal defense",
           href: "/industries/law"
@@ -258,14 +263,14 @@ export function MainNavigation() {
 
           {/* Desktop right */}
           <div className="ml-auto hidden items-center gap-2 md:flex">
-            <Link href="/contact-sales" className={buttonClass("primary")}>
+            <Link href="/contact" className={buttonClass("primary")}>
               Contact Us
             </Link>
           </div>
 
           {/* Mobile */}
           <div className="ml-auto flex items-center gap-2 md:hidden">
-            <Link href="/contact-sales" className={buttonClass("primary")}>
+            <Link href="/contact" className={buttonClass("primary")}>
               Contact Us
             </Link>
             <button
@@ -301,7 +306,7 @@ export function MainNavigation() {
           </nav>
           <div className="border-t border-hairline p-5">
             <Link
-              href="/contact-sales"
+              href="/contact"
               onClick={closeMobileMenu}
               className={`${buttonClass("primary", "md")} w-full`}
             >

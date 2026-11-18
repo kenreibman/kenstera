@@ -1,28 +1,27 @@
-import { CheckCircle2 } from 'lucide-react'
+import { Check } from 'lucide-react'
 
 export default function ConfirmationHero() {
   return (
-    <section className="relative pt-20 pb-12">
-      <div className="w-full max-w-7xl mx-auto px-5">
-        <div className="mx-auto text-center max-w-[640px]">
-          <div className="flex justify-center mb-6">
-            <div aria-hidden="true" className="w-20 h-20 rounded-full bg-emerald-100 flex items-center justify-center">
-              <CheckCircle2 className="w-10 h-10 text-emerald-600" />
-            </div>
-          </div>
+    <section className="px-5 pb-6 pt-10 sm:px-8 sm:pt-16">
+      <div className="mx-auto max-w-[1180px]">
+        <div className="grad g-moss fade-in-up flex min-h-[420px] flex-col items-center justify-center rounded-2xl px-6 py-16 text-center sm:min-h-[480px]">
+          <span
+            aria-hidden="true"
+            className="flex h-16 w-16 items-center justify-center rounded-full bg-white/90 shadow-lg"
+          >
+            <Check className="h-7 w-7 text-black" strokeWidth={1.8} />
+          </span>
 
-          <h1 className="text-[clamp(28px,5vw,42px)] font-bold leading-[1.15] mb-4 text-gray-900">
-            You&apos;re all set.
-          </h1>
+          <h1 className="mt-8 text-[40px] leading-[1.06] text-white sm:text-[56px]">You&apos;re all set.</h1>
 
-          <p className="text-lg text-gray-500 mb-6">
-            Your consultation has been scheduled. Check your email for the calendar invite and meeting details.
+          <p className="mt-4 max-w-md text-[17px] leading-[1.45] text-white/90">
+            Your call with Kenstera is booked. Check your email for the calendar invite and meeting details.
           </p>
 
-          <div className="inline-flex items-center gap-2 px-4 py-2 bg-gray-100 rounded-full text-sm text-gray-600">
-            <span className="w-2 h-2 rounded-full bg-emerald-500 motion-safe:animate-pulse" />
+          <span className="mt-8 inline-flex items-center gap-2 rounded-full bg-white/90 px-4 py-2 text-[14px] text-black">
+            <span className="h-2 w-2 rounded-full bg-emerald-500 motion-safe:animate-pulse" />
             Confirmation sent to your email
-          </div>
+          </span>
         </div>
       </div>
     </section>

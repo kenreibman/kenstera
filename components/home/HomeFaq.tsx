@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Plus } from "lucide-react";
+import { ChevronDown } from "lucide-react";
 import { Button, Section } from "@/components/el/ui";
 import { HOME_FAQS } from "./faqs";
 
@@ -14,25 +14,25 @@ export function HomeFaq() {
         <div className="md:sticky md:top-24 md:self-start">
           <p className="mb-3 text-[15px] text-subtle">Questions, answered</p>
           <h2 className="text-[32px] leading-[1.15] text-black sm:text-[40px]">Frequently asked questions</h2>
-          <Button href="/contact-sales" variant="secondary" className="mt-6">
+          <Button href="/contact" variant="secondary" className="mt-6">
             Still have a question?
           </Button>
         </div>
 
-        <div className="border-t border-hairline">
+        <div>
           {HOME_FAQS.map((faq, index) => {
             const isOpen = openIndex === index;
             return (
-              <div key={faq.question} className="border-b border-hairline">
+              <div key={faq.question} className="dotted-row pb-0.5">
                 <button
                   type="button"
                   aria-expanded={isOpen}
                   onClick={() => setOpenIndex(isOpen ? null : index)}
                   className="flex w-full items-center justify-between gap-6 py-5 text-left"
                 >
-                  <h3 className="text-[16px] font-normal text-black">{faq.question}</h3>
-                  <Plus
-                    className={`h-4 w-4 flex-none text-subtle transition-transform duration-300 ${isOpen ? "rotate-45" : ""}`}
+                  <h3 className="text-[17px] font-normal text-black">{faq.question}</h3>
+                  <ChevronDown
+                    className={`h-4 w-4 flex-none text-subtle transition-transform duration-300 ${isOpen ? "rotate-180" : ""}`}
                   />
                 </button>
                 <div

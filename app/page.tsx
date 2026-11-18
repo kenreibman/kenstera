@@ -7,7 +7,8 @@ import {
   HomeCta,
   HOME_FAQS,
 } from "@/components/home";
-import { OG_IMAGE, OG_IMAGE_URL, jsonLdString } from "@/lib/seo";
+import { Reveal } from "@/components/el/motion";
+import { OG_IMAGE,OG_IMAGE_URL, jsonLdString } from "@/lib/seo";
 
 export const metadata: Metadata = {
   title: {
@@ -87,9 +88,13 @@ export default function Home() {
       <main className="bg-page">
         <HomeHero />
         <HomeServices />
-        <HomeWork />
+        <Reveal>
+          <HomeWork />
+        </Reveal>
         <HomeFaq />
-        <HomeCta />
+        <Reveal>
+          <HomeCta />
+        </Reveal>
       </main>
     </>
   );

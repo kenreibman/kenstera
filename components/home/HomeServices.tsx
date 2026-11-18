@@ -1,90 +1,78 @@
-import { Star, Megaphone, MapPin } from "lucide-react";
-import { Button, Card, CardCaption, GradientCard, Section, SectionHeader } from "@/components/el/ui";
+import { Globe, MapPin, Megaphone, MessageSquare, Star } from "lucide-react";
+import { Button, Container, Section, SectionHeader } from "@/components/el/ui";
+import { Reveal, ScrollText } from "@/components/el/motion";
 import { THETICKSUIT } from "@/content/clients";
-import { TextBackMock, WebsiteMock } from "./mocks";
+import { HomeFeatures } from "./HomeFeatures";
 
-const SMALL = [
-  {
-    icon: Star,
-    label: "Review Funnel",
-    text: "Automatic review requests that build genuine social proof for your business.",
-  },
-  {
-    icon: Megaphone,
-    label: "Marketing Campaigns",
-    text: "Targeted paid and email campaigns that drive qualified demand.",
-  },
-  {
-    icon: MapPin,
-    label: "Local SEO",
-    text: "Organic lead acquisition through local search visibility.",
-  },
+const CHIPS = [
+  { icon: Globe, label: "Websites" },
+  { icon: MessageSquare, label: "Text back" },
+  { icon: Star, label: "Reviews" },
+  { icon: Megaphone, label: "Campaigns" },
+  { icon: MapPin, label: "Local SEO" },
 ];
 
-/** The elevenlabs.io product bento: header, two feature cards, a row of three, then a client row. */
+/**
+ * The elevenlabs.io /studio rhythm: a scroll-filled statement with feature
+ * chips, then feature rows whose product panel stays pinned and swaps as the
+ * copy scrolls.
+ */
 export function HomeServices() {
   return (
-    <Section id="services">
-      <SectionHeader
-        label="What we do"
-        title="We help businesses grow"
-        action={<Button href="/contact-sales">Contact us</Button>}
-        description={
-          <p>
-            Websites, automations, and marketing systems that turn stagnant brands into thriving ones.
-            Five systems that work together, built and managed for you.
-          </p>
-        }
-      />
-
-      <div className="mt-14 grid gap-3 lg:grid-cols-2">
-        <GradientCard
-          palette="dawn"
-          label="Custom Websites"
-          caption="Conversion-optimized, high-performance websites."
-          className="min-h-[520px]"
-        >
-          <WebsiteMock className="max-w-[460px]" />
-        </GradientCard>
-
-        <Card className="flex min-h-[520px] flex-col p-6 sm:p-8">
-          <div className="flex flex-1 items-center justify-center py-6">
-            <TextBackMock />
+    <>
+      <section className="border-t border-hairline">
+        <Container framed>
+          <div className="mx-auto max-w-[880px] py-24 text-center sm:py-36">
+            <ScrollText
+              className="text-[30px] leading-[1.2] tracking-[-0.012em] sm:text-[48px]"
+              text="Websites, automations, and marketing systems that turn stagnant brands into thriving ones."
+            />
+            <Reveal delay={120} className="mt-12 flex flex-wrap justify-center gap-2.5">
+              {CHIPS.map((c) => (
+                <span
+                  key={c.label}
+                  className="ring-hairline inline-flex items-center gap-2 rounded-full bg-white px-4 py-2 text-[15px]"
+                >
+                  <c.icon className="h-4 w-4" strokeWidth={1.6} />
+                  {c.label}
+                </span>
+              ))}
+            </Reveal>
           </div>
-          <CardCaption
-            label="Missed Call Text Back"
-            text="24/7 intake that instantly texts back missed calls, so no lead is ever lost."
+        </Container>
+      </section>
+
+      <Section id="services">
+        <Reveal>
+          <SectionHeader
+            label="What we do"
+            title="Five systems that work together"
+            action={<Button href="/contact">Contact us</Button>}
+            description={<p>Built and managed for you, so you can get back to running the business.</p>}
           />
-        </Card>
-      </div>
-
-      <div className="mt-3 grid gap-3 md:grid-cols-3">
-        {SMALL.map((s) => (
-          <Card key={s.label} className="flex min-h-[240px] flex-col justify-between p-6 sm:p-7">
-            <span className="ring-hairline flex h-10 w-10 items-center justify-center rounded-lg bg-white/70">
-              <s.icon className="h-[18px] w-[18px]" strokeWidth={1.6} />
-            </span>
-            <CardCaption label={s.label} text={s.text} />
-          </Card>
-        ))}
-      </div>
-
-      {/* Client row */}
-      <div className="mt-8 flex flex-col gap-4 rounded-2xl px-1 sm:flex-row sm:items-center sm:justify-between">
-        <div className="flex items-center gap-4">
-          <span className="grad g-moss flex h-11 w-11 flex-none items-center justify-center rounded-xl text-[15px] font-semibold text-white">
-            T
-          </span>
-          <div>
-            <p className="text-[16px] text-black">{THETICKSUIT.name}</p>
-            <p className="text-[15px] text-subtle">{THETICKSUIT.summary}</p>
-          </div>
+        </Reveal>
+        <div className="mt-10 sm:mt-16">
+          <HomeFeatures />
         </div>
-        <Button href={THETICKSUIT.caseStudyHref} variant="secondary">
-          Read the case study
-        </Button>
-      </div>
-    </Section>
+
+        <Reveal>
+          <div className="mt-16 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+            <div className="flex items-center gap-4">
+              <span className="grad g-moss flex h-11 w-11 flex-none items-center justify-center rounded-xl text-[15px] font-semibold text-white">
+                T
+              </span>
+              <div>
+                <p className="text-[16px] text-black">{THETICKSUIT.name}</p>
+                <p className="text-[15px] text-subtle">{THETICKSUIT.summary}</p>
+              </div>
+            </div>
+            <Button href={THETICKSUIT.caseStudyHref} variant="secondary">
+              Read the case study
+            </Button>
+          </div>
+        </Reveal>
+      </Section>
+    </>
   );
 }
 

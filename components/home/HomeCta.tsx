@@ -12,7 +12,7 @@ export function HomeCta() {
               Let&rsquo;s grow your business
             </h2>
             <div className="mt-8 flex flex-wrap gap-2">
-              <Button href="/contact-sales" variant="light">
+              <Button href="/contact" variant="light">
                 Contact us
               </Button>
               <a

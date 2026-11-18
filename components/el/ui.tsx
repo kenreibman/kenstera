@@ -110,7 +110,7 @@ export function Section({
   id?: string;
 }) {
   return (
-    <section id={id} className={`scroll-mt-16 border-t border-hairline ${className}`}>
+    <section id={id} className={`scroll-mt-32 border-t border-hairline ${className}`}>
       <Container framed>
         <div className="py-20 sm:py-28">{children}</div>
       </Container>

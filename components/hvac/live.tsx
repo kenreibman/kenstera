@@ -125,6 +125,59 @@ export function LiveCalls({ run, className = "" }: { run: boolean; className?: s
   );
 }
 
+/** The voice receptionist answering a call, with a live transcript. */
+export function LiveVoiceCall({ run, className = "" }: { run: boolean; className?: string }) {
+  const step = useSequence(run, [300, 1500, 3000, 4400, 5800]);
+  const line = (who: "ai" | "caller", text: string) => (
+    <div className={`pop-in flex ${who === "ai" ? "justify-start" : "justify-end"}`}>
+      <p
+        className={`max-w-[88%] rounded-2xl px-3.5 py-2 text-[13.5px] leading-[1.35] ${
+          who === "ai" ? "bg-surface text-black" : "bg-black text-white"
+        }`}
+      >
+        {text}
+      </p>
+    </div>
+  );
+  return (
+    <div className={`${card} w-full max-w-[330px] overflow-hidden ${className}`}>
+      <div className="flex items-center gap-3 border-b border-hairline px-4 py-3.5">
+        <span className="flex h-9 w-9 flex-none items-center justify-center rounded-full bg-black text-white">
+          <Phone className="h-4 w-4" />
+        </span>
+        <div className="min-w-0 flex-1">
+          <p className="text-[14px]">Incoming call</p>
+          <p className="text-[12px] text-subtle">(555) 010-2387</p>
+        </div>
+        <span className="flex h-6 items-end gap-[3px]" aria-hidden="true">
+          {[0, 1, 2, 3, 4].map((i) => (
+            <span
+              key={i}
+              className={`wave-bar w-[3px] rounded-full bg-black ${step >= 1 ? "" : "opacity-20"}`}
+              style={{ animationDelay: `${i * 0.12}s`, animationPlayState: step >= 1 ? "running" : "paused" }}
+            />
+          ))}
+        </span>
+      </div>
+      <div className="flex min-h-[250px] flex-col gap-2 px-4 py-4">
+        {step >= 1 && line("ai", "Thanks for calling. How can I help?")}
+        {step >= 2 && line("caller", "My AC just stopped working.")}
+        {step >= 3 && line("ai", "Sorry to hear that. What's the address?")}
+        {step >= 4 && line("caller", "12 Example Street.")}
+        {step >= 5 && (
+          <p className="pop-in mt-1 flex items-center gap-2 text-[12px] text-subtle">
+            <span className="flex h-4 w-4 items-center justify-center rounded-full bg-black text-white">
+              <Check className="h-2.5 w-2.5" />
+            </span>
+            Details sent to the shop
+          </p>
+        )}
+      </div>
+      <p className="border-t border-hairline px-4 py-2 text-[11px] text-subtle">Illustration, not a real call.</p>
+    </div>
+  );
+}
+
 /** The review request, then the review landing with its stars filling in. */
 export function LiveReview({ run, className = "" }: { run: boolean; className?: string }) {
   const step = useSequence(run, [200, 1300, 2500, 2900, 3100, 3300, 3500, 3700]);
@@ -167,16 +220,18 @@ export function LiveReview({ run, className = "" }: { run: boolean; className?: 
 
 /** Hero product card: a pill toggle swaps between the two things Kenstera does. */
 export function HvacHeroCard() {
-  const [tab, setTab] = useState<"missed" | "review">("missed");
+  const [tab, setTab] = useState<"missed" | "voice" | "review">("missed");
   const [ref, inView] = useInView<HTMLDivElement>({ threshold: 0.3 });
   const tabs = [
-    { id: "missed" as const, label: "Missed call" },
-    { id: "review" as const, label: "After the job" },
+    { id: "missed" as const, label: "Text back" },
+    { id: "voice" as const, label: "Voice receptionist" },
+    { id: "review" as const, label: "Reviews" },
   ];
+  const palette = tab === "missed" ? "g-dusk" : tab === "voice" ? "g-dawn" : "g-ember";
   return (
     <div
       ref={ref}
-      className={`grad ${tab === "missed" ? "g-dusk" : "g-ember"} relative rounded-2xl transition-[background] duration-700`}
+      className={`grad ${palette} relative rounded-2xl transition-[background] duration-700`}
     >
       <div className="relative flex min-h-[520px] flex-col items-center justify-center gap-8 px-5 pb-24 pt-10 sm:min-h-[580px] sm:px-10">
         <div
@@ -188,6 +243,8 @@ export function HvacHeroCard() {
               <LiveCalls run={inView} className="hidden sm:block" />
               <LiveThread run={inView} />
             </>
+          ) : tab === "voice" ? (
+            <LiveVoiceCall run={inView} />
           ) : (
             <LiveReview run={inView} />
           )}

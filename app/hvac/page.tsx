@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Check, Clock, MessageSquare, PhoneMissed, Star, Wrench, X } from "lucide-react";
+import { Check, Clock, Headset, MessageSquare, PhoneMissed, Star, Wrench, X } from "lucide-react";
 import { Button, Container, Section, SectionHeader, type Palette } from "@/components/el/ui";
 import { Reveal, ScrollText } from "@/components/el/motion";
 import { HvacHeroCard } from "@/components/hvac/live";
@@ -10,9 +10,9 @@ import { SubNav } from "@/components/hvac/SubNav";
 import { HVAC_BOOK_HREF, HVAC_BOOK_LABEL } from "@/components/hvac/links";
 import { OG_IMAGE, jsonLdString } from "@/lib/seo";
 
-const TITLE = "Missed-call text-back and review requests for HVAC shops";
+const TITLE = "Voice receptionist, missed-call text-back and review requests for HVAC shops";
 const DESCRIPTION =
-  "When you miss a call, Kenstera texts the customer back right away so they book with you. Every finished job gets a review request. No new software for your techs.";
+  "A voice receptionist answers the calls you can't get to, and if the caller hangs up, Kenstera texts them back right away. Every finished job gets a review request. No new software for your techs.";
 
 export const metadata: Metadata = {
   title: TITLE,
@@ -28,6 +28,7 @@ export const metadata: Metadata = {
 };
 
 const CHIPS = [
+  { icon: Headset, label: "Voice receptionist" },
   { icon: PhoneMissed, label: "Missed-call text-back" },
   { icon: Star, label: "Review requests" },
   { icon: MessageSquare, label: "Quote follow-up, later" },
@@ -56,7 +57,8 @@ const AUDIENCE: { title: string; body: string; palette: Palette; icon: typeof Cl
 ];
 
 const COMPARE = [
-  { moment: "A call goes to voicemail", before: "The customer tries the next shop", after: "They get a text from you right away" },
+  { moment: "A call goes to voicemail", before: "The customer tries the next shop", after: "A voice receptionist picks up instead" },
+  { moment: "The caller hangs up", before: "You never hear from them again", after: "They get a text from you right away" },
   { moment: "The job wraps up", before: "You hope they remember to review", after: "A review request goes out" },
   { moment: "Your techs", before: "Keep doing their jobs", after: "Keep doing their jobs, nothing new" },
   { moment: "Follow-up", before: "Whenever someone remembers", after: "Handled in the background" },
@@ -66,6 +68,16 @@ const FAQS: HvacFaqItem[] = [
   {
     question: "Do my techs have to do anything?",
     answer: "No. It runs in the background, and your techs keep doing what they already do.",
+  },
+  {
+    question: "What does the voice receptionist do?",
+    answer:
+      "It answers calls your team can't get to, asks what's going on, and gets the caller's details to you. We'll walk through exactly how it would handle calls for your shop on the intro call.",
+  },
+  {
+    question: "Do I need both the voice receptionist and the text-back?",
+    answer:
+      "They work as a pair: the receptionist answers the call, and the text-back reaches the people who hang up. We'll talk about what fits your shop on the intro call.",
   },
   {
     question: "Does it work with Housecall Pro, Jobber, or ServiceTitan?",
@@ -123,8 +135,9 @@ export default function HvacPage() {
               >
                 <p>A homeowner&rsquo;s AC quits at 7pm. They call down the Google list until somebody answers.</p>
                 <p>
-                  Kenstera texts back every call you miss, so they book with you instead. Then it asks your happy
-                  customers for the reviews that help you show up higher in local search.
+                  Kenstera answers every call you can&rsquo;t, with a voice receptionist, and texts back the ones who
+                  hang up, so they book with you instead. Then it asks your happy customers for the reviews that help
+                  you show up higher in local search.
                 </p>
               </div>
             </div>
@@ -141,7 +154,7 @@ export default function HvacPage() {
             <div className="mx-auto max-w-[860px] py-24 text-center sm:py-36">
               <ScrollText
                 className="text-[30px] leading-[1.2] tracking-[-0.012em] sm:text-[48px]"
-                text="Every missed call is a customer dialing the next shop on the list. Kenstera gets back to them first."
+                text="Every missed call is a customer dialing the next shop on the list. Kenstera answers first, by voice or by text."
               />
               <Reveal delay={120} className="mt-12 flex flex-wrap justify-center gap-2.5">
                 {CHIPS.map((c) => (
@@ -163,7 +176,7 @@ export default function HvacPage() {
           <Reveal>
             <SectionHeader
               label="How it works"
-              title="You miss the call. They get a text. You get the job."
+              title="You miss the call. They still get an answer. You get the job."
               description={<p>It runs in the background. Nothing new for your techs to learn.</p>}
             />
           </Reveal>

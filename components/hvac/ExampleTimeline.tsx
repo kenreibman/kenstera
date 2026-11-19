@@ -1,7 +1,7 @@
 "use client";
 
 import { StickyFeatures, type FeatureItem } from "@/components/el/motion";
-import { LiveCalls, LiveReview, LiveThread } from "./live";
+import { LiveCalls, LiveReview, LiveThread, LiveVoiceCall } from "./live";
 
 const ITEMS: FeatureItem[] = [
   {
@@ -12,8 +12,15 @@ const ITEMS: FeatureItem[] = [
     visual: (active) => <LiveCalls run={active} />,
   },
   {
+    label: "7:12 PM",
+    title: "The voice receptionist picks up.",
+    body: "Instead of voicemail, the caller reaches someone who asks what's wrong and takes the details, so the job isn't lost.",
+    palette: "dawn",
+    visual: (active) => <LiveVoiceCall run={active} />,
+  },
+  {
     label: "7:13 PM to 7:15 PM",
-    title: "A text goes out. They reply and book the 8am slot.",
+    title: "If they hang up, a text goes out. They reply and book the 8am slot.",
     body: "No one has to remember. The customer hears from you before they've dialed the next shop, and you find out in the morning, not at 7pm.",
     palette: "iris",
     visual: (active) => <LiveThread run={active} />,

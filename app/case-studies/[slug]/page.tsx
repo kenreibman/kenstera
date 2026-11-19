@@ -15,6 +15,9 @@ import { CaseStudySidebar } from "@/components/case-studies/CaseStudySidebar";
 import { HomeCta } from "@/components/home";
 import { OG_IMAGE, OG_IMAGE_URL, OG_IMAGE_ABSOLUTE_URL, SITE_URL, jsonLdString } from "@/lib/seo";
 import { JsonLd } from "@/components/seo/JsonLd";
+import { Container, SectionHeader } from "@/components/el/ui";
+import { Reveal } from "@/components/el/motion";
+import { TheTickSuitWork } from "@/components/case-studies/TheTickSuitWork";
 import { breadcrumbSchema } from "@/lib/schema";
 
 interface PageProps {
@@ -233,6 +236,25 @@ export default async function CaseStudyDetailPage({ params }: PageProps) {
             </div>
           </div>
         </div>
+
+        {slug === "theticksuit" && (
+          <section className="border-t border-hairline">
+            <Container framed>
+              <div className="py-16 sm:py-24">
+                <Reveal>
+                  <SectionHeader
+                    label="Inside the work"
+                    title="Five workstreams, one goal: more orders with less work"
+                    description={<p>Each piece below is illustrated to show how it works. The illustrations are examples of the work, not screenshots of TheTickSuit's tools or data.</p>}
+                  />
+                </Reveal>
+                <div className="mt-10 sm:mt-16">
+                  <TheTickSuitWork />
+                </div>
+              </div>
+            </Container>
+          </section>
+        )}
 
         <HomeCta />
       </main>

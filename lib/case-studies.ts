@@ -25,6 +25,7 @@ export interface TocItem {
 export interface CaseStudy {
   slug: string;
   title: string;
+  seoTitle?: string;
   description: string;
   date: string;
   updated?: string;
@@ -138,6 +139,7 @@ export function getCaseStudyBySlug(slug: string): CaseStudy | null {
   return {
     slug,
     title: data.title || "Untitled",
+    seoTitle: data.seoTitle,
     description: data.description || "",
     date: data.date || "",
     updated: data.updated,

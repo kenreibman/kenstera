@@ -40,7 +40,7 @@ export function FeatureTabs({
                 onClick={() => setActiveIndex(index)}
                 className={`rounded-2xl p-6 text-left transition-colors ${isActive ? "bg-surface" : "hover:bg-surface/60"}`}
               >
-                <span className={`block text-[17px] ${isActive ? "text-black" : "text-black/50"}`}>{feature.title}</span>
+                <span className={`block text-[17px] ${isActive ? "text-black" : "text-black/60"}`}>{feature.title}</span>
                 <span className={`grid transition-[grid-template-rows] duration-300 ease-out ${isActive ? "grid-rows-[1fr]" : "grid-rows-[0fr]"}`}>
                   <span className="overflow-hidden">
                     <span className="block pt-2 text-[15px] leading-[1.5] text-subtle">{feature.description}</span>

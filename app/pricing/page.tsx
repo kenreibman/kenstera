@@ -4,15 +4,17 @@ import { PricingCards } from "./components/PricingCards";
 import { PricingFAQ } from "./components/PricingFAQ";
 import { PricingCTA } from "./components/PricingCTA";
 import { OG_IMAGE, jsonLdString } from "@/lib/seo";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { breadcrumbSchema } from "@/lib/schema";
 
 export const metadata: Metadata = {
   title: "Pricing",
   description:
-    "Competitive pricing for your business needs. Choose from Scale, Business, or Partner plans.",
+    "Simple plans for websites, voice and text automation, and marketing systems. Compare the Scale, Business, and Partner plans, then book a call.",
   openGraph: {
     title: "Pricing | Kenstera",
     description:
-      "Competitive pricing for your business needs. Choose from Scale, Business, or Partner plans.",
+      "Simple plans for websites, voice and text automation, and marketing systems. Compare the Scale, Business, and Partner plans, then book a call.",
     images: [...OG_IMAGE],
   },
 };
@@ -70,6 +72,7 @@ export default function PricingPage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: jsonLdString(faqSchema) }}
       />
+      <JsonLd data={breadcrumbSchema([{ name: "Pricing", path: "/pricing" }])} />
       <main className="min-h-screen bg-page">
         <div className="mx-auto max-w-[1184px] px-5 py-14 sm:px-8 sm:py-20">
           {/* Header */}

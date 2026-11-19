@@ -41,7 +41,7 @@ export function IndustriesGettingStarted({
           <div className="flex flex-wrap gap-2">
             <Button href="/contact">Contact Us</Button>
             <Button href="/contact" variant="secondary">
-              Learn more
+              Book a call
             </Button>
           </div>
         </div>

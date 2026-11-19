@@ -9,7 +9,7 @@
  * The `?v=N` suffix is a cache-buster: social scrapers (Facebook, LinkedIn,
  * X/Twitter, iMessage) cache the image by URL, so bump it when the art changes.
  */
-export const OG_IMAGE_URL = "/og-image.jpg?v=2";
+export const OG_IMAGE_URL = "/og-image.jpg?v=3";
 
 export const SITE_URL = "https://kenstera.com";
 
@@ -36,4 +36,15 @@ export const OG_IMAGE = [
  */
 export function jsonLdString(data: unknown): string {
   return JSON.stringify(data).replace(/</g, "\\u003c");
+}
+
+/**
+ * Trim a meta description to a length Google shows in full (~155 chars),
+ * cutting at a word boundary and adding an ellipsis only when it was cut.
+ */
+export function clipDescription(text: string, max = 155): string {
+  const clean = text.replace(/\s+/g, " ").trim();
+  if (clean.length <= max) return clean;
+  const cut = clean.slice(0, max - 1);
+  return `${cut.slice(0, cut.lastIndexOf(" ")).replace(/[,;:\-–—\s]+$/, "")}…`;
 }

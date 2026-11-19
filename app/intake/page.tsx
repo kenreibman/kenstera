@@ -11,7 +11,7 @@ import { OG_IMAGE, jsonLdString } from "@/lib/seo";
 export const metadata: Metadata = {
   title: "Intake Services for Law Firms",
   description:
-    "Kenstera builds AI-powered intake and lead qualification systems for law firms — handling inbound calls and web inquiries 24/7 so your firm never misses a potential client.",
+    "AI-powered intake and lead qualification for law firms: inbound calls and web inquiries handled 24/7 so you never miss a potential client.",
   alternates: {
     canonical: "https://kenstera.com/intake",
   },

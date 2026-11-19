@@ -28,7 +28,7 @@ export function IndustriesHero({
             <div className="mt-6 flex flex-wrap gap-2">
               <Button href="/contact">Contact Us</Button>
               <Button href="/contact" variant="secondary">
-                Learn More
+                Book a call
               </Button>
             </div>
           </div>

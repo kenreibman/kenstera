@@ -50,7 +50,7 @@ export function IndustriesCustomizable({
                 onClick={() => setActiveIndex(open ? -1 : index)}
                 className="flex w-full items-center justify-between gap-6 py-5 text-left"
               >
-                <span className={`text-[16px] ${open ? "text-black" : "text-black/50"}`}>{feature.title}</span>
+                <span className={`text-[16px] ${open ? "text-black" : "text-black/60"}`}>{feature.title}</span>
                 <Plus className={`h-4 w-4 flex-none text-subtle transition-transform duration-300 ${open ? "rotate-45" : ""}`} />
               </button>
               <div className={`grid transition-[grid-template-rows] duration-300 ease-out ${open ? "grid-rows-[1fr]" : "grid-rows-[0fr]"}`}>

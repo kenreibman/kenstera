@@ -2,7 +2,9 @@ import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { IndustriesHero, IndustriesUseCases, IndustriesVoiceAgents, IndustriesMultimodal, IndustriesWorkflows, IndustriesCustomizable, IndustriesIntegrations, IndustriesGettingStarted, IndustriesFaqBlog, IndustriesCta } from "@/components/industries";
 import { getServiceContent, getAllServiceSlugs } from "@/lib/service-content";
-import { OG_IMAGE } from "@/lib/seo";
+import { OG_IMAGE, clipDescription } from "@/lib/seo";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { breadcrumbSchema, serviceSchema } from "@/lib/schema";
 
 interface ServicePageProps {
   params: Promise<{ slug: string }>;
@@ -26,10 +28,10 @@ export async function generateMetadata({ params }: ServicePageProps): Promise<Me
   return {
     // The services layout's title.template appends "| Kenstera".
     title: content.name,
-    description: content.hero.description,
+    description: clipDescription(content.hero.description),
     openGraph: {
       title: `${content.name} | Kenstera`,
-      description: content.hero.description,
+      description: clipDescription(content.hero.description),
       images: [...OG_IMAGE],
     },
   };
@@ -46,6 +48,12 @@ export default async function ServicePage({ params }: ServicePageProps) {
 
   return (
     <main className="min-h-screen bg-page">
+      <JsonLd
+        data={[
+          serviceSchema({ name: content.name, description: content.hero.description, path: `/services/${slug}` }),
+          breadcrumbSchema([{ name: "Services", path: "/services" }, { name: content.name, path: `/services/${slug}` }]),
+        ]}
+      />
       <IndustriesHero
         headline={content.hero.headline}
         description={content.hero.description}

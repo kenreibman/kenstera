@@ -5,15 +5,15 @@ export const metadata: Metadata = {
   // A plain-string title here would clear the inherited template for child
   // segments, leaving /services/[slug] pages unbranded.
   title: {
-    default: "Services | Kenstera",
+    default: "Services",
     template: "%s | Kenstera",
   },
   description:
-    "Intake and scheduling, custom development, and support automation. Built, managed, and improved by Kenstera.",
+    "Intake and scheduling, custom development, and support automation, including voice and text. Built, managed, and improved by Kenstera.",
   openGraph: {
     title: "Services | Kenstera",
     description:
-      "Intake and scheduling, custom development, and support automation. Built, managed, and improved by Kenstera.",
+      "Intake and scheduling, custom development, and support automation, including voice and text. Built, managed, and improved by Kenstera.",
     images: [...OG_IMAGE],
   },
 };

@@ -6,6 +6,8 @@ import { LayoutWrapper } from "@/components/LayoutWrapper";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next"
 import { OG_IMAGE, OG_IMAGE_URL } from "@/lib/seo";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { organizationSchema, websiteSchema } from "@/lib/schema";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -63,6 +65,7 @@ export default function RootLayout({
       <body
         className={`${inter.variable} font-sans antialiased`}
       >
+        <JsonLd data={[organizationSchema(), websiteSchema()]} />
         <LayoutWrapper>
           {children}
         </LayoutWrapper>

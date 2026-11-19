@@ -9,10 +9,12 @@ import { StickyCta } from "@/components/hvac/StickyCta";
 import { SubNav } from "@/components/hvac/SubNav";
 import { HVAC_BOOK_HREF, HVAC_BOOK_LABEL } from "@/components/hvac/links";
 import { OG_IMAGE, jsonLdString } from "@/lib/seo";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { breadcrumbSchema, serviceSchema } from "@/lib/schema";
 
-const TITLE = "Missed-call text-back and review requests for HVAC shops";
+const TITLE = "Missed-Call Text Back and Reviews for HVAC Shops";
 const DESCRIPTION =
-  "When you miss a call, Kenstera texts the customer back from your business number so they book with you. Every finished job gets a review request. An optional voice receptionist can answer instead. No new software for your techs.";
+  "Texts back every call your HVAC shop misses so customers book with you, then asks for Google reviews. Optional voice receptionist. No new software.";
 
 export const metadata: Metadata = {
   title: TITLE,
@@ -110,6 +112,12 @@ export default function HvacPage() {
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLdString(faqJsonLd) }} />
+      <JsonLd
+        data={[
+          serviceSchema({ name: "Missed-call text back and review requests for HVAC shops", description: DESCRIPTION, path: "/hvac", serviceType: "Missed-call text back" }),
+          breadcrumbSchema([{ name: "HVAC shops", path: "/hvac" }]),
+        ]}
+      />
       <SubNav href={HVAC_BOOK_HREF} label={HVAC_BOOK_LABEL} />
       <main className="bg-page">
         {/* Hero */}

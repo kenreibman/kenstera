@@ -186,7 +186,7 @@ export function ReviewLandsCard({ className = "" }: { className?: string }) {
         <span>New Google review</span>
         <span>Just now</span>
       </div>
-      <div className="mt-3 flex gap-0.5" aria-label="Five stars">
+      <div className="mt-3 flex gap-0.5" role="img" aria-label="Five stars">
         {Array.from({ length: 5 }, (_, i) => (
           <Star key={i} className="h-4 w-4 fill-black text-black" strokeWidth={1.5} />
         ))}

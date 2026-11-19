@@ -23,7 +23,7 @@ function Typing({ side }: { side: "out" | "in" }) {
         className={`flex items-center gap-1 rounded-2xl px-3.5 py-3 ${
           side === "out" ? "rounded-br-md bg-black" : "ring-hairline rounded-bl-md bg-white"
         }`}
-        aria-label="Typing"
+        role="img" aria-label="Typing"
       >
         {[0, 1, 2].map((i) => (
           <span

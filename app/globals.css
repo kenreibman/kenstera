@@ -19,7 +19,7 @@
   --color-surface: #f5f3f1;
   --color-surface-2: #ebe8e4;
   --color-ink: #000000;
-  --color-subtle: #777169;
+  --color-subtle: #6e675f;
   --color-hairline: rgba(0, 0, 0, 0.08);
 
   --color-ring: var(--ring);
@@ -57,7 +57,7 @@
   --secondary: #f5f3f1;
   --secondary-foreground: #000000;
   --muted: #f5f3f1;
-  --muted-foreground: #777169;
+  --muted-foreground: #6e675f;
   --accent: #f5f3f1;
   --accent-foreground: #000000;
   --destructive: #d92d20;

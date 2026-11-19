@@ -99,16 +99,11 @@ export function ScrollText({ text, className = "" }: { text: string; className?:
   }, []);
 
   return (
-    <p ref={ref} className={className} aria-label={text}>
+    <p ref={ref} className={className}>
       {words.map((w, i) => {
         const on = progress * words.length > i;
         return (
-          <span
-            key={i}
-            aria-hidden="true"
-            className="transition-colors duration-300"
-            style={{ color: on ? "#000" : "rgba(0,0,0,0.2)" }}
-          >
+          <span key={i} className="transition-colors duration-300" style={{ color: on ? "#000" : "rgba(0,0,0,0.45)" }}>
             {w}
             {i < words.length - 1 ? " " : ""}
           </span>

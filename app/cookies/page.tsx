@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Cookie Policy | Kenstera",
+  title: "Cookie Policy",
   description:
     "Learn how Kenstera uses cookies and similar tracking technologies on our website.",
 };

@@ -14,6 +14,8 @@ import { mdxComponents } from "@/components/blog/MDXComponents";
 import { CaseStudySidebar } from "@/components/case-studies/CaseStudySidebar";
 import { HomeCta } from "@/components/home";
 import { OG_IMAGE, OG_IMAGE_URL, OG_IMAGE_ABSOLUTE_URL, SITE_URL, jsonLdString } from "@/lib/seo";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { breadcrumbSchema } from "@/lib/schema";
 
 interface PageProps {
   params: Promise<{ slug: string }>;
@@ -38,7 +40,7 @@ export async function generateMetadata({
 
   return {
     // The root layout's title.template appends "| Kenstera".
-    title: study.title,
+    title: study.seoTitle || study.title,
     description: study.description,
     keywords: study.keywords,
     authors: [{ name: study.author }],
@@ -98,6 +100,9 @@ export default async function CaseStudyDetailPage({ params }: PageProps) {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: jsonLdString(jsonLd) }}
+      />
+      <JsonLd
+        data={breadcrumbSchema([{ name: "Case studies", path: "/case-studies" }, { name: study.clientName || study.title, path: `/case-studies/${slug}` }])}
       />
       <main className="bg-page min-h-screen">
         {/* Hero Section */}

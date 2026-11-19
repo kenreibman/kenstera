@@ -20,7 +20,7 @@ function Typing({ side }: { side: "out" | "in" }) {
         className={`flex items-center gap-1 rounded-2xl px-3.5 py-3 ${
           side === "out" ? "rounded-br-md bg-black" : "ring-hairline rounded-bl-md bg-white"
         }`}
-        aria-label="Typing"
+        role="img" aria-label="Typing"
       >
         {[0, 1, 2].map((i) => (
           <span
@@ -225,7 +225,7 @@ export function LiveReview({ run, className = "" }: { run: boolean; className?: 
           <span>New Google review</span>
           <span>Just now</span>
         </div>
-        <div className="mt-2 flex gap-0.5" aria-label="Five stars">
+        <div className="mt-2 flex gap-0.5" role="img" aria-label="Five stars">
           {Array.from({ length: 5 }, (_, i) => (
             <Star
               key={i}

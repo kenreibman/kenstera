@@ -2,7 +2,9 @@ import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { IndustriesHero, IndustriesUseCases, IndustriesVoiceAgents, IndustriesMultimodal, IndustriesWorkflows, IndustriesCustomizable, IndustriesIntegrations, IndustriesGettingStarted, IndustriesFaqBlog, IndustriesCta } from "@/components/industries";
 import { getIndustryContent, getAllIndustrySlugs } from "@/lib/industry-content";
-import { OG_IMAGE } from "@/lib/seo";
+import { OG_IMAGE, clipDescription } from "@/lib/seo";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { breadcrumbSchema } from "@/lib/schema";
 
 interface IndustryPageProps {
   params: Promise<{ slug: string }>;
@@ -25,10 +27,10 @@ export async function generateMetadata({ params }: IndustryPageProps): Promise<M
 
   return {
     title: `${content.name} Solutions`,
-    description: content.hero.description,
+    description: clipDescription(content.hero.description),
     openGraph: {
       title: `${content.name} Solutions | Kenstera`,
-      description: content.hero.description,
+      description: clipDescription(content.hero.description),
       images: [...OG_IMAGE],
     },
   };
@@ -45,6 +47,9 @@ export default async function IndustryPage({ params }: IndustryPageProps) {
 
   return (
     <main className="min-h-screen bg-page">
+      <JsonLd
+        data={breadcrumbSchema([{ name: "Industries", path: "/industries" }, { name: content.name, path: `/industries/${slug}` }])}
+      />
       <IndustriesHero
         headline={content.hero.headline}
         description={content.hero.description}

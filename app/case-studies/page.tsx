@@ -4,14 +4,16 @@ import { CaseStudyCard } from "@/components/case-studies/CaseStudyCard";
 import { HomeCta } from "@/components/home";
 import { Container, SectionHeader } from "@/components/el/ui";
 import { OG_IMAGE } from "@/lib/seo";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { breadcrumbSchema } from "@/lib/schema";
 
 export const metadata: Metadata = {
   title: "Case Studies",
   description:
-    "Real work for real clients. See how Kenstera redesigned TheTickSuit's website, A/B tested it for conversion, added a 24/7 customer chat and a review pipeline, and manages their SEO.",
+    "Real work for real clients: how Kenstera redesigned TheTickSuit's site, A/B tested it, added a 24/7 chat and reviews, and manages SEO.",
   openGraph: {
     title: "Case Studies | Kenstera",
-    description: "Real work for real clients. See how Kenstera redesigned TheTickSuit's website.",
+    description: "Real work for real clients: how Kenstera redesigned TheTickSuit's site, A/B tested it, added a 24/7 chat and reviews, and manages SEO.",
     type: "website",
     images: [...OG_IMAGE],
   },
@@ -22,6 +24,7 @@ export default function CaseStudiesPage() {
 
   return (
     <main className="min-h-screen bg-page">
+      <JsonLd data={breadcrumbSchema([{ name: "Case studies", path: "/case-studies" }])} />
       <section className="pb-12 pt-14 sm:pt-20">
         <Container framed>
           <SectionHeader

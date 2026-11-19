@@ -8,6 +8,7 @@ import {
   HOME_FAQS,
 } from "@/components/home";
 import { Reveal } from "@/components/el/motion";
+import { CONTACT_EMAIL, ORG_ID, SOCIAL_LINKS } from "@/lib/schema";
 import { OG_IMAGE,OG_IMAGE_URL, jsonLdString } from "@/lib/seo";
 
 export const metadata: Metadata = {
@@ -48,6 +49,9 @@ const jsonLd = {
     "Kenstera builds high-converting websites, workflow automations, and marketing systems that drive rapid, predictable growth for your business.",
   url: "https://kenstera.com",
   slogan: "Rapid Growth For Business",
+  email: CONTACT_EMAIL,
+  sameAs: SOCIAL_LINKS,
+  parentOrganization: { "@id": ORG_ID },
   areaServed: "Worldwide",
   serviceType: [
     "Custom Websites",

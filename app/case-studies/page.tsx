@@ -8,7 +8,7 @@ import { OG_IMAGE } from "@/lib/seo";
 export const metadata: Metadata = {
   title: "Case Studies",
   description:
-    "Real work for real clients. See how Kenstera redesigned TheTickSuit's website and helped streamline the business.",
+    "Real work for real clients. See how Kenstera redesigned TheTickSuit's website, A/B tested it for conversion, added a 24/7 customer chat and a review pipeline, and manages their SEO.",
   openGraph: {
     title: "Case Studies | Kenstera",
     description: "Real work for real clients. See how Kenstera redesigned TheTickSuit's website.",

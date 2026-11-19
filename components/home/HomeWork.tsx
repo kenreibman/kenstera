@@ -10,7 +10,7 @@ export function HomeWork() {
       <div className="mx-auto max-w-2xl text-center">
         <p className="mb-3 text-[16px] text-subtle">Selected work</p>
         <h2 className="text-[32px] leading-[1.15] text-black sm:text-[40px]">
-          A modern website and a more streamlined business
+          A modern website that converts, and a business that runs itself
         </h2>
       </div>
 
@@ -35,7 +35,7 @@ export function HomeWork() {
           </div>
           <div className="flex flex-1 items-end justify-between gap-4 px-6 py-5 sm:px-8">
             <div>
-              <p className="text-[15px] text-subtle">Website redesign · Business streamlining</p>
+              <p className="text-[15px] text-subtle">Redesign · A/B testing · 24/7 chat · Reviews · SEO</p>
               <p className="mt-1 text-[16px] text-black">See how we rebuilt theticksuit.com</p>
             </div>
           </div>

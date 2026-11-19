@@ -200,6 +200,8 @@ h2,
 .g-dawn { --g-base: #b85f14; --g1: #f7a823; --g2: #c4571c; --g3: #3d1d0c; --g4: #ffd27a; --g-p1: 15% 20%; --g-p2: 55% 60%; --g-p3: 90% 90%; --g-p4: 40% 25%; }
 /* Sage and olive. */
 .g-moss { --g-base: #4b6b3c; --g1: #a8c67a; --g2: #2f4f2f; --g3: #d8cf8a; --g4: #6c8f5a; }
+/* Deep teal and seafoam. */
+.g-tide { --g-base: #1f5d6b; --g1: #7fd0d8; --g2: #1b7f8f; --g3: #0d2f45; --g4: #b4e3c8; --g-p1: 25% 75%; --g-p2: 70% 65%; --g-p3: 85% 20%; --g-p4: 30% 25%; }
 /* Violet and rose. */
 .g-iris { --g-base: #4d3fb8; --g1: #c77de6; --g2: #3248b8; --g3: #f2a3c0; --g4: #1d2466; --g-p3: 80% 25%; --g-p4: 85% 85%; }
 

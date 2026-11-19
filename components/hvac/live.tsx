@@ -126,8 +126,30 @@ export function LiveCalls({ run, className = "" }: { run: boolean; className?: s
 }
 
 /** The voice receptionist answering a call, with a live transcript. */
-export function LiveVoiceCall({ run, className = "" }: { run: boolean; className?: string }) {
+export function LiveVoiceCall({
+  run,
+  className = "",
+  general = false,
+}: {
+  run: boolean;
+  className?: string;
+  /** Industry-neutral script for pages that aren't about HVAC. */
+  general?: boolean;
+}) {
   const step = useSequence(run, [300, 1500, 3000, 4400, 5800]);
+  const script = general
+    ? {
+        caller1: "Hi, I'd like to book an appointment.",
+        ai2: "Happy to help. What's the best number to reach you?",
+        caller2: "(555) 010-4471.",
+        done: "Details sent to the team",
+      }
+    : {
+        caller1: "My AC just stopped working.",
+        ai2: "Sorry to hear that. What's the address?",
+        caller2: "12 Example Street.",
+        done: "Details sent to the shop",
+      };
   const line = (who: "ai" | "caller", text: string) => (
     <div className={`pop-in flex ${who === "ai" ? "justify-start" : "justify-end"}`}>
       <p
@@ -161,15 +183,15 @@ export function LiveVoiceCall({ run, className = "" }: { run: boolean; className
       </div>
       <div className="flex min-h-[250px] flex-col gap-2 px-4 py-4">
         {step >= 1 && line("ai", "Thanks for calling. How can I help?")}
-        {step >= 2 && line("caller", "My AC just stopped working.")}
-        {step >= 3 && line("ai", "Sorry to hear that. What's the address?")}
-        {step >= 4 && line("caller", "12 Example Street.")}
+        {step >= 2 && line("caller", script.caller1)}
+        {step >= 3 && line("ai", script.ai2)}
+        {step >= 4 && line("caller", script.caller2)}
         {step >= 5 && (
           <p className="pop-in mt-1 flex items-center gap-2 text-[12px] text-subtle">
             <span className="flex h-4 w-4 items-center justify-center rounded-full bg-black text-white">
               <Check className="h-2.5 w-2.5" />
             </span>
-            Details sent to the shop
+            {script.done}
           </p>
         )}
       </div>

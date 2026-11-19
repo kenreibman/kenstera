@@ -12,16 +12,9 @@ const ITEMS: FeatureItem[] = [
     visual: (active) => <LiveCalls run={active} />,
   },
   {
-    label: "7:12 PM",
-    title: "The voice receptionist picks up.",
-    body: "Instead of voicemail, the caller reaches someone who asks what's wrong and takes the details, so the job isn't lost.",
-    palette: "dawn",
-    visual: (active) => <LiveVoiceCall run={active} />,
-  },
-  {
     label: "7:13 PM to 7:15 PM",
-    title: "If they hang up, a text goes out. They reply and book the 8am slot.",
-    body: "No one has to remember. The customer hears from you before they've dialed the next shop, and you find out in the morning, not at 7pm.",
+    title: "A text goes out from your business number. They reply and book the 8am slot.",
+    body: "No one has to remember. The customer hears from you within a minute, before they've dialed the next shop, and you find out in the morning, not at 7pm.",
     palette: "iris",
     visual: (active) => <LiveThread run={active} />,
   },
@@ -31,6 +24,13 @@ const ITEMS: FeatureItem[] = [
     body: "Once the job is done, the customer gets a short text asking for a Google review. Each one helps you show up higher in local search, so the next 7pm call is more likely to find you first.",
     palette: "ember",
     visual: (active) => <LiveReview run={active} />,
+  },
+  {
+    label: "Optional: have a voice answer instead",
+    title: "A voice receptionist picks up the call.",
+    body: "If you'd rather a voice answers than a text, the caller reaches someone who asks what's wrong and takes the details.",
+    palette: "dawn",
+    visual: (active) => <LiveVoiceCall run={active} />,
   },
 ];
 

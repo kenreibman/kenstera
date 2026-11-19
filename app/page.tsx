@@ -53,6 +53,7 @@ const jsonLd = {
     "Custom Websites",
     "Review Funnel",
     "Missed Call Text Back",
+    "Voice Receptionist",
     "Marketing Campaigns",
     "Local SEO",
   ],

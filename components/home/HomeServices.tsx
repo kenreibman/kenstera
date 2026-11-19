@@ -1,4 +1,4 @@
-import { Globe, MapPin, Megaphone, MessageSquare, Star } from "lucide-react";
+import { Globe, Headset, MapPin, Megaphone, MessageSquare, Star } from "lucide-react";
 import { Button, Container, Section, SectionHeader } from "@/components/el/ui";
 import { Reveal, ScrollText } from "@/components/el/motion";
 import { THETICKSUIT } from "@/content/clients";
@@ -7,6 +7,7 @@ import { HomeFeatures } from "./HomeFeatures";
 const CHIPS = [
   { icon: Globe, label: "Websites" },
   { icon: MessageSquare, label: "Text back" },
+  { icon: Headset, label: "Voice receptionist" },
   { icon: Star, label: "Reviews" },
   { icon: Megaphone, label: "Campaigns" },
   { icon: MapPin, label: "Local SEO" },
@@ -46,7 +47,7 @@ export function HomeServices() {
         <Reveal>
           <SectionHeader
             label="What we do"
-            title="Five systems that work together"
+            title="Six systems that work together"
             action={<Button href="/contact">Contact us</Button>}
             description={<p>Built and managed for you, so you can get back to running the business.</p>}
           />

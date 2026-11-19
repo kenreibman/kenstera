@@ -123,7 +123,7 @@ export function Card({ children, className = "" }: { children: ReactNode; classN
   return <div className={`rounded-2xl bg-surface ${className}`}>{children}</div>;
 }
 
-export type Palette = "ember" | "dusk" | "dawn" | "moss" | "iris";
+export type Palette = "ember" | "dusk" | "dawn" | "moss" | "iris" | "tide";
 
 /** Grainy painted-gradient card with an optional white caption at the bottom. */
 export function GradientCard({

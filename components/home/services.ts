@@ -1,7 +1,7 @@
 import type { Palette } from "@/components/el/ui";
 
 // Home-page service list, shared by the hero showcase and the services bento.
-export type MockKind = "website" | "textback" | "review" | "campaign" | "local";
+export type MockKind = "website" | "textback" | "voice" | "review" | "campaign" | "local";
 
 export interface HomeService {
   title: string;
@@ -25,6 +25,13 @@ export const HOME_SERVICES: HomeService[] = [
     description: "24/7 intake that instantly texts back missed calls, so no lead is ever lost.",
     palette: "dusk",
     mock: "textback",
+  },
+  {
+    title: "Voice Receptionist",
+    short: "Voice",
+    description: "A voice receptionist that answers your calls, asks what's going on, and gets the details to you.",
+    palette: "tide",
+    mock: "voice",
   },
   {
     title: "Review Funnel",

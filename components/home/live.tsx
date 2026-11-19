@@ -4,6 +4,7 @@ import Image from "next/image";
 import type { ReactElement } from "react";
 import { Check, Clock, Mail, MapPin, MessageSquare, Navigation, Phone, Globe, Star } from "lucide-react";
 import { useSequence } from "@/components/el/motion";
+import { LiveVoiceCall } from "@/components/hvac/live";
 import { THETICKSUIT } from "@/content/clients";
 import type { MockKind } from "./services";
 
@@ -213,6 +214,7 @@ export function LiveLocal({ run }: { run: boolean }) {
 export const LIVE_MOCKS: Record<MockKind, (run: boolean) => ReactElement> = {
   website: (run) => <LiveWebsite run={run} />,
   textback: (run) => <LiveTextBack run={run} />,
+  voice: (run) => <LiveVoiceCall run={run} general />,
   review: (run) => <LiveReviewRequest run={run} />,
   campaign: (run) => <LiveCampaign run={run} />,
   local: (run) => <LiveLocal run={run} />,

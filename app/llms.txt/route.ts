@@ -23,6 +23,7 @@ Kenstera is a business-growth company. It designs and builds websites, answers c
 - [HVAC shops](https://kenstera.com/hvac): missed-call text back and review requests for HVAC businesses, with an optional voice receptionist
 - [Case studies](https://kenstera.com/case-studies): real client work
 - [TheTickSuit case study](https://kenstera.com/case-studies/theticksuit): website redesign, A/B tested UI, 24/7 customer chat, review pipeline, and ongoing SEO and AI search management
+- [MassimiLaw case study](https://kenstera.com/case-studies/massimilaw): a first website for a New York City civil rights and employment law firm that had none
 - [Pricing](https://kenstera.com/pricing): Scale, Business, and Partner plans
 - [Contact and booking](https://kenstera.com/contact): book a call or email contact@kenstera.com
 

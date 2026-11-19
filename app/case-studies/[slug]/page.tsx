@@ -18,6 +18,7 @@ import { JsonLd } from "@/components/seo/JsonLd";
 import { Container, SectionHeader } from "@/components/el/ui";
 import { Reveal } from "@/components/el/motion";
 import { TheTickSuitWork } from "@/components/case-studies/TheTickSuitWork";
+import { MassimiLawWork } from "@/components/case-studies/MassimiLawWork";
 import { breadcrumbSchema } from "@/lib/schema";
 
 interface PageProps {
@@ -67,6 +68,19 @@ export async function generateMetadata({
     },
   };
 }
+
+const WORK: Record<string, { title: string; note: string; node: React.ReactNode }> = {
+  theticksuit: {
+    title: "Five workstreams, one goal: more orders with less work",
+    note: "Each piece below is illustrated to show how it works. The illustrations are examples of the work, not screenshots of TheTickSuit's tools or data.",
+    node: <TheTickSuitWork />,
+  },
+  massimilaw: {
+    title: "Built around three questions every visitor has",
+    note: "Every image below is a screenshot of the live site at massimilaw.com.",
+    node: <MassimiLawWork />,
+  },
+};
 
 export default async function CaseStudyDetailPage({ params }: PageProps) {
   const { slug } = await params;
@@ -237,20 +251,18 @@ export default async function CaseStudyDetailPage({ params }: PageProps) {
           </div>
         </div>
 
-        {slug === "theticksuit" && (
+        {WORK[slug] && (
           <section className="border-t border-hairline">
             <Container framed>
               <div className="py-16 sm:py-24">
                 <Reveal>
                   <SectionHeader
                     label="Inside the work"
-                    title="Five workstreams, one goal: more orders with less work"
-                    description={<p>Each piece below is illustrated to show how it works. The illustrations are examples of the work, not screenshots of TheTickSuit's tools or data.</p>}
+                    title={WORK[slug].title}
+                    description={<p>{WORK[slug].note}</p>}
                   />
                 </Reveal>
-                <div className="mt-10 sm:mt-16">
-                  <TheTickSuitWork />
-                </div>
+                <div className="mt-10 sm:mt-16">{WORK[slug].node}</div>
               </div>
             </Container>
           </section>

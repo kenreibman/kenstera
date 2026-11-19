@@ -10,10 +10,10 @@ import { breadcrumbSchema } from "@/lib/schema";
 export const metadata: Metadata = {
   title: "Case Studies",
   description:
-    "Real work for real clients: how Kenstera redesigned TheTickSuit's site, A/B tested it, added a 24/7 chat and reviews, and manages SEO.",
+    "Real work for real clients: TheTickSuit's tested redesign with 24/7 chat and reviews, and MassimiLaw's first law firm website.",
   openGraph: {
     title: "Case Studies | Kenstera",
-    description: "Real work for real clients: how Kenstera redesigned TheTickSuit's site, A/B tested it, added a 24/7 chat and reviews, and manages SEO.",
+    description: "Real work for real clients: TheTickSuit's tested redesign with 24/7 chat and reviews, and MassimiLaw's first law firm website.",
     type: "website",
     images: [...OG_IMAGE],
   },

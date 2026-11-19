@@ -124,7 +124,7 @@ export default function HvacPage() {
         <section>
           <Container framed>
             <div className="grid gap-8 pb-12 pt-14 sm:pt-24 md:grid-cols-2 md:gap-12">
-              <div className="fade-in-up">
+              <div>
                 <h1 className="text-[40px] leading-[1.06] text-black sm:text-[56px]">
                   Don&rsquo;t let the next shop on Google get your 7pm call.
                 </h1>
@@ -138,8 +138,7 @@ export default function HvacPage() {
                 </div>
               </div>
               <div
-                className="fade-in-up max-w-[520px] space-y-4 text-[17px] leading-[1.5] text-black md:pt-3"
-                style={{ animationDelay: "120ms" }}
+                className="max-w-[520px] space-y-4 text-[17px] leading-[1.5] text-black md:pt-3"
               >
                 <p>A homeowner&rsquo;s AC quits at 7pm. They call down the Google list until somebody answers.</p>
                 <p>
@@ -150,7 +149,7 @@ export default function HvacPage() {
               </div>
             </div>
 
-            <div className="fade-in-up mb-16 sm:mb-24" style={{ animationDelay: "240ms" }}>
+            <div className="mb-16 sm:mb-24">
               <HvacHeroCard />
             </div>
           </Container>

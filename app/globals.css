@@ -139,18 +139,6 @@ h2,
   isolation: isolate;
   overflow: hidden;
   background: var(--g-base);
-  /* Chromium and Safari can let animated, blurred or blend-moded children
-     escape a rounded overflow clip on the GPU, which shows up as sharp
-     corners. A solid mask plus a promoted layer forces the rounded clip. */
-  -webkit-mask-image: -webkit-radial-gradient(white, black);
-  mask-image: radial-gradient(white, black);
-  transform: translateZ(0);
-}
-/* Same fix for white mock cards and any other rounded, clipped surface. */
-.ring-hairline.overflow-hidden,
-.rounded-2xl.overflow-hidden {
-  -webkit-mask-image: -webkit-radial-gradient(white, black);
-  mask-image: radial-gradient(white, black);
 }
 .grad::before {
   content: "";
@@ -180,6 +168,17 @@ h2,
    radial gradients are already soft, so drop the blur, the blend mode and the
    animations there. -webkit-touch-callout exists only on iOS. */
 @supports (-webkit-touch-callout: none) {
+  /* Force the rounded clip with a solid mask and a promoted layer. Scoped to
+     iOS: on Chrome the mask only adds paint cost to large gradient cards. */
+  .grad,
+  .ring-hairline.overflow-hidden,
+  .rounded-2xl.overflow-hidden {
+    -webkit-mask-image: -webkit-radial-gradient(white, black);
+    mask-image: radial-gradient(white, black);
+  }
+  .grad {
+    transform: translateZ(0);
+  }
   .grad::before {
     filter: none;
     animation: none;

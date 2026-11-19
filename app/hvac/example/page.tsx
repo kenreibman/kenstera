@@ -16,7 +16,7 @@ export default function HvacExamplePage() {
     <main className="bg-page">
       <section>
         <Container framed>
-          <div className="fade-in-up pb-12 pt-14 sm:pb-20 sm:pt-24">
+          <div className="pb-12 pt-14 sm:pb-20 sm:pt-24">
             <p className="mb-3 text-[16px] text-subtle">A 2-minute example</p>
             <h1 className="max-w-3xl text-[40px] leading-[1.06] text-black sm:text-[56px]">
               Here&rsquo;s what happens when you miss a call.

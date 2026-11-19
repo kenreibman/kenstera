@@ -30,7 +30,7 @@ export function HomeHero() {
     <section>
       <Container framed>
         <div className="grid gap-8 pb-12 pt-16 sm:pt-24 md:grid-cols-2 md:gap-12">
-          <div className="fade-in-up">
+          <div>
             <h1 className="text-[46px] leading-[1.04] text-black sm:text-[60px]">
               Rapid growth
               <br />
@@ -44,8 +44,7 @@ export function HomeHero() {
             </div>
           </div>
           <p
-            className="fade-in-up max-w-[520px] text-[17px] leading-[1.45] text-black md:pt-3"
-            style={{ animationDelay: "120ms" }}
+            className="max-w-[520px] text-[17px] leading-[1.45] text-black md:pt-3"
           >
             Kenstera builds high-converting websites, workflow automations, and marketing systems that
             drive rapid, predictable growth for your business.

@@ -1,6 +1,6 @@
-import Image from "next/image";
 import { Container } from "@/components/el/ui";
 import { UseCase } from "@/lib/industry-content";
+import { UseCaseVisual, type UseCaseVariant } from "./UseCaseVisuals";
 
 const defaultUseCases: UseCase[] = [
   {
@@ -20,17 +20,13 @@ const defaultUseCases: UseCase[] = [
   },
 ];
 
-const IMAGES = [
-  { src: "/images/24-7-coverage.webp", alt: "24/7 AI-powered coverage - instant response conversation" },
-  { src: "/images/qualification-booking.webp", alt: "Qualification and instant booking automation" },
-];
-const PALETTES = ["ember", "dusk", "dawn"];
-
 interface IndustriesUseCasesProps {
   useCases?: UseCase[];
+  /** `law` shows personal-injury intake demos; anything else gets neutral ones. */
+  variant?: UseCaseVariant;
 }
 
-export function IndustriesUseCases({ useCases = defaultUseCases }: IndustriesUseCasesProps) {
+export function IndustriesUseCases({ useCases = defaultUseCases, variant = "general" }: IndustriesUseCasesProps) {
   return (
     <section className="pb-16 sm:pb-24">
       <Container framed>
@@ -38,20 +34,7 @@ export function IndustriesUseCases({ useCases = defaultUseCases }: IndustriesUse
           {useCases.map((useCase, index) => (
             <div key={useCase.title} className="flex flex-col rounded-2xl bg-surface p-2">
               <div className="relative aspect-[4/5] overflow-hidden rounded-xl bg-surface-2">
-                {IMAGES[index] ? (
-                  <Image
-                    src={IMAGES[index].src}
-                    alt={IMAGES[index].alt}
-                    fill
-                    className="object-cover"
-                    sizes="(max-width: 768px) 100vw, 33vw"
-                    priority
-                  />
-                ) : (
-                  <div className={`grad g-${PALETTES[index % PALETTES.length]} absolute inset-0`} aria-hidden="true">
-                    
-                  </div>
-                )}
+                <UseCaseVisual index={index} variant={variant} />
               </div>
               <p className="px-3 pb-3 pt-4 text-[15px] leading-[1.5] text-subtle">
                 <span className="text-black">{useCase.title}</span>

@@ -54,7 +54,7 @@ export default async function IndustryPage({ params }: IndustryPageProps) {
         headline={content.hero.headline}
         description={content.hero.description}
       />
-      <IndustriesUseCases useCases={content.useCases} />
+      <IndustriesUseCases useCases={content.useCases} variant={slug === "law" ? "law" : "general"} />
       <IndustriesVoiceAgents
         label={content.voiceAgents.label}
         heading={content.voiceAgents.heading}

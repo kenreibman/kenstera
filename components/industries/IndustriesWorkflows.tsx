@@ -28,7 +28,7 @@ export function IndustriesWorkflows({
   heading = "Create multi-agent workflows with strict guardrails and track results with in depth testing and analytics",
   features = defaultFeatures,
 }: IndustriesWorkflowsProps) {
-  return <FeatureTabs label="Workflows & Testing" heading={heading} features={features} palette="iris" />;
+  return <FeatureTabs label="Workflows" heading={heading} features={features} palette="iris" />;
 }
 
 export default IndustriesWorkflows;

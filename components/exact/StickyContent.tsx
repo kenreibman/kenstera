@@ -2,6 +2,8 @@
 import { useEffect, useRef, useState, type ReactNode } from "react";
 
 export interface StickyItem {
+  /** Optional small line above the title, for example a time or a step. */
+  eyebrow?: string;
   title: string;
   body: string;
   /** Square art (588x588 at 1440). A function receives `active` so a live demo can replay. */
@@ -55,6 +57,9 @@ export function StickyContent({ items }: { items: StickyItem[] }) {
             className="relative border-b border-black/5 pb-10 lg:min-h-[500px] lg:border-r lg:px-12 lg:py-[72px] lg:pb-[72px]"
           >
             <div className="flex flex-col gap-3 px-4 pt-12 md:px-12 lg:px-0 lg:pt-0">
+              {it.eyebrow && (
+                <p className="el-trim text-[14px] leading-[21px] tracking-[0.14px] text-subtle">{it.eyebrow}</p>
+              )}
               <h3 className="el-trim text-[24px] font-normal leading-8 tracking-[-0.24px] text-black">{it.title}</h3>
               <p className="el-trim mt-[14px] text-[17px] leading-[25px] tracking-[0.17px] text-subtle">{it.body}</p>
             </div>

@@ -1,7 +1,6 @@
-import { ShaderHero } from "@/components/sections/ShaderHero";
-import { IntakeCall } from "@/components/sections/IntakeCall";
-import { IntakeBooking } from "@/components/sections/IntakeBooking";
-import { IntakeSetup } from "@/components/sections/IntakeSetup";
+import { IntakeBooking, IntakeCall, IntakeSetup } from "@/components/sections/IntakeSections";
+import { BlockSection } from "@/components/exact";
+import { Button } from "@/components/el/ui";
 import { CRMIntegrations } from "@/components/sections/CRMIntegrations";
 import { IndustriesFaqBlog } from "@/components/industries";
 import { FinalCTA } from "@/components/sections/FinalCTA";
@@ -75,7 +74,7 @@ export default function IntakePage() {
     ],
     contactPoint: {
       "@type": "ContactPoint",
-      email: "info@kenstera.com",
+      email: "contact@kenstera.com",
       contactType: "sales",
     },
   };
@@ -105,8 +104,24 @@ export default function IntakePage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: jsonLdString(faqSchema) }}
       />
-      <main className="">
-        <ShaderHero />
+      <main className="bg-page">
+        <BlockSection bare className="pb-10 pt-16 lg:pb-14 lg:pt-24">
+          <div className="grid grid-cols-12 gap-x-3">
+            <div className="contents lg:col-span-6 lg:block lg:pr-5">
+              <h1 className="el-trim col-span-12 text-[36px] leading-[42px] tracking-[-0.72px] text-black lg:text-[48px] lg:leading-[52px] lg:tracking-[-0.96px]">
+                Your firm&apos;s intake, automated.
+              </h1>
+              <div className="order-last col-span-12 mt-8 flex flex-wrap gap-2">
+                <Button href="/contact">Contact us</Button>
+              </div>
+            </div>
+            <div className="col-span-12 mt-8 flex flex-col lg:col-span-6 lg:mt-0 lg:pl-5">
+              <p className="el-trim mt-auto text-balance text-[16px] leading-6 tracking-[0.16px] text-black lg:text-pretty">
+                Capture leads, book appointments, and acquire high-value cases. Save time and grow your law firm.
+              </p>
+            </div>
+          </div>
+        </BlockSection>
         <IntakeCall />
         <IntakeBooking />
         <IntakeSetup />

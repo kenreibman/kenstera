@@ -28,7 +28,7 @@ export function IndustriesMultimodal({
   heading = "Kenstera Agents resolve issues, deliver answers, and take action - anytime, anywhere",
   features = defaultFeatures,
 }: IndustriesMultimodalProps) {
-  return <FeatureTabs label="Robust" heading={heading} features={features} palette="dusk" />;
+  return <FeatureTabs label="Capabilities" heading={heading} features={features} palette="dusk" />;
 }
 
 export default IndustriesMultimodal;

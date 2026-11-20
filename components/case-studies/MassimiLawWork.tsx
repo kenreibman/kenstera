@@ -1,7 +1,8 @@
 "use client";
 
 import Image from "next/image";
-import { StickyFeatures, type FeatureItem } from "@/components/el/motion";
+import type { FeatureItem } from "@/components/el/motion";
+import { StickyContent, fromFeatureItems } from "@/components/exact";
 
 /*
  * The MassimiLaw case study showcase. Every visual is a real screenshot of the
@@ -54,5 +55,5 @@ const ITEMS: FeatureItem[] = [
 ];
 
 export function MassimiLawWork() {
-  return <StickyFeatures items={ITEMS} />;
+  return <StickyContent items={fromFeatureItems(ITEMS)} />;
 }

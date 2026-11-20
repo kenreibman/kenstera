@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { BlockSection } from "@/components/exact";
 
 export const metadata: Metadata = {
   title: "Privacy Policy",
@@ -8,17 +9,19 @@ export const metadata: Metadata = {
 
 export default function PrivacyPage() {
   return (
-    <main className="min-h-screen bg-page">
-      <div className="mx-auto max-w-4xl px-5 py-16 sm:py-24">
-        <h1 className="text-3xl font-semibold tracking-tight text-neutral-900 sm:text-4xl">
+    <main className="bg-page">
+      <BlockSection bare className="pb-10 pt-16 lg:pb-14 lg:pt-24">
+        <h1 className="el-trim text-[36px] leading-[42px] tracking-[-0.72px] text-black lg:text-[48px] lg:leading-[52px] lg:tracking-[-0.96px]">
           Privacy Policy
         </h1>
-        <p className="mt-3 text-sm text-gray-400">Last updated: February 11, 2026</p>
+        <p className="mt-5 text-[14px] leading-[21px] text-subtle">Last updated: February 11, 2026</p>
+      </BlockSection>
 
-        <div className="mt-12 space-y-10 text-[15px] leading-relaxed text-neutral-700">
+      <BlockSection className="px-6 pb-20 pt-12 lg:px-8 lg:pb-[120px]">
+        <div className="max-w-3xl space-y-10 text-[15px] leading-relaxed text-black/80">
           {/* Introduction */}
           <section>
-            <h2 className="mb-4 text-xl font-semibold text-neutral-900">Introduction</h2>
+            <h2 className="mb-4 text-[22px] font-normal leading-[1.25] tracking-[-0.2px] text-black">Introduction</h2>
             <p>
               Kenstera LLC (&quot;Kenstera,&quot; &quot;we,&quot; &quot;us,&quot; or &quot;our&quot;) operates the website kenstera.com. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you visit our website or engage with our services.
             </p>
@@ -26,7 +29,7 @@ export default function PrivacyPage() {
 
           {/* Information We Collect */}
           <section>
-            <h2 className="mb-4 text-xl font-semibold text-neutral-900">Information We Collect</h2>
+            <h2 className="mb-4 text-[22px] font-normal leading-[1.25] tracking-[-0.2px] text-black">Information We Collect</h2>
             <p className="mb-3">We may collect the following types of information:</p>
             <ul className="list-disc space-y-2 pl-6">
               <li>
@@ -43,7 +46,7 @@ export default function PrivacyPage() {
 
           {/* How We Use Your Information */}
           <section>
-            <h2 className="mb-4 text-xl font-semibold text-neutral-900">How We Use Your Information</h2>
+            <h2 className="mb-4 text-[22px] font-normal leading-[1.25] tracking-[-0.2px] text-black">How We Use Your Information</h2>
             <p className="mb-3">We use the information we collect to:</p>
             <ul className="list-disc space-y-2 pl-6">
               <li>Respond to your inquiries and provide requested services</li>
@@ -56,7 +59,7 @@ export default function PrivacyPage() {
 
           {/* Third-Party Services */}
           <section>
-            <h2 className="mb-4 text-xl font-semibold text-neutral-900">Third-Party Services</h2>
+            <h2 className="mb-4 text-[22px] font-normal leading-[1.25] tracking-[-0.2px] text-black">Third-Party Services</h2>
             <p className="mb-3">We use the following third-party services that may collect data:</p>
             <ul className="list-disc space-y-2 pl-6">
               <li>
@@ -73,7 +76,7 @@ export default function PrivacyPage() {
 
           {/* Data Sharing */}
           <section>
-            <h2 className="mb-4 text-xl font-semibold text-neutral-900">Data Sharing</h2>
+            <h2 className="mb-4 text-[22px] font-normal leading-[1.25] tracking-[-0.2px] text-black">Data Sharing</h2>
             <p>
               We do not sell your personal information. We may share your information with trusted service providers who assist us in operating our website and conducting our business, provided they agree to keep your information confidential. We may also disclose information when required by law or to protect our rights.
             </p>
@@ -81,7 +84,7 @@ export default function PrivacyPage() {
 
           {/* Data Retention */}
           <section>
-            <h2 className="mb-4 text-xl font-semibold text-neutral-900">Data Retention</h2>
+            <h2 className="mb-4 text-[22px] font-normal leading-[1.25] tracking-[-0.2px] text-black">Data Retention</h2>
             <p>
               We retain your personal information only for as long as necessary to fulfill the purposes described in this policy, unless a longer retention period is required or permitted by law. Contact form submissions and consultation records are retained for the duration of our business relationship and a reasonable period thereafter.
             </p>
@@ -89,7 +92,7 @@ export default function PrivacyPage() {
 
           {/* Your Rights */}
           <section>
-            <h2 className="mb-4 text-xl font-semibold text-neutral-900">Your Rights</h2>
+            <h2 className="mb-4 text-[22px] font-normal leading-[1.25] tracking-[-0.2px] text-black">Your Rights</h2>
             <p className="mb-3">Depending on your jurisdiction, you may have the right to:</p>
             <ul className="list-disc space-y-2 pl-6">
               <li>Access the personal data we hold about you</li>
@@ -101,13 +104,13 @@ export default function PrivacyPage() {
             </ul>
             <p className="mt-3">
               To exercise any of these rights, please contact us at{" "}
-              <a href="mailto:info@kenstera.com" className="text-neutral-900 underline underline-offset-2 hover:text-black">info@kenstera.com</a>.
+              <a href="mailto:contact@kenstera.com" className="text-neutral-900 underline underline-offset-2 hover:text-black">contact@kenstera.com</a>.
             </p>
           </section>
 
           {/* Security */}
           <section>
-            <h2 className="mb-4 text-xl font-semibold text-neutral-900">Security</h2>
+            <h2 className="mb-4 text-[22px] font-normal leading-[1.25] tracking-[-0.2px] text-black">Security</h2>
             <p>
               We implement reasonable administrative, technical, and physical safeguards to protect your personal information from unauthorized access, use, or disclosure. However, no method of transmission over the Internet or electronic storage is completely secure, and we cannot guarantee absolute security.
             </p>
@@ -115,7 +118,7 @@ export default function PrivacyPage() {
 
           {/* Children's Privacy */}
           <section>
-            <h2 className="mb-4 text-xl font-semibold text-neutral-900">Children&apos;s Privacy</h2>
+            <h2 className="mb-4 text-[22px] font-normal leading-[1.25] tracking-[-0.2px] text-black">Children&apos;s Privacy</h2>
             <p>
               Our website and services are not directed to individuals under the age of 16. We do not knowingly collect personal information from children. If you believe we have inadvertently collected information from a child, please contact us and we will promptly delete it.
             </p>
@@ -123,7 +126,7 @@ export default function PrivacyPage() {
 
           {/* Changes to This Policy */}
           <section>
-            <h2 className="mb-4 text-xl font-semibold text-neutral-900">Changes to This Policy</h2>
+            <h2 className="mb-4 text-[22px] font-normal leading-[1.25] tracking-[-0.2px] text-black">Changes to This Policy</h2>
             <p>
               We may update this Privacy Policy from time to time. Any changes will be posted on this page with an updated &quot;Last updated&quot; date. We encourage you to review this policy periodically.
             </p>
@@ -131,14 +134,14 @@ export default function PrivacyPage() {
 
           {/* Contact */}
           <section>
-            <h2 className="mb-4 text-xl font-semibold text-neutral-900">Contact</h2>
+            <h2 className="mb-4 text-[22px] font-normal leading-[1.25] tracking-[-0.2px] text-black">Contact</h2>
             <p>
               If you have any questions about this Privacy Policy, please contact us at{" "}
-              <a href="mailto:info@kenstera.com" className="text-neutral-900 underline underline-offset-2 hover:text-black">info@kenstera.com</a>.
+              <a href="mailto:contact@kenstera.com" className="text-neutral-900 underline underline-offset-2 hover:text-black">contact@kenstera.com</a>.
             </p>
           </section>
         </div>
-      </div>
+      </BlockSection>
     </main>
   );
 }

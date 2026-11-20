@@ -1,4 +1,4 @@
-import { Container } from "@/components/el/ui";
+import { AudienceSlider, BlockSection } from "@/components/exact";
 import { UseCase } from "@/lib/industry-content";
 import { UseCaseVisual, type UseCaseVariant } from "./UseCaseVisuals";
 
@@ -26,26 +26,20 @@ interface IndustriesUseCasesProps {
   variant?: UseCaseVariant;
 }
 
+const sentence = (s: string) => s.charAt(0).toUpperCase() + s.slice(1);
+
+/** The tile slider block: square animated demos with a title and a short line under each. */
 export function IndustriesUseCases({ useCases = defaultUseCases, variant = "general" }: IndustriesUseCasesProps) {
   return (
-    <section className="pb-16 sm:pb-24">
-      <Container framed>
-        <div className="grid gap-3 md:grid-cols-3">
-          {useCases.map((useCase, index) => (
-            <div key={useCase.title} className="flex flex-col rounded-2xl bg-surface p-2">
-              <div className="relative aspect-[4/5] overflow-hidden rounded-xl bg-surface-2">
-                <UseCaseVisual index={index} variant={variant} />
-              </div>
-              <p className="px-3 pb-3 pt-4 text-[15px] leading-[1.5] text-subtle">
-                <span className="text-black">{useCase.title}</span>
-                {", "}
-                {useCase.description}
-              </p>
-            </div>
-          ))}
-        </div>
-      </Container>
-    </section>
+    <BlockSection className="px-3 pb-20 pt-10 lg:pb-[120px]">
+      <AudienceSlider
+        items={useCases.map((u, i) => ({
+          title: u.title,
+          description: sentence(u.description),
+          media: <UseCaseVisual index={i} variant={variant} />,
+        }))}
+      />
+    </BlockSection>
   );
 }
 

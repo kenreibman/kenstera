@@ -76,6 +76,7 @@ const navItems = [
   },
   { href: "/case-studies", label: "Case Studies" },
   { href: "/pricing", label: "Pricing" },
+  { href: "/team", label: "Team" },
 ];
 
 function Wordmark() {

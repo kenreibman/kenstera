@@ -1,85 +1,61 @@
-import { ArrowRight } from 'lucide-react'
-import Link from 'next/link'
+import { Button } from "@/components/el/ui"
+import { BlockSection, TITLE_CLASS, TitleBlock } from "@/components/exact"
 
 export function CRMIntegrations() {
   const integrations = [
-    { name: 'Clio', logo: <ClioLogo /> },
-    { name: 'Litify', logo: <LitifyLogo /> },
-    { name: 'Filevine', logo: <FilevineLogo /> },
-    { name: 'MyCase', logo: <MyCaseLogo /> },
-    { name: 'Salesforce', logo: <SalesforceLogo /> },
-    { name: 'Lawmatics', logo: <LawmaticsLogo /> },
+    { name: "Clio", logo: <ClioLogo /> },
+    { name: "Litify", logo: <LitifyLogo /> },
+    { name: "Filevine", logo: <FilevineLogo /> },
+    { name: "MyCase", logo: <MyCaseLogo /> },
+    { name: "Salesforce", logo: <SalesforceLogo /> },
+    { name: "Lawmatics", logo: <LawmaticsLogo /> },
   ]
 
   return (
-    <section className="relative py-20 md:py-28">
-      {/* Dotted line separator */}
-      <div className="absolute top-0 left-0 right-0 h-px bg-[repeating-linear-gradient(90deg,transparent,transparent_4px,#e5e7eb_4px,#e5e7eb_8px)]" />
+    <>
+      <BlockSection className="px-6 pb-12 pt-20 lg:px-8 lg:pb-14 lg:pt-[120px]">
+        <TitleBlock eyebrow="Integrations">
+          <h2 className={TITLE_CLASS}>Connect to your tech stack and CRM</h2>
+        </TitleBlock>
+        <p className="el-trim mx-auto mt-5 max-w-[560px] px-5 text-center text-[16px] leading-6 tracking-[0.16px] text-subtle">
+          Seamlessly connect to your existing tools and simplify case management, follow-ups, and lead conversion. Every lead flows directly into your system.
+        </p>
+      </BlockSection>
 
-      <div className="w-full max-w-7xl mx-auto px-5">
-        {/* Header */}
-        <div className="text-center mb-12">
-          <h2 className="text-[clamp(32px,5vw,52px)] font-bold leading-[1.1] tracking-tight text-gray-900 mb-5">
-            Connect to Your Tech Stack and CRM
-          </h2>
-
-          <p className="text-lg text-gray-600 max-w-2xl mx-auto leading-relaxed">
-            Seamlessly connect to your existing tools and simplify case management, follow-ups, and lead conversion. Every lead flows directly into your system.
-          </p>
+      <BlockSection className="p-0">
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6">
+          {integrations.map((integration) => (
+            <div
+              key={integration.name}
+              className="flex h-28 items-center justify-center border-b border-r border-black/5 px-4 [&:nth-child(2n)]:border-r-0 sm:[&:nth-child(2n)]:border-r sm:[&:nth-child(3n)]:border-r-0 lg:[&:nth-child(3n)]:border-r lg:[&:nth-child(6n)]:border-r-0"
+              aria-label={integration.name}
+            >
+              {integration.logo}
+            </div>
+          ))}
         </div>
-
-        {/* Integration card */}
-        <div className="relative rounded-3xl overflow-hidden">
-          {/* Gradient background */}
-          <div className="absolute inset-0 bg-gradient-to-br from-slate-100 via-gray-100 to-slate-200" />
-
-          <div className="relative p-8 md:p-12">
-            {/* Logo grid */}
-            <div className="grid grid-cols-3 md:grid-cols-6 gap-4 mb-10">
-              {integrations.map((integration, i) => (
-                <div
-                  key={i}
-                  className="bg-white rounded-2xl p-5 flex items-center justify-center h-20 shadow-sm hover:shadow-md transition-shadow"
-                >
-                  {integration.logo}
-                </div>
-              ))}
-            </div>
-
-            {/* Features row */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-10">
-              <div>
-                <h3 className="text-lg font-semibold text-gray-900 mb-2">Custom Integration</h3>
-                <p className="text-[15px] text-gray-600 leading-relaxed">
-                  Our team personally codes and connects your existing tools with tailored integrations and automated data sync.
-                </p>
-              </div>
-              <div>
-                <h3 className="text-lg font-semibold text-gray-900 mb-2">Real-Time Sync</h3>
-                <p className="text-[15px] text-gray-600 leading-relaxed">
-                  Client data, appointments, and conversations sync instantly across all your platforms. No manual entry required.
-                </p>
-              </div>
-            </div>
-
-            {/* Footer row */}
-            <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
-              <Link
-                href="/contact"
-                className="inline-flex items-center gap-2 text-gray-900 font-medium hover:gap-3 transition-all"
-              >
-                Book a Demo
-                <ArrowRight className="w-4 h-4" />
-              </Link>
-            </div>
+        <div className="grid gap-8 px-6 py-12 md:grid-cols-2 lg:px-8">
+          <div>
+            <h3 className="mb-[18px] text-[24px] font-normal leading-[31.2px] tracking-[-0.24px] text-black">Custom integration</h3>
+            <p className="text-[16px] leading-[22.4px] tracking-[0.16px] text-[#6e6e6e]">
+              Our team personally codes and connects your existing tools with tailored integrations and automated data sync.
+            </p>
+          </div>
+          <div>
+            <h3 className="mb-[18px] text-[24px] font-normal leading-[31.2px] tracking-[-0.24px] text-black">Real-time sync</h3>
+            <p className="text-[16px] leading-[22.4px] tracking-[0.16px] text-[#6e6e6e]">
+              Client data, appointments, and conversations sync instantly across all your platforms. No manual entry required.
+            </p>
           </div>
         </div>
-      </div>
-    </section>
+        <div className="border-t border-black/5 px-6 py-8 lg:px-8">
+          <Button href="/contact">Book a Demo</Button>
+        </div>
+      </BlockSection>
+    </>
   )
 }
 
-// Logo components
 function ClioLogo() {
   return (
     <div className="flex flex-col md:flex-row items-center gap-1.5">

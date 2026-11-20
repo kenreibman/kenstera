@@ -1,13 +1,13 @@
 "use client";
 
-import { useState } from "react";
-import { Section, GradientCard, type Palette } from "@/components/el/ui";
+import { BlockSection, StickyContent, TITLE_CLASS, TitleBlock } from "@/components/exact";
+import type { Palette } from "@/components/el/ui";
 import { Feature } from "@/lib/industry-content";
 
 /**
- * Shared layout for the "Robust" and "Workflows & Testing" sections:
- * label + headline, a selectable feature list, and a gradient panel that
- * shows the selected feature as a white card.
+ * Shared layout for the "Capabilities" and "Workflows" sections: a title block, then sticky rows
+ * where each feature's title and copy scroll on the left while a painted square on the right swaps.
+ * The square shows a small drawn card for the feature, not a repeat of its text.
  */
 export function FeatureTabs({
   label,
@@ -20,50 +20,36 @@ export function FeatureTabs({
   features: Feature[];
   palette: Palette;
 }) {
-  const [activeIndex, setActiveIndex] = useState(0);
-  const active = features[activeIndex];
-
   return (
-    <Section>
-      <p className="mb-3 text-[16px] text-subtle">{label}</p>
-      <h2 className="max-w-3xl text-[32px] leading-[1.15] text-black sm:text-[40px]">{heading}</h2>
-
-      <div className="mt-14 grid gap-3 lg:grid-cols-2">
-        <div className="flex flex-col gap-1">
-          {features.map((feature, index) => {
-            const isActive = activeIndex === index;
-            return (
-              <button
-                key={feature.title}
-                type="button"
-                aria-expanded={isActive}
-                onClick={() => setActiveIndex(index)}
-                className={`rounded-2xl p-6 text-left transition-colors ${isActive ? "bg-surface" : "hover:bg-surface/60"}`}
-              >
-                <span className={`block text-[17px] ${isActive ? "text-black" : "text-black/60"}`}>{feature.title}</span>
-                <span className={`grid transition-[grid-template-rows] duration-300 ease-out ${isActive ? "grid-rows-[1fr]" : "grid-rows-[0fr]"}`}>
-                  <span className="overflow-hidden">
-                    <span className="block pt-2 text-[15px] leading-[1.5] text-subtle">{feature.description}</span>
-                  </span>
-                </span>
-              </button>
-            );
-          })}
-        </div>
-
-        <GradientCard palette={palette} className="min-h-[380px] lg:min-h-[480px]">
-          {active && (
-            <div
-              key={active.title}
-              className="fade-in-up ring-hairline w-full max-w-[400px] rounded-2xl bg-white p-6 shadow-[0_24px_60px_-24px_rgba(0,0,0,0.35)]"
-            >
-              <p className="text-[13px] text-subtle">{label}</p>
-              <p className="mt-2 text-[17px] leading-[1.35] text-black">{active.title}</p>
-              <p className="mt-2 text-[14px] leading-[1.5] text-subtle">{active.description}</p>
-            </div>
-          )}
-        </GradientCard>
-      </div>
-    </Section>
+    <>
+      <BlockSection className="px-6 pb-16 pt-20 lg:px-8 lg:pb-20 lg:pt-[120px]">
+        <TitleBlock eyebrow={label}>
+          <h2 className={TITLE_CLASS}>{heading}</h2>
+        </TitleBlock>
+      </BlockSection>
+      <BlockSection className="p-0">
+        <StickyContent
+          items={features.map((f, i) => ({
+            title: f.title,
+            body: f.description,
+            media: () => (
+              <div className={`grad g-${palette} flex h-full min-h-[380px] w-full items-center justify-center p-6 lg:min-h-0 lg:p-10`}>
+                <div className="w-full max-w-[360px] rounded-2xl bg-white p-6 shadow-[0_24px_60px_-24px_rgba(0,0,0,0.35)]">
+                  <p className="text-[13px] text-subtle">
+                    {label} · {String(i + 1).padStart(2, "0")}
+                  </p>
+                  <p className="mt-2 text-[17px] leading-[1.35] text-black">{f.title}</p>
+                  <div className="mt-5 space-y-2.5" aria-hidden="true">
+                    <div className="h-2 w-full rounded-full bg-surface" />
+                    <div className="h-2 w-5/6 rounded-full bg-surface" />
+                    <div className="h-2 w-2/3 rounded-full bg-surface" />
+                  </div>
+                </div>
+              </div>
+            ),
+          }))}
+        />
+      </BlockSection>
+    </>
   );
 }

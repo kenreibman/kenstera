@@ -1,6 +1,7 @@
 "use client";
 
-import { StickyFeatures, type FeatureItem } from "@/components/el/motion";
+import type { FeatureItem } from "@/components/el/motion";
+import { StickyContent, fromFeatureItems } from "@/components/exact";
 import { LiveCalls, LiveReview, LiveThread, LiveVoiceCall } from "./live";
 
 const ITEMS: FeatureItem[] = [
@@ -35,5 +36,5 @@ const ITEMS: FeatureItem[] = [
 ];
 
 export function ExampleTimeline() {
-  return <StickyFeatures items={ITEMS} />;
+  return <StickyContent items={fromFeatureItems(ITEMS, { labels: true })} />;
 }

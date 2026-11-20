@@ -1,7 +1,8 @@
 "use client";
 
 import { Check, Search, Sparkles, Star } from "lucide-react";
-import { StickyFeatures, useSequence, type FeatureItem } from "@/components/el/motion";
+import { useSequence, type FeatureItem } from "@/components/el/motion";
+import { StickyContent, fromFeatureItems } from "@/components/exact";
 import { LiveWebsite } from "@/components/home/live";
 
 /*
@@ -228,5 +229,5 @@ const ITEMS: FeatureItem[] = [
 ];
 
 export function TheTickSuitWork() {
-  return <StickyFeatures items={ITEMS} />;
+  return <StickyContent items={fromFeatureItems(ITEMS)} />;
 }

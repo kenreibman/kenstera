@@ -7,10 +7,10 @@ export function HomeCta() {
     <CtaBand id="contact" title="Let&rsquo;s grow your business">
       <Button href="/contact">Contact us</Button>
       <a
-        href="mailto:info@kenstera.com"
+        href="mailto:contact@kenstera.com"
         className="inline-flex h-11 items-center rounded-full bg-white px-5 text-[16px] text-black shadow-[0_0_0_0.5px_rgba(0,0,0,0.125)] transition-[background-color] duration-150 hover:bg-surface"
       >
-        info@kenstera.com
+        contact@kenstera.com
       </a>
     </CtaBand>
   );

@@ -5,3 +5,5 @@ export { BentoGrid, type BentoCard } from "./BentoGrid";
 export { ElFaq, type FaqItem } from "./Faq";
 export { CtaBand } from "./CtaBand";
 export { AudienceSlider, type AudienceItem } from "./AudienceSlider";
+export { fromFeatureItems } from "./adapters";
+export { SimpleHeader } from "./SimpleHeader";

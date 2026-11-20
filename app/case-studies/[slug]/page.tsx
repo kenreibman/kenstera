@@ -15,8 +15,7 @@ import { CaseStudySidebar } from "@/components/case-studies/CaseStudySidebar";
 import { HomeCta } from "@/components/home";
 import { OG_IMAGE, OG_IMAGE_URL, OG_IMAGE_ABSOLUTE_URL, SITE_URL, jsonLdString } from "@/lib/seo";
 import { JsonLd } from "@/components/seo/JsonLd";
-import { Container, SectionHeader } from "@/components/el/ui";
-import { Reveal } from "@/components/el/motion";
+import { BlockSection, TITLE_CLASS, TitleBlock } from "@/components/exact";
 import { TheTickSuitWork } from "@/components/case-studies/TheTickSuitWork";
 import { MassimiLawWork } from "@/components/case-studies/MassimiLawWork";
 import { breadcrumbSchema } from "@/lib/schema";
@@ -121,82 +120,77 @@ export default async function CaseStudyDetailPage({ params }: PageProps) {
       <JsonLd
         data={breadcrumbSchema([{ name: "Case studies", path: "/case-studies" }, { name: study.clientName || study.title, path: `/case-studies/${slug}` }])}
       />
-      <main className="bg-page min-h-screen">
-        {/* Hero Section */}
-        <section className="relative">
-          <div className="relative mx-auto max-w-[1184px] px-5 sm:px-8 pt-14 sm:pt-20 pb-12">
-            {study.category && <p className="mb-3 text-[15px] text-subtle">{study.category}</p>}
-            {/* Title */}
-            <h1 className="text-[36px] sm:text-[48px] text-black mb-6 max-w-3xl leading-[1.1]">
-              {study.title}
-            </h1>
-            <p className="max-w-2xl text-[16px] leading-[1.5] text-black/80 mb-10">{study.description}</p>
+      <main className="bg-page">
+        {/* Hero: borderless block, headline left, summary from column 8 */}
+        <BlockSection bare className="pb-10 pt-16 lg:pb-14 lg:pt-24">
+          <div className="grid grid-cols-12 gap-x-3">
+            <div className="col-span-12 lg:col-span-7 lg:pr-5">
+              {study.category && (
+                <p className="el-trim mb-5 text-[14px] leading-[21px] tracking-[0.14px] text-subtle">{study.category}</p>
+              )}
+              <h1 className="el-trim text-[32px] leading-[38px] tracking-[-0.64px] text-black lg:text-[48px] lg:leading-[52px] lg:tracking-[-0.96px]">
+                {study.title}
+              </h1>
+            </div>
+            <div className="col-span-12 mt-8 flex flex-col lg:col-span-5 lg:mt-0 lg:pl-5">
+              <p className="el-trim mt-auto text-balance text-[16px] leading-6 tracking-[0.16px] text-black lg:text-pretty">
+                {study.description}
+              </p>
+            </div>
+          </div>
+        </BlockSection>
 
-            {study.heroImage && (
-              <div className="mb-10 rounded-2xl bg-surface p-2 sm:p-3">
+        {study.heroImage && (
+          <BlockSection className="p-0" containerClassName="mt-[52px]">
+            <div className="px-4 py-4">
+              <div className="overflow-hidden rounded-3xl bg-[#f7f4f2]">
                 <Image
                   src={study.heroImage}
                   alt={study.title}
                   width={1440}
                   height={900}
                   priority
-                  sizes="(min-width: 1184px) 1120px, 100vw"
-                  className="h-auto w-full rounded-xl ring-hairline"
+                  sizes="(min-width: 1184px) 1144px, 100vw"
+                  className="h-auto w-full"
                 />
               </div>
-            )}
+            </div>
+          </BlockSection>
+        )}
 
-            {/* Stats Row */}
+        {(study.stats.length > 0 || study.pullQuote) && (
+          <BlockSection className="px-6 py-14 lg:px-8 lg:py-20">
             {study.stats.length > 0 && (
-              <div className="flex flex-wrap gap-6 sm:gap-16 mb-10">
+              <div className="mb-10 flex flex-wrap gap-6 sm:gap-16">
                 {study.stats.map((stat, i) => (
                   <div key={i}>
-                    <div className="text-3xl sm:text-4xl font-light text-black tracking-tight">
-                      {stat.value}
-                    </div>
-                    <div className="text-sm text-muted-foreground mt-1">
-                      {stat.label}
-                    </div>
+                    <div className="text-3xl font-light tracking-tight text-black sm:text-4xl">{stat.value}</div>
+                    <div className="mt-1 text-sm text-muted-foreground">{stat.label}</div>
                   </div>
                 ))}
               </div>
             )}
-
-            {/* Pull Quote + Attribution */}
             {study.pullQuote && (
-              <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-6 sm:gap-10">
-                <p className="text-base sm:text-lg text-foreground/80 leading-relaxed max-w-2xl">
-                  {study.pullQuote}
-                </p>
-
-                <div className="flex items-center gap-3 flex-shrink-0">
+              <div className="flex flex-col justify-between gap-6 sm:flex-row sm:items-end sm:gap-10">
+                <p className="max-w-2xl text-base leading-relaxed text-foreground/80 sm:text-lg">{study.pullQuote}</p>
+                <div className="flex flex-shrink-0 items-center gap-3">
                   {study.clientPhoto && (
-                    <div className="relative w-12 h-12 rounded-full overflow-hidden flex-shrink-0 border border-border">
-                      <Image
-                        src={study.clientPhoto}
-                        alt={study.clientName}
-                        fill
-                        className="object-cover object-top"
-                        sizes="48px"
-                      />
+                    <div className="relative h-12 w-12 flex-shrink-0 overflow-hidden rounded-full border border-border">
+                      <Image src={study.clientPhoto} alt={study.clientName} fill className="object-cover object-top" sizes="48px" />
                     </div>
                   )}
                   <div>
-                    <div className="text-sm font-semibold text-foreground">
-                      {study.clientName}
-                    </div>
-                    <div className="text-sm text-muted-foreground">
-                      {study.clientTitle}
-                    </div>
+                    <div className="text-sm font-semibold text-foreground">{study.clientName}</div>
+                    <div className="text-sm text-muted-foreground">{study.clientTitle}</div>
                   </div>
                 </div>
               </div>
             )}
-          </div>
-        </section>
+          </BlockSection>
+        )}
 
         {/* Two-column Content Section */}
-        <div className="mx-auto max-w-[1184px] px-5 sm:px-8 py-10 sm:py-14 border-t border-hairline">
+        <BlockSection className="px-6 py-14 lg:px-8 lg:py-20">
           {/* Mobile back link */}
           <div className="lg:hidden mb-8">
             <Link
@@ -249,23 +243,20 @@ export default async function CaseStudyDetailPage({ params }: PageProps) {
               </article>
             </div>
           </div>
-        </div>
+        </BlockSection>
 
         {WORK[slug] && (
-          <section className="border-t border-hairline">
-            <Container framed>
-              <div className="py-16 sm:py-24">
-                <Reveal>
-                  <SectionHeader
-                    label="Inside the work"
-                    title={WORK[slug].title}
-                    description={<p>{WORK[slug].note}</p>}
-                  />
-                </Reveal>
-                <div className="mt-10 sm:mt-16">{WORK[slug].node}</div>
-              </div>
-            </Container>
-          </section>
+          <>
+            <BlockSection className="px-6 pb-16 pt-20 lg:px-8 lg:pb-20 lg:pt-[120px]">
+              <TitleBlock eyebrow="Inside the work">
+                <h2 className={TITLE_CLASS}>{WORK[slug].title}</h2>
+              </TitleBlock>
+              <p className="el-trim mx-auto mt-5 max-w-[560px] px-5 text-center text-[16px] leading-6 tracking-[0.16px] text-subtle">
+                {WORK[slug].note}
+              </p>
+            </BlockSection>
+            <BlockSection className="p-0">{WORK[slug].node}</BlockSection>
+          </>
         )}
 
         <HomeCta />

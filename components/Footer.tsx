@@ -8,6 +8,7 @@ const columns = [
       { label: "Services", href: "/services" },
       { label: "Case Studies", href: "/case-studies" },
       { label: "Pricing", href: "/pricing" },
+      { label: "Team", href: "/team" },
       { label: "Contact Us", href: "/contact" },
     ],
   },
@@ -21,7 +22,7 @@ const columns = [
   {
     title: "Company",
     links: [
-      { label: "info@kenstera.com", href: "mailto:info@kenstera.com" },
+      { label: "contact@kenstera.com", href: "mailto:contact@kenstera.com" },
       { label: "Privacy Policy", href: "/privacy" },
       { label: "Terms of Service", href: "/terms" },
       { label: "Cookie Policy", href: "/cookies" },

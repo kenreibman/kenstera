@@ -1,8 +1,6 @@
 "use client";
 
-import { useState } from "react";
-import { Plus } from "lucide-react";
-import { Button, Section } from "@/components/el/ui";
+import { BlockSection, ElFaq } from "@/components/exact";
 import { FAQ } from "@/lib/industry-content";
 
 const defaultFaqs: FAQ[] = [
@@ -37,46 +35,12 @@ interface IndustriesFaqBlogProps {
   faqs?: FAQ[];
 }
 
-/** FAQ section: heading on the left, accordion on the right. */
+/** FAQ block, the same one the home page uses. */
 export function IndustriesFaqBlog({ faqs = defaultFaqs }: IndustriesFaqBlogProps) {
-  const [openIndex, setOpenIndex] = useState<number | null>(null);
-
   return (
-    <Section>
-      <div className="grid gap-10 md:grid-cols-2 md:gap-12">
-        <div className="md:sticky md:top-24 md:self-start">
-          <p className="mb-3 text-[15px] text-subtle">Questions, answered</p>
-          <h2 className="text-[32px] leading-[1.15] text-black sm:text-[40px]">Frequently asked questions</h2>
-          <Button href="/contact" variant="secondary" className="mt-6">
-            Contact Us
-          </Button>
-        </div>
-
-        <div className="border-t border-hairline">
-          {faqs.map((faq, index) => {
-            const open = openIndex === index;
-            return (
-              <div key={faq.question} className="border-b border-hairline">
-                <button
-                  type="button"
-                  aria-expanded={open}
-                  onClick={() => setOpenIndex(open ? null : index)}
-                  className="flex w-full items-center justify-between gap-4 py-5 text-left"
-                >
-                  <span className="text-[16px] text-black">{faq.question}</span>
-                  <Plus className={`h-4 w-4 flex-none text-subtle transition-transform duration-300 ${open ? "rotate-45" : ""}`} />
-                </button>
-                <div className={`grid transition-[grid-template-rows] duration-300 ease-out ${open ? "grid-rows-[1fr]" : "grid-rows-[0fr]"}`}>
-                  <div className="overflow-hidden">
-                    <p className="pb-5 pr-8 text-[15px] leading-[1.6] text-subtle">{faq.answer}</p>
-                  </div>
-                </div>
-              </div>
-            );
-          })}
-        </div>
-      </div>
-    </Section>
+    <BlockSection id="faq">
+      <ElFaq items={faqs.map((f) => ({ q: f.question, a: <p>{f.answer}</p> }))} />
+    </BlockSection>
   );
 }
 

@@ -279,7 +279,7 @@ export function MainNavigation() {
               <div key={item.href} className="group relative">
                 <Link
                   href={item.href}
-                  className="-mx-3 flex h-9 items-center gap-1 rounded-full px-3 text-[18px] text-black transition-colors duration-150 hover:bg-black/5"
+                  className="-mx-3 flex h-9 items-center gap-1 rounded-full px-3 text-[14px] text-black transition-colors duration-150 hover:bg-black/5"
                 >
                   {item.label}
                   {item.hasDropdown && (

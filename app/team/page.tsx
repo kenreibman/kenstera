@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { ArrowUpRight } from "lucide-react";
 import { Button } from "@/components/el/ui";
 import { BlockSection, CtaBand } from "@/components/exact";
 import { JsonLd } from "@/components/seo/JsonLd";
@@ -34,6 +35,7 @@ export default function TeamPage() {
             name: m.name,
             jobTitle: m.role,
             worksFor: { "@id": ORG_ID },
+            ...(m.links.length ? { sameAs: m.links.map((l) => l.href) } : {}),
           })),
         ]}
       />
@@ -66,6 +68,23 @@ export default function TeamPage() {
                 <div className="mt-5 px-3">
                   <h2 className="text-[18px] font-normal leading-[25.2px] tracking-normal text-black">{m.name}</h2>
                   <p className="text-[14px] leading-[19.6px] text-[#6e6e6e]">{m.role}</p>
+                  {m.links.length > 0 && (
+                    <div className="mt-4 flex flex-wrap gap-2">
+                      {m.links.map((l) => (
+                        <a
+                          key={l.href}
+                          href={l.href}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          aria-label={`${m.name} on ${l.label} (opens in a new tab)`}
+                          className="inline-flex h-8 items-center gap-1 rounded-full bg-white px-3 text-[13px] text-black shadow-[0_0_0_0.5px_rgba(0,0,0,0.125)] transition-[background-color] duration-150 hover:bg-surface"
+                        >
+                          {l.label}
+                          <ArrowUpRight className="h-3.5 w-3.5" strokeWidth={1.6} aria-hidden="true" />
+                        </a>
+                      ))}
+                    </div>
+                  )}
                 </div>
               </li>
             ))}

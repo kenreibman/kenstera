@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Menu, X, ChevronDown, ChevronRight, Sparkles } from "lucide-react";
 import { buttonClass } from "@/components/el/ui";
 
@@ -202,6 +202,8 @@ export function MainNavigation() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [expandedItem, setExpandedItem] = useState<string | null>(null);
   const [scrolled, setScrolled] = useState(false);
+  const [menuTop, setMenuTop] = useState(64);
+  const headerRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 4);
@@ -233,11 +235,37 @@ export function MainNavigation() {
     setExpandedItem(null);
   };
 
+  const openMobileMenu = () => {
+    // The announcement bar scrolls away, so anchor the menu to wherever the header actually sits.
+    if (headerRef.current) setMenuTop(Math.round(headerRef.current.getBoundingClientRect().bottom));
+    setMobileMenuOpen(true);
+  };
+
   return (
     <>
+      {/* Announcement bar: a soft peach wash, centered message and a small white pill. The 20px strip under
+          it shows in the corners of the rounded header sheet. */}
+      <div
+        className="relative flex min-h-12 items-center justify-center px-4 py-2"
+        style={{ background: "radial-gradient(55% 260% at 50% 0%, #f8e5d9 0%, #f5f3f1 75%)" }}
+      >
+        <p className="text-[13px] leading-[18px] text-[#59544f] sm:text-[14px]">
+          <span className="text-black">Plans start at $599 a month.</span>
+        </p>
+        <span aria-hidden="true" className="mx-3 hidden h-4 w-px bg-black/15 sm:block" />
+        <Link
+          href="/pricing"
+          className="ml-3 inline-flex h-8 items-center rounded-full bg-white px-3 text-[13px] text-black shadow-[0_0_0_0.5px_rgba(0,0,0,0.125)] transition-[background-color] duration-150 hover:bg-surface sm:ml-0"
+        >
+          See pricing
+        </Link>
+        <div aria-hidden="true" className="absolute inset-x-0 top-full h-5 bg-[#f5f3f1]" />
+      </div>
+
       <header
-        className={`main-navigation sticky top-0 z-50 bg-page/90 backdrop-blur-md transition-shadow ${
-          scrolled ? "shadow-[0_1px_0_rgba(0,0,0,0.06)]" : ""
+        ref={headerRef}
+        className={`main-navigation sticky top-0 z-50 bg-page transition-[border-radius,box-shadow] duration-200 ${
+          scrolled ? "shadow-[0_1px_0_rgba(0,0,0,0.05)]" : "rounded-t-[20px]"
         }`}
       >
         <div className="mx-5 flex h-16 max-w-[1178px] items-center min-[1218px]:mx-auto">
@@ -265,6 +293,9 @@ export function MainNavigation() {
 
           {/* Desktop right */}
           <div className="ml-auto hidden items-center gap-2 md:flex">
+            <Link href="/contact" className={buttonClass("secondary")}>
+              Book a call
+            </Link>
             <Link href="/contact" className={buttonClass("primary")}>
               Contact Us
             </Link>
@@ -277,7 +308,7 @@ export function MainNavigation() {
             </Link>
             <button
               type="button"
-              onClick={() => (mobileMenuOpen ? closeMobileMenu() : setMobileMenuOpen(true))}
+              onClick={() => (mobileMenuOpen ? closeMobileMenu() : openMobileMenu())}
               className="flex h-10 w-10 items-center justify-center rounded-full hover:bg-black/5"
               aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
               aria-expanded={mobileMenuOpen}
@@ -293,7 +324,8 @@ export function MainNavigation() {
           role="dialog"
           aria-modal="true"
           aria-label="Site navigation"
-          className="fixed bottom-0 left-0 right-0 top-16 z-50 flex flex-col bg-page md:hidden"
+          className="fixed bottom-0 left-0 right-0 z-50 flex flex-col bg-page md:hidden"
+          style={{ top: menuTop }}
         >
           <nav className="flex-1 overflow-y-auto px-5">
             {navItems.map((item) => (

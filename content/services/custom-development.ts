@@ -62,7 +62,7 @@ export const customDevelopmentContent: IndustryContent = {
       {
         title: "Rapid prototyping",
         description:
-          "Working prototypes in days, not months. See your tool before committing to a full build. Iterate based on real usage, not guesses.",
+          "Working prototypes early, so you can see your tool before committing to a full build. Iterate based on real usage, not guesses.",
       },
       {
         title: "Production-grade delivery",

@@ -75,6 +75,7 @@ const navItems = [
     dropdown: servicesDropdown
   },
   { href: "/case-studies", label: "Case Studies" },
+  { href: "/pricing", label: "Pricing" },
 ];
 
 function Wordmark() {
@@ -238,18 +239,18 @@ export function MainNavigation() {
           scrolled ? "shadow-[0_1px_0_rgba(0,0,0,0.06)]" : ""
         }`}
       >
-        <div className="mx-auto flex h-16 max-w-[1180px] items-center gap-8 px-5 sm:px-8">
-          <Link href="/" className="flex items-center" aria-label="Kenstera home">
+        <div className="mx-5 flex h-16 max-w-[1178px] items-center min-[1218px]:mx-auto">
+          <Link href="/" className="-mx-3 flex h-9 items-center rounded-full px-3 transition-colors duration-150 hover:bg-black/5" aria-label="Kenstera home">
             <Wordmark />
           </Link>
 
           {/* Desktop Nav */}
-          <nav aria-label="Primary" className="hidden items-center gap-1 md:flex">
+          <nav aria-label="Primary" className="ml-9 hidden items-center gap-x-7 md:flex xl:gap-x-9">
             {navItems.map((item) => (
               <div key={item.href} className="group relative">
                 <Link
                   href={item.href}
-                  className="flex items-center gap-1 rounded-full px-3 py-2 text-[14px] text-black transition-colors hover:bg-black/5"
+                  className="-mx-3 flex h-9 items-center gap-1 rounded-full px-3 text-[18px] text-black transition-colors duration-150 hover:bg-black/5"
                 >
                   {item.label}
                   {item.hasDropdown && (

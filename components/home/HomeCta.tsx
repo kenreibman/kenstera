@@ -1,31 +1,18 @@
-import { Button, Container } from "@/components/el/ui";
+import { Button } from "@/components/el/ui";
+import { CtaBand } from "@/components/exact";
 
-/** Closing card: a wide grainy gradient with white type, like elevenlabs.io's story cards. */
+/** Closing band: full-width hairlines, headline left, buttons right. */
 export function HomeCta() {
   return (
-    <section id="contact" className="border-t border-hairline">
-      <Container framed>
-        <div className="py-20 sm:py-28">
-          <div className="grad g-ember flex min-h-[380px] flex-col justify-end rounded-2xl p-8 sm:p-12">
-            <p className="text-[16px] text-white/80">Get in touch</p>
-            <h2 className="mt-2 max-w-xl text-[36px] leading-[1.1] text-white sm:text-[48px]">
-              Let&rsquo;s grow your business
-            </h2>
-            <div className="mt-8 flex flex-wrap gap-2">
-              <Button href="/contact" variant="light">
-                Contact us
-              </Button>
-              <a
-                href="mailto:info@kenstera.com"
-                className="inline-flex h-11 items-center rounded-full px-5 text-[16px] text-white ring-1 ring-white/40 transition-colors hover:bg-white/10"
-              >
-                info@kenstera.com
-              </a>
-            </div>
-          </div>
-        </div>
-      </Container>
-    </section>
+    <CtaBand id="contact" title="Let&rsquo;s grow your business">
+      <Button href="/contact">Contact us</Button>
+      <a
+        href="mailto:info@kenstera.com"
+        className="inline-flex h-11 items-center rounded-full bg-white px-5 text-[16px] text-black shadow-[0_0_0_0.5px_rgba(0,0,0,0.125)] transition-[background-color] duration-150 hover:bg-surface"
+      >
+        info@kenstera.com
+      </a>
+    </CtaBand>
   );
 }
 

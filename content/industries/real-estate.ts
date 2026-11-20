@@ -115,9 +115,9 @@ export const realEstateContent: IndustryContent = {
     ],
   },
   gettingStarted: {
-    heading: "Go live this week",
+    heading: "Hands-on setup, then we manage it",
     description:
-      "Our real estate team helps you connect lead sources, integrate your CRM, and configure qualification criteria, so you can start converting more leads immediately.",
+      "Our real estate team helps you connect lead sources, integrate your CRM, and configure qualification criteria, so every lead gets followed up consistently.",
   },
   faqs: [
     {

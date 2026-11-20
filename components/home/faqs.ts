@@ -11,7 +11,7 @@ export const HOME_FAQS: HomeFaq[] = [
   {
     question: "When am I going to start seeing results?",
     answer:
-      "This will completely depend on what else you're doing for advertising, how long you've been in business, the quality of your work, and of course that you commit to using our system. If you think you're going to close your eyes and pay us $397 a month to solve all your problems, we're probably not the right fit for you. We cannot stress this enough — you have to be doing multiple forms of advertising. Kenstera is meant to provide you a simple, yet extremely effective foundational marketing system to help grow and expand your business. We're here to build your online business foundation, not perform miracles.",
+      "This will completely depend on what else you're doing for advertising, how long you've been in business, the quality of your work, and of course that you commit to using our system. If you think you're going to close your eyes and pay us $599 a month to solve all your problems, we're probably not the right fit for you. We cannot stress this enough — you have to be doing multiple forms of advertising. Kenstera is meant to provide you a simple, yet extremely effective foundational marketing system to help grow and expand your business. We're here to build your online business foundation, not perform miracles.",
   },
   {
     question: "Can you explain how you help me grow my business?",

@@ -110,7 +110,7 @@ export const healthcareContent: IndustryContent = {
     ],
   },
   gettingStarted: {
-    heading: "Go live in weeks, not months",
+    heading: "Hands-on setup, then we manage it",
     description:
       "Our healthcare implementation team helps you configure agents, integrate with your systems, and train your staff.",
   },

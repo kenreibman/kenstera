@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Container } from "@/components/el/ui";
+import { BlockSection } from "@/components/exact";
 
 const columns = [
   {
@@ -29,48 +29,53 @@ const columns = [
   },
 ];
 
+const LINK =
+  "block w-fit rounded px-1.5 py-[9px] -mx-1.5 text-[14px] font-medium leading-[10px] text-black outline-none transition-colors duration-150 hover:text-subtle focus-visible:ring-2 focus-visible:ring-black/30";
+
+/**
+ * Footer in the exact elevenlabs.io layout: 12-column grid, wordmark in columns 1-3, link groups
+ * in columns 4-12 (13px gray label, 14px/500 black links with 28px rows), inside the section frame.
+ */
 export function Footer() {
   return (
-    <footer className="main-footer border-t border-hairline bg-page">
-      <Container>
-        <div className="grid gap-12 py-16 md:grid-cols-12">
-          <div className="md:col-span-5">
-            <Link href="/" className="text-[19px] font-semibold tracking-[-0.03em] text-black">
+    <footer className="main-footer bg-page">
+      <BlockSection className="px-3 py-20 lg:py-[120px]">
+        <div className="grid grid-cols-12 gap-x-3 gap-y-16">
+          <div className="col-span-12 px-5 lg:col-span-3">
+            <Link
+              href="/"
+              className="-m-2 block w-fit rounded p-2 text-[19px] font-semibold tracking-[-0.03em] text-black"
+            >
               Kenstera
             </Link>
           </div>
 
-          {columns.map((col) => (
-            <div key={col.title} className="md:col-span-2 md:last:col-span-3">
-              <p className="mb-4 text-[13px] text-subtle">{col.title}</p>
-              <ul className="space-y-2.5">
-                {col.links.map((l) => (
-                  <li key={l.label}>
-                    {l.href.startsWith("http") ? (
-                      <a
-                        href={l.href}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-[14px] text-black/80 transition-colors hover:text-black"
-                      >
-                        {l.label}
-                      </a>
-                    ) : (
-                      <Link href={l.href} className="text-[14px] text-black/80 transition-colors hover:text-black">
-                        {l.label}
-                      </Link>
-                    )}
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))}
+          <ul className="col-span-12 grid grid-cols-12 gap-x-3 gap-y-10 lg:col-span-9">
+            {columns.map((col) => (
+              <li key={col.title} className="col-span-6 px-5 sm:col-span-4 lg:col-span-3">
+                <p className="-mt-[9px] py-[9px] text-[13px] font-medium leading-[10px] text-subtle">{col.title}</p>
+                <ul className="mt-[3px]">
+                  {col.links.map((l) => (
+                    <li key={l.label}>
+                      {l.href.startsWith("http") ? (
+                        <a href={l.href} target="_blank" rel="noopener noreferrer" className={LINK}>
+                          {l.label}
+                        </a>
+                      ) : (
+                        <Link href={l.href} className={LINK}>
+                          {l.label}
+                        </Link>
+                      )}
+                    </li>
+                  ))}
+                </ul>
+              </li>
+            ))}
+          </ul>
         </div>
 
-        <div className="border-t border-hairline py-6 text-[13px] text-subtle">
-          © {new Date().getFullYear()} Kenstera LLC
-        </div>
-      </Container>
+        <p className="mt-16 px-5 text-[13px] text-subtle">© {new Date().getFullYear()} Kenstera LLC</p>
+      </BlockSection>
     </footer>
   );
 }

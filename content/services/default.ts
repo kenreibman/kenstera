@@ -24,7 +24,7 @@ export const defaultContent: IndustryContent = {
     {
       title: "Support Automation",
       description:
-        "Our software that handle tier-1 support, route complex issues, and keep response times under a minute. Your customers get answers, not hold music.",
+        "Our software handles tier-1 support, route complex issues, and keep response times under a minute. Your customers get answers, not hold music.",
       gradient: "from-purple-200 via-pink-100 to-blue-100",
     },
   ],
@@ -114,9 +114,9 @@ export const defaultContent: IndustryContent = {
     ],
   },
   gettingStarted: {
-    heading: "Go live in days, not weeks",
+    heading: "Hands-on setup, then we manage it",
     description:
-      "We scope your needs, build your system, integrate with your tools, and manage everything post-launch. You start seeing results this week.",
+      "We scope your needs, build your system, integrate with your tools, and manage everything post-launch.",
   },
   faqs: [
     {

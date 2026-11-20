@@ -114,9 +114,9 @@ export const defaultContent: IndustryContent = {
     ],
   },
   gettingStarted: {
-    heading: "Go live in days, not weeks",
+    heading: "Hands-on setup, then we manage it",
     description:
-      "We configure your qualification rules, integrate with your systems, and set up follow-up sequences, so you start converting more leads this week.",
+      "We configure your qualification rules, integrate with your systems, and set up follow-up sequences, so every lead gets followed up consistently.",
   },
   faqs: [
     {

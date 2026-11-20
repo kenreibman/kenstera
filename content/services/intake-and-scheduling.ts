@@ -116,7 +116,7 @@ export const intakeAndSchedulingContent: IndustryContent = {
   gettingStarted: {
     heading: "Live in under a week",
     description:
-      "We configure your qualification rules, connect your calendar and CRM, set up follow-up sequences, and test everything so you start catching leads this week, not next month.",
+      "We configure your qualification rules, connect your calendar and CRM, set up follow-up sequences, and test everything before it goes live.",
   },
   faqs: [
     {

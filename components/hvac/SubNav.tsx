@@ -10,7 +10,7 @@ export function SubNav({ href, label }: { href: string; label: string }) {
   ];
   return (
     <div className="sticky top-16 z-30 border-b border-hairline bg-page/90 backdrop-blur-md">
-      <div className="mx-auto flex h-14 max-w-[1180px] items-center justify-between gap-6 px-5 sm:px-8">
+      <div className="mx-5 flex h-14 max-w-[1178px] items-center justify-between gap-6 min-[1218px]:mx-auto">
         <span className="flex items-center gap-2.5 text-[15px] text-black">
           <span className="grad g-ember inline-block h-6 w-6 rounded-md" aria-hidden="true" />
           Kenstera for HVAC

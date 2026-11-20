@@ -6,8 +6,8 @@ interface IndustriesGettingStartedProps {
 }
 
 export function IndustriesGettingStarted({
-  heading = "Start in days, not months",
-  description = "Get started easily with minimal setup and hands-on support to explore what Conversational Agents can unlock for your business.",
+  heading = "Hands-on setup, then we manage it",
+  description = "Get started with hands-on setup and support from our team.",
 }: IndustriesGettingStartedProps) {
   return (
     <Section>
@@ -18,8 +18,8 @@ export function IndustriesGettingStarted({
           <div>
             <h3 className="text-[20px] text-black">Custom pricing based on your needs</h3>
             <p className="mt-2 max-w-md text-[15px] leading-[1.5] text-subtle">
-              Get started with Kenstera Agents featuring enterprise-grade FDE deployment, global language readiness, and
-              rapid integration support.
+              Every business is different, so we scope the work with you and quote it to fit. No contracts, and you can
+              cancel anytime.
             </p>
           </div>
           <div className="flex flex-wrap gap-2">
@@ -34,8 +34,8 @@ export function IndustriesGettingStarted({
           <div>
             <h3 className="text-[20px] text-black">Dedicated onboarding and support</h3>
             <p className="mt-2 max-w-md text-[15px] leading-[1.5] text-subtle">
-              Our team will guide you through setup, integration, and optimization to ensure your Conversational Agent
-              delivers maximum value from day one.
+              Our team guides you through setup, integration, and ongoing optimization, so you are never left
+              figuring it out alone.
             </p>
           </div>
           <div className="flex flex-wrap gap-2">

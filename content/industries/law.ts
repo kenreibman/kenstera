@@ -112,9 +112,9 @@ export const lawContent: IndustryContent = {
     ],
   },
   gettingStarted: {
-    heading: "Go live in days, not weeks",
+    heading: "Hands-on setup, then we manage it",
     description:
-      "We configure your qualification criteria, integrate with your case management system, and set up follow-up sequences, so you start signing more cases this week.",
+      "We configure your qualification criteria, integrate with your case management system, and set up follow-up sequences, so every inquiry gets followed up consistently.",
   },
   faqs: [
     {

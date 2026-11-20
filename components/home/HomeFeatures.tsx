@@ -1,6 +1,6 @@
 "use client";
 
-import { StickyFeatures, type FeatureItem } from "@/components/el/motion";
+import { StickyContent, type StickyItem } from "@/components/exact";
 import { HOME_SERVICES } from "./services";
 import { LIVE_MOCKS } from "./live";
 
@@ -15,14 +15,16 @@ const BODIES: Record<string, string> = {
   "Local SEO": "Organic lead acquisition through local search visibility.",
 };
 
-const ITEMS: FeatureItem[] = HOME_SERVICES.map((s) => ({
-  label: s.short,
+const ITEMS: StickyItem[] = HOME_SERVICES.map((s) => ({
   title: s.title,
   body: BODIES[s.title] ?? s.description,
-  palette: s.palette,
-  visual: (active: boolean) => LIVE_MOCKS[s.mock](active),
+  media: (active: boolean) => (
+    <div className={`grad g-${s.palette} flex h-full min-h-[440px] w-full items-center justify-center p-6 lg:min-h-0 lg:p-10`}>
+      {LIVE_MOCKS[s.mock](active)}
+    </div>
+  ),
 }));
 
 export function HomeFeatures() {
-  return <StickyFeatures items={ITEMS} />;
+  return <StickyContent items={ITEMS} />;
 }

@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
 import { Check, Clock, Headset, MessageSquare, PhoneMissed, Star, Wrench, X } from "lucide-react";
-import { Button, Container, Section, SectionHeader, type Palette } from "@/components/el/ui";
+import { Button, type Palette } from "@/components/el/ui";
 import { Reveal, ScrollText } from "@/components/el/motion";
 import { HvacHeroCard } from "@/components/hvac/live";
 import { HowItWorks } from "@/components/hvac/HowItWorks";
-import { HvacFaq, type HvacFaqItem } from "@/components/hvac/HvacFaq";
+import { AudienceSlider, BlockSection, CtaBand, ElFaq, TITLE_CLASS, TitleBlock } from "@/components/exact";
 import { StickyCta } from "@/components/hvac/StickyCta";
 import { SubNav } from "@/components/hvac/SubNav";
 import { HVAC_BOOK_HREF, HVAC_BOOK_LABEL } from "@/components/hvac/links";
@@ -66,7 +66,7 @@ const COMPARE = [
   { moment: "Prefer a voice to answer?", before: "Voicemail", after: "An optional voice receptionist picks up" },
 ];
 
-const FAQS: HvacFaqItem[] = [
+const FAQS: { question: string; answer: string }[] = [
   {
     question: "Do my techs have to do anything?",
     answer: "No. It runs in the background, and your techs keep doing what they already do.",
@@ -108,6 +108,9 @@ const faqJsonLd = {
   })),
 };
 
+const DOTS =
+  "repeating-radial-gradient(circle, rgba(0,0,0,0.15) 0px, rgba(0,0,0,0.15) 1px, rgba(0,0,0,0) 1px, rgba(0,0,0,0) 6px)";
+
 export default function HvacPage() {
   return (
     <>
@@ -120,187 +123,159 @@ export default function HvacPage() {
       />
       <SubNav href={HVAC_BOOK_HREF} label={HVAC_BOOK_LABEL} />
       <main className="bg-page">
-        {/* Hero */}
-        <section>
-          <Container framed>
-            <div className="grid gap-8 pb-12 pt-14 sm:pt-24 md:grid-cols-2 md:gap-12">
-              <div>
-                <h1 className="text-[40px] leading-[1.06] text-black sm:text-[56px]">
-                  Don&rsquo;t let the next shop on Google get your 7pm call.
-                </h1>
-                <div className="mt-8 flex flex-col gap-2 sm:flex-row">
-                  <Button href={HVAC_BOOK_HREF} className="w-full sm:w-auto">
-                    {HVAC_BOOK_LABEL}
-                  </Button>
-                  <Button href="/hvac/example" variant="secondary" className="w-full sm:w-auto">
-                    See a 2-minute example
-                  </Button>
-                </div>
-              </div>
-              <div
-                className="max-w-[520px] space-y-4 text-[17px] leading-[1.5] text-black md:pt-3"
-              >
-                <p>A homeowner&rsquo;s AC quits at 7pm. They call down the Google list until somebody answers.</p>
-                <p>
-                  Kenstera texts back every call you miss, from your business number, so they book with you instead.
-                  Then it asks your happy customers for the reviews that help you show up higher in local search.
-                  Prefer a voice to answer? There&rsquo;s an optional voice receptionist.
-                </p>
-              </div>
-            </div>
-
-            <div className="mb-16 sm:mb-24">
-              <HvacHeroCard />
-            </div>
-          </Container>
-        </section>
-
-        {/* Statement with scroll-filled words and feature chips */}
-        <section className="border-t border-hairline">
-          <Container framed>
-            <div className="mx-auto max-w-[860px] py-24 text-center sm:py-36">
-              <ScrollText
-                className="text-[30px] leading-[1.2] tracking-[-0.012em] sm:text-[48px]"
-                text="Every missed call is a customer dialing the next shop on the list. Kenstera gets back to them first."
-              />
-              <Reveal delay={120} className="mt-12 flex flex-wrap justify-center gap-2.5">
-                {CHIPS.map((c) => (
-                  <span
-                    key={c.label}
-                    className="ring-hairline inline-flex items-center gap-2 rounded-full bg-white px-4 py-2 text-[15px]"
-                  >
-                    <c.icon className="h-4 w-4" strokeWidth={1.6} />
-                    {c.label}
-                  </span>
-                ))}
-              </Reveal>
-            </div>
-          </Container>
-        </section>
-
-        {/* Sticky feature rows */}
-        <Section id="how">
-          <Reveal>
-            <SectionHeader
-              label="How it works"
-              title="You miss the call. They get a text. You get the job."
-              description={<p>It runs in the background. Nothing new for your techs to learn.</p>}
-            />
-          </Reveal>
-          <div className="mt-10 sm:mt-16">
-            <HowItWorks />
-          </div>
-        </Section>
-
-        {/* Who it's for: gradient cards */}
-        <Section id="what">
-          <Reveal>
-            <SectionHeader
-              label="Who it's for"
-              title="Small shops where the owner still answers the phone"
-              action={
-                <Button href={HVAC_BOOK_HREF}>
+        {/* Hero: borderless block, headline and buttons left, paragraphs from column 7 */}
+        <BlockSection bare className="pb-6 pt-16 lg:pb-10 lg:pt-24">
+          <div className="grid grid-cols-12 gap-x-3">
+            <div className="contents lg:col-span-6 lg:block lg:pr-5">
+              <h1 className="el-trim col-span-12 text-[36px] leading-[42px] tracking-[-0.72px] text-black lg:col-span-10 lg:text-[48px] lg:leading-[52px] lg:tracking-[-0.96px]">
+                Don&rsquo;t let the next shop on Google get your 7pm call.
+              </h1>
+              <div className="order-last col-span-12 mt-8 flex flex-col gap-2 sm:flex-row">
+                <Button href={HVAC_BOOK_HREF} className="w-full sm:w-auto">
                   {HVAC_BOOK_LABEL}
                 </Button>
-              }
-            />
-          </Reveal>
-          <div className="mt-12 grid gap-3 md:grid-cols-3">
-            {AUDIENCE.map((a, i) => (
-              <Reveal key={a.title} delay={i * 90}>
-                <div className="group">
-                  <div className={`grad g-${a.palette} flex aspect-[4/3] items-center justify-center rounded-2xl`}>
-                    <span className="flex h-14 w-14 items-center justify-center rounded-full bg-white/90 shadow-lg transition-transform duration-500 group-hover:scale-110">
-                      <a.icon className="h-6 w-6" strokeWidth={1.5} />
-                    </span>
-                  </div>
-                  <p className="mt-5 text-[19px] leading-[1.25] text-black">{a.title}</p>
-                  <p className="mt-2 text-[15px] leading-[1.5] text-subtle">{a.body}</p>
-                </div>
-              </Reveal>
-            ))}
+                <Button href="/hvac/example" variant="secondary" className="w-full sm:w-auto">
+                  See a 2-minute example
+                </Button>
+              </div>
+            </div>
+            <div className="col-span-12 mt-8 flex flex-col gap-4 lg:col-span-6 lg:mt-0 lg:pl-5">
+              <p className="el-trim mt-auto text-balance text-[16px] leading-6 tracking-[0.16px] text-black lg:text-pretty">
+                A homeowner&rsquo;s AC quits at 7pm. They call down the Google list until somebody answers.
+              </p>
+              <p className="el-trim text-balance text-[16px] leading-6 tracking-[0.16px] text-black lg:text-pretty">
+                Kenstera texts back every call you miss, from your business number, so they book with you instead.
+                Then it asks your happy customers for the reviews that help you show up higher in local search.
+                Prefer a voice to answer? There&rsquo;s an optional voice receptionist.
+              </p>
+            </div>
           </div>
+        </BlockSection>
 
-          <Reveal className="mt-3 grid gap-3 md:grid-cols-2">
+        <BlockSection className="p-0" containerClassName="mt-[52px]">
+          <HvacHeroCard />
+        </BlockSection>
+
+        {/* Statement (words fill as you scroll) and feature chips */}
+        <BlockSection>
+          <TitleBlock>
+            <ScrollText
+              as="h2"
+              className={TITLE_CLASS}
+              text="Every missed call is a customer dialing the next shop on the list. Kenstera gets back to them first."
+            />
+          </TitleBlock>
+          <Reveal delay={120} className="mt-12 flex flex-wrap justify-center gap-2.5">
+            {CHIPS.map((c) => (
+              <span
+                key={c.label}
+                className="inline-flex h-9 items-center gap-2 rounded-full bg-white px-4 text-[15px] shadow-[0_0_0_0.5px_rgba(0,0,0,0.125)]"
+              >
+                <c.icon className="h-4 w-4" strokeWidth={1.6} />
+                {c.label}
+              </span>
+            ))}
+          </Reveal>
+        </BlockSection>
+
+        {/* How it works: title block, then sticky rows */}
+        <BlockSection id="how" className="px-6 pb-16 pt-20 lg:px-8 lg:pb-20 lg:pt-[120px]">
+          <TitleBlock eyebrow="How it works">
+            <h2 className={TITLE_CLASS}>You miss the call. They get a text. You get the job.</h2>
+          </TitleBlock>
+          <p className="el-trim mx-auto mt-5 max-w-[560px] px-5 text-center text-[16px] leading-6 tracking-[0.16px] text-subtle">
+            It runs in the background. Nothing new for your techs to learn.
+          </p>
+        </BlockSection>
+        <BlockSection className="p-0">
+          <HowItWorks />
+        </BlockSection>
+
+        {/* Who it's for: tile slider */}
+        <BlockSection id="what" className="px-6 pb-10 pt-20 lg:px-8 lg:pb-10 lg:pt-[120px]">
+          <TitleBlock eyebrow="Who it's for">
+            <h2 className={TITLE_CLASS}>Small shops where the owner still answers the phone</h2>
+          </TitleBlock>
+        </BlockSection>
+        <BlockSection className="px-3 pb-20 pt-10 lg:pb-[120px]">
+          <AudienceSlider
+            items={AUDIENCE.map((a) => ({
+              title: a.title,
+              description: a.body,
+              media: (
+                <div className={`grad g-${a.palette} flex h-full w-full items-center justify-center`}>
+                  <span className="flex h-14 w-14 items-center justify-center rounded-full bg-white/90 shadow-lg">
+                    <a.icon className="h-6 w-6" strokeWidth={1.5} />
+                  </span>
+                </div>
+              ),
+            }))}
+          />
+          <div className="mt-12 grid gap-2 sm:grid-cols-2 sm:gap-3">
             {[
               { t: "Quote follow-up", b: "A nudge to customers who got a quote and went quiet." },
               { t: "Google Business Profile tune-up", b: "A tidy-up of your listing so it's ready for the calls and reviews coming in." },
             ].map((x) => (
-              <div key={x.t} className="rounded-2xl bg-surface p-6 sm:p-7">
-                <p className="mb-3 text-[13px] text-subtle">Later, if you want it</p>
-                <p className="text-[19px] text-black">{x.t}</p>
-                <p className="mt-1 text-[15px] leading-[1.5] text-subtle">{x.b}</p>
+              <div key={x.t} className="relative overflow-hidden rounded-2xl bg-surface px-5 py-7">
+                <p className="mb-2 text-[14px] leading-[19.6px] text-subtle">Later, if you want it</p>
+                <h3 className="mb-[18px] text-[24px] font-normal leading-[31.2px] tracking-[-0.24px] text-black">{x.t}</h3>
+                <p className="text-[16px] leading-[22.4px] tracking-[0.16px] text-[#6e6e6e]">{x.b}</p>
+                <div className="pointer-events-none absolute inset-0 rounded-2xl shadow-[inset_0_0_0_0.5px_rgba(0,0,0,0.075)]" />
               </div>
             ))}
-          </Reveal>
-        </Section>
+          </div>
+          <div className="mt-10 flex justify-center">
+            <Button href={HVAC_BOOK_HREF}>{HVAC_BOOK_LABEL}</Button>
+          </div>
+        </BlockSection>
 
-        {/* Before and after table */}
-        <Section id="compare">
-          <Reveal>
-            <SectionHeader label="Before and after" title="What changes at your shop" />
-          </Reveal>
-          <Reveal className="mt-12">
-            <div className="overflow-hidden rounded-2xl bg-surface">
-              <div className="grid grid-cols-[1.1fr_1fr_1fr] gap-4 px-5 py-4 text-[14px] text-subtle sm:px-8">
-                <span />
-                <span>Today</span>
-                <span className="text-black">With Kenstera</span>
-              </div>
-              {COMPARE.map((r) => (
-                <div
-                  key={r.moment}
-                  className="dotted-row grid grid-cols-[1.1fr_1fr_1fr] items-start gap-4 px-5 py-5 pb-[22px] sm:px-8"
-                >
-                  <span className="text-[15px] text-black sm:text-[16px]">{r.moment}</span>
-                  <span className="flex gap-2 text-[14px] leading-[1.4] text-subtle sm:text-[15px]">
-                    <X className="mt-0.5 hidden h-4 w-4 flex-none sm:block" strokeWidth={1.5} />
-                    {r.before}
-                  </span>
-                  <span className="flex gap-2 text-[14px] leading-[1.4] text-black sm:text-[15px]">
-                    <Check className="mt-0.5 hidden h-4 w-4 flex-none sm:block" strokeWidth={1.8} />
-                    {r.after}
-                  </span>
-                </div>
-              ))}
+        {/* Before and after: comparison grid */}
+        <BlockSection id="compare" className="px-6 pb-10 pt-20 lg:px-8 lg:pb-10 lg:pt-[120px]">
+          <TitleBlock eyebrow="Before and after">
+            <h2 className={TITLE_CLASS}>What changes at your shop</h2>
+          </TitleBlock>
+        </BlockSection>
+        <BlockSection className="pt-10 pb-20 lg:pb-[120px]" containerClassName="">
+          <div className="grid grid-cols-[1fr_1fr] lg:grid-cols-[1.5fr_1fr_1fr]">
+            <div className="hidden border-y border-black/5 bg-page lg:block" />
+            <div className="flex flex-col border-y border-black/5 bg-page px-4 py-4 lg:border-l lg:py-6">
+              <p className="el-trim text-[17px] leading-[25px] tracking-[0.17px] text-black">Today</p>
             </div>
-          </Reveal>
-        </Section>
+            <div className="flex flex-col border-y border-l border-black/5 bg-page px-4 py-4 lg:py-6">
+              <p className="el-trim text-[17px] leading-[25px] tracking-[0.17px] text-black">With Kenstera</p>
+            </div>
+            {COMPARE.map((r) => (
+              <div key={r.moment} className="contents">
+                <div className="relative col-span-2 px-4 pb-2 pt-6 lg:col-span-1 lg:py-6">
+                  <p className="el-trim text-[17px] leading-[25px] tracking-[0.17px] text-black">{r.moment}</p>
+                </div>
+                <div className="relative flex gap-2 px-4 pb-6 text-[15px] leading-[21px] text-subtle lg:border-l lg:border-black/5 lg:py-6">
+                  <X className="mt-0.5 h-4 w-4 flex-none text-[#a59f97]" strokeWidth={1.5} />
+                  {r.before}
+                </div>
+                <div className="relative flex gap-2 border-l border-black/5 px-4 pb-6 text-[15px] leading-[21px] text-black lg:py-6">
+                  <Check className="mt-0.5 h-4 w-4 flex-none" strokeWidth={1.8} />
+                  {r.after}
+                </div>
+                <div
+                  aria-hidden
+                  className="col-span-2 h-[2px] w-full lg:col-span-3"
+                  style={{ backgroundImage: DOTS, backgroundSize: "6px 100%" }}
+                />
+              </div>
+            ))}
+          </div>
+        </BlockSection>
 
         {/* FAQ */}
-        <Section id="faq">
-          <div className="grid gap-10 md:grid-cols-12 md:gap-12">
-            <div className="md:sticky md:top-36 md:col-span-5 md:self-start">
-              <h2 className="text-[34px] leading-[1.12] text-black sm:text-[44px]">Frequently asked questions</h2>
-            </div>
-            <div className="md:col-span-7">
-              <HvacFaq items={FAQS} />
-            </div>
-          </div>
-        </Section>
+        <BlockSection id="faq">
+          <ElFaq items={FAQS.map((f) => ({ q: f.question, a: <p>{f.answer}</p> }))} />
+        </BlockSection>
 
-        {/* Closing */}
-        <section id="book" className="scroll-mt-32 border-t border-hairline">
-          <Container framed>
-            <div className="py-16 sm:py-28">
-              <Reveal>
-                <div className="grad g-ember flex min-h-[380px] flex-col justify-end rounded-2xl p-7 sm:p-12">
-                  <h2 className="max-w-xl text-[34px] leading-[1.1] text-white sm:text-[52px]">
-                    Ready to stop losing the 7pm call?
-                  </h2>
-                  <p className="mt-3 max-w-md text-[17px] leading-[1.45] text-white/90">
-                    Fifteen minutes. We&rsquo;ll talk through your shop and tell you honestly if we can help.
-                  </p>
-                  <div className="mt-8">
-                    <Button href={HVAC_BOOK_HREF} variant="light" className="w-full sm:w-auto">
-                      {HVAC_BOOK_LABEL}
-                    </Button>
-                  </div>
-                </div>
-              </Reveal>
-            </div>
-          </Container>
-        </section>
+        {/* Closing band */}
+        <CtaBand id="book" title="Ready to stop losing the 7pm call? Fifteen minutes, and we'll tell you honestly if we can help.">
+          <Button href={HVAC_BOOK_HREF}>{HVAC_BOOK_LABEL}</Button>
+        </CtaBand>
       </main>
       <StickyCta href={HVAC_BOOK_HREF} label={HVAC_BOOK_LABEL} />
     </>

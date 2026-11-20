@@ -62,7 +62,7 @@ export function Reveal({
  * Statement whose words fill from gray to black as the section scrolls
  * through the viewport, like the big paragraphs on elevenlabs.io.
  */
-export function ScrollText({ text, className = "" }: { text: string; className?: string }) {
+export function ScrollText({ text, className = "", as: Tag = "p" }: { text: string; className?: string; as?: "p" | "h2" }) {
   const ref = useRef<HTMLParagraphElement | null>(null);
   const words = text.split(" ");
   const [progress, setProgress] = useState(0);
@@ -99,7 +99,7 @@ export function ScrollText({ text, className = "" }: { text: string; className?:
   }, []);
 
   return (
-    <p ref={ref} className={className}>
+    <Tag ref={ref} className={className}>
       {words.map((w, i) => {
         const on = progress * words.length > i;
         return (
@@ -109,7 +109,7 @@ export function ScrollText({ text, className = "" }: { text: string; className?:
           </span>
         );
       })}
-    </p>
+    </Tag>
   );
 }
 

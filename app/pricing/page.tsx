@@ -1,8 +1,10 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { PricingCards } from "./components/PricingCards";
+import { BlockSection } from "@/components/exact";
 import { PricingFAQ } from "./components/PricingFAQ";
 import { PricingCTA } from "./components/PricingCTA";
+import { pricingFaqs } from "./faqs";
 import { OG_IMAGE, jsonLdString } from "@/lib/seo";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { breadcrumbSchema } from "@/lib/schema";
@@ -10,47 +12,16 @@ import { breadcrumbSchema } from "@/lib/schema";
 export const metadata: Metadata = {
   title: "Pricing",
   description:
-    "Simple plans for websites, voice and text automation, and marketing systems. Compare the Scale, Business, and Partner plans, then book a call.",
+    "Plans start at $599 a month: a website, missed-call text back, local SEO, and automatic reviews. Compare Scale, Business, and Partner, then book a call.",
   openGraph: {
     title: "Pricing | Kenstera",
     description:
-      "Simple plans for websites, voice and text automation, and marketing systems. Compare the Scale, Business, and Partner plans, then book a call.",
+      "Plans start at $599 a month: a website, missed-call text back, local SEO, and automatic reviews. Compare Scale, Business, and Partner, then book a call.",
     images: [...OG_IMAGE],
   },
 };
 
-const pricingFaqs = [
-  {
-    question: "What's included in each plan?",
-    answer:
-      "Each plan builds on the previous tier. Scale includes standard TTS voices and basic analytics. Business adds low-latency voices, advanced NLU, multi-channel support, and CRM integration. Partner includes everything plus custom terms, SSO, and priority support.",
-  },
-  {
-    question: "Can I switch plans later?",
-    answer:
-      "Yes, you can upgrade or downgrade your plan at any time. When upgrading, you'll get immediate access to the new features. When downgrading, the change takes effect at the start of your next billing cycle.",
-  },
-  {
-    question: "Is there a minimum contract length?",
-    answer:
-      "Scale and Business plans are billed monthly with no long-term commitment required. Partner plans typically involve an annual agreement, but we can discuss flexible terms based on your needs.",
-  },
-  {
-    question: "What payment methods do you accept?",
-    answer:
-      "We accept all major credit cards, ACH transfers, and wire transfers for annual plans. For Partner plans, we can also accommodate purchase orders and custom billing arrangements.",
-  },
-  {
-    question: "Do you offer a free trial?",
-    answer:
-      "We offer a personalized demo and pilot period for qualified businesses. Book a call with our team to discuss your needs and we'll set up a trial that makes sense for your use case.",
-  },
-  {
-    question: "What kind of support is included?",
-    answer:
-      "Scale and Business plans include email support with response within 24 business hours. Partner plans include priority support with a dedicated account manager and faster response times.",
-  },
-];
+
 
 export default function PricingPage() {
   const faqSchema = {
@@ -73,39 +44,30 @@ export default function PricingPage() {
         dangerouslySetInnerHTML={{ __html: jsonLdString(faqSchema) }}
       />
       <JsonLd data={breadcrumbSchema([{ name: "Pricing", path: "/pricing" }])} />
-      <main className="min-h-screen bg-page">
-        <div className="mx-auto max-w-[1184px] px-5 py-14 sm:px-8 sm:py-20">
-          {/* Header */}
-          <div className="mb-12 sm:mb-16">
-            <h1 className="text-3xl font-semibold tracking-tight text-neutral-900 sm:text-4xl lg:text-5xl">
-              Competitive pricing for your business needs
-            </h1>
-          </div>
+      <main className="bg-page">
+        {/* Hero: borderless block, two-tone headline */}
+        <BlockSection bare className="pb-10 pt-16 lg:pt-24">
+          <h1 className="el-trim max-w-[760px] text-[36px] leading-[42px] tracking-[-0.72px] text-black lg:text-[44px] lg:leading-[48px] lg:tracking-[-0.88px]">
+            Competitive pricing
+            <span className="block text-[#a59f97]">for your business needs</span>
+          </h1>
+        </BlockSection>
 
-          {/* Pricing Grid */}
+        {/* Plans: full-height columns between hairlines */}
+        <BlockSection className="p-0">
           <PricingCards />
-
-          {/* Bottom CTA */}
-          <div className="mt-16 text-center">
-            <p className="text-neutral-600">
+          <div className="border-t border-black/5 py-6 text-center">
+            <p className="text-[14px] leading-[19.6px] text-[#59544f]">
               Not sure which plan is right for you?{" "}
-              <Link
-                href="https://cal.com/kenstera/30min"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="font-medium text-neutral-900 underline underline-offset-4 hover:text-neutral-700"
-              >
+              <Link href="/contact" className="text-black underline underline-offset-4 hover:text-subtle">
                 Book a free consultation
               </Link>
             </p>
           </div>
+        </BlockSection>
 
-          {/* FAQ Section */}
-          <PricingFAQ />
-
-          {/* CTA Section */}
-          <PricingCTA />
-        </div>
+        <PricingFAQ />
+        <PricingCTA />
       </main>
     </>
   );

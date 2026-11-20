@@ -7,7 +7,6 @@ import {
   HomeCta,
   HOME_FAQS,
 } from "@/components/home";
-import { Reveal } from "@/components/el/motion";
 import { CONTACT_EMAIL, ORG_ID, SOCIAL_LINKS } from "@/lib/schema";
 import { OG_IMAGE,OG_IMAGE_URL, jsonLdString } from "@/lib/seo";
 
@@ -93,13 +92,9 @@ export default function Home() {
       <main className="bg-page">
         <HomeHero />
         <HomeServices />
-        <Reveal>
-          <HomeWork />
-        </Reveal>
+        <HomeWork />
         <HomeFaq />
-        <Reveal>
-          <HomeCta />
-        </Reveal>
+        <HomeCta />
       </main>
     </>
   );

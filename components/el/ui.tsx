@@ -30,10 +30,10 @@ type ButtonProps = {
 };
 
 const BUTTON_BASE =
-  "inline-flex items-center justify-center gap-1.5 rounded-full font-normal whitespace-nowrap transition-colors";
+  "inline-flex items-center justify-center gap-1.5 rounded-full font-normal whitespace-nowrap transition-[background-color,color,box-shadow,border-color] duration-150 ease-[cubic-bezier(0.4,0,0.2,1)]";
 const BUTTON_VARIANT = {
   primary: "bg-black text-white hover:bg-neutral-800",
-  secondary: "bg-white text-black ring-hairline hover:bg-neutral-50",
+  secondary: "bg-white text-black shadow-[0_0_0_0.5px_rgba(0,0,0,0.125)] hover:bg-surface",
   light: "bg-white text-black hover:bg-white/90",
 };
 const BUTTON_SIZE = { sm: "h-9 px-4 text-[14px]", md: "h-11 px-5 text-[16px]" };

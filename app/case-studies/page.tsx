@@ -33,8 +33,8 @@ export default function CaseStudiesPage() {
             title="Real work for real clients"
             description={
               <p>
-                Every project here is real, published with the client&apos;s work live for you to
-                see.
+                Every project here is a real client, with the work live for you to see. Where a case
+                study uses an illustration, it is labeled as one.
               </p>
             }
           />

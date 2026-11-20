@@ -1,8 +1,9 @@
 "use client";
 
-import { useState, type ReactNode } from "react";
+import type { ReactNode } from "react";
 import { Check, Phone, PhoneMissed, Search, Star } from "lucide-react";
-import { useInView, useSequence } from "@/components/el/motion";
+import { useSequence } from "@/components/el/motion";
+import { HeroMedia, type MediaTab } from "@/components/exact";
 import { PhoneFrame } from "./mocks";
 
 /*
@@ -241,54 +242,31 @@ export function LiveReview({ run, className = "" }: { run: boolean; className?: 
 }
 
 /** Hero product card: a pill toggle swaps between the two things Kenstera does. */
+/** The /hvac hero: the exact media card with notch tabs. Each tab plays its demo while it is current. */
 export function HvacHeroCard() {
-  const [tab, setTab] = useState<"missed" | "voice" | "review">("missed");
-  const [ref, inView] = useInView<HTMLDivElement>({ threshold: 0.3 });
-  const tabs = [
-    { id: "missed" as const, label: "Text back" },
-    { id: "voice" as const, label: "Voice receptionist" },
-    { id: "review" as const, label: "Reviews" },
+  const art = (palette: string, body: (run: boolean) => ReactNode) =>
+    function Art(run: boolean) {
+      return (
+        <div className={`grad ${palette} h-full w-full`}>
+          <div className="flex h-full w-full flex-col items-center justify-center gap-8 px-5 py-8 md:flex-row md:gap-16 md:px-10">
+            {body(run)}
+          </div>
+        </div>
+      );
+    };
+  const tabs: MediaTab[] = [
+    {
+      id: "missed",
+      label: "Text back",
+      media: art("g-dusk", (run) => (
+        <>
+          <LiveCalls run={run} className="hidden md:block" />
+          <LiveThread run={run} />
+        </>
+      )),
+    },
+    { id: "voice", label: "Voice receptionist", media: art("g-dawn", (run) => <LiveVoiceCall run={run} />) },
+    { id: "review", label: "Reviews", media: art("g-ember", (run) => <LiveReview run={run} />) },
   ];
-  const palette = tab === "missed" ? "g-dusk" : tab === "voice" ? "g-dawn" : "g-ember";
-  return (
-    <div
-      ref={ref}
-      className={`grad ${palette} relative rounded-2xl transition-[background] duration-700`}
-    >
-      <div className="relative flex min-h-[520px] flex-col items-center justify-center gap-8 px-5 pb-24 pt-10 sm:min-h-[580px] sm:px-10">
-        <div
-          key={tab}
-          className="pop-in flex w-full flex-col items-center justify-center gap-8 md:flex-row md:gap-16"
-        >
-          {tab === "missed" ? (
-            <>
-              <LiveCalls run={inView} className="hidden sm:block" />
-              <LiveThread run={inView} />
-            </>
-          ) : tab === "voice" ? (
-            <LiveVoiceCall run={inView} />
-          ) : (
-            <LiveReview run={inView} />
-          )}
-        </div>
-      </div>
-      <div className="absolute inset-x-0 bottom-6 z-10 flex justify-center">
-        <div role="tablist" aria-label="What Kenstera does" className="flex rounded-full bg-white/90 p-1 shadow-lg backdrop-blur">
-          {tabs.map((t) => (
-            <button
-              key={t.id}
-              role="tab"
-              aria-selected={tab === t.id}
-              onClick={() => setTab(t.id)}
-              className={`h-9 rounded-full px-4 text-[14px] transition-colors ${
-                tab === t.id ? "bg-black text-white" : "text-black hover:bg-black/5"
-              }`}
-            >
-              {t.label}
-            </button>
-          ))}
-        </div>
-      </div>
-    </div>
-  );
+  return <HeroMedia tabs={tabs} label="What Kenstera does" />;
 }

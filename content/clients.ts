@@ -22,3 +22,15 @@ export const MASSIMILAW = {
   work: ["WordPress migration", "Accessible front end"],
   about: "MassimiLaw is a New York City civil rights and employment law firm representing people harmed by workplace violations and police misconduct.",
 } as const;
+
+// TheDavidImage: the fine-art photography portfolio of David Reibman. Kenstera migrated it from
+// Squarespace to a custom Payload CMS site. Screenshots are of the live site (thedavidimage.com).
+export const THEDAVIDIMAGE = {
+  name: "TheDavidImage",
+  url: "https://thedavidimage.com",
+  caseStudyHref: "/case-studies/thedavidimage",
+  image: "/images/clients/thedavidimage-home.webp",
+  summary: "A custom CMS migration from Squarespace to Payload CMS for a fine-art photography portfolio.",
+  work: ["Custom CMS", "Payload CMS migration"],
+  about: "TheDavidImage is the online portfolio of photographer David Reibman: panoramic fine-art photography, with galleries, a shop and films.",
+} as const;

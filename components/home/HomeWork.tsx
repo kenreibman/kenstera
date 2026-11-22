@@ -2,7 +2,7 @@ import Image from "next/image";
 import { Button } from "@/components/el/ui";
 import { BlockSection, BentoGrid, TITLE_CLASS, TitleBlock, type BentoCard } from "@/components/exact";
 import { Reveal } from "@/components/el/motion";
-import { THETICKSUIT, MASSIMILAW } from "@/content/clients";
+import { THETICKSUIT, MASSIMILAW, THEDAVIDIMAGE } from "@/content/clients";
 
 function Shot({ src, alt }: { src: string; alt: string }) {
   return (
@@ -11,7 +11,7 @@ function Shot({ src, alt }: { src: string; alt: string }) {
         src={src}
         alt={alt}
         fill
-        sizes="(min-width: 1024px) 560px, 100vw"
+        sizes="(min-width: 1024px) 363px, 100vw"
         className="object-cover object-left-top transition-transform duration-700 ease-[cubic-bezier(0.31,0.325,0,0.92)] group-hover:scale-[1.02]"
       />
     </div>
@@ -25,6 +25,13 @@ const CARDS: BentoCard[] = [
     description: THETICKSUIT.about,
     href: THETICKSUIT.caseStudyHref,
     media: <Shot src={THETICKSUIT.image} alt="TheTickSuit homepage, redesigned by Kenstera" />,
+  },
+  {
+    title: THEDAVIDIMAGE.name,
+    meta: "Custom CMS, Squarespace to Payload migration, photography",
+    description: THEDAVIDIMAGE.about,
+    href: THEDAVIDIMAGE.caseStudyHref,
+    media: <Shot src={THEDAVIDIMAGE.image} alt="TheDavidImage gallery overview, migrated to a custom Payload CMS site by Kenstera" />,
   },
   {
     title: MASSIMILAW.name,
@@ -46,7 +53,7 @@ export function HomeWork() {
       </BlockSection>
       <BlockSection className="px-6 pb-20 pt-10 lg:px-8 lg:pb-[120px]">
         <Reveal>
-          <BentoGrid cards={CARDS} columns={2} />
+          <BentoGrid cards={CARDS} columns={3} />
           <div className="mt-10 flex justify-center">
             <Button href="/case-studies">See all case studies</Button>
           </div>

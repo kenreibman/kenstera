@@ -18,6 +18,7 @@ import { JsonLd } from "@/components/seo/JsonLd";
 import { BlockSection, TITLE_CLASS, TitleBlock } from "@/components/exact";
 import { TheTickSuitWork } from "@/components/case-studies/TheTickSuitWork";
 import { MassimiLawWork } from "@/components/case-studies/MassimiLawWork";
+import { TheDavidImageWork } from "@/components/case-studies/TheDavidImageWork";
 import { breadcrumbSchema } from "@/lib/schema";
 
 interface PageProps {
@@ -73,6 +74,11 @@ const WORK: Record<string, { title: string; note: string; node: React.ReactNode 
     title: "Five workstreams, one goal: more orders with less work",
     note: "Each piece below is illustrated to show how it works. The illustrations are examples of the work, not screenshots of TheTickSuit's tools or data.",
     node: <TheTickSuitWork />,
+  },
+  thedavidimage: {
+    title: "A portfolio and a CMS built around the work",
+    note: "Every image below is a screenshot of the live site at thedavidimage.com.",
+    node: <TheDavidImageWork />,
   },
   massimilaw: {
     title: "Built around three questions every visitor has",

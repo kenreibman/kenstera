@@ -63,6 +63,9 @@ export interface CaseStudyMeta {
   readingTime: string;
 }
 
+// TheTickSuit always comes first; everything else is newest first.
+const PINNED_FIRST = ["theticksuit"];
+
 export function getAllCaseStudies(): CaseStudyMeta[] {
   if (!fs.existsSync(CASE_STUDIES_DIR)) {
     return [];
@@ -94,6 +97,9 @@ export function getAllCaseStudies(): CaseStudyMeta[] {
       };
     })
     .sort((a, b) => {
+      const pa = PINNED_FIRST.indexOf(a.slug);
+      const pb = PINNED_FIRST.indexOf(b.slug);
+      if (pa !== -1 || pb !== -1) return (pa === -1 ? 99 : pa) - (pb === -1 ? 99 : pb);
       // Missing dates parse to NaN, which poisons the comparator — pin them to 0
       // so they sort last deterministically instead of scrambling the order.
       const ta = new Date(a.date).getTime() || 0;

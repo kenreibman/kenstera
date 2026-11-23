@@ -35,10 +35,10 @@ const CARDS: BentoCard[] = [
   },
   {
     title: MASSIMILAW.name,
-    meta: "WordPress migration, accessibility, law firm",
+    meta: "WordPress migration, Next.js, accessibility",
     description: MASSIMILAW.about,
     href: MASSIMILAW.caseStudyHref,
-    media: <Shot src={MASSIMILAW.image} alt="MassimiLaw homepage, migrated to WordPress by Kenstera" />,
+    media: <Shot src={MASSIMILAW.image} alt="MassimiLaw homepage, migrated to WordPress with a Next.js front end by Kenstera" />,
   },
 ];
 

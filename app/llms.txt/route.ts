@@ -24,7 +24,7 @@ Kenstera is a business-growth company. It designs and builds websites, answers c
 - [Case studies](https://kenstera.com/case-studies): real client work
 - [TheTickSuit case study](https://kenstera.com/case-studies/theticksuit): website redesign on Shopify (Liquid) with ShipHero for inventory management, A/B tested UI, 24/7 customer chat, review pipeline, and ongoing SEO and AI search management
 - [TheDavidImage case study](https://kenstera.com/case-studies/thedavidimage): a custom CMS migration from Squarespace to Payload CMS for a fine-art photography portfolio
-- [MassimiLaw case study](https://kenstera.com/case-studies/massimilaw): a WordPress migration for a New York City civil rights and employment law firm, with a focus on front-end accessibility
+- [MassimiLaw case study](https://kenstera.com/case-studies/massimilaw): a migration to WordPress (as the CMS) with an accessible Next.js front end, for a New York City civil rights and employment law firm
 - [Pricing](https://kenstera.com/pricing): Scale, Business, and Partner plans
 - [Team](https://kenstera.com/team): Ken Reibman (founder), Francisco Banda and Kousay Jebir (software engineers)
 - [Contact and booking](https://kenstera.com/contact): book a call or email contact@kenstera.com

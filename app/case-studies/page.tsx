@@ -10,10 +10,10 @@ import { breadcrumbSchema } from "@/lib/schema";
 export const metadata: Metadata = {
   title: "Case Studies",
   description:
-    "Real work for real clients: TheTickSuit's tested redesign with 24/7 chat and reviews, TheDavidImage's custom CMS migration to Payload, and MassimiLaw's WordPress migration with an accessible front end.",
+    "Real work for real clients: TheTickSuit's tested redesign with 24/7 chat and reviews, TheDavidImage's custom CMS migration to Payload, and MassimiLaw's WordPress migration with an accessible Next.js front end.",
   openGraph: {
     title: "Case Studies | Kenstera",
-    description: "Real work for real clients: TheTickSuit's tested redesign with 24/7 chat and reviews, TheDavidImage's custom CMS migration to Payload, and MassimiLaw's WordPress migration with an accessible front end.",
+    description: "Real work for real clients: TheTickSuit's tested redesign with 24/7 chat and reviews, TheDavidImage's custom CMS migration to Payload, and MassimiLaw's WordPress migration with an accessible Next.js front end.",
     type: "website",
     images: [...OG_IMAGE],
   },

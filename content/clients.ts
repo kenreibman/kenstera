@@ -11,15 +11,15 @@ export const THETICKSUIT = {
 } as const;
 
 // MassimiLaw: a New York City civil rights and employment law firm. Kenstera
-// migrated its website to WordPress, with a focus on front-end accessibility.
+// migrated its website to WordPress as the CMS, with an accessible Next.js front end.
 // Screenshots are of the live site (massimilaw.com).
 export const MASSIMILAW = {
   name: "MassimiLaw",
   url: "https://www.massimilaw.com",
   caseStudyHref: "/case-studies/massimilaw",
   image: "/images/clients/massimilaw-home.webp",
-  summary: "A WordPress migration for a New York City civil rights and employment law firm, with a focus on front-end accessibility.",
-  work: ["WordPress migration", "Accessible front end"],
+  summary: "A migration to WordPress with an accessible Next.js front end, for a New York City civil rights and employment law firm.",
+  work: ["WordPress migration", "Accessible Next.js front end"],
   about: "MassimiLaw is a New York City civil rights and employment law firm representing people harmed by workplace violations and police misconduct.",
 } as const;
 
